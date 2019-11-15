@@ -11,6 +11,14 @@ public class Part {
         this.mToppings = toppings;
     }
 
+    @Override
+    public String toString() {
+        return "Part{" +
+                "mId=" + mId +
+                ", mToppings='" + mToppings + '\'' +
+                '}';
+    }
+
     private int mId;
 
     private String mToppings;
