@@ -1,0 +1,18 @@
+{
+  "id": 123,
+  "Pizzas": [
+    {
+      "id": 456,
+      "size": "L",
+      "thickness": "M",
+      "cheesType": "Regular",
+      "Parts": [
+        {
+          "id": 1,
+          "Toppings": "olives"
+        }
+      ]
+    }
+  ],
+  "Price": 10.44
+}
