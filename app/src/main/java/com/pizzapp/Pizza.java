@@ -1,6 +1,7 @@
 
 package com.pizzapp;
 
+import java.util.ArrayList;
 import java.util.List;
 //import javax.annotation.Generated;
 //import com.google.gson.annotations.SerializedName;
@@ -12,9 +13,21 @@ public class Pizza {
     public Pizza(int mId) {
         this.mId = mId;
         this.mCheesType = "reg";
+        this.mParts = new ArrayList<>();
         this.mParts.add(new Part(1, "mushrooms" ));
         this.mSize = "L";
         this.mThickness = "EXXTRA THICC";
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "mId=" + mId +
+                ", mCheesType='" + mCheesType + '\'' +
+                ", mParts=" + mParts +
+                ", mSize='" + mSize + '\'' +
+                ", mThickness='" + mThickness + '\'' +
+                '}';
     }
 
     private int mId;
