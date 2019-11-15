@@ -15,9 +15,8 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/order_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bind here!" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>
