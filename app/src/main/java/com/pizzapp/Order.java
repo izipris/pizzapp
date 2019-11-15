@@ -1,43 +1,44 @@
+
 package com.pizzapp;
+
+import java.util.List;
 
 public class Order {
 
-    public Order(int id) {
-        this.id = id;
-        this.price = 0;
+    public Order(int mId) {
+        this.mId = mId;
+        this.mPizzas.add(new Pizza(1));
+        this.mPrice = 0.0;
     }
 
-    private class Pizza{
+    private int mId;
 
-    }
+    private List<Pizza> mPizzas;
 
-    private int id;
-    private Pizza pizza;
-    private int price;
-
-
-
-    public Pizza getPizza() {
-        return pizza;
-    }
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    private Double mPrice;
 
     public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+        return mId;
     }
 
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public List<Pizza> getPizzas() {
+        return mPizzas;
+    }
+
+    public void setPizzas(List<Pizza> pizzas) {
+        mPizzas = pizzas;
+    }
+
+    public Double getPrice() {
+        return mPrice;
+    }
+
+    public void setPrice(Double price) {
+        mPrice = price;
+    }
 
 }
