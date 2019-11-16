@@ -40,8 +40,18 @@ public class TabFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         textView = (TextView) view.findViewById(R.id.textView);
+        switch (position){
+            case 0:
+                textView.setText("Choose Size");
+                break;
+            case 1:
+                textView.setText("My Pizza");
+                break;
+            case 2:
+                textView.setText("Choose Crust");
+                break;
+        }
 
-        textView.setText("Fragment " + (position + 1));
 
     }
 }
