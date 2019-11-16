@@ -9,7 +9,7 @@ public class Size {
         this.price = 0;
     }
 
-    public Size(String name, float price) {
+    public Size(String name, double price) {
         this.name = name;
         this.price = price;
     }

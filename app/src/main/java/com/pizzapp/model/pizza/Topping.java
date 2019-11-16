@@ -11,7 +11,7 @@ public class Topping {
         this.imageSource = "";
     }
 
-    public Topping(String name, float price, String imageSource) {
+    public Topping(String name, double price, String imageSource) {
         this.name = name;
         this.price = price;
         this.imageSource = imageSource;
