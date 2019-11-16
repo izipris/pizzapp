@@ -2,7 +2,7 @@ package com.pizzapp.model.pizza;
 
 public class Crust {
     private String name;
-    private float price;
+    private double price;
 
     public Crust() {
         this.name = "";
@@ -22,11 +22,11 @@ public class Crust {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

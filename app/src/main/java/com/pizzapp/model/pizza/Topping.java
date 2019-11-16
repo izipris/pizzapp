@@ -2,7 +2,7 @@ package com.pizzapp.model.pizza;
 
 public class Topping {
     private String name;
-    private float price;
+    private double price;
     private String imageSource;
 
     public Topping() {
@@ -25,11 +25,11 @@ public class Topping {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
