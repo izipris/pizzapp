@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pizzapp</string>
-    <string name="tab_title_main">My Pizza</string>
-    <string name="tab_title_crust">Crust</string>
-    <string name="tab_title_size">Size</string>
+    <string name="pickup_button">Pickup</string>
+    <string name="delivery_button">Delivery</string>
 </resources>
