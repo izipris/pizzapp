@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 public class OrderSummary extends AppCompatActivity {
 
-    Order order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
