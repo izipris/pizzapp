@@ -49,16 +49,19 @@
         </LinearLayout>
     </ScrollView>
 
-    <Space
+    <View
         android:id="@+id/space_between_order_and_actions"
         android:layout_width="match_parent"
-        android:layout_height="345dp" />
+        android:layout_height="match_parent"
+        android:background="@color/cardview_dark_background"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:id="@+id/action_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
 
@@ -67,14 +70,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/delivery_button" />
+            android:text="@string/delivery_button"
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/pickup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/pickup_button" />
+            android:text="@string/pickup_button"
+            android:textSize="30sp"/>
 
     </LinearLayout>
 </LinearLayout>
