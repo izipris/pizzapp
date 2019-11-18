@@ -16,12 +16,10 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MAIN_FRAGMENT_INDEX = 1;
-    private static final int DEFAULT_ORDER_ID = 0;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private Order userCurrentOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,5 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(tabAdapter);
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         tabLayout.setupWithViewPager(viewPager);
-
-        userCurrentOrder = new Order(DEFAULT_ORDER_ID);
     }
 }

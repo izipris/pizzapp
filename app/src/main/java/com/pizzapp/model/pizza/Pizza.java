@@ -1,6 +1,9 @@
 package com.pizzapp.model.pizza;
 
 
+import java.util.List;
+import java.util.Vector;
+
 /**
  * This class represent a pizza in an order.
  */
@@ -11,17 +14,15 @@ public class Pizza {
     private int numberOfSlices;
     private Size size;
     private Crust crust;
-    private CheeseType cheeseType;
-    private PizzaPart[] parts;
+    private List<PizzaPart> parts;
 
-    public Pizza(int numberOfSlices, Size size, Crust crust, CheeseType cheeseType){
+    public Pizza(int numberOfSlices, Size size, Crust crust){
         this.numberOfSlices = numberOfSlices;
         this.size = size;
         this.crust = crust;
-        this.cheeseType = cheeseType;
-        parts = new PizzaPart[numberOfSlices];
+        parts = new Vector<>();
         for(int i = 0; i < numberOfSlices; ++i) {
-            parts[i] = new PizzaPart();
+            parts.add(new PizzaPart());
         }
     }
 
@@ -33,16 +34,15 @@ public class Pizza {
         this.numberOfSlices = pizza.numberOfSlices;
         this.size = pizza.size;
         this.crust = pizza.crust;
-        this.cheeseType = pizza.cheeseType;
         this.parts = pizza.parts;
     }
 
-    public Pizza(Size size, Crust crust, CheeseType cheeseType){
-        this(DEFAULT_NUMBER_OF_SLICES, size, crust, cheeseType);
+    public Pizza(Size size, Crust crust){
+        this(DEFAULT_NUMBER_OF_SLICES, size, crust);
     }
 
     public double getPrice(){
-        double price = size.getPrice() + crust.getPrice() + cheeseType.getPrice();
+        double price = size.getPrice() + crust.getPrice();
         for (PizzaPart part: parts){
             if (part.isHasTopping()){
                 price += part.getTopping().getPrice() / (double) numberOfSlices;
@@ -67,18 +67,10 @@ public class Pizza {
         this.crust = crust;
     }
 
-    public CheeseType getCheeseType() {
-        return cheeseType;
-    }
-
-    public void setCheeseType(CheeseType cheeseType) {
-        this.cheeseType = cheeseType;
-    }
-
     public PizzaPart getPizzaPart(int index) throws IndexOutOfBoundsException{
         if (index < 0 || index > numberOfSlices){
             throw new IndexOutOfBoundsException(OUT_OF_BOUNDS_MSG);
         }
-        return parts[index];
+        return parts.get(index);
     }
 }
