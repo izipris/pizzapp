@@ -61,6 +61,8 @@ public class TabFragmentCrust extends Fragment {
     }
 
     private void defineDoughButtonsHandlers(final Map<ImageButton, TextView> buttonToTextMapping) {
+        // Define the onClick handlers such that when one option selected. it's highlighted
+        // while the others are not.
         for (Map.Entry<ImageButton, TextView> entryCurrent : buttonToTextMapping.entrySet()) {
             final ImageButton imageButtonCurrent = entryCurrent.getKey();
             final TextView textViewCurrent = entryCurrent.getValue();
