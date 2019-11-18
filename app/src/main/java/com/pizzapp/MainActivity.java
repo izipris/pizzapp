@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tabAdapter.addFragment(new TabFragmentMain(), getString(R.string.tab_title_main));
         tabAdapter.addFragment(new TabFragmentCrust(), getString(R.string.tab_title_crust));
         viewPager.setAdapter(tabAdapter);
+        viewPager.setCurrentItem(1, false);
         tabLayout.setupWithViewPager(viewPager);
     }
 }
