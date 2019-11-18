@@ -1,8 +1,6 @@
 package com.pizzapp.ui.tabs;
 
 
-import android.content.Context;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,7 +14,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList;
     private final List<String> mFragmentTitleList;
 
-    public TabAdapter(FragmentManager manager, Context context) {
+    public TabAdapter(FragmentManager manager) {
         super(manager);
         this.mFragmentList = new ArrayList<>();
         this.mFragmentTitleList = new ArrayList<>();
