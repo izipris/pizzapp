@@ -13,7 +13,6 @@ public class Pizza {
     private Crust crust;
     private CheeseType cheeseType;
     private PizzaPart[] parts;
-    private double price;
 
     public Pizza(int numberOfSlices, Size size, Crust crust, CheeseType cheeseType){
         this.numberOfSlices = numberOfSlices;
@@ -24,7 +23,6 @@ public class Pizza {
         for(int i = 0; i < numberOfSlices; ++i) {
             parts[i] = new PizzaPart();
         }
-        calculatePrice();
     }
 
     /**
@@ -37,23 +35,19 @@ public class Pizza {
         this.crust = pizza.crust;
         this.cheeseType = pizza.cheeseType;
         this.parts = pizza.parts;
-        this.price = pizza.price;
     }
 
     public Pizza(Size size, Crust crust, CheeseType cheeseType){
         this(DEFAULT_NUMBER_OF_SLICES, size, crust, cheeseType);
     }
 
-    private void calculatePrice(){
-        price = size.getPrice() + crust.getPrice() + cheeseType.getPrice();
+    public double getPrice(){
+        double price = size.getPrice() + crust.getPrice() + cheeseType.getPrice();
         for (PizzaPart part: parts){
             if (part.isHasTopping()){
                 price += part.getTopping().getPrice() / (double) numberOfSlices;
             }
         }
-    }
-
-    public double getPrice() {
         return price;
     }
 

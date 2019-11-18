@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.pizzapp.model.Order;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
@@ -15,10 +16,12 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MAIN_FRAGMENT_INDEX = 1;
+    private static final int DEFAULT_ORDER_ID = 0;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private Order userCurrentOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +43,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(tabAdapter);
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         tabLayout.setupWithViewPager(viewPager);
+
+        userCurrentOrder = new Order(DEFAULT_ORDER_ID);
     }
 }
