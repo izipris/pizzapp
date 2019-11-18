@@ -7,5 +7,16 @@
     <string name="image_description_dough_regular">Regular</string>
     <string name="image_description_dough_thin">Thin</string>
     <string name="currency_symbol">$</string>
-    <string name="inital_medium_pizza_price">15.00$</string>
+    <string name="initial_medium_pizza_price">15.00$</string>
+    <string name="initial_large_pizza_price">17.50$</string>
+    <string name="initial_extra_large_pizza_price">20.00$</string>
+    <string name="image_description_medium_pizza">button with medium pizza image</string>
+    <string name="image_description_large_pizza">button with large pizza image</string>
+    <string name="image_description_extra_large_pizza">button with extra large pizza image</string>
+    <string name="m">M</string>
+    <string name="medium_size">9.5</string>
+    <string name="large_size">11.5</string>
+    <string name="l">L</string>
+    <string name="xl">XL</string>
+    <string name="extra_large_size">13.5</string>
 </resources>
