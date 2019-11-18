@@ -34,16 +34,16 @@
 	],
 	"crusts":[
 		{
-			"name":"Thin",
+			"name":"THIN",
 			"price":0
 		},
 		{
-			"name":"Regular",
+			"name":"REGULAR",
 			"price":0
 		},
 		{
-			"name":"Thick",
-			"price":2
+			"name":"THICK",
+			"price":2.00
 		}
 	]	
 }
