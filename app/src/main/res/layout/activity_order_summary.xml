@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fillViewport="true"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,10 +15,10 @@
         android:background="@color/colorPrimary"
         android:padding="10dp"
         android:text="Your Order"
+        android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/order_details_scroll_text"
@@ -31,20 +31,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/article_subheading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Pizza 1"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
-            <TextView
-                android:id="@+id/article"
+                android:id="@+id/order_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="@dimen/line_spacing"
                 android:padding="@dimen/padding_regular"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault"
-                android:text="Pizza 2 \n balh and text \n blah and text\n" />
+                android:text="Pizza 2 \n balh and text \n blah and text\n"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
 
         </LinearLayout>
     </ScrollView>
@@ -53,8 +46,8 @@
         android:id="@+id/space_between_order_and_actions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_dark_background"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@color/cardview_dark_background" />
 
     <LinearLayout
         android:id="@+id/action_buttons_layout"
@@ -71,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/delivery_button"
-            android:textSize="30sp"/>
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/pickup_button"
@@ -79,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/pickup_button"
-            android:textSize="30sp"/>
+            android:textSize="25sp" />
 
     </LinearLayout>
 </LinearLayout>
