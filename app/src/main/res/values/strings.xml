@@ -3,4 +3,8 @@
     <string name="tab_title_main">My Pizza</string>
     <string name="tab_title_crust">Crust</string>
     <string name="tab_title_size">Size</string>
+    <string name="image_description_dough_thick">Thick</string>
+    <string name="image_description_dough_regular">Regular</string>
+    <string name="image_description_dough_thin">Thin</string>
+    <string name="currency_symbol">$</string>
 </resources>

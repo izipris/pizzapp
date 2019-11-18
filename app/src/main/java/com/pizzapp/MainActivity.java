@@ -31,14 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
+        initTabsLayout(viewPager, tabLayout);
+    }
 
-
+    private void initTabsLayout(ViewPager viewPager, TabLayout tabLayout) {
         tabAdapter = new TabAdapter(getSupportFragmentManager());
         tabAdapter.addFragment(new TabFragmentSize(), getString(R.string.tab_title_size));
         tabAdapter.addFragment(new TabFragmentMain(), getString(R.string.tab_title_main));
         tabAdapter.addFragment(new TabFragmentCrust(), getString(R.string.tab_title_crust));
+        int viewPagerTabsLimit = (tabAdapter.getCount() > 1 ? tabAdapter.getCount() - 1 : 1);
         viewPager.setAdapter(tabAdapter);
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
+        viewPager.setOffscreenPageLimit(viewPagerTabsLimit);
         tabLayout.setupWithViewPager(viewPager);
     }
 }
