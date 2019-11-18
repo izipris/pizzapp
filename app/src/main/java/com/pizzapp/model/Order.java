@@ -11,7 +11,6 @@ import java.util.Vector;
 public class Order {
     private int id;
     private List<Pizza> pizzas;
-    //private List<Drinks> drinks;
 
     public Order(int id){
         this.id = id;
