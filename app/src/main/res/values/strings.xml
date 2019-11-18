@@ -3,4 +3,5 @@
     <string name="tab_title_main">My Pizza</string>
     <string name="tab_title_crust">Crust</string>
     <string name="tab_title_size">Size</string>
+    <string name="inital_medium_pizza_price">15.00$</string>
 </resources>
