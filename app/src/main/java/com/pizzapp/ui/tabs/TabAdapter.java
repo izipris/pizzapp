@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.pizzapp.R;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TabAdapter extends FragmentStatePagerAdapter {
@@ -22,10 +19,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     public TabAdapter(FragmentManager manager, Context context) {
         super(manager);
         this.mFragmentList = new ArrayList<>();
-        this.mFragmentTitleList = Arrays.asList(context.getString(
-                R.string.tab_title_size),
-                context.getString(R.string.tab_title_main),
-                context.getString(R.string.tab_title_crust));
+        this.mFragmentTitleList = new ArrayList<>();
     }
 
     @Override
