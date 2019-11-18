@@ -11,12 +11,10 @@ import com.pizzapp.R;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    private String tabsTitles[];
-    private Context context;
+    private String[] tabsTitles;
 
     public ViewPagerAdapter(FragmentManager manager, Context context) {
         super(manager);
-        this.context = context;
         this.tabsTitles = new String[]{context.getString(
                 R.string.tab_title_size),
                 context.getString(R.string.tab_title_mypizza),
