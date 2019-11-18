@@ -14,6 +14,12 @@ public class Database {
     public Database() {
     }
 
+    public Database(List<Size> sizes, List<Topping> toppings, List<Crust> crusts) {
+        this.sizes = sizes;
+        this.toppings = toppings;
+        this.crusts = crusts;
+    }
+
     public List<Size> getSizes() {
         return sizes;
     }
