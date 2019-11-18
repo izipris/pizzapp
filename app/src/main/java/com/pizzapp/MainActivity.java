@@ -14,6 +14,7 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int MAIN_FRAGMENT_INDEX = 1;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         tabAdapter.addFragment(new TabFragmentMain(), getString(R.string.tab_title_main));
         tabAdapter.addFragment(new TabFragmentCrust(), getString(R.string.tab_title_crust));
         viewPager.setAdapter(tabAdapter);
-        viewPager.setCurrentItem(1, false);
+        viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         tabLayout.setupWithViewPager(viewPager);
     }
 }
