@@ -16,6 +16,12 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.utilities.IO;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class TabFragmentCrust extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,9 +40,9 @@ public class TabFragmentCrust extends Fragment {
         ImageButton doughThickImageButton = view.findViewById(R.id.doughThickImageButton);
         ImageButton doughRegularImageButton = view.findViewById(R.id.doughRegularImageButton);
         ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
-        defineDoughButtonsHandlers(doughThickImageButton, doughThickTextView);
-        defineDoughButtonsHandlers(doughRegularImageButton, doughRegularTextView);
-        defineDoughButtonsHandlers(doughThinImageButton, doughThinTextView);
+        Map<ImageButton, TextView> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
+                Arrays.asList(doughThickTextView, doughRegularTextView, doughThinTextView));
+        defineDoughButtonsHandlers(buttonToTitleMap);
         Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
@@ -54,12 +60,33 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(ImageButton imageButton, final TextView textView) {
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView.setTextColor(Color.RED);
-            }
-        });
+    private void defineDoughButtonsHandlers(final Map<ImageButton, TextView> buttonToTextMapping) {
+        for (Map.Entry<ImageButton, TextView> entryCurrent : buttonToTextMapping.entrySet()) {
+            final ImageButton imageButtonCurrent = entryCurrent.getKey();
+            final TextView textViewCurrent = entryCurrent.getValue();
+            imageButtonCurrent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    textViewCurrent.setTextColor(Color.RED);
+                    for (Map.Entry<ImageButton, TextView> entryOther : buttonToTextMapping.entrySet()) {
+                        TextView textVieOther = entryOther.getValue();
+                        if (textViewCurrent != textVieOther) {
+                            textVieOther.setTextColor(Color.BLACK);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private Map<ImageButton, TextView> generateButtonToTitleMapping(List<ImageButton> imageButtonList, List<TextView> textViewList) {
+        if (imageButtonList.size() != textViewList.size()) {
+            return Collections.emptyMap();
+        }
+        Map<ImageButton, TextView> map = new HashMap<>();
+        for (int i = 0; i < imageButtonList.size(); i++) {
+            map.put(imageButtonList.get(i), textViewList.get(i));
+        }
+        return map;
     }
 }
