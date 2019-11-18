@@ -35,7 +35,22 @@ public class IO {
         return writer.toString();
     }
 
-    public static Database jsonFileToDatabase(InputStream jsonFileInputStream) throws JSONException, IOException {
+    public static Database getDatabaseFromInputStream(InputStream jsonFileInputStream) {
+        Database db;
+        try {
+            db = generateDatabaseFromInputStream(jsonFileInputStream);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            db = new Database();
+        } catch (IOException e) {
+            e.printStackTrace();
+            db = new Database();
+        }
+        return db;
+    }
+
+    private static Database generateDatabaseFromInputStream(InputStream jsonFileInputStream)
+            throws JSONException, IOException {
         JSONObject dbJsonRawObject = new JSONObject(readInputStreamToString(jsonFileInputStream));
 
         JSONArray sizesJsonArr = dbJsonRawObject.getJSONArray("sizes");
