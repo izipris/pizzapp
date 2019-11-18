@@ -1,0 +1,49 @@
+{
+	"sizes":[
+		{
+			"name": "M",
+			"price": 15
+		},
+		
+		{
+			"name": "L",
+			"price": 17.5
+		},
+		
+		{
+			"name": "XL",
+			"price": 20
+		}
+	],
+	"toppings":[
+		{
+			"name": "Olives",
+			"price":2,
+			"image":"TBD"
+		},
+		{
+			"name": "Mushrooms",
+			"price":2,
+			"image":"TBD"
+		},
+		{
+			"name": "Tomatos",
+			"price":2,
+			"image":"TBD"
+		}
+	],
+	"crusts":[
+		{
+			"name":"Thin",
+			"price":0
+		},
+		{
+			"name":"Regular",
+			"price":0
+		},
+		{
+			"name":"Thick",
+			"price":2
+		}
+	]	
+}
