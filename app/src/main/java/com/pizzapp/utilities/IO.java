@@ -63,10 +63,6 @@ public class IO {
             Topping topping = new Topping(name, price, imageSource);
             toppings.add(topping);
         }
-        Database db = new Database();
-        db.setSizes(sizes);
-        db.setToppings(toppings);
-        db.setCrusts(crusts);
-        return db;
+        return new Database(sizes, toppings, crusts);
     }
 }
