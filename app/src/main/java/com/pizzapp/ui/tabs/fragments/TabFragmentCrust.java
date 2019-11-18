@@ -1,9 +1,11 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -29,6 +31,12 @@ public class TabFragmentCrust extends Fragment {
         TextView doughThickTextView = view.findViewById(R.id.doughThickTextView);
         TextView doughRegularTextView = view.findViewById(R.id.doughRegularTextView);
         TextView doughThinTextView = view.findViewById(R.id.doughThinTextView);
+        ImageButton doughThickImageButton = view.findViewById(R.id.doughThickImageButton);
+        ImageButton doughRegularImageButton = view.findViewById(R.id.doughRegularImageButton);
+        ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
+        defineDoughButtonsHandlers(doughThickImageButton, doughThickTextView);
+        defineDoughButtonsHandlers(doughRegularImageButton, doughRegularTextView);
+        defineDoughButtonsHandlers(doughThinImageButton, doughThinTextView);
         Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
@@ -44,5 +52,14 @@ public class TabFragmentCrust extends Fragment {
         return crust.getPrice() > 0 ? crust.getName() + " + " +
                 String.format("%.2f", crust.getPrice()) +
                 getString(R.string.currency_symbol) : crust.getName();
+    }
+
+    private void defineDoughButtonsHandlers(ImageButton imageButton, final TextView textView) {
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setTextColor(Color.RED);
+            }
+        });
     }
 }
