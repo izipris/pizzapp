@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:columnCount="3"
+    android:rowCount="3"
+    >
 
     <TextView
+        android:id="@+id/medium_pizza_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tab_title_size"
-        android:textSize="36sp" />
+        android:layout_row="0"
+        android:layout_column="2"
+        android:text="@string/inital_medium_pizza_price"
+        android:textSize="18sp"
+        app:fontFamily="@font/open_sans" />
 
 </GridLayout>
