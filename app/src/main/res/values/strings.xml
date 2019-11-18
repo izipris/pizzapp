@@ -6,4 +6,5 @@
     <string name="image_description_dough_thick">Thick Dough</string>
     <string name="image_description_dough_regular">Regular Dough</string>
     <string name="image_description_dough_thin">Thin Dough</string>
+    <string name="currency_symbol">$</string>
 </resources>
