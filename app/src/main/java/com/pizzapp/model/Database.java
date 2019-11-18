@@ -11,7 +11,8 @@ public class Database {
     private List<Topping> toppings;
     private List<Crust> crusts;
 
-    public Database(){}
+    public Database() {
+    }
 
     public List<Size> getSizes() {
         return sizes;
