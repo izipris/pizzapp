@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".OrderSummary"
-            android:label = "Second Activity"
+            android:label = "Order Summary"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ToppingsPopUp"></activity>
         <activity android:name=".MainActivity">
+                android:value="com.pizzapp.OrderSummary" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

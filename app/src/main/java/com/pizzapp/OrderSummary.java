@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -17,23 +18,19 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
-
-//import android.widget.TextView;
-//import org.json.JSONObject;
-
 
 public class OrderSummary extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
+//        Context context = this.getApplicationContext();
+//        String order = loadJSONToString();
+        TextView orderDetails = findViewById(R.id.order_details);
+        orderDetails.setText(R.string.test_string_stupid);
 
     }
 
@@ -48,9 +45,9 @@ public class OrderSummary extends AppCompatActivity {
     }
 
 
-    public String loadJSONFromAsset(Context context) {
+    public String loadJSONToString() {
         try {
-            InputStream is = context.getAssets().open("order.json");
+            InputStream is = getAssets().open("order.json");
             byte[] buffer = new byte[is.available()]; // todo: they say not to use but cannot find alternative to go with android 15 and up
             int bytes_read = is.read(buffer);
             if(bytes_read == 0 || buffer.length == 0){
