@@ -1,6 +1,7 @@
 package com.pizzapp.ui.tabs.fragments;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,60 +39,62 @@ public class TabFragmentSize extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
-        setupText(view, database);
+        final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, database);
 
         chosenSize = database.getSizes().get(DB_SIZE_M);
 
-        ImageButton mediumPizzaButton = view.findViewById(R.id.medium_pizza_image);
-        ImageButton largePizzaButton = view.findViewById(R.id.large_pizza_image);
-        ImageButton extraLargePizzaButton = view.findViewById(R.id.extra_large_pizza_image);
-        final ArrayList<ImageButton> buttons = new ArrayList<>(Arrays.asList(mediumPizzaButton, largePizzaButton, extraLargePizzaButton));
-        for(final ImageButton button: buttons){
-            button.setOnClickListener(new View.OnClickListener() {
+        for(final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes){
+            buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    highlightChosenSize(buttons, button);
+                    highlightChosenSize(buttonsAndSizes, buttonSizePair);
                 }
             });
         }
     }
 
-    private void setupText(@NonNull View view, Database database){
+    private ArrayList<Pair<ImageButton, Size>> setup(@NonNull View view, Database database) {
+        ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = new ArrayList<>();
         Size currentSize;
-        for(int i = 0; i < database.getSizes().size(); ++i)
-        {
+        ImageButton currentButton = null;
+        for (int i = 0; i < database.getSizes().size(); ++i) {
             currentSize = database.getSizes().get(i);
-            switch (i){
+            switch (i) {
                 case DB_SIZE_M:
                     ((TextView) view.findViewById(R.id.M)).setText(currentSize.getName());
                     ((TextView) view.findViewById(R.id.medium_pizza_price)).setText(
-                            String.format(Locale.getDefault(),"%.2f", currentSize.getPrice()) +
-                            getString(R.string.currency_symbol) );
+                            String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
+                                    getString(R.string.currency_symbol));
+                    currentButton = view.findViewById(R.id.medium_pizza_image);
                     break;
                 case DB_SIZE_L:
                     ((TextView) view.findViewById(R.id.L)).setText(currentSize.getName());
                     ((TextView) view.findViewById(R.id.large_pizza_price)).setText(
-                            String.format(Locale.getDefault(),"%.2f", currentSize.getPrice()) +
-                                    getString(R.string.currency_symbol) );
+                            String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
+                                    getString(R.string.currency_symbol));
+                    currentButton = view.findViewById(R.id.large_pizza_image);
                     break;
                 case DB_SIZE_XL:
                     ((TextView) view.findViewById(R.id.XL)).setText(currentSize.getName());
                     ((TextView) view.findViewById(R.id.extra_large_pizza_price)).setText(
-                            String.format(Locale.getDefault(),"%.2f", currentSize.getPrice()) +
-                                    getString(R.string.currency_symbol) );
+                            String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
+                                    getString(R.string.currency_symbol));
+                    currentButton = view.findViewById(R.id.extra_large_pizza_image);
                     break;
             }
+            buttonsAndSizes.add(new Pair<>(currentButton, currentSize));
         }
-
+        return buttonsAndSizes;
     }
 
-    private void highlightChosenSize(List<ImageButton> buttons, ImageButton chosen){
-        chosen.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for(ImageButton button:buttons){
-            if(button != chosen) {
-                button.setBackgroundResource(0);
+    private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
+        chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+        for (final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes) {
+            if (buttonSizePair.first != chosen.first) {
+                buttonSizePair.first.setBackgroundResource(0);
             }
         }
+        chosenSize = chosen.second;
     }
 
 }
