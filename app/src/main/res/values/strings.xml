@@ -19,4 +19,5 @@
     <string name="l">L</string>
     <string name="xl">XL</string>
     <string name="extra_large_size">13.5</string>
+    <string name="message_for_size_choosing">You just choose pizza in size of</string>
 </resources>
