@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorGrayTabBackground"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:shrinkColumns="*">
 
     <TableRow
         android:layout_width="match_parent"
@@ -15,8 +16,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginEnd="20dp">
 
             <TextView
                 android:id="@+id/M"
@@ -47,9 +50,11 @@
             android:id="@+id/medium_pizza_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="@string/initial_medium_pizza_price"
             android:textSize="18sp"
-            app:fontFamily="@font/open_sans"/>
+            app:fontFamily="@font/open_sans"
+            android:layout_marginStart="20dp" />
 
     </TableRow>
 
@@ -61,8 +66,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginEnd="20dp">
 
             <TextView
                 android:id="@+id/L"
@@ -93,9 +100,11 @@
             android:id="@+id/large_pizza_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="@string/initial_large_pizza_price"
             android:textSize="18sp"
-            app:fontFamily="@font/open_sans"/>
+            app:fontFamily="@font/open_sans"
+            android:layout_marginStart="20dp" />
 
     </TableRow>
 
@@ -107,8 +116,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:layout_marginEnd="20dp">
 
             <TextView
                 android:id="@+id/XL"
@@ -139,9 +150,11 @@
             android:id="@+id/extra_large_pizza_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="@string/initial_extra_large_pizza_price"
             android:textSize="18sp"
-            app:fontFamily="@font/open_sans"/>
+            app:fontFamily="@font/open_sans"
+            android:layout_marginStart="20dp" />
 
     </TableRow>
 
