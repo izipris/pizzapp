@@ -1,14 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/colorGrayTabBackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:shrinkColumns="*">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/tab_title_size"
-        android:textSize="36sp" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/m"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:fontFamily="@font/open_sans" />
+
+            <TextView
+                android:id="@+id/medium_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/medium_size"
+                android:textAlignment="center"
+                app:fontFamily="@font/open_sans" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/medium_pizza_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description_medium_pizza"
+            app:srcCompat="@drawable/ic_m_pizza" />
+
+        <TextView
+            android:id="@+id/medium_pizza_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/initial_medium_pizza_price"
+            android:textSize="18sp"
+            app:fontFamily="@font/open_sans" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/L"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/l"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:fontFamily="@font/open_sans" />
+
+            <TextView
+                android:id="@+id/large_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/large_size"
+                android:textAlignment="center"
+                app:fontFamily="@font/open_sans" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/large_pizza_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description_dough_regular"
+            app:srcCompat="@drawable/ic_l_pizza" />
+
+        <TextView
+            android:id="@+id/large_pizza_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/initial_large_pizza_price"
+            android:textSize="18sp"
+            app:fontFamily="@font/open_sans" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/XL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/xl"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:fontFamily="@font/open_sans" />
+
+            <TextView
+                android:id="@+id/extra_large_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/extra_large_size"
+                android:textAlignment="center"
+                app:fontFamily="@font/open_sans" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/extra_large_pizza_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description_extra_large_pizza"
+            app:srcCompat="@drawable/ic_xl_pizza" />
+
+        <TextView
+            android:id="@+id/extra_large_pizza_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/initial_extra_large_pizza_price"
+            android:textSize="18sp"
+            app:fontFamily="@font/open_sans" />
+
+    </TableRow>
+
+</TableLayout>
