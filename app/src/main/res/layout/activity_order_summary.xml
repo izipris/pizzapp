@@ -9,7 +9,7 @@
     tools:context="com.pizzapp.OrderSummary">
 
     <TextView
-        android:id="@+id/order_details_heading"
+        android:id="@+id/your_order_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -31,14 +31,31 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/order_details"
-                android:layout_width="wrap_content"
+                android:id="@+id/pizza_size"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="@dimen/line_spacing"
-                android:padding="@dimen/padding_regular"
-                android:text="Pizza 2 \n balh and text \n blah and text\n"
+                android:text="XL Pizza"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
 
+            <TextView
+                android:id="@+id/topping_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toppings:"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+
+            <TextView
+                android:id="@+id/topping_instance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="onion....4.5$"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+
+            <TextView
+                android:id="@+id/pizza_total_price_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total:...... 10.9$"/>
         </LinearLayout>
     </ScrollView>
 
@@ -49,30 +66,52 @@
         android:layout_weight="1"
         android:background="@color/cardview_dark_background" />
 
+    <TextView
+        android:id="@+id/order_total_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10.44$"/>
+
     <LinearLayout
         android:id="@+id/action_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:gravity="bottom"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarButtonStyle">
 
         <Button
             android:id="@+id/delivery_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="?attr/colorButtonNormal"
             android:text="@string/delivery_button"
-            android:textSize="25sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/open_sans" />
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:paddingLeft="@dimen/padding_regular"
+            android:paddingRight="@dimen/padding_regular"/>
         <Button
             android:id="@+id/pickup_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="?attr/colorButtonNormal"
             android:text="@string/pickup_button"
-            android:textSize="25sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/open_sans" />
 
     </LinearLayout>
 </LinearLayout>

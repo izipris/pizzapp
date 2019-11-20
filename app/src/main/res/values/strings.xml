@@ -20,4 +20,7 @@
     <string name="xl">XL</string>
     <string name="extra_large_size">13.5</string>
     <string name="message_for_size_choosing">You just choose pizza in size of</string>
+    <string name="test_string_stupid">whatever</string>
+    <string name="delivery_button">Delivery</string>
+    <string name="pickup_button">Pickup</string>
 </resources>
