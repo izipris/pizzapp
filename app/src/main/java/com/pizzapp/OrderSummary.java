@@ -3,12 +3,13 @@ package com.pizzapp;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.databinding.DataBindingUtil;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -16,31 +17,149 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
-import com.pizzapp.model.pizza.Size;
 import com.pizzapp.utilities.IO;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.util.LinkedList;
+import java.util.List;
 
 public class OrderSummary extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private ScrollView mOrderDetailsScrollText;
+    private LinearLayout mPizzaLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
 
+        mOrderDetailsScrollText = findViewById(R.id.order_details_scroll_text);
+        mPizzaLayout = findViewById(R.id.pizza_text_layout);
+
         Order testOrder = getTestOrder();
         double testOrderTotalPrice = testOrder.getTotalPrice();
-        TextView orderDetails = findViewById(R.id.order_details);
+        viewOrder(testOrder);
+        setPriceTextView(testOrderTotalPrice);
+    }
 
+    private void setPriceTextView(double testOrderTotalPrice){
+        TextView orderPrice = findViewById(R.id.order_total_price);
+        orderPrice.setText("Order Total:" + String.valueOf(testOrderTotalPrice) + "$");
+    }
+
+    private void viewOrder(Order testOrder) {
+        try{
+            for (int i=0; i < testOrder.getNumberOfPizzas(); i++){
+                List<TextView> pizzaViews = getPizzaViews(testOrder.getPizza(i));
+                for (TextView view: pizzaViews)
+                    mPizzaLayout.addView(view);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    private TextView getSizeView(Pizza pizza){
+        TextView pizzaSizeView = getAnonymousTextView();
+        pizzaSizeView.setText(pizza.getSize().getName() + " "
+                            + pizza.getCrust().getName() + " Pizza"); //don't care about translations
+        pizzaSizeView.setTextSize(25); // todo verify font family
+        pizzaSizeView.setVisibility(View.VISIBLE);
+        return pizzaSizeView;
+    }
+
+    public LinearLayout getPizzaLayout(){
+        LinearLayout genLayout = new LinearLayout(this);
+        genLayout.setOrientation(LinearLayout.VERTICAL);
+        genLayout.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+
+        genLayout.setPadding(20, 20, 20, 20);
+        return  genLayout;
+    }
+
+    public TextView getAnonymousTextView(){
+        TextView textView = new TextView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(20,0,0,0);
+        textView.setLayoutParams(params);
+        textView.setTextColor(Color.BLACK);
+        return textView;
+    }
+
+    private TextView getPartLineView(){
+        TextView partLineView = getAnonymousTextView();
+        partLineView.setTextSize(18); // todo verify font family
+        return partLineView;
+    }
+
+    private TextView getPartToppings(PizzaPart currPart) {
+        TextView toppingsView = getAnonymousTextView();
+        toppingsView.setTextSize(13); // todo verify font family
+        toppingsView.setText(currPart.getTopping().getName() + "..." +
+                String.valueOf(currPart.getTopping().getPrice()));
+        return toppingsView;
+    }
+
+    private List<TextView> getPartLayout(int i, Pizza pizza){
+//        LinearLayout partLayout = getPizzaLayout();
+        List<TextView>  partAndTopping = new LinkedList<>();
+        int numOfParts = pizza.getNumberOfParts();
+        PizzaPart currPart = pizza.getPizzaPart(i);
+
+        TextView pizzaPartLineView = getPartLineView();
+        TextView toppingsView = getPartToppings(currPart);
+        pizzaPartLineView.setText("Part " + i + "/" + numOfParts + ":");
+        pizzaPartLineView.setVisibility(View.VISIBLE);
+        toppingsView.setVisibility(View.VISIBLE);
+        partAndTopping.add(pizzaPartLineView);
+        partAndTopping.add(toppingsView);
+        return partAndTopping;
+    }
+
+    private List<TextView> getAllPartsAndToppings(Pizza pizza, int numOfParts) {
+        List<TextView>  partsAndToppings = new LinkedList<>();
+        for (int i = 0; i < numOfParts; i++){
+            List<TextView> partAndTopping = getPartLayout(i, pizza);
+            partsAndToppings.addAll(partAndTopping);
+        }
+        // essentially will return a list of view of part,topping,part,topping
+        return partsAndToppings;
+    }
+
+
+
+    private List<TextView> getPizzaViews(Pizza pizza) {
+        int numOfParts = pizza.getNumberOfParts();
+        List<TextView>  views = new LinkedList<>();
+        views.add(getSizeView(pizza));
+        views.addAll(getAllPartsAndToppings(pizza, numOfParts));
+        views.add(getPizzaPriceView(pizza, numOfParts));
+        return views;
+    }
+
+
+
+    private double getPizzaPrice(Pizza pizza, int numOfParts){
+        double priceSum = pizza.getSize().getPrice();
+        for (int i = 0; i < numOfParts; i++)
+            priceSum = priceSum + pizza.getPizzaPart(i).getTopping().getPrice();
+        return priceSum;
+    }
+
+    private TextView getPizzaPriceView(Pizza pizza, int numOfParts) {
+        double price = getPizzaPrice(pizza, numOfParts);
+        TextView priceView = getAnonymousTextView();
+        priceView.setText("Total:........." + String.valueOf(price) + "$");
+        priceView.setTextSize(15);
+        priceView.setTypeface(null, Typeface.BOLD);
+        priceView.setVisibility(View.VISIBLE);
+        return priceView;
     }
 
     private Pizza getTestPizza(){
@@ -53,15 +172,15 @@ public class OrderSummary extends AppCompatActivity {
         return testPizza;
     }
 
+    private Database getDatabase() {
+        return IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
+    }
+
     private Order getTestOrder() {
         Pizza testPizza = getTestPizza();
         Order testOrder = new Order(1234);
         testOrder.addPizza(testPizza);
         return testOrder;
-    }
-
-    private Database getDatabase() {
-        return IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
     }
 
     public String byteBufferToString(byte[] buffer){
@@ -73,7 +192,6 @@ public class OrderSummary extends AppCompatActivity {
             return null;
         }
     }
-
 
     public String loadJSONToString() {
         try {

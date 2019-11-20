@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -25,26 +26,26 @@
     <ScrollView
         android:id="@+id/order_details_scroll_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/pizza_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/pizza_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="3dp"
-                android:text="XL Pizza"
+
+                android:text="XL Thin Pizza"
                 android:textSize="25sp"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/open_sans"/>
+
 
             <TextView
                 android:id="@+id/part_heading"
@@ -52,52 +53,62 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:text="Part 1/1"
+                android:text="Part 1/2"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/open_sans" />
 
             <TextView
-                android:id="@+id/topping_heading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:text="Toppings:"
-                android:textSize="15sp"
-                android:textColor="@android:color/black"
-                app:fontFamily="@font/open_sans" />
-
-            <TextView
-                android:id="@+id/topping_instance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:text="- onion....4.5$"
                 android:textColor="@android:color/black"
+                android:textSize="13dp"
                 app:fontFamily="@font/open_sans"/>
 
             <TextView
-                android:id="@+id/pizza_total_price_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="-Pizza Total:...... 10.9$"
+                android:text="- olives....2.1$"
+                android:textSize="13dp"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Part 2/2"
+                android:textSize="18sp"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/open_sans" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="- onion....4.5$"
+                android:textSize="13dp"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans"/>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="-Pizza Total:...... 10.9$"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
         </LinearLayout>
     </ScrollView>
-
-    <View
-        android:id="@+id/space_between_order_and_actions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/order_total_price"
@@ -105,11 +116,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Order Total: 10.44$"
         android:textSize="25sp"
         android:textColor="@android:color/black"
         android:textAlignment="center"
         app:fontFamily="@font/open_sans"/>
+
 
     <LinearLayout
         android:id="@+id/action_buttons_layout"
