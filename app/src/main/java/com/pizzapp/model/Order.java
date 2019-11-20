@@ -45,4 +45,6 @@ public class Order implements Serializable {
     public void upadateLastPizza(Pizza newPizza){
         pizzas.set(pizzas.size() - 1, newPizza);
     }
+
+    public int getNumberOfPizzas(){return pizzas.size();}
 }
