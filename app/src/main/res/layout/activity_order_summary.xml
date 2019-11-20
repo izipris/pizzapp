@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
+    android:background="#F7F7F7"
     tools:context="com.pizzapp.OrderSummary">
 
     <TextView
@@ -13,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:padding="10dp"
+        android:padding="14dp"
         android:text="Your Order"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:fontFamily="@font/open_sans"/>
 
     <ScrollView
         android:id="@+id/order_details_scroll_text"
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/pizza_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -34,28 +37,59 @@
                 android:id="@+id/pizza_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="3dp"
                 android:text="XL Pizza"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+                android:textSize="25sp"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans"/>
+
+            <TextView
+                android:id="@+id/part_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Part 1/1"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans" />
 
             <TextView
                 android:id="@+id/topping_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:text="Toppings:"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans" />
 
             <TextView
                 android:id="@+id/topping_instance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="onion....4.5$"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="- onion....4.5$"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans"/>
 
             <TextView
                 android:id="@+id/pizza_total_price_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total:...... 10.9$"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="-Pizza Total:...... 10.9$"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/open_sans" />
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -63,22 +97,29 @@
         android:id="@+id/space_between_order_and_actions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/cardview_dark_background" />
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/order_total_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="10.44$"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Order Total: 10.44$"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        app:fontFamily="@font/open_sans"/>
 
     <LinearLayout
         android:id="@+id/action_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         android:layout_gravity="end"
         android:gravity="bottom"
         android:orientation="horizontal"
+        android:background="#FFFFFF"
         style="?android:attr/buttonBarButtonStyle">
 
         <Button
@@ -87,7 +128,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#DCDCDC"
             android:text="@string/delivery_button"
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
@@ -97,16 +143,19 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
-            android:paddingLeft="@dimen/padding_regular"
-            android:paddingRight="@dimen/padding_regular"/>
+            android:background="@android:color/black"/>
         <Button
             android:id="@+id/pickup_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#DCDCDC"
             android:text="@string/pickup_button"
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
