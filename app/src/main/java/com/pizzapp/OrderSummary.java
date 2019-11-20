@@ -5,11 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.pizzapp.model.Database;
+import com.pizzapp.model.Order;
+import com.pizzapp.model.pizza.Pizza;
+import com.pizzapp.model.pizza.PizzaPart;
+import com.pizzapp.model.pizza.Size;
+import com.pizzapp.utilities.IO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +26,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
+import java.util.LinkedList;
 
 public class OrderSummary extends AppCompatActivity {
 
@@ -27,11 +36,32 @@ public class OrderSummary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
-//        Context context = this.getApplicationContext();
-//        String order = loadJSONToString();
-        TextView orderDetails = findViewById(R.id.order_details);
-        orderDetails.setText(R.string.test_string_stupid);
 
+        Order testOrder = getTestOrder();
+        double testOrderTotalPrice = testOrder.getTotalPrice();
+        TextView orderDetails = findViewById(R.id.order_details);
+
+    }
+
+    private Pizza getTestPizza(){
+        Database db = getDatabase();
+        Pizza testPizza = new Pizza(db.getSizes().get(0),db.getCrusts().get(0));
+        PizzaPart testPizzaPart = testPizza.getPizzaPart(0);
+        if (!testPizzaPart.isHasTopping()){
+            testPizzaPart.setTopping(db.getToppings().get(0));
+        }
+        return testPizza;
+    }
+
+    private Order getTestOrder() {
+        Pizza testPizza = getTestPizza();
+        Order testOrder = new Order(1234);
+        testOrder.addPizza(testPizza);
+        return testOrder;
+    }
+
+    private Database getDatabase() {
+        return IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
     }
 
     public String byteBufferToString(byte[] buffer){
