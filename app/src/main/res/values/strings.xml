@@ -29,4 +29,6 @@
 <string name="choose_topping">choose_topping</string>
 <string name="size_symbol">\"</string>
 <string name="tab_title_separator">/</string>
+    <string name="delivery_button">Delivery</string>
+    <string name="pickup_button">Pickup</string>
 </resources>
