@@ -40,4 +40,6 @@ public class Order {
     public Pizza getPizza(int index) {
         return pizzas.get(index);
     }
+
+    public int getNumberOfPizzas(){return pizzas.size();}
 }

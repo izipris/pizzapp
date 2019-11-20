@@ -73,4 +73,6 @@ public class Pizza {
         }
         return parts.get(index);
     }
+
+    public int getNumberOfParts(){return this.parts.size();}
 }
