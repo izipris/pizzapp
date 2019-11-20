@@ -98,4 +98,6 @@ public class Pizza implements Serializable {
     public List<PizzaPart> getParts(){
         return parts;
     }
+
+    public int getNumberOfParts(){return this.parts.size();}
 }
