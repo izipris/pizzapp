@@ -1,5 +1,6 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,6 +58,24 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addOnClickListener(slices);
     }
 
+    // This method is called when the second activity finishes
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == POPUP_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                currentPizza = (Pizza) data.getSerializableExtra("pizza");
+                createPizza();
+            }
+        }
+    }
+
+    private void createPizza() {
+        // TODO: 21 נובמבר 2019 add topping to pizza 
+    }
+
 
     private void addOnClickListener(List<ImageView> slices) {
         for (ImageView slice: slices){
@@ -92,5 +111,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         }
         return -1;
     }
+
+
 
 }

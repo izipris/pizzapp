@@ -1,13 +1,14 @@
 package com.pizzapp.model.pizza;
 
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
 /**
  * This class represent a pizza in an order.
  */
-public class Pizza {
+public class Pizza implements Serializable {
     private static final int DEFAULT_NUMBER_OF_SLICES = 1;
     private static final String OUT_OF_BOUNDS_MSG = "There no pizza part in the given index.";
 
@@ -22,7 +23,7 @@ public class Pizza {
         this.crust = crust;
         parts = new Vector<>();
         for(int i = 0; i < numberOfSlices; ++i) {
-            parts.add(new PizzaPart());
+            parts.add(new PizzaPart(i));
         }
     }
 
@@ -45,7 +46,8 @@ public class Pizza {
         double price = size.getPrice() + crust.getPrice();
         for (PizzaPart part: parts){
             if (part.isHasTopping()){
-                price += part.getTopping().getPrice() / (double) numberOfSlices;
+                for (Topping topping:part.getToppings())
+                price += topping.getPrice() / (double) numberOfSlices;
             }
         }
         return price;
