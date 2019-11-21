@@ -1,5 +1,7 @@
 package com.pizzapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
@@ -32,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
         initTabsLayout(viewPager, tabLayout);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void initTabsLayout(ViewPager viewPager, TabLayout tabLayout) {
