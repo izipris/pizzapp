@@ -17,6 +17,7 @@ import com.pizzapp.R;
 import com.pizzapp.ToppingPopUp;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Database;
+import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Slice;
 import com.pizzapp.utilities.IO;
 
@@ -26,6 +27,14 @@ import java.util.List;
 import java.util.Map;
 
 public class TabFragmentMain extends Fragment {
+
+    int TOP_RIGHT_SLICE = 0;
+    int BOTTOM_RIGHT_SLICE = 1;
+    int BOTTOM_LEFT_SLICE = 2;
+    int TOP_LEFT_SLICE = 3;
+
+    Pizza pizza;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_fragment_main, container, false);
@@ -61,9 +70,24 @@ public class TabFragmentMain extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
+                    intent.putExtra("callingId", getView().getId());
                     startActivity(intent);
                     }
             });
-            }
         }
+    }
+
+//    private int getPartClicked(int id){
+//        switch (id){
+//            case (R.id.topRight):
+//                return TOP_RIGHT_SLICE;
+//            case (R.id.bottomRight):
+//                return BOTTOM_RIGHT_SLICE;
+//            case (R.id.bottomLeft):
+//                return BOTTOM_LEFT_SLICE;
+//            case (R.id.topLeft):
+//                return TOP_LEFT_SLICE;
+//        }
+//    }
+//
 }
