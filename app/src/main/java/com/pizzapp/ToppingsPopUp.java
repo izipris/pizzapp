@@ -16,10 +16,13 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
+import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,28 +31,30 @@ import java.util.Map;
 import static android.widget.GridLayout.spec;
 import static java.lang.Math.min;
 
-public class ToppingsPopUp extends AppCompatActivity {
+public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
-    int TOP_RIGHT_SLICE = 0;
-    int BOTTOM_RIGHT_SLICE = 1;
-    int BOTTOM_LEFT_SLICE = 2;
-    int TOP_LEFT_SLICE = 3;
-    int BOX_WIDTH = 120;
-    int BOX_HEIGHT = 52;
-    int ENLARGED_WIDTH = 130;
-    int ENLARGED_HEIGHT = 130;
-    int ENLARGED_MARGIN_FROM_TOP_TOP_SLICES = 150;
-    int ENLARGED_MARGIN_FROM_LEFT_LEFT_SLICES = 75;
-    int ORIGINAL_WIDTH = 76;
-    int ORIGINAL_HEIGHT = 76;
-    int ORIGINAL_MARGIN_FROM_TOP_TOP_SLICES = 200;
-    int ORIGINAL_MARGIN_FROM_TOP_BOTTOM_SLICES = 275;
-    int ORIGINAL_MARGIN_FROM_LEFT_LEFT_SLICES = 130;
-    int ORIGINAL_MARGIN_FROM_LEFT_RIGHT_SLICES = 207;
+    private static final int TOP_RIGHT_SLICE = 0;
+    private static final int BOTTOM_RIGHT_SLICE = 1;
+    private static final int BOTTOM_LEFT_SLICE = 2;
+    private static final int TOP_LEFT_SLICE = 3;
+    private static final int BOX_WIDTH = 120;
+    private static final int BOX_HEIGHT = 52;
+    private static final int PIZZA_PASSED = 3;
+    private static final int ENLARGED_WIDTH = 130;
+    private static final int ENLARGED_HEIGHT = 130;
+    private static final int ENLARGED_MARGIN_FROM_TOP_TOP_SLICES = 150;
+    private static final int ENLARGED_MARGIN_FROM_LEFT_LEFT_SLICES = 75;
+    private static final int ORIGINAL_WIDTH = 76;
+    private static final int ORIGINAL_HEIGHT = 76;
+    private static final int ORIGINAL_MARGIN_FROM_TOP_TOP_SLICES = 200;
+    private static final int ORIGINAL_MARGIN_FROM_TOP_BOTTOM_SLICES = 275;
+    private static final int ORIGINAL_MARGIN_FROM_LEFT_LEFT_SLICES = 130;
+    private static final int ORIGINAL_MARGIN_FROM_LEFT_RIGHT_SLICES = 207;
 
 
     private GridLayout gridLayout;
     int currentSliceId = -1;
+    int currentSliceIdOutOfFour;
     Pizza pizza;
     private List<Topping> toppingsList = new ArrayList<>();
     private Map<Integer, String> idMap = new HashMap<>();
@@ -59,9 +64,28 @@ public class ToppingsPopUp extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
+        extractExtras();
         initiateIdMap();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
+    }
+
+    private void extractExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
+                pizza = (Pizza) extras.getSerializable("pizza");
+            } else {
+                createDefaultPizza();
+            }
+            currentSliceIdOutOfFour = extras.getInt("callingId");
+            calculateCurrentSliceId();
+            enlargeSlice(currentSliceId);
+        }
+    }
+
+    private void createDefaultPizza() {
+        pizza = new Pizza(4, new Size(), new Crust());
     }
 
 
@@ -96,35 +120,27 @@ public class ToppingsPopUp extends AppCompatActivity {
 
     private CheckBox createCheckbox(int row, int col){
         final CheckBox checkBox = new CheckBox(this);
+        final Topping topping = toppingsList.get(4 * col + row);
         checkBox.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
         checkBox.setId(4 * col + row);
-        checkBox.setText(toppingsList.get(4 * col + row).getName());
+        checkBox.setText(topping.getName());
+        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+            checkBox.setChecked(true);
+        }
 
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkBox.isChecked()){
-                    // TODO: 18 נובמבר 2019 add item picture and add to object
+                    addTopping(topping);
                 }
                 else {
-                    // TODO: 18 נובמבר 2019 delete from picture
+                    removeTopping(topping);
                 }
             }
         });
         return checkBox;
     }
-
-//    private void addOnClickListener(List<ImageView> slices) {
-//        for (ImageView slice: slices){
-//            slice.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
-//                    startActivity(intent);
-//                }
-//            });
-//        }
-//    }
 
     private void initiateIdMap(){
         addEntryToMap(R.id.topRight, "topRight");
@@ -139,10 +155,6 @@ public class ToppingsPopUp extends AppCompatActivity {
 
     private void removeEntryFromMap(String value){
         idMap.remove(findKeyFromValue(value));
-    }
-
-    private void setupToppingGrid(int sliceId){
-
     }
 
     private void shrinkSlice(int sliceId){
@@ -203,33 +215,40 @@ public class ToppingsPopUp extends AppCompatActivity {
 
     }
 
-    public void add_topping(View view){
-        int toppingId = view.getId();
-        boolean checked = ((CheckBox) view).isChecked();
-        if (checked){
-            addTopping(currentSliceId, toppingId);
-        }
-        else {
-            removeTopping(currentSliceId, toppingId);
-        }
+
+    private void addTopping(Topping topping){
+        addEntryToMap(createToppingId(topping), topping.getName());
+        addToppingToPizza(topping);
     }
 
-
-    private void addTopping(int sliceId, int toppingId){
-
+    private int createToppingId(Topping topping){
+        return currentSliceIdOutOfFour * (toppingsList.indexOf(topping));
     }
 
-    private void removeTopping(int sliceId, int toppingId){
+    private void addToppingToPizza(Topping topping){
+        pizza.getPizzaPart(currentSliceIdOutOfFour).addTopping(topping);
+        // TODO: 21 נובמבר 2019  add a topping pic to the pizza
+    }
 
+    private void removeTopping(Topping topping){
+        removeEntryFromMap(topping.getName());
+        removeToppingFromPizza(topping);
+    }
+
+    private void removeToppingFromPizza(Topping topping){
+        pizza.getPizzaPart(currentSliceIdOutOfFour).removeTopping(topping);
+        // TODO: 21 נובמבר 2019 remove a topping pic r from the pizza
     }
 
     public void onClick(View view) {
+        // TODO: 21 נובמבר 2019 take out these lines. thy ar only for easy testing
         int newId = view.getId();
         if (newId != currentSliceId && currentSliceId != -1){
             shrinkSlice(currentSliceId);
         }
         enlargeSlice(newId);
         currentSliceId = newId;
+        calculateCurrentSliceOutOfFour();
     }
 
     private Integer findKeyFromValue(String value){
@@ -256,13 +275,35 @@ public class ToppingsPopUp extends AppCompatActivity {
         return false;
     }
 
+    private void calculateCurrentSliceOutOfFour(){
+        switch (currentSliceId){
+                case (R.id.topRight):
+                    currentSliceIdOutOfFour = TOP_RIGHT_SLICE;
+                case (R.id.bottomRight):
+                    currentSliceIdOutOfFour = BOTTOM_RIGHT_SLICE;
+                case (R.id.bottomLeft):
+                    currentSliceIdOutOfFour = BOTTOM_LEFT_SLICE;
+                case (R.id.topLeft):
+                    currentSliceIdOutOfFour = TOP_LEFT_SLICE;
+        }
+    }
+
+    private void calculateCurrentSliceId(){
+        switch (currentSliceIdOutOfFour){
+            case (TOP_RIGHT_SLICE):
+                currentSliceId = R.id.topRight;
+            case (BOTTOM_RIGHT_SLICE):
+                currentSliceId = R.id.bottomRight;
+            case (BOTTOM_LEFT_SLICE):
+                currentSliceId = R.id.bottomLeft;
+            case (TOP_LEFT_SLICE):
+                currentSliceId = R.id.topLeft;
+        }
+    }
+
+
     private int convertDpToPx(int dp)
     {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
-    private int pxToDp(int px)
-    {
-        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
 }
