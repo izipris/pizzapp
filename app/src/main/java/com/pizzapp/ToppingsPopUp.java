@@ -3,6 +3,7 @@ package com.pizzapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
@@ -279,12 +280,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         switch (currentSliceId){
                 case (R.id.topRight):
                     currentSliceIdOutOfFour = TOP_RIGHT_SLICE;
+                    break;
                 case (R.id.bottomRight):
                     currentSliceIdOutOfFour = BOTTOM_RIGHT_SLICE;
+                    break;
                 case (R.id.bottomLeft):
                     currentSliceIdOutOfFour = BOTTOM_LEFT_SLICE;
+                    break;
                 case (R.id.topLeft):
                     currentSliceIdOutOfFour = TOP_LEFT_SLICE;
+                    break;
         }
     }
 
@@ -292,12 +297,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         switch (currentSliceIdOutOfFour){
             case (TOP_RIGHT_SLICE):
                 currentSliceId = R.id.topRight;
+                break;
             case (BOTTOM_RIGHT_SLICE):
                 currentSliceId = R.id.bottomRight;
+                break;
             case (BOTTOM_LEFT_SLICE):
                 currentSliceId = R.id.bottomLeft;
+                break;
             case (TOP_LEFT_SLICE):
                 currentSliceId = R.id.topLeft;
+                break;
         }
     }
 
@@ -305,5 +314,12 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private int convertDpToPx(int dp)
     {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public void backToMain(View view) {
+        Intent intent = getIntent();
+        intent.putExtra("pizza", pizza);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 }
