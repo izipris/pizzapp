@@ -7,4 +7,9 @@
     <string name="image_description_dough_regular">Regular</string>
     <string name="image_description_dough_thin">Thin</string>
     <string name="currency_symbol">$</string>
+    <string name="olives">olives</string>
+    <string name="topright">topRight</string>
+    <string name="bottomright">bottomRight</string>
+    <string name="bottomleft">bottomLeft</string>
+    <string name="topleft">topLeft</string>
 </resources>

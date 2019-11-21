@@ -6,12 +6,84 @@
     android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
-    <ScrollView
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="40dp"
+        android:background="#357C39"
+        android:gravity="center"
+        android:text="@string/choose_topping" />
+
+
+    <RelativeLayout
+        android:id="@+id/pizzaPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:paddingBottom="70dp">
+
+
+
+        <ImageView
+            android:id="@+id/topRight"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginLeft="207dp"
+            android:layout_marginTop="200dp"
+            android:contentDescription="@string/topright"
+            android:paddingLeft="1.5dp"
+            android:paddingBottom="1.5dp"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/ic_xl_pizza_slice" />
+
+        <ImageView
+            android:id="@+id/bottomRight"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginLeft="207dp"
+            android:layout_marginTop="275dp"
+            android:paddingLeft="1.5dp"
+            android:paddingTop="1.5dp"
+            android:contentDescription="@string/bottomright"
+            android:rotation="90"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/ic_xl_pizza_slice"
+            />
+
+        <ImageView
+            android:id="@+id/bottomLeft"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="275dp"
+            android:contentDescription="@string/bottomleft"
+            android:paddingTop="1.5dp"
+            android:paddingRight="1.5dp"
+            android:rotation="180"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/ic_xl_pizza_slice" />
+
+        <ImageView
+            android:id="@+id/topLeft"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="200dp"
+            android:paddingBottom="1.5dp"
+            android:paddingRight="1.5dp"
+            android:contentDescription="topLeft"
+            android:rotation="270"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/ic_xl_pizza_slice"
+            />
+    </RelativeLayout>
+
+    <HorizontalScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="201dp"
+        android:layout_below="@id/pizzaPic"
         android:fadingEdge="horizontal"
         android:scrollbars="horizontal">
 
@@ -71,7 +143,9 @@
 
         </GridLayout>
 
-    </ScrollView>
+    </HorizontalScrollView>
+
+
 
 
 </RelativeLayout>
