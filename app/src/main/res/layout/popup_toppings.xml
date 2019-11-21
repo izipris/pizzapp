@@ -24,59 +24,124 @@
         android:paddingBottom="70dp">
 
 
-
-        <ImageView
-            android:id="@+id/topRight"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
+        <FrameLayout
+            android:id="@+id/topRightFrame"
+            android:layout_width="154dp"
+            android:layout_height="154dp"
             android:layout_marginLeft="207dp"
-            android:layout_marginTop="200dp"
-            android:contentDescription="@string/topright"
-            android:paddingLeft="1.5dp"
-            android:paddingBottom="1.5dp"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/ic_xl_pizza_slice" />
+            android:layout_marginTop="25dp">
 
-        <ImageView
-            android:id="@+id/bottomRight"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
+            <ImageView
+                android:id="@+id/topRight"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_gravity="left|bottom"
+                android:contentDescription="@string/topright"
+                android:onClick="onClick"
+                android:paddingLeft="1.5dp"
+                android:paddingBottom="1.5dp"
+                app:srcCompat="@drawable/ic_xl_pizza_slice" />
+
+            <ImageView
+                android:id="@+id/pizzaPLusTopRight"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="left|center|bottom"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/pizza_plus" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/bottomRightFrame"
+            android:layout_width="154dp"
+            android:layout_height="154dp"
             android:layout_marginLeft="207dp"
-            android:layout_marginTop="275dp"
-            android:paddingLeft="1.5dp"
-            android:paddingTop="1.5dp"
-            android:contentDescription="@string/bottomright"
-            android:rotation="90"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/ic_xl_pizza_slice"
-            />
+            android:layout_marginTop="178dp">
 
-        <ImageView
-            android:id="@+id/bottomLeft"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="275dp"
-            android:contentDescription="@string/bottomleft"
-            android:paddingTop="1.5dp"
-            android:paddingRight="1.5dp"
-            android:rotation="180"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/ic_xl_pizza_slice" />
+            <ImageView
+                android:id="@+id/bottomRight"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_gravity="top|left"
+                android:contentDescription="@string/bottomright"
+                android:onClick="onClick"
+                android:paddingLeft="1.5dp"
+                android:paddingTop="1.5dp"
+                android:rotation="90"
+                app:srcCompat="@drawable/ic_xl_pizza_slice" />
 
-        <ImageView
-            android:id="@+id/topLeft"
-            android:layout_width="76dp"
-            android:layout_height="76dp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="200dp"
-            android:paddingBottom="1.5dp"
-            android:paddingRight="1.5dp"
-            android:contentDescription="topLeft"
-            android:rotation="270"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/ic_xl_pizza_slice"
-            />
+            <ImageView
+                android:id="@+id/pizzaPLusBottomRight"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="left|center|top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/pizza_plus" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/bottomLeftFrame"
+            android:layout_width="154dp"
+            android:layout_height="154dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="178dp">
+
+
+            <ImageView
+                android:id="@+id/bottomLeft"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_gravity="top|right"
+                android:contentDescription="@string/bottomleft"
+                android:onClick="onClick"
+                android:paddingTop="1.5dp"
+                android:paddingRight="1.5dp"
+                android:rotation="180"
+                app:srcCompat="@drawable/ic_xl_pizza_slice" />
+
+            <ImageView
+                android:id="@+id/pizzaPLusBottomleft"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right|center|top"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                app:srcCompat="@drawable/pizza_plus" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/topLeftFrame"
+            android:layout_width="154dp"
+            android:layout_height="154dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="25dp">
+
+            <ImageView
+                android:id="@+id/topLeft"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_gravity="bottom|right"
+                android:contentDescription="topLeft"
+                android:onClick="onClick"
+                android:paddingRight="1.5dp"
+                android:paddingBottom="1.5dp"
+                android:rotation="270"
+                app:srcCompat="@drawable/ic_xl_pizza_slice" />
+
+            <ImageView
+                android:id="@+id/pizzaPLusTopleft"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right|center|bottom"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/pizza_plus" />
+        </FrameLayout>
+
+
     </RelativeLayout>
 
     <HorizontalScrollView
@@ -90,58 +155,15 @@
         <GridLayout
             android:id="@+id/grid_layout"
             android:layout_width="match_parent"
-            android:layout_height="151dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            android:columnCount="4"
+            android:columnCount="3"
             android:paddingLeft="40dp"
             android:paddingRight="18dp"
-            android:rowCount="3">
+            android:rowCount="4">
 
 
-            <CheckBox
-                android:id="@+id/olives"
-                android:layout_width="120dp"
-                android:layout_height="52dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:onClick="add_topping"
-                android:paddingRight="15dp"
-                android:text="@string/olives" />
-
-            <CheckBox
-
-                android:id="@+id/tuna"
-                android:layout_width="120dp"
-                android:layout_height="52dp"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:onClick="add_topping"
-                android:paddingRight="15dp"
-                android:text="@string/olives" />
-
-            <CheckBox
-
-                android:id="@+id/corn"
-                android:layout_width="120dp"
-                android:layout_height="52dp"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:onClick="add_topping"
-                android:paddingRight="15dp"
-                android:text="@string/olives" />
-
-            <CheckBox
-
-                android:id="@+id/pineapple"
-                android:layout_width="120dp"
-                android:layout_height="52dp"
-                android:layout_row="0"
-                android:layout_column="3"
-                android:onClick="add_topping"
-                android:text="@string/olives" />
-
-
-        </GridLayout>
+                    </GridLayout>
 
     </HorizontalScrollView>
 
