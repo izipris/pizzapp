@@ -21,19 +21,25 @@ import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Slice;
 import com.pizzapp.utilities.IO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class TabFragmentMain extends Fragment {
 
-    int TOP_RIGHT_SLICE = 0;
-    int BOTTOM_RIGHT_SLICE = 1;
-    int BOTTOM_LEFT_SLICE = 2;
-    int TOP_LEFT_SLICE = 3;
 
-    Pizza pizza;
+public class TabFragmentMain extends Fragment implements Serializable {
+
+    private static final int POPUP_ACTIVITY_REQUEST_CODE = 0;
+    private static final int TOP_RIGHT_SLICE = 0;
+    private static final int BOTTOM_RIGHT_SLICE = 1;
+    private static final int BOTTOM_LEFT_SLICE = 2;
+    private static final int TOP_LEFT_SLICE = 3;
+    private static final int PIZZA_PASSED = 3;
+    private static final int PIZZA_NOT_PASSED = 2;
+
+    Pizza currentPizza;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,20 +55,8 @@ public class TabFragmentMain extends Fragment {
         ImageView topLeftSlice = view.findViewById(R.id.topLeft);
         List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
         addOnClickListener(slices);
-//        Map<ImageButton, TextView> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
-//                Arrays.asList(doughThickTextView, doughRegularTextView, doughThinTextView));
-//        defineDoughButtonsHandlers(buttonToTitleMap);
-//        Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
-//
-//        Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
-//        Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
-//        Crust thickCrust = database.getCrusts().get(DB_CRUST_THICK);
-//
-//        doughThickTextView.setText(getDoughTitle(thickCrust));
-//        doughRegularTextView.setText(getDoughTitle(regularCrust));
-//        doughThinTextView.setText(getDoughTitle(thinCrust));
-
     }
+
 
     private void addOnClickListener(List<ImageView> slices) {
         for (ImageView slice: slices){
@@ -70,24 +64,33 @@ public class TabFragmentMain extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
-                    intent.putExtra("callingId", getView().getId());
-                    startActivity(intent);
+                    int numberOfExtrasPassed;
+                    intent.putExtra("callingId", getPartClicked(v.getId()));
+                    if (currentPizza != null) {
+                        numberOfExtrasPassed = PIZZA_PASSED;
+                        intent.putExtra("pizza", currentPizza);
+                    } else {
+                        numberOfExtrasPassed = PIZZA_NOT_PASSED;
+                    }
+                    intent.putExtra("numberOfExtras", numberOfExtrasPassed);
+                    startActivityForResult(intent, POPUP_ACTIVITY_REQUEST_CODE);
                     }
             });
         }
     }
 
-//    private int getPartClicked(int id){
-//        switch (id){
-//            case (R.id.topRight):
-//                return TOP_RIGHT_SLICE;
-//            case (R.id.bottomRight):
-//                return BOTTOM_RIGHT_SLICE;
-//            case (R.id.bottomLeft):
-//                return BOTTOM_LEFT_SLICE;
-//            case (R.id.topLeft):
-//                return TOP_LEFT_SLICE;
-//        }
-//    }
-//
+    private int getPartClicked(int id){
+        switch (id){
+            case (R.id.topRight):
+                return TOP_RIGHT_SLICE;
+            case (R.id.bottomRight):
+                return BOTTOM_RIGHT_SLICE;
+            case (R.id.bottomLeft):
+                return BOTTOM_LEFT_SLICE;
+            case (R.id.topLeft):
+                return TOP_LEFT_SLICE;
+        }
+        return -1;
+    }
+
 }

@@ -28,4 +28,15 @@
     <string name="bottomright">bottomRight</string>
     <string name="bottomleft">bottomLeft</string>
     <string name="topleft">topLeft</string>
+    <string name="hello">hello</string>
+    <string name="choose_topping">choose topping</string>
+    <string name="m">m</string>
+    <string name="medium_size">medium_size</string>
+    <string name="image_description_medium_pizza">image_description_medium_pizza</string>
+    <string name="initial_medium_pizza_price">initial_medium_pizza_price</string>
+    <string name="xl">xl</string>
+    <string name="extra_large_size">extra_large_size</string>
+    <string name="initial_extra_large_pizza_price">initial_extra_large_pizza_price</string>
+    <string name="l">l</string>
+    <string name="large_size">large_size</string>
 </resources>
