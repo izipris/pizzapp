@@ -31,4 +31,9 @@
 <string name="tab_title_separator">/</string>
     <string name="delivery_button">Delivery</string>
     <string name="pickup_button">Pickup</string>
+    <string name="olives">olives</string>
+    <string name="topright">topRight</string>
+    <string name="bottomright">bottomRight</string>
+    <string name="bottomleft">bottomLeft</string>
+    <string name="topleft">topLeft</string>
 </resources>
