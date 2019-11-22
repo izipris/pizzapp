@@ -1,6 +1,8 @@
 package com.pizzapp.model.pizza;
 
-public class Topping {
+import java.io.Serializable;
+
+public class Topping implements Serializable {
     private String name;
     private double price;
     private String imageSource;

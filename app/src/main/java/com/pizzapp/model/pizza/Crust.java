@@ -1,6 +1,8 @@
 package com.pizzapp.model.pizza;
 
-public class Crust {
+import java.io.Serializable;
+
+public class Crust implements Serializable {
     private String name;
     private double price;
 

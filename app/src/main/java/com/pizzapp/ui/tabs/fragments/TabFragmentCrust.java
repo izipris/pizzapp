@@ -16,13 +16,14 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.utilities.IO;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabFragmentCrust extends Fragment {
+public class TabFragmentCrust extends Fragment implements Serializable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_fragment_crust, container, false);
