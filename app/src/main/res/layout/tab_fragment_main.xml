@@ -7,22 +7,50 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/greeting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="30dp"
         android:gravity="center"
-        android:text="@string/hello">
+        android:text="@string/hello_tomer">
 
     </TextView>
 
+    <LinearLayout
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/greeting"
+        android:orientation="horizontal">
 
+
+        <TextView
+            android:id="@+id/crust"
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:text="crust"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:text="My Pizza"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/pizzaSize"
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="size" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/pizzaPic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/heading"
         android:paddingBottom="70dp">
 
 
@@ -145,5 +173,75 @@
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/pizzaPic">
+
+        <LinearLayout
+            android:id="@+id/topOfBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="ADD"
+                android:layout_marginLeft="110dp"
+                android:onClick="addPizza"/>
+
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Clear"
+                android:layout_marginLeft="20dp"
+                android:onClick="clearPizza"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/topOfBottom">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="180dp"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderDisplay"
+            android:layout_below="@id/price"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="160dp"
+                android:text="View Order"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderDisplay"
+            android:text="Continue"
+            android:onClick="placeOrder"
+            />
+
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
