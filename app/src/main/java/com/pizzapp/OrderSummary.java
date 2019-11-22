@@ -37,6 +37,7 @@ public class OrderSummary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
 
+
         mOrderDetailsScrollText = findViewById(R.id.order_details_scroll_text);
         mPizzaLayout = findViewById(R.id.pizza_text_layout);
 
@@ -48,7 +49,7 @@ public class OrderSummary extends AppCompatActivity {
 
     private void setPriceTextView(double testOrderTotalPrice){
         TextView orderPrice = findViewById(R.id.order_total_price);
-        orderPrice.setText("Order Total:" + String.valueOf(testOrderTotalPrice) + "$");
+        orderPrice.setText("Order Total: " + String.valueOf(testOrderTotalPrice) + "$");
     }
 
     private void viewOrder(Order testOrder) {
@@ -106,7 +107,7 @@ public class OrderSummary extends AppCompatActivity {
         return toppingsView;
     }
 
-    private List<TextView> getPartLayout(int i, Pizza pizza){
+    private List<TextView> getPartAndToppingsViews(int i, Pizza pizza){
 //        LinearLayout partLayout = getPizzaLayout();
         List<TextView>  partAndTopping = new LinkedList<>();
         int numOfParts = pizza.getNumberOfParts();
@@ -114,7 +115,7 @@ public class OrderSummary extends AppCompatActivity {
 
         TextView pizzaPartLineView = getPartLineView();
         TextView toppingsView = getPartToppings(currPart);
-        pizzaPartLineView.setText("Part " + i + "/" + numOfParts + ":");
+        pizzaPartLineView.setText("Part " + (i+1) + "/" + numOfParts + ":");
         pizzaPartLineView.setVisibility(View.VISIBLE);
         toppingsView.setVisibility(View.VISIBLE);
         partAndTopping.add(pizzaPartLineView);
@@ -125,7 +126,7 @@ public class OrderSummary extends AppCompatActivity {
     private List<TextView> getAllPartsAndToppings(Pizza pizza, int numOfParts) {
         List<TextView>  partsAndToppings = new LinkedList<>();
         for (int i = 0; i < numOfParts; i++){
-            List<TextView> partAndTopping = getPartLayout(i, pizza);
+            List<TextView> partAndTopping = getPartAndToppingsViews(i, pizza);
             partsAndToppings.addAll(partAndTopping);
         }
         // essentially will return a list of view of part,topping,part,topping
@@ -142,8 +143,6 @@ public class OrderSummary extends AppCompatActivity {
         views.add(getPizzaPriceView(pizza, numOfParts));
         return views;
     }
-
-
 
     private double getPizzaPrice(Pizza pizza, int numOfParts){
         double priceSum = pizza.getSize().getPrice();
@@ -162,12 +161,14 @@ public class OrderSummary extends AppCompatActivity {
         return priceView;
     }
 
-    private Pizza getTestPizza(){
+    private Pizza getTestPizza(int i_size, int i_crust, int i_toppins, int num_parts){
         Database db = getDatabase();
-        Pizza testPizza = new Pizza(db.getSizes().get(0),db.getCrusts().get(0));
-        PizzaPart testPizzaPart = testPizza.getPizzaPart(0);
-        if (!testPizzaPart.isHasTopping()){
-            testPizzaPart.setTopping(db.getToppings().get(0));
+        Pizza testPizza = new Pizza(num_parts, db.getSizes().get(i_size),db.getCrusts().get(i_crust));
+        for (int i = 0; i < num_parts; i++){
+            PizzaPart testPizzaPart = testPizza.getPizzaPart(i);
+            if (!testPizzaPart.isHasTopping()){
+                testPizzaPart.setTopping(db.getToppings().get(i_toppins));
+            }
         }
         return testPizza;
     }
@@ -177,10 +178,23 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     private Order getTestOrder() {
-        Pizza testPizza = getTestPizza();
-        Order testOrder = new Order(1234);
-        testOrder.addPizza(testPizza);
-        return testOrder;
+        try{
+
+            Pizza testPizza1 = getTestPizza(0,0,0,1);
+            Pizza testPizza2 = getTestPizza(1,1,1,2);
+            Pizza testPizza3 = getTestPizza(2,2,2,4);
+            Pizza testPizza4 = getTestPizza(2,2,2,6);
+            Order testOrder = new Order(1234);
+            testOrder.addPizza(testPizza1);
+            testOrder.addPizza(testPizza2);
+            testOrder.addPizza(testPizza3);
+            testOrder.addPizza(testPizza4);
+            return testOrder;
+        } catch (Exception e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return null;
     }
 
     public String byteBufferToString(byte[] buffer){
