@@ -6,13 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -25,13 +30,16 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static android.widget.GridLayout.spec;
 import static java.lang.Math.min;
+import static java.lang.Math.random;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
@@ -39,6 +47,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
+    private static final int ANGLE_TO_ROTATE = 90;
     private static final int BOX_WIDTH = 120;
     private static final int BOX_HEIGHT = 52;
     private static final int PIZZA_PASSED = 3;
@@ -82,7 +91,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             }
             currentSliceIdOutOfFour = extras.getInt("callingId");
             calculateCurrentSliceId();
-            enlargeSlice(currentSliceId);
+            enlargeSlice();
         }
     }
 
@@ -159,20 +168,33 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         idMap.remove(findKeyFromValue(value));
     }
 
-    private void shrinkSlice(int sliceId){
-        ImageView part = findViewById(sliceId);
-        ViewGroup.LayoutParams layoutParams = part.getLayoutParams();
-        layoutParams.height = convertDpToPx(ORIGINAL_HEIGHT);
-        layoutParams.width = convertDpToPx(ORIGINAL_WIDTH);
-        part.setLayoutParams(layoutParams);
+    private void shrinkSlice(){
+        for (Topping topping:pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()){
+            shrinkImage(findToppingId(topping));
+        }
+        shrinkImage(currentSliceId);
     }
 
-    private void enlargeSlice(Integer sliceId){
-        ImageView part = findViewById(sliceId);
-        ViewGroup.LayoutParams layoutParams = part.getLayoutParams();
+    private void shrinkImage(int imageId){
+        ImageView image = findViewById(imageId);
+        ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
+        layoutParams.height = convertDpToPx(ORIGINAL_HEIGHT);
+        layoutParams.width = convertDpToPx(ORIGINAL_WIDTH);
+        image.setLayoutParams(layoutParams);
+    }
+
+    private void enlargeSlice(){
+        for (Topping topping:pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()){
+            enlargeImage(findToppingId(topping));
+        }
+        enlargeImage(currentSliceId);
+    }
+    private void enlargeImage(Integer sliceId){
+        ImageView image = findViewById(sliceId);
+        ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         layoutParams.height = convertDpToPx(ENLARGED_HEIGHT);
         layoutParams.width = convertDpToPx(ENLARGED_WIDTH);
-        part.setLayoutParams(layoutParams);
+        image.setLayoutParams(layoutParams);
     }
 
     private void changeSize(int sliceId, boolean enlarge){
@@ -219,42 +241,124 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
 
     private void addTopping(Topping topping){
-        addEntryToMap(createToppingId(topping), topping.getName());
-        addToppingToPizza(topping);
+        int toppingId = createToppingId(topping);
+        while (idMap.containsKey(toppingId)){
+            createToppingId(topping);
+        }
+        addEntryToMap(toppingId, calculateCurrentSliceString() + topping.getName());
+        addToppingToPizza(topping, toppingId);
     }
 
     private int createToppingId(Topping topping){
-        return currentSliceIdOutOfFour * (toppingsList.indexOf(topping));
+        Random random = new Random();
+        return  random.nextInt() * (toppingsList.indexOf(topping) + random.nextInt());
     }
 
-    private void addToppingToPizza(Topping topping){
+    private void addToppingToPizza(Topping topping, int toppingId){
         pizza.getPizzaPart(currentSliceIdOutOfFour).addTopping(topping);
-        // TODO: 21 נובמבר 2019  add a topping pic to the pizza
+        FrameLayout frameLayout = getAppropriateFrameId();
+        ImageView newTopping = new ImageView(this);
+        newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
+        newTopping.setRotation(calculateCurrentSliceRotation());
+        newTopping.setId(toppingId);
+        newTopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newId = getSliceFromTopping(v.getId());
+                if (newId != currentSliceId && currentSliceId != -1){
+                    shrinkSlice();
+                }
+                currentSliceId = newId;
+                calculateCurrentSliceOutOfFour();
+                enlargeSlice();
+                editToppingChart();
+            }
+        });
+        FrameLayout.LayoutParams layoutParams = new
+                FrameLayout.LayoutParams(convertDpToPx(154),convertDpToPx(154));
+        setGravity(layoutParams);
+        layoutParams.height = convertDpToPx(ENLARGED_HEIGHT);
+        layoutParams.width = convertDpToPx(ENLARGED_WIDTH);
+
+        newTopping.setLayoutParams(layoutParams);
+        frameLayout.addView(newTopping);
+    }
+
+    private int getSliceFromTopping(int toppingId){
+        if (isSubstring("topRight", idMap.get(toppingId))) {
+            return R.id.topRight;
+        }
+        if (isSubstring("bottomRight", idMap.get(toppingId))) {
+            return R.id.bottomRight;
+        }
+        if (isSubstring("bottomLeft", idMap.get(toppingId))) {
+            return R.id.bottomLeft;
+        }
+        if (isSubstring("topLeft", idMap.get(toppingId))) {
+            return R.id.topLeft;
+        }
+        return -1;
+    }
+
+    private void setGravity(FrameLayout.LayoutParams layoutParams){
+        switch (currentSliceIdOutOfFour){
+            case (TOP_RIGHT_SLICE):
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+            case (BOTTOM_RIGHT_SLICE):
+                layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+            case (BOTTOM_LEFT_SLICE):
+                layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+            case (TOP_LEFT_SLICE):
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+        }
+    }
+
+    private Drawable convertStringToDrawable(String name){
+        int id = getResources().getIdentifier(name, "drawable", getPackageName());
+        return getResources().getDrawable(id);
     }
 
     private void removeTopping(Topping topping){
-        removeEntryFromMap(topping.getName());
         removeToppingFromPizza(topping);
+        removeEntryFromMap(calculateCurrentSliceString() + topping.getName());
     }
 
     private void removeToppingFromPizza(Topping topping){
         pizza.getPizzaPart(currentSliceIdOutOfFour).removeTopping(topping);
-        // TODO: 21 נובמבר 2019 remove a topping pic r from the pizza
+        ImageView toppingToRemove = findViewById(findToppingId(topping));
+        toppingToRemove.setVisibility(View.GONE);
     }
 
     public void onClick(View view) {
         // TODO: 21 נובמבר 2019 take out these lines. thy ar only for easy testing
         int newId = view.getId();
         if (newId != currentSliceId && currentSliceId != -1){
-            shrinkSlice(currentSliceId);
+            shrinkSlice();
         }
-        enlargeSlice(newId);
         currentSliceId = newId;
         calculateCurrentSliceOutOfFour();
+        enlargeSlice();
         editToppingChart();
     }
 
     private void editToppingChart() {
+        for (Topping topping:toppingsList){
+            CheckBox checkBox = findViewById(toppingsList.indexOf(topping));
+            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+                checkBox.setChecked(true);
+            } else {
+                checkBox.setChecked(false);
+            }
+        }
+    }
+
+    private int findToppingId(Topping topping){
+        for (Map.Entry<Integer, String> entry:idMap.entrySet()){
+            if ((calculateCurrentSliceString() + topping.getName()).equals(entry.getValue())){
+                return entry.getKey();
+            }
+        }
+        return -1;
     }
 
     private Integer findKeyFromValue(String value){
@@ -315,6 +419,36 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
     }
 
+    private String calculateCurrentSliceString(){
+        switch (currentSliceIdOutOfFour){
+            case (TOP_RIGHT_SLICE):
+                return "topRight";
+            case (BOTTOM_RIGHT_SLICE):
+                return "bottomRight";
+            case (BOTTOM_LEFT_SLICE):
+                return "bottomLeft";
+            case (TOP_LEFT_SLICE):
+                return "topLeft";
+        }
+        return "";
+    }
+
+    private int calculateCurrentSliceRotation(){
+        return ANGLE_TO_ROTATE * currentSliceIdOutOfFour;
+    }
+
+    private FrameLayout getAppropriateFrameId(){
+        switch (currentSliceIdOutOfFour){
+            case (TOP_RIGHT_SLICE):
+                return findViewById(R.id.topRightFrame);
+            case (BOTTOM_RIGHT_SLICE):
+                return findViewById(R.id.bottomRightFrame);
+            case (BOTTOM_LEFT_SLICE):
+                return findViewById(R.id.bottomLeftFrame);
+        }
+        return findViewById(R.id.topLeftFrame);
+
+    }
 
     private int convertDpToPx(int dp)
     {
