@@ -79,6 +79,7 @@
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:onClick="launchDeliveryActivity"
             app:fontFamily="@font/open_sans" />
 
         <View
@@ -101,6 +102,7 @@
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:onClick="launchPickupActivity"
             app:fontFamily="@font/open_sans" />
 
     </LinearLayout>
