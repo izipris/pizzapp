@@ -21,6 +21,7 @@ import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
+import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
@@ -250,6 +251,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         enlargeSlice(newId);
         currentSliceId = newId;
         calculateCurrentSliceOutOfFour();
+        editToppingChart();
+    }
+
+    private void editToppingChart() {
     }
 
     private Integer findKeyFromValue(String value){
@@ -317,9 +322,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     public void backToMain(View view) {
-        Intent intent = getIntent();
-        intent.putExtra("pizza", pizza);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pizza", pizza);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

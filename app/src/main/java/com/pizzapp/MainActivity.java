@@ -15,19 +15,23 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     private static final int MAIN_FRAGMENT_INDEX = 1;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public Pizza pizza;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        extractExtras();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -35,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
         initTabsLayout(viewPager, tabLayout);
+    }
+
+    private void extractExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            pizza = (Pizza) extras.getSerializable("pizza");
+            viewPager = findViewById(R.id.viewpager);
+            viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX);
+        }
     }
 
     @Override
@@ -52,5 +65,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         viewPager.setOffscreenPageLimit(viewPagerTabsLimit);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public Pizza getPizza() {
+        return pizza;
     }
 }
