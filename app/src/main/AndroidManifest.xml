@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Pickup"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,13 +35,20 @@
         </activity>
         <activity
             android:name=".Delivery"
-            android:label="Delivery Summary"
+            android:label="Delivery"
             android:parentActivityName=".OrderSummary">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pizzapp.OrderSummary" />
         </activity>
+        <activity android:name=".Pickup"
+            android:label="Pickup"
+            android:parentActivityName=".OrderSummary">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pizzapp.OrderSummary" />
 
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
