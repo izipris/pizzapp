@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.ToppingPopUp;
 import com.pizzapp.ToppingsPopUp;
@@ -45,11 +46,27 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_fragment_main, container, false);
+//        extractExtras();
     }
+
+//    private void extractExtras() {
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
+//                pizza = (Pizza) extras.getSerializable("pizza");
+//            } else {
+//                createDefaultPizza();
+//            }
+//            currentSliceIdOutOfFour = extras.getInt("callingId");
+//            calculateCurrentSliceId();
+//            enlargeSlice(currentSliceId);
+//        }
+//    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        currentPizza = ((MainActivity)this.getActivity()).pizza;
         ImageView topRightSlice = view.findViewById(R.id.topRight);
         ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
         ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
@@ -73,7 +90,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
     private void createPizza() {
-        // TODO: 21 נובמבר 2019 add topping to pizza 
+        // TODO: 21 נובמבר 2019 add topping to pizza
     }
 
 
@@ -92,7 +109,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
                         numberOfExtrasPassed = PIZZA_NOT_PASSED;
                     }
                     intent.putExtra("numberOfExtras", numberOfExtrasPassed);
-                    startActivityForResult(intent, POPUP_ACTIVITY_REQUEST_CODE);
+                    startActivity(intent);
                     }
             });
         }

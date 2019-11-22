@@ -1,9 +1,10 @@
 package com.pizzapp.model.pizza;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PizzaPart {
+public class PizzaPart implements Serializable {
     private List<Topping> toppings;
     private boolean hasTopping;
     private int id;
