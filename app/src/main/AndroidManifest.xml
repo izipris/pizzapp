@@ -6,10 +6,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Pickup"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".OrderSummary"
             android:label = "Order Summary"
             android:parentActivityName=".MainActivity">
@@ -19,14 +29,16 @@
                     "com.pizzapp.OrderSummary" />
         </activity>
         <activity android:name=".ToppingsPopUp"></activity>
-        <activity android:name=".MainActivity">
-                android:value="com.pizzapp.OrderSummary" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".Delivery"
+            android:label="Delivery Summary"
+            android:parentActivityName=".OrderSummary">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pizzapp.OrderSummary" />
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

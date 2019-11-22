@@ -3,6 +3,7 @@ package com.pizzapp;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -197,6 +198,13 @@ public class OrderSummary extends AppCompatActivity {
         return null;
     }
 
+
+    public void launchDeliveryActivity(View view){
+        Log.d(LOG_TAG, "Delivery button clicked!");
+        Intent intent = new Intent(this, Delivery.class);
+        startActivity(intent);
+    }
+
     public String byteBufferToString(byte[] buffer){
         try{
             String order_as_json = new String(buffer, "UTF-8");
@@ -228,4 +236,9 @@ public class OrderSummary extends AppCompatActivity {
     }
 
 
+    public void launchPickupActivity(View view) {
+        Log.d(LOG_TAG, "Pickup button clicked!");
+        Intent intent = new Intent(this, Pickup.class);
+        startActivity(intent);
+    }
 }
