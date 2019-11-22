@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -31,7 +32,8 @@ public class OrderSummary extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ScrollView mOrderDetailsScrollText;
     private LinearLayout mPizzaLayout;
-
+    private Button mDelivery;
+    private Button mPickup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class OrderSummary extends AppCompatActivity {
 
         mOrderDetailsScrollText = findViewById(R.id.order_details_scroll_text);
         mPizzaLayout = findViewById(R.id.pizza_text_layout);
+        mPickup = findViewById(R.id.pickup_button);
+        mDelivery = findViewById(R.id.delivery_button);
 
         Order testOrder = getTestOrder();
         double testOrderTotalPrice = testOrder.getTotalPrice();
@@ -63,13 +67,13 @@ public class OrderSummary extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
     private TextView getSizeView(Pizza pizza){
         TextView pizzaSizeView = getAnonymousTextView();
         pizzaSizeView.setText(pizza.getSize().getName() + " "
                             + pizza.getCrust().getName() + " Pizza"); //don't care about translations
         pizzaSizeView.setTextSize(25); // todo verify font family
+        pizzaSizeView.setPadding(5,5,5,5);
         pizzaSizeView.setVisibility(View.VISIBLE);
         return pizzaSizeView;
     }
@@ -201,8 +205,31 @@ public class OrderSummary extends AppCompatActivity {
 
     public void launchDeliveryActivity(View view){
         Log.d(LOG_TAG, "Delivery button clicked!");
+        mDelivery.setTextColor(Color.RED);
         Intent intent = new Intent(this, Delivery.class);
         startActivity(intent);
+    }
+
+
+    public void launchPickupActivity(View view) {
+        Log.d(LOG_TAG, "Pickup button clicked!");
+        mPickup.setTextColor(Color.RED);
+        Intent intent = new Intent(this, Pickup.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(LOG_TAG, "onPause");
+        mDelivery.setTextColor(Color.BLACK);
+        mPickup.setTextColor(Color.BLACK);
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        Log.d(LOG_TAG, "onRestart");
     }
 
     public String byteBufferToString(byte[] buffer){
@@ -236,9 +263,4 @@ public class OrderSummary extends AppCompatActivity {
     }
 
 
-    public void launchPickupActivity(View view) {
-        Log.d(LOG_TAG, "Pickup button clicked!");
-        Intent intent = new Intent(this, Pickup.class);
-        startActivity(intent);
-    }
 }
