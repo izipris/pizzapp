@@ -9,8 +9,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,7 +26,9 @@ import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Topping;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -40,8 +44,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
 
-    Pizza currentPizza;
-    Order finalOrder;
+    private Pizza currentPizza;
+    private Order finalOrder;
+    private List<ImageView> toppingImages = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,13 +57,48 @@ public class TabFragmentMain extends Fragment implements Serializable {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         currentPizza = ((MainActivity)this.getActivity()).pizza;
+        if (((MainActivity)this.getActivity()).order == null) {
+            finalOrder = new Order(0);
+        } else {
+            finalOrder = ((MainActivity) this.getActivity()).order;
+            finalOrder.addPizza(currentPizza);
+        }
+        setPrice(view);
         ImageView topRightSlice = view.findViewById(R.id.topRight);
         ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
         ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
         ImageView topLeftSlice = view.findViewById(R.id.topLeft);
         List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
         addOnClickListener(slices);
+        addClearOnClickListener(view);
         createPizza(view);
+    }
+
+    private void addClearOnClickListener(final View view) {
+        Button clearButton = view.findViewById(R.id.clear);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (ImageView toppingImage:toppingImages){
+                    toppingImage.setVisibility(View.GONE);
+                    deleteToppingsFromPizzaObject();
+//                    finalOrder.upadateLastPizza(currentPizza);
+                    setPrice(view);
+                }
+            }
+        });
+    }
+
+    private void deleteToppingsFromPizzaObject() {
+        for (PizzaPart part:currentPizza.getParts()){
+            part.getToppings().clear();
+        }
+    }
+
+    private void setPrice(View view) {
+        TextView price = view.findViewById(R.id.orderPrice);
+        String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
+        price.setText(priceDisplay);
     }
 
 
@@ -91,6 +131,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         layoutParams.width = convertDpToPx(WIDTH);
 
         newTopping.setLayoutParams(layoutParams);
+        toppingImages.add(newTopping);
         frameLayout.addView(newTopping);
     }
 
@@ -111,12 +152,16 @@ public class TabFragmentMain extends Fragment implements Serializable {
         switch (currentPart){
             case (TOP_RIGHT_SLICE):
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                break;
             case (BOTTOM_RIGHT_SLICE):
                 layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+                break;
             case (BOTTOM_LEFT_SLICE):
                 layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                break;
             case (TOP_LEFT_SLICE):
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                break;
         }
     }
 
@@ -178,9 +223,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
     public void clearPizza(View view) {
-        for (PizzaPart pizzaPart:currentPizza.getParts()){
 
-        }
     }
 
     public void placeOrder(View view) {

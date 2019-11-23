@@ -58,8 +58,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
 
-
-    private GridLayout gridLayout;
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
     Pizza pizza;

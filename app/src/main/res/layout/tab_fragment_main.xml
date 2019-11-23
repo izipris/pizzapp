@@ -59,7 +59,7 @@
             android:layout_width="154dp"
             android:layout_height="154dp"
             android:layout_marginLeft="207dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/topRight"
@@ -87,7 +87,7 @@
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:layout_marginLeft="207dp"
-            android:layout_marginTop="203dp">
+            android:layout_marginTop="178dp">
 
             <ImageView
                 android:id="@+id/bottomRight"
@@ -117,7 +117,7 @@
             android:layout_width="154dp"
             android:layout_height="88dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="203dp">
+            android:layout_marginTop="178dp">
 
 
             <ImageView
@@ -147,7 +147,7 @@
             android:layout_width="154dp"
             android:layout_height="154dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:id="@+id/topLeft"
@@ -209,7 +209,7 @@
             android:layout_below="@+id/topOfBottom">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/orderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="180dp"
