@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public Pizza pizza;
+    public Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             pizza = (Pizza) extras.getSerializable("pizza");
+            order = (Order) extras.getSerializable("order");
             viewPager = findViewById(R.id.viewpager);
             viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX);
-        }
-    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void initTabsLayout(ViewPager viewPager, TabLayout tabLayout) {

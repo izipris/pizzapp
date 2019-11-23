@@ -22,6 +22,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
@@ -61,6 +62,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
     Pizza pizza;
+    Order orderToPassBack;
     private List<Topping> toppingsList = new ArrayList<>();
     private Map<Integer, String> idToStringMap = new HashMap<>();
     private boolean initiationOfActivity = true;
@@ -85,6 +87,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
                 pizza = (Pizza) extras.getSerializable("pizza");
                 createInitialPizza(currentSliceId);
+                orderToPassBack = (Order) extras.getSerializable("order");
             } else {
                 createDefaultPizza();
             }
@@ -437,6 +440,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Intent intent = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("pizza", pizza);
+        bundle.putSerializable("order", orderToPassBack);
         intent.putExtras(bundle);
         startActivity(intent);
     }
