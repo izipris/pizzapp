@@ -21,8 +21,10 @@ import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
+import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
+import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 
 import java.io.Serializable;
@@ -70,11 +72,36 @@ public class TabFragmentMain extends Fragment implements Serializable {
         ImageView topLeftSlice = view.findViewById(R.id.topLeft);
         List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
         addOnClickListener(slices);
-        addClearOnClickListener(view);
+        addClearButtonOnClickListener(view);
+        addAddButtonOnClickListener(view);
+        addContinueOnClickListener(view);
         createPizza(view);
     }
 
-    private void addClearOnClickListener(final View view) {
+    private void addContinueOnClickListener(View view) {
+        Button placeOrderButton = view.findViewById(R.id.placeOrder);
+        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Order.class);
+                intent.putExtra("order", finalOrder);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addAddButtonOnClickListener(final View view) {
+        Button addButton = view.findViewById(R.id.add);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPizza = new Pizza(4, new Size(), new Crust());
+                deleteToppingsFromPizzaObject();
+            }
+        });
+    }
+
+    private void addClearButtonOnClickListener(final View view) {
         Button clearButton = view.findViewById(R.id.clear);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,16 +243,5 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 return TOP_LEFT_SLICE;
         }
         return -1;
-    }
-
-
-    public void addPizza(View view) {
-    }
-
-    public void clearPizza(View view) {
-
-    }
-
-    public void placeOrder(View view) {
     }
 }
