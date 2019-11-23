@@ -280,12 +280,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         switch (currentSliceIdOutOfFour){
             case (TOP_RIGHT_SLICE):
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                break;
             case (BOTTOM_RIGHT_SLICE):
                 layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+                break;
             case (BOTTOM_LEFT_SLICE):
                 layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                break;
             case (TOP_LEFT_SLICE):
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                break;
         }
     }
 
