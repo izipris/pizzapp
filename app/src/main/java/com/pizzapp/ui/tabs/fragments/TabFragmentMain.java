@@ -27,6 +27,7 @@ import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
+import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -163,10 +164,10 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 openPopup(currentPart);            }
         });
         FrameLayout.LayoutParams layoutParams = new
-                FrameLayout.LayoutParams(convertDpToPx(154),convertDpToPx(154));
+                FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154),StaticFunctions.convertDpToPx(154));
         setGravity(layoutParams, currentPart);
-        layoutParams.height = convertDpToPx(HEIGHT);
-        layoutParams.width = convertDpToPx(WIDTH);
+        layoutParams.height = StaticFunctions.convertDpToPx(HEIGHT);
+        layoutParams.width = StaticFunctions.convertDpToPx(WIDTH);
 
         newTopping.setLayoutParams(layoutParams);
         toppingImages.add(newTopping);
@@ -210,11 +211,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private Drawable convertStringToDrawable(String name){
         int id = getResources().getIdentifier(name, "drawable", getActivity().getPackageName());
         return getResources().getDrawable(id);
-    }
-
-    private int convertDpToPx(int dp)
-    {
-        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
     private void addOnClickListener(List<ImageView> slices) {

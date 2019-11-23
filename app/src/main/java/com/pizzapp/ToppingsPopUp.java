@@ -30,6 +30,7 @@ import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.utilities.IO;
+import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -50,8 +51,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int BOX_WIDTH = 120;
-    private static final int BOX_HEIGHT = 52;
     private static final int PIZZA_PASSED = 3;
     private static final int ENLARGED_WIDTH = 130;
     private static final int ENLARGED_HEIGHT = 130;
@@ -64,8 +63,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     Pizza pizza;
     Order orderToPassBack;
     private List<Topping> toppingsList = new ArrayList<>();
-    private Map<Integer, String> idToStringMap = new HashMap<>();
     private boolean initiationOfActivity = true;
+
+    private Map<Integer, String> idToStringMap = new HashMap<>();
+    private Map<Integer, Integer> pizzaImageToPartMap = new HashMap<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -73,6 +75,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
         initiateidToStringMap();
+        initializepizzaImageToPartMap();
         extractExtras();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
@@ -161,7 +164,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                     addTopping(topping);
                 }
                 else {
-                    removeTopping(topping);
+                    removeToppingFromPizza(topping);
                 }
             }
         });
@@ -169,18 +172,25 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private void initiateidToStringMap(){
-        addEntryToMap(R.id.topRight, "topRight");
-        addEntryToMap(R.id.bottomRight, "bottomRight");
-        addEntryToMap(R.id.bottomLeft, "bottomLeft");
-        addEntryToMap(R.id.topLeft, "topLeft");
+        addEntryToIdToStringMap(R.id.topRight, "topRight");
+        addEntryToIdToStringMap(R.id.bottomRight, "bottomRight");
+        addEntryToIdToStringMap(R.id.bottomLeft, "bottomLeft");
+        addEntryToIdToStringMap(R.id.topLeft, "topLeft");
     }
 
-    private void addEntryToMap(int value, String key){
+    private void addEntryToIdToStringMap(int value, String key){
         idToStringMap.put(value, key);
     }
 
-    private void removeEntryFromMap(String value){
+    private void RemoveEntryFromIdToStringMap(String value){
         idToStringMap.remove(getKeyFromValue(value));
+    }
+
+    private void initializepizzaImageToPartMap(){
+        pizzaImageToPartMap.put(R.id.topRight, 0);
+        pizzaImageToPartMap.put(R.id.bottomRight, 1);
+        pizzaImageToPartMap.put(R.id.bottomLeft, 2);
+        pizzaImageToPartMap.put(R.id.topLeft, 3);
     }
 
     private void shrinkSlice(){
@@ -193,8 +203,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void shrinkImage(int imageId){
         ImageView image = findViewById(imageId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-        layoutParams.height = convertDpToPx(ORIGINAL_HEIGHT);
-        layoutParams.width = convertDpToPx(ORIGINAL_WIDTH);
+        layoutParams.height = StaticFunctions.convertDpToPx(ORIGINAL_HEIGHT);
+        layoutParams.width = StaticFunctions.convertDpToPx(ORIGINAL_WIDTH);
         image.setLayoutParams(layoutParams);
     }
 
@@ -207,8 +217,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void enlargeImage(Integer sliceId){
         ImageView image = findViewById(sliceId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-        layoutParams.height = convertDpToPx(ENLARGED_HEIGHT);
-        layoutParams.width = convertDpToPx(ENLARGED_WIDTH);
+        layoutParams.height = StaticFunctions.convertDpToPx(ENLARGED_HEIGHT);
+        layoutParams.width = StaticFunctions.convertDpToPx(ENLARGED_WIDTH);
         image.setLayoutParams(layoutParams);
     }
     
@@ -217,7 +227,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         while (idToStringMap.containsKey(toppingId)){
             createToppingId(topping);
         }
-        addEntryToMap(toppingId, getCurrentSliceString() + topping.getName());
+        addEntryToIdToStringMap(toppingId, getCurrentSliceString() + topping.getName());
         addToppingToPizza(topping, toppingId);
     }
 
@@ -246,14 +256,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             }
         });
         FrameLayout.LayoutParams layoutParams = new
-                FrameLayout.LayoutParams(convertDpToPx(154),convertDpToPx(154));
+                FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154),StaticFunctions.convertDpToPx(154));
         setGravity(layoutParams);
         if (initiationOfActivity){
-            layoutParams.height = convertDpToPx(ORIGINAL_HEIGHT);
-            layoutParams.width = convertDpToPx(ORIGINAL_WIDTH);
+            layoutParams.height = StaticFunctions.convertDpToPx(ORIGINAL_HEIGHT);
+            layoutParams.width = StaticFunctions.convertDpToPx(ORIGINAL_WIDTH);
         } else {
-            layoutParams.height = convertDpToPx(ENLARGED_HEIGHT);
-            layoutParams.width = convertDpToPx(ENLARGED_WIDTH);
+            layoutParams.height = StaticFunctions.convertDpToPx(ENLARGED_HEIGHT);
+            layoutParams.width = StaticFunctions.convertDpToPx(ENLARGED_WIDTH);
             // only adding it to the pizza if it isn't already there
             pizza.getPizzaPart(currentSliceIdOutOfFour).addTopping(topping);
         }
@@ -262,16 +272,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private int getSliceFromTopping(int toppingId){
-        if (isSubstring("topRight", idToStringMap.get(toppingId))) {
+        if (StaticFunctions.isSubstring("topRight", idToStringMap.get(toppingId))) {
             return R.id.topRight;
         }
-        if (isSubstring("bottomRight", idToStringMap.get(toppingId))) {
+        if (StaticFunctions.isSubstring("bottomRight", idToStringMap.get(toppingId))) {
             return R.id.bottomRight;
         }
-        if (isSubstring("bottomLeft", idToStringMap.get(toppingId))) {
+        if (StaticFunctions.isSubstring("bottomLeft", idToStringMap.get(toppingId))) {
             return R.id.bottomLeft;
         }
-        if (isSubstring("topLeft", idToStringMap.get(toppingId))) {
+        if (StaticFunctions.isSubstring("topLeft", idToStringMap.get(toppingId))) {
             return R.id.topLeft;
         }
         return -1;
@@ -298,20 +308,15 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         int id = getResources().getIdentifier(name, "drawable", getPackageName());
         return getResources().getDrawable(id);
     }
-
-    private void removeTopping(Topping topping){
-        removeToppingFromPizza(topping);
-        removeEntryFromMap(getCurrentSliceString() + topping.getName());
-    }
-
+    
     private void removeToppingFromPizza(Topping topping){
         pizza.getPizzaPart(currentSliceIdOutOfFour).removeTopping(topping);
         ImageView toppingToRemove = findViewById(getToppingId(topping));
         toppingToRemove.setVisibility(View.GONE);
+        RemoveEntryFromIdToStringMap(getCurrentSliceString() + topping.getName());
     }
 
     public void onClick(View view) {
-        // TODO: 21 נובמבר 2019 take out these lines. thy ar only for easy testing
         int newId = view.getId();
         if (newId != currentSliceId && currentSliceId != -1){
             shrinkSlice();
@@ -351,52 +356,15 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return -1;
     }
 
-    private Boolean isSubstring(String s1,String s2){
-        for (int i = 0; i <= s2.length() - s1.length(); i++){
-            int j;
-            for (j =0; j < s1.length(); j++){
-                if (s2.charAt(i + j) != s1.charAt(j)){
-                    break;
-                }
-            }
-            if (j == s1.length()){
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void assignCurrentSliceOutOfFour(){
-        switch (currentSliceId){
-                case (R.id.topRight):
-                    currentSliceIdOutOfFour = TOP_RIGHT_SLICE;
-                    break;
-                case (R.id.bottomRight):
-                    currentSliceIdOutOfFour = BOTTOM_RIGHT_SLICE;
-                    break;
-                case (R.id.bottomLeft):
-                    currentSliceIdOutOfFour = BOTTOM_LEFT_SLICE;
-                    break;
-                case (R.id.topLeft):
-                    currentSliceIdOutOfFour = TOP_LEFT_SLICE;
-                    break;
-        }
+        currentSliceIdOutOfFour = pizzaImageToPartMap.get(currentSliceId);
     }
 
     private void assignCurrentSliceId(){
-        switch (currentSliceIdOutOfFour){
-            case (TOP_RIGHT_SLICE):
-                currentSliceId = R.id.topRight;
-                break;
-            case (BOTTOM_RIGHT_SLICE):
-                currentSliceId = R.id.bottomRight;
-                break;
-            case (BOTTOM_LEFT_SLICE):
-                currentSliceId = R.id.bottomLeft;
-                break;
-            case (TOP_LEFT_SLICE):
-                currentSliceId = R.id.topLeft;
-                break;
+        for (Map.Entry<Integer, Integer> entry: pizzaImageToPartMap.entrySet()){
+            if (entry.getValue() == currentSliceIdOutOfFour){
+                currentSliceId = entry.getKey();
+            }
         }
     }
 
@@ -429,11 +397,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
         return findViewById(R.id.topLeftFrame);
 
-    }
-
-    private int convertDpToPx(int dp)
-    {
-        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
     public void backToMain(View view) {
