@@ -19,6 +19,7 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
+import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
 
 import java.io.IOException;
@@ -30,7 +31,6 @@ import java.util.List;
 public class OrderSummary extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private ScrollView mOrderDetailsScrollText;
     private LinearLayout mPizzaLayout;
     private Button mDelivery;
     private Button mPickup;
@@ -40,16 +40,18 @@ public class OrderSummary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
 
-
-        mOrderDetailsScrollText = findViewById(R.id.order_details_scroll_text);
-        mPizzaLayout = findViewById(R.id.pizza_text_layout);
-        mPickup = findViewById(R.id.pickup_button);
-        mDelivery = findViewById(R.id.delivery_button);
+        initializeDataMembers();
 
         Order testOrder = getTestOrder();
         double testOrderTotalPrice = testOrder.getTotalPrice();
         viewOrder(testOrder);
         setPriceTextView(testOrderTotalPrice);
+    }
+
+    private void initializeDataMembers(){
+        mPizzaLayout = findViewById(R.id.pizza_text_layout);
+        mPickup = findViewById(R.id.pickup_button);
+        mDelivery = findViewById(R.id.delivery_button);
     }
 
     private void setPriceTextView(double testOrderTotalPrice){
@@ -98,18 +100,29 @@ public class OrderSummary extends AppCompatActivity {
         return textView;
     }
 
-    private TextView getPartLineView(){
+    private TextView getPartLineView(int part_i, int numOfParts){
         TextView partLineView = getAnonymousTextView();
-        partLineView.setTextSize(18); // todo verify font family
+        partLineView.setTextSize(18);
+        partLineView.setText("Part " + (part_i + 1) + "/" + numOfParts + ":");
+        partLineView.setVisibility(View.VISIBLE);
         return partLineView;
     }
 
-    private TextView getPartToppings(PizzaPart currPart) {
+    private TextView getToppingView(Topping topping){
         TextView toppingsView = getAnonymousTextView();
-        toppingsView.setTextSize(13); // todo verify font family
-        toppingsView.setText(currPart.getTopping().getName() + "..." +
-                String.valueOf(currPart.getTopping().getPrice()));
+        toppingsView.setTextSize(13);
+        toppingsView.setText(topping.getName() + "..." +
+                String.valueOf(topping.getPrice()));
+        toppingsView.setVisibility(View.VISIBLE);
         return toppingsView;
+    }
+
+    private List<TextView> getPartToppings(PizzaPart currPart) {
+        List<TextView> toppings = new LinkedList<>();
+        for (Topping topping: currPart.getToppings()){
+            toppings.add(getToppingView(topping));
+        }
+        return  toppings;
     }
 
     private List<TextView> getPartAndToppingsViews(int i, Pizza pizza){
@@ -118,13 +131,11 @@ public class OrderSummary extends AppCompatActivity {
         int numOfParts = pizza.getNumberOfParts();
         PizzaPart currPart = pizza.getPizzaPart(i);
 
-        TextView pizzaPartLineView = getPartLineView();
-        TextView toppingsView = getPartToppings(currPart);
-        pizzaPartLineView.setText("Part " + (i+1) + "/" + numOfParts + ":");
-        pizzaPartLineView.setVisibility(View.VISIBLE);
-        toppingsView.setVisibility(View.VISIBLE);
+        TextView pizzaPartLineView = getPartLineView(i, numOfParts);
+        List<TextView> toppingsViews = getPartToppings(currPart);
+
         partAndTopping.add(pizzaPartLineView);
-        partAndTopping.add(toppingsView);
+        partAndTopping.addAll(toppingsViews);
         return partAndTopping;
     }
 
@@ -151,8 +162,11 @@ public class OrderSummary extends AppCompatActivity {
 
     private double getPizzaPrice(Pizza pizza, int numOfParts){
         double priceSum = pizza.getSize().getPrice();
-        for (int i = 0; i < numOfParts; i++)
-            priceSum = priceSum + pizza.getPizzaPart(i).getTopping().getPrice();
+        for (int i = 0; i < numOfParts; i++){
+            List<Topping> toppings = pizza.getPizzaPart(i).getToppings();
+            for (Topping topping: toppings)
+                priceSum = priceSum + topping.getPrice();
+        }
         return priceSum;
     }
 
@@ -172,7 +186,7 @@ public class OrderSummary extends AppCompatActivity {
         for (int i = 0; i < num_parts; i++){
             PizzaPart testPizzaPart = testPizza.getPizzaPart(i);
             if (!testPizzaPart.isHasTopping()){
-                testPizzaPart.setTopping(db.getToppings().get(i_toppins));
+                testPizzaPart.addTopping(db.getToppings().get(i_toppins));
             }
         }
         return testPizza;
