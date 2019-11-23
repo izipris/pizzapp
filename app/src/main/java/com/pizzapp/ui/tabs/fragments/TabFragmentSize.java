@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class TabFragmentSize extends Fragment implements Serializable {
+public class TabFragmentSize extends Fragment  {
 
     private Size chosenSize;
     static private final int DB_SIZE_M = 0;
