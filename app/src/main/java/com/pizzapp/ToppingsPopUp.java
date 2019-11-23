@@ -64,7 +64,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     int currentSliceIdOutOfFour;
     Pizza pizza;
     private List<Topping> toppingsList = new ArrayList<>();
-    private Map<Integer, String> idMap = new HashMap<>();
+    private Map<Integer, String> idToStringMap = new HashMap<>();
     private boolean initiationOfActivity = true;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -72,8 +72,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
+        initiateidToStringMap();
         extractExtras();
-        initiateIdMap();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
     }
@@ -102,7 +102,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             for (Topping topping : pizzaPart.getToppings()) {
                 addTopping(topping);
             }
-            currentSliceId++;
+            currentSliceIdOutOfFour++;
+            assignCurrentSliceId();
         }
         currentSliceId = partId;
         assignCurrentSliceOutOfFour();
@@ -166,7 +167,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return checkBox;
     }
 
-    private void initiateIdMap(){
+    private void initiateidToStringMap(){
         addEntryToMap(R.id.topRight, "topRight");
         addEntryToMap(R.id.bottomRight, "bottomRight");
         addEntryToMap(R.id.bottomLeft, "bottomLeft");
@@ -174,11 +175,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private void addEntryToMap(int value, String key){
-        idMap.put(value, key);
+        idToStringMap.put(value, key);
     }
 
     private void removeEntryFromMap(String value){
-        idMap.remove(getKeyFromValue(value));
+        idToStringMap.remove(getKeyFromValue(value));
     }
 
     private void shrinkSlice(){
@@ -212,7 +213,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     
     private void addTopping(Topping topping){
         int toppingId = createToppingId(topping);
-        while (idMap.containsKey(toppingId)){
+        while (idToStringMap.containsKey(toppingId)){
             createToppingId(topping);
         }
         addEntryToMap(toppingId, getCurrentSliceString() + topping.getName());
@@ -260,16 +261,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private int getSliceFromTopping(int toppingId){
-        if (isSubstring("topRight", idMap.get(toppingId))) {
+        if (isSubstring("topRight", idToStringMap.get(toppingId))) {
             return R.id.topRight;
         }
-        if (isSubstring("bottomRight", idMap.get(toppingId))) {
+        if (isSubstring("bottomRight", idToStringMap.get(toppingId))) {
             return R.id.bottomRight;
         }
-        if (isSubstring("bottomLeft", idMap.get(toppingId))) {
+        if (isSubstring("bottomLeft", idToStringMap.get(toppingId))) {
             return R.id.bottomLeft;
         }
-        if (isSubstring("topLeft", idMap.get(toppingId))) {
+        if (isSubstring("topLeft", idToStringMap.get(toppingId))) {
             return R.id.topLeft;
         }
         return -1;
@@ -328,7 +329,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private int getToppingId(Topping topping){
-        for (Map.Entry<Integer, String> entry:idMap.entrySet()){
+        for (Map.Entry<Integer, String> entry:idToStringMap.entrySet()){
             if ((getCurrentSliceString() + topping.getName()).equals(entry.getValue())){
                 return entry.getKey();
             }
@@ -337,7 +338,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private Integer getKeyFromValue(String value){
-        for (Map.Entry<Integer, String> entry: idMap.entrySet()){
+        for (Map.Entry<Integer, String> entry: idToStringMap.entrySet()){
             if (entry.getValue().equals(value)){
                 return entry.getKey();
             }
