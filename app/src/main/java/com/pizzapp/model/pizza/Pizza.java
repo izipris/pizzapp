@@ -65,7 +65,18 @@ public class Pizza implements Serializable {
         return crust;
     }
 
-    public void setCrust(Crust crust) {
+    public String getSizeName() {
+        return size.getName();
+    }
+
+    public String getCrustName() {
+        return crust.getName();
+    }
+
+
+
+
+        public void setCrust(Crust crust) {
         this.crust = crust;
     }
 

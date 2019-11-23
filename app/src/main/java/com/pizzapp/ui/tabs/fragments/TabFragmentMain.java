@@ -62,7 +62,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (((MainActivity)this.getActivity()).pizza == null){
-            createDefaultPizza();
+            createDefaultPizza(view);
         } else {
             currentPizza = ((MainActivity) this.getActivity()).pizza;
         }
@@ -83,7 +83,21 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addClearButtonOnClickListener(view);
         addAddButtonOnClickListener(view);
         addContinueOnClickListener(view);
+        addSizeText(view);
+        addCrustText(view);
         createPizza(view);
+    }
+
+    private void addSizeText(View view) {
+        TextView size = view.findViewById(R.id.pizzaSize);
+        String textToShow  = "size/" + currentPizza.getSizeName();
+        size.setText(textToShow);
+    }
+
+    private void addCrustText(View view) {
+        TextView crust = view.findViewById(R.id.crust);
+        String textToShow  = "crust/" + currentPizza.getCrustName();
+        crust.setText(textToShow);
     }
 
     private void addContinueOnClickListener(View view) {
@@ -103,7 +117,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createDefaultPizza();
+                createDefaultPizza(view);
                 finalOrder.addPizza(currentPizza);
                 for (ImageView toppingImage:toppingImages) {
                     toppingImage.setVisibility(View.GONE);
@@ -253,9 +267,13 @@ public class TabFragmentMain extends Fragment implements Serializable {
         return -1;
     }
 
-    private void createDefaultPizza(){
+    private void createDefaultPizza(View view){
         Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
         Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
         currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
+        ((MainActivity) this.getActivity()).pizza = currentPizza;
+        addSizeText(view);
+        addCrustText(view);
+
     }
 }
