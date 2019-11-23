@@ -2,13 +2,14 @@ package com.pizzapp.model;
 
 import com.pizzapp.model.pizza.Pizza;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
 /**
  * This class represent one order of pizzas
  */
-public class Order {
+public class Order implements Serializable {
     private int id;
     private List<Pizza> pizzas;
 
@@ -39,5 +40,9 @@ public class Order {
 
     public Pizza getPizza(int index) {
         return pizzas.get(index);
+    }
+
+    public void upadateLastPizza(Pizza newPizza){
+        pizzas.set(pizzas.size() - 1, newPizza);
     }
 }
