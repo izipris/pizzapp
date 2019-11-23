@@ -26,6 +26,7 @@ import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
+import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
+    private static final int DEFAULT_NUMBER_OF_SLICES = 4;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -58,12 +60,17 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        currentPizza = ((MainActivity)this.getActivity()).pizza;
+        if (((MainActivity)this.getActivity()).pizza == null){
+            createDefaultPizza();
+        } else {
+            currentPizza = ((MainActivity) this.getActivity()).pizza;
+        }
         if (((MainActivity)this.getActivity()).order == null) {
             finalOrder = new Order(0);
+            finalOrder.addPizza(currentPizza);
         } else {
             finalOrder = ((MainActivity) this.getActivity()).order;
-            finalOrder.addPizza(currentPizza);
+            finalOrder.upadateLastPizza(currentPizza);
         }
         setPrice(view);
         ImageView topRightSlice = view.findViewById(R.id.topRight);
@@ -95,8 +102,12 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentPizza = new Pizza(4, new Size(), new Crust());
-                deleteToppingsFromPizzaObject();
+                createDefaultPizza();
+                finalOrder.addPizza(currentPizza);
+                for (ImageView toppingImage:toppingImages) {
+                    toppingImage.setVisibility(View.GONE);
+                }
+                setPrice(view);
             }
         });
     }
@@ -224,6 +235,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         if (currentPizza != null) {
             numberOfExtrasPassed = PIZZA_PASSED;
             intent.putExtra("pizza", currentPizza);
+            intent.putExtra("order", finalOrder);
         } else {
             numberOfExtrasPassed = PIZZA_NOT_PASSED;
         }
@@ -243,5 +255,11 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 return TOP_LEFT_SLICE;
         }
         return -1;
+    }
+
+    private void createDefaultPizza(){
+        Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
+        Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
+        currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
     }
 }
