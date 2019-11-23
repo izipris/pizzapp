@@ -1,34 +1,50 @@
 package com.pizzapp.model.pizza;
 
-public class PizzaPart {
-    private Topping topping;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PizzaPart implements Serializable {
+    private List<Topping> toppings;
     private boolean hasTopping;
+    private int id;
 
-    public PizzaPart(){
-        topping = null;
+    public PizzaPart(int id){
+        toppings = new ArrayList<Topping>();
         hasTopping = false;
-    }
-
-    public PizzaPart(Topping topping){
-        this.topping = topping;
-        hasTopping = true;
+        this.id = id;
     }
 
     public boolean isHasTopping() {
         return hasTopping;
     }
 
-    public void setTopping(Topping topping) {
-        this.topping = topping;
+    public boolean hasCertainTopping(Topping topping){
+        if (toppings.contains(topping)){
+            return true;
+        }
+        return false;
+    }
+
+    public void addTopping(Topping topping) {
+        this.toppings.add(topping);
         hasTopping = true;
     }
 
-    public void removeTopping(){
-        topping = null;
-        hasTopping = false;
+    public void removeTopping(Topping topping){
+        if (hasTopping) {
+            toppings.remove(topping);
+        }
+        if (toppings.size() == 0) {
+            hasTopping = false;
+        }
     }
 
-    public Topping getTopping() {
-        return topping;
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -18,12 +18,13 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.utilities.IO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class TabFragmentSize extends Fragment {
+public class TabFragmentSize extends Fragment  {
 
     private Size chosenSize;
     static private final int DB_SIZE_M = 0;
@@ -34,6 +35,7 @@ public class TabFragmentSize extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_fragment_size, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -105,4 +107,7 @@ public class TabFragmentSize extends Fragment {
                 Toast.LENGTH_SHORT).show();
     }
 
+    public Size getChosenSize() {
+        return chosenSize;
+    }
 }

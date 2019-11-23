@@ -17,9 +17,9 @@
 	],
 	"toppings":[
 		{
-			"name": "Olives",
+			"name": "Onion",
 			"price":2,
-			"image":"TBD"
+			"image":"@drawable/ic_onion_topping"
 		},
 		{
 			"name": "Mushrooms",
@@ -29,7 +29,7 @@
 		{
 			"name": "Tomatos",
 			"price":2,
-			"image":"TBD"
+			"image":"@drawable/ic_tomato_topping"
 		}
 	],
 	"crusts":[

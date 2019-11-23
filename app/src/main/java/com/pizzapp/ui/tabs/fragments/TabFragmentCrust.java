@@ -16,6 +16,7 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.utilities.IO;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
