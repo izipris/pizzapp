@@ -84,8 +84,8 @@
 
         <FrameLayout
             android:id="@+id/bottomRightFrame"
-            android:layout_width="154dp"
-            android:layout_height="154dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:layout_marginLeft="207dp"
             android:layout_marginTop="203dp">
 
@@ -115,7 +115,7 @@
         <FrameLayout
             android:id="@+id/bottomLeftFrame"
             android:layout_width="154dp"
-            android:layout_height="154dp"
+            android:layout_height="88dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="203dp">
 
