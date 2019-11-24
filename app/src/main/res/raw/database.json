@@ -27,7 +27,7 @@
 		{
 			"name": "Mushrooms",
 			"price":2,
-			"image":"TBD"
+			"image":"@drawable/ic_mushrooms_topping"
 		},
 		{
 			"name": "Tomatos",
