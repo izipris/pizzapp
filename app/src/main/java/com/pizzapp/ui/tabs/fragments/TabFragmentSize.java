@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,8 +48,6 @@ public class TabFragmentSize extends Fragment {
                 @Override
                 public void onClick(View view) {
                     highlightChosenSize(buttonsAndSizes, buttonSizePair);
-                    displayToast(view, getResources().getString(R.string.message_for_size_choosing) + " " +
-                            buttonSizePair.second.getName());
                 }
             });
         }
@@ -104,11 +101,6 @@ public class TabFragmentSize extends Fragment {
             }
         }
         chosenSize = chosen.second;
-    }
-
-    public void displayToast(@NonNull View view, String message) {
-        Toast.makeText(view.getContext(), message,
-                Toast.LENGTH_SHORT).show();
     }
 
     public Size getChosenSize() {
