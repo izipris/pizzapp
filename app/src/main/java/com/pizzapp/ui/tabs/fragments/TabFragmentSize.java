@@ -18,13 +18,11 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.utilities.IO;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class TabFragmentSize extends Fragment  {
+public class TabFragmentSize extends Fragment {
 
     private Size chosenSize;
     static private final int DB_SIZE_M = 0;
@@ -46,7 +44,7 @@ public class TabFragmentSize extends Fragment  {
 
         chosenSize = database.getSizes().get(DB_SIZE_M);
 
-        for(final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes){
+        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,6 +68,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.medium_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.medium_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.medium_pizza_image);
                     break;
                 case DB_SIZE_L:
@@ -77,6 +77,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.large_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.large_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.large_pizza_image);
                     break;
                 case DB_SIZE_XL:
@@ -84,6 +86,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.extra_large_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.extra_large_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.extra_large_pizza_image);
                     break;
             }
@@ -94,7 +98,7 @@ public class TabFragmentSize extends Fragment  {
 
     private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
         chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes) {
+        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             if (buttonSizePair.first != chosen.first) {
                 buttonSizePair.first.setBackgroundResource(0);
             }

@@ -26,5 +26,6 @@
 <string name="bottomleft">bottomLeft</string>
 <string name="topleft">topLeft</string>
 <string name="hello_tomer">Hello Tomer</string>
-    <string name="choose_topping">choose_topping</string>
+<string name="choose_topping">choose_topping</string>
+<string name="size_symbol">\"</string>
 </resources>
