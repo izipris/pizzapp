@@ -28,4 +28,5 @@
 <string name="hello_tomer">Hello Tomer</string>
 <string name="choose_topping">choose_topping</string>
 <string name="size_symbol">\"</string>
+<string name="tab_title_separator">/</string>
 </resources>
