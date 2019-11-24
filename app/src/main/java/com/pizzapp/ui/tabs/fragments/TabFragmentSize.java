@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Size;
@@ -50,6 +51,11 @@ public class TabFragmentSize extends Fragment {
         Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
         final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, database);
 
+        if (((MainActivity)this.getActivity()).pizza == null){
+            chosenSize = database.getSizes().get(DB_SIZE_M); /* need to fix */
+        } else {
+            chosenSize = ((MainActivity) this.getActivity()).pizza.getSize();
+        }
         chosenSize = database.getSizes().get(DB_SIZE_M);
 
         for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
