@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
+import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.utilities.IO;
 
@@ -27,7 +28,7 @@ import java.util.Locale;
 
 public class TabFragmentSize extends Fragment  {
 
-    private Size chosenSize;
+    private Pizza currentPizza;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
@@ -45,12 +46,7 @@ public class TabFragmentSize extends Fragment  {
         Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
         final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, database);
 
-        if (((MainActivity)this.getActivity()).pizza == null){
-            chosenSize = database.getSizes().get(DB_SIZE_M); /* need to fix */
-        } else {
-            chosenSize = ((MainActivity) this.getActivity()).pizza.getSize();
-        }
-        chosenSize = database.getSizes().get(DB_SIZE_M);
+        currentPizza = ((MainActivity) this.getActivity()).pizza;
 
         for(final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes){
             buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +101,7 @@ public class TabFragmentSize extends Fragment  {
                 buttonSizePair.first.setBackgroundResource(0);
             }
         }
-        chosenSize = chosen.second;
+        currentPizza.setSize(chosen.second);
     }
 
     public void displayToast(@NonNull View view, String message) {
@@ -113,7 +109,4 @@ public class TabFragmentSize extends Fragment  {
                 Toast.LENGTH_SHORT).show();
     }
 
-    public Size getChosenSize() {
-        return chosenSize;
-    }
 }
