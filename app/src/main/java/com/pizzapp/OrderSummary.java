@@ -38,6 +38,7 @@ public class OrderSummary extends AppCompatActivity {
     private Button mDelivery;
     private Button mPickup;
     private Toolbar toolbar;
+    private Order finalOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,11 @@ public class OrderSummary extends AppCompatActivity {
         initializeDataMembers();
         Intent intent = getIntent();
 
-        Order testOrder = (Order) intent.getSerializableExtra("order");
+        Order finalOrder = (Order) intent.getSerializableExtra("order");
 
-        if (testOrder != null) {
-            double testOrderTotalPrice = testOrder.getTotalPrice();
-            viewOrder(testOrder);
+        if (finalOrder != null) {
+            double testOrderTotalPrice = finalOrder.getTotalPrice();
+            viewOrder(finalOrder);
             setPriceTextView(testOrderTotalPrice);
         }
     }
