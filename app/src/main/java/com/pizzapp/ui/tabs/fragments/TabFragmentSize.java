@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Size;
+import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.utilities.IO;
 
 import java.util.ArrayList;
@@ -23,10 +24,18 @@ import java.util.Locale;
 
 public class TabFragmentSize extends Fragment {
 
+    private TabAdapter tabAdapter;
+    private int tabPosition;
     private Size chosenSize;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
+
+    public TabFragmentSize(TabAdapter tabAdapter, int tabPosition) {
+        super();
+        this.tabAdapter = tabAdapter;
+        this.tabPosition = tabPosition;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,6 +110,9 @@ public class TabFragmentSize extends Fragment {
             }
         }
         chosenSize = chosen.second;
+        tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
+                getString(R.string.tab_title_separator) + chosen.second.getName());
+        tabAdapter.notifyDataSetChanged();
     }
 
     public Size getChosenSize() {
