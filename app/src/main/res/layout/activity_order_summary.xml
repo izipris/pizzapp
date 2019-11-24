@@ -10,18 +10,23 @@
     android:background="#F7F7F7"
     tools:context="com.pizzapp.OrderSummary">
 
-    <TextView
-        android:id="@+id/your_order_heading"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/order_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="14dp"
-        android:text="Your Order"
-        android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:fontFamily="@font/open_sans"/>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <TextView
+        android:id="@+id/greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="30dp"
+        android:gravity="center"
+        android:text="@string/hello_tomer"/>
+
 
     <ScrollView
         android:id="@+id/order_details_scroll_text"

@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.pizzapp.MainActivity;
+import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
@@ -105,7 +106,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         placeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Order.class);
+                Intent intent = new Intent(getActivity(), OrderSummary.class);
                 intent.putExtra("order", finalOrder);
                 startActivity(intent);
             }
@@ -276,4 +277,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addCrustText(view);
 
     }
+
+
 }

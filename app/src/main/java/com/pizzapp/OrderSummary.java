@@ -3,23 +3,26 @@ package com.pizzapp;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.databinding.DataBindingUtil;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.pizzapp.model.Database;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Topping;
+
 import com.pizzapp.utilities.IO;
 
 import java.io.IOException;
@@ -34,18 +37,37 @@ public class OrderSummary extends AppCompatActivity {
     private LinearLayout mPizzaLayout;
     private Button mDelivery;
     private Button mPickup;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
 
-        initializeDataMembers();
+        setToolbar();
 
-        Order testOrder = getTestOrder();
-        double testOrderTotalPrice = testOrder.getTotalPrice();
-        viewOrder(testOrder);
-        setPriceTextView(testOrderTotalPrice);
+        initializeDataMembers();
+        Intent intent = getIntent();
+
+        Order testOrder = (Order) intent.getSerializableExtra("order");
+
+        if (testOrder != null) {
+            double testOrderTotalPrice = testOrder.getTotalPrice();
+            viewOrder(testOrder);
+            setPriceTextView(testOrderTotalPrice);
+        }
+    }
+
+    public void setToolbar(){
+        toolbar = findViewById(R.id.order_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
     private void initializeDataMembers(){
@@ -70,11 +92,12 @@ public class OrderSummary extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private TextView getSizeView(Pizza pizza){
         TextView pizzaSizeView = getAnonymousTextView();
         pizzaSizeView.setText(pizza.getSize().getName() + " "
                             + pizza.getCrust().getName() + " Pizza"); //don't care about translations
-        pizzaSizeView.setTextSize(25); // todo verify font family
+        pizzaSizeView.setTextSize(20);
         pizzaSizeView.setPadding(5,5,5,5);
         pizzaSizeView.setVisibility(View.VISIBLE);
         return pizzaSizeView;
@@ -102,7 +125,7 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView getPartLineView(int part_i, int numOfParts){
         TextView partLineView = getAnonymousTextView();
-        partLineView.setTextSize(18);
+        partLineView.setTextSize(13);
         partLineView.setText("Part " + (part_i + 1) + "/" + numOfParts + ":");
         partLineView.setVisibility(View.VISIBLE);
         return partLineView;
@@ -110,7 +133,7 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView getToppingView(Topping topping){
         TextView toppingsView = getAnonymousTextView();
-        toppingsView.setTextSize(13);
+        toppingsView.setTextSize(8);
         toppingsView.setText(topping.getName() + "..." +
                 String.valueOf(topping.getPrice()));
         toppingsView.setVisibility(View.VISIBLE);
