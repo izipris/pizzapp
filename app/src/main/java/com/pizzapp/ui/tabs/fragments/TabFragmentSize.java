@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
 import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
@@ -32,6 +33,7 @@ public class TabFragmentSize extends Fragment {
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
+    private final int MAIN_TAB_INDEX = 1;
 
     public TabFragmentSize(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -114,6 +116,8 @@ public class TabFragmentSize extends Fragment {
         currentPizza.setSize(chosen.second);
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                 getString(R.string.tab_title_separator) + chosen.second.getName());
+        TabLayout tabs = getActivity().findViewById(R.id.tabs);
+        tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
     }
 }
