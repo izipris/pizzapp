@@ -24,11 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TabFragmentSize extends Fragment  {
+public class TabFragmentSize extends Fragment {
 
     private TabAdapter tabAdapter;
     private int tabPosition;
-    private Size chosenSize;
     private Pizza currentPizza;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
@@ -107,21 +106,14 @@ public class TabFragmentSize extends Fragment  {
 
     private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
         chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes) {
+        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             if (buttonSizePair.first != chosen.first) {
                 buttonSizePair.first.setBackgroundResource(0);
             }
         }
         currentPizza.setSize(chosen.second);
-    }
-
-    public void displayToast(@NonNull View view, String message) {
-        Toast.makeText(view.getContext(), message,
-                Toast.LENGTH_SHORT).show();
-        chosenSize = chosen.second;
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                 getString(R.string.tab_title_separator) + chosen.second.getName());
         tabAdapter.notifyDataSetChanged();
     }
-
 }
