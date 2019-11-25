@@ -20,20 +20,16 @@
 <string name="xl">XL</string>
 <string name="extra_large_size">13.5</string>
 <string name="message_for_size_choosing">You just choose pizza in size of</string>
+
+<string name="hello_tomer">Hello Tomer</string>
+<string name="choose_topping">choose_topping</string>
+<string name="size_symbol">\"</string>
+<string name="tab_title_separator">/</string>
+<string name="delivery_button">Delivery</string>
+<string name="pickup_button">Pickup</string>
 <string name="olives">olives</string>
 <string name="topright">topRight</string>
 <string name="bottomright">bottomRight</string>
 <string name="bottomleft">bottomLeft</string>
 <string name="topleft">topLeft</string>
-<string name="hello_tomer">Hello Tomer</string>
-<string name="choose_topping">choose_topping</string>
-<string name="size_symbol">\"</string>
-<string name="tab_title_separator">/</string>
-    <string name="delivery_button">Delivery</string>
-    <string name="pickup_button">Pickup</string>
-    <string name="olives">olives</string>
-    <string name="topright">topRight</string>
-    <string name="bottomright">bottomRight</string>
-    <string name="bottomleft">bottomLeft</string>
-    <string name="topleft">topLeft</string>
 </resources>

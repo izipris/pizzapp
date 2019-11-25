@@ -270,35 +270,6 @@ public class OrderSummary extends AppCompatActivity {
         Log.d(LOG_TAG, "onRestart");
     }
 
-    public String byteBufferToString(byte[] buffer){
-        try{
-            String order_as_json = new String(buffer, "UTF-8");
-            return order_as_json;
-        } catch (UnsupportedEncodingException ex){
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public String loadJSONToString() {
-        try {
-            InputStream is = getAssets().open("order.json");
-            byte[] buffer = new byte[is.available()]; // todo: they say not to use but cannot find alternative to go with android 15 and up
-            int bytes_read = is.read(buffer);
-            if(bytes_read == 0 || buffer.length == 0){
-                Log.d(LOG_TAG, "empty or zero bytes or");
-                return null;  // todo
-            }
-            is.close();
-            return byteBufferToString(buffer);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (NullPointerException ex){
-            ex.printStackTrace();
-            return null;
-        }
-    }
 
 
 }
