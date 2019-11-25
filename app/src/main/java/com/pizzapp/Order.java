@@ -1,5 +1,7 @@
 package com.pizzapp;
 
+import com.pizzapp.model.pizza.Pizza;
+
 public class Order {
 
     public Order(int id) {
@@ -7,19 +9,15 @@ public class Order {
         this.price = 0;
     }
 
-    private class Pizza{
-
-    }
-
     private int id;
     private Pizza pizza;
     private int price;
 
 
-
     public Pizza getPizza() {
         return pizza;
     }
+
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
@@ -35,6 +33,7 @@ public class Order {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
