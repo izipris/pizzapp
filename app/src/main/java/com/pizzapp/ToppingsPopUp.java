@@ -58,6 +58,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
 
+    private static final int MIN_ROWS_IN_CHART = 2;
+
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
     Pizza pizza;
@@ -121,7 +123,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createToppingChart(){
         GridLayout layout = findViewById(R.id.grid_layout);
-        int numberOfRows = min(4, toppingsList.size());
+        int numberOfRows = min(MIN_ROWS_IN_CHART, toppingsList.size());
         layout.setRowCount(numberOfRows);
         int numberOfColumns = calculateNumberOfColumns();
         layout.setColumnCount(numberOfColumns);
@@ -139,8 +141,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private int calculateNumberOfColumns() {
-        int numberOfRows = toppingsList.size() / 4;
-        if (toppingsList.size() % 4 != 0) {
+        int numberOfRows = toppingsList.size() / MIN_ROWS_IN_CHART;
+        if (toppingsList.size() % MIN_ROWS_IN_CHART != 0) {
             numberOfRows++;
         }
         return numberOfRows;
@@ -149,9 +151,9 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private CheckBox createCheckbox(int row, int col){
         final CheckBox checkBox = new CheckBox(this);
-        final Topping topping = toppingsList.get(4 * col + row);
+        final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
         checkBox.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-        checkBox.setId(4 * col + row);
+        checkBox.setId(MIN_ROWS_IN_CHART * col + row);
         checkBox.setText(topping.getName());
         if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())){
             checkBox.setChecked(true);
