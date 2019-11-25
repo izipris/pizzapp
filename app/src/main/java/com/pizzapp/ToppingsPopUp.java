@@ -58,7 +58,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
 
-    private static final int MIN_ROWS_IN_CHART = 2;
+    private static final int MIN_ROWS_IN_CHART = 3;
 
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
@@ -130,6 +130,9 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         for (int i = 0; i < numberOfRows; i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i, 1, 1);
             for (int j = 0; j < numberOfColumns; j++) {
+                if (j * MIN_ROWS_IN_CHART + i == toppingsList.size()){
+                    break;
+                }
                 GridLayout.Spec colSpec = GridLayout.spec(j, 1, 1);
                 CheckBox checkBox = createCheckbox(i, j);
                 GridLayout.LayoutParams myGLP = new GridLayout.LayoutParams();

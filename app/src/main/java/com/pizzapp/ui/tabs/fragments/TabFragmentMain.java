@@ -120,7 +120,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 for (ImageView toppingImage : toppingImages) {
                     toppingImage.setVisibility(View.GONE);
                     deleteToppingsFromPizzaObject();
-//                    finalOrder.upadateLastPizza(currentPizza);
+                    finalOrder.upadateLastPizza(currentPizza);
                     setPrice(view);
                 }
             }
