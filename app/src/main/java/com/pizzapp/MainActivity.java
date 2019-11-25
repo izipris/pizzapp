@@ -1,7 +1,5 @@
 package com.pizzapp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     private void initTabsLayout(ViewPager viewPager, TabLayout tabLayout) {
         tabAdapter = new TabAdapter(getSupportFragmentManager());
-        tabAdapter.addFragment(new TabFragmentSize(), getString(R.string.tab_title_size));
+        tabAdapter.addFragment(new TabFragmentSize(tabAdapter, 0), getString(R.string.tab_title_size));
         tabAdapter.addFragment(new TabFragmentMain(), getString(R.string.tab_title_main));
-        tabAdapter.addFragment(new TabFragmentCrust(), getString(R.string.tab_title_crust));
+        tabAdapter.addFragment(new TabFragmentCrust(tabAdapter, 2), getString(R.string.tab_title_crust));
         int viewPagerTabsLimit = (tabAdapter.getCount() > 1 ? tabAdapter.getCount() - 1 : 1);
         viewPager.setAdapter(tabAdapter);
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,20 +15,27 @@ import androidx.fragment.app.Fragment;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Size;
+import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.utilities.IO;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class TabFragmentSize extends Fragment  {
+public class TabFragmentSize extends Fragment {
 
+    private TabAdapter tabAdapter;
+    private int tabPosition;
     private Size chosenSize;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
+
+    public TabFragmentSize(TabAdapter tabAdapter, int tabPosition) {
+        super();
+        this.tabAdapter = tabAdapter;
+        this.tabPosition = tabPosition;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,13 +52,11 @@ public class TabFragmentSize extends Fragment  {
 
         chosenSize = database.getSizes().get(DB_SIZE_M);
 
-        for(final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes){
+        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     highlightChosenSize(buttonsAndSizes, buttonSizePair);
-                    displayToast(view, getResources().getString(R.string.message_for_size_choosing) + " " +
-                            buttonSizePair.second.getName());
                 }
             });
         }
@@ -70,6 +74,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.medium_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.medium_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.medium_pizza_image);
                     break;
                 case DB_SIZE_L:
@@ -77,6 +83,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.large_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.large_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.large_pizza_image);
                     break;
                 case DB_SIZE_XL:
@@ -84,6 +92,8 @@ public class TabFragmentSize extends Fragment  {
                     ((TextView) view.findViewById(R.id.extra_large_pizza_price)).setText(
                             String.format(Locale.getDefault(), "%.2f", currentSize.getPrice()) +
                                     getString(R.string.currency_symbol));
+                    ((TextView) view.findViewById(R.id.extra_large_size)).setText(String.format(Locale.getDefault(), "%.1f",
+                            currentSize.getDimension()) + getString(R.string.size_symbol));
                     currentButton = view.findViewById(R.id.extra_large_pizza_image);
                     break;
             }
@@ -94,17 +104,15 @@ public class TabFragmentSize extends Fragment  {
 
     private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
         chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (final Pair<ImageButton, Size> buttonSizePair: buttonsAndSizes) {
+        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             if (buttonSizePair.first != chosen.first) {
                 buttonSizePair.first.setBackgroundResource(0);
             }
         }
         chosenSize = chosen.second;
-    }
-
-    public void displayToast(@NonNull View view, String message) {
-        Toast.makeText(view.getContext(), message,
-                Toast.LENGTH_SHORT).show();
+        tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
+                getString(R.string.tab_title_separator) + chosen.second.getName());
+        tabAdapter.notifyDataSetChanged();
     }
 
     public Size getChosenSize() {
