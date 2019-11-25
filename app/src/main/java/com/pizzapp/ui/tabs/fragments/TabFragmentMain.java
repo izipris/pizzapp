@@ -59,6 +59,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // a condition to identify if the popup was opened
         if (((MainActivity) this.getActivity()).pizza == null) {
             createDefaultPizza(view);
         } else {
@@ -81,7 +82,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addClearButtonOnClickListener(view);
         addAddButtonOnClickListener(view);
         addContinueOnClickListener(view);
-        createPizza(view);
+        createCurrentPizza(view);
     }
 
     private void addContinueOnClickListener(View view) {
@@ -101,11 +102,11 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createDefaultPizza(view);
+//                createDefaultPizza(view);
                 finalOrder.addPizza(currentPizza);
-                for (ImageView toppingImage : toppingImages) {
-                    toppingImage.setVisibility(View.GONE);
-                }
+//                for (ImageView toppingImage : toppingImages) {
+//                    toppingImage.setVisibility(View.GONE);
+//                }
                 setPrice(view);
             }
         });
@@ -139,7 +140,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
 
-    private void createPizza(View view) {
+    private void createCurrentPizza(View view) {
         int currentPart = 0;
         if (currentPizza != null) {
             for (PizzaPart pizzaPart : currentPizza.getParts()) {
@@ -181,24 +182,26 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 return view.findViewById(R.id.bottomRightFrame);
             case (BOTTOM_LEFT_SLICE):
                 return view.findViewById(R.id.bottomLeftFrame);
+            case (TOP_LEFT_SLICE):
+                return view.findViewById(R.id.topLeftFrame);
         }
-        return view.findViewById(R.id.topLeftFrame);
+        return null;
 
     }
 
     private void setGravity(FrameLayout.LayoutParams layoutParams, int currentPart) {
         switch (currentPart) {
             case (TOP_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                 break;
             case (BOTTOM_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+                layoutParams.gravity = Gravity.TOP | Gravity.START;
                 break;
             case (BOTTOM_LEFT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.TOP | Gravity.END;
                 break;
             case (TOP_LEFT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
                 break;
         }
     }
@@ -217,7 +220,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
             slice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPopup(v.getId());
+                    openPopup(getPartClicked(v.getId()));
                 }
             });
         }
@@ -226,7 +229,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private void openPopup(int id) {
         Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
         int numberOfExtrasPassed;
-        intent.putExtra("callingId", getPartClicked(id));
+        intent.putExtra("callingId", id);
         if (currentPizza != null) {
             numberOfExtrasPassed = PIZZA_PASSED;
             intent.putExtra("pizza", currentPizza);

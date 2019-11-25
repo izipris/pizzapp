@@ -153,7 +153,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         checkBox.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
         checkBox.setId(4 * col + row);
         checkBox.setText(topping.getName());
-        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())){
             checkBox.setChecked(true);
         }
 
@@ -290,16 +290,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void setGravity(FrameLayout.LayoutParams layoutParams){
         switch (currentSliceIdOutOfFour){
             case (TOP_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                 break;
             case (BOTTOM_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+                layoutParams.gravity = Gravity.TOP | Gravity.START;
                 break;
             case (BOTTOM_LEFT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.TOP | Gravity.END;
                 break;
             case (TOP_LEFT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
                 break;
         }
     }
@@ -330,7 +330,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void editToppingChart() {
         for (Topping topping:toppingsList){
             CheckBox checkBox = findViewById(toppingsList.indexOf(topping));
-            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())){
                 checkBox.setChecked(true);
             } else {
                 checkBox.setChecked(false);
