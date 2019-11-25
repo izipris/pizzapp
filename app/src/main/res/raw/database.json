@@ -2,17 +2,20 @@
 	"sizes":[
 		{
 			"name": "M",
-			"price": 15
+			"price": 15,
+			"dimension": 9.5
 		},
 		
 		{
 			"name": "L",
-			"price": 17.5
+			"price": 17.5,
+			"dimension": 11.5
 		},
 		
 		{
 			"name": "XL",
-			"price": 20
+			"price": 20,
+			"dimension": 13.5
 		}
 	],
 	"toppings":[
@@ -24,7 +27,7 @@
 		{
 			"name": "Mushrooms",
 			"price":2,
-			"image":"TBD"
+			"image":"@drawable/ic_mushrooms_topping"
 		},
 		{
 			"name": "Tomatos",

@@ -62,7 +62,8 @@ public class IO {
         for (int i = 0; i < sizesJsonArr.length(); i++) {
             String name = sizesJsonArr.getJSONObject(i).getString("name");
             double price = sizesJsonArr.getJSONObject(i).getDouble("price");
-            Size size = new Size(name, price);
+            double dimension = sizesJsonArr.getJSONObject(i).getDouble("dimension");
+            Size size = new Size(name, price, dimension);
             sizes.add(size);
         }
         for (int i = 0; i < crustsJsonArr.length(); i++) {
