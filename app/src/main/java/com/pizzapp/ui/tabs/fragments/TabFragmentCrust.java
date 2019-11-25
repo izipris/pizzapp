@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
@@ -32,6 +32,7 @@ public class TabFragmentCrust extends Fragment {
     private TabAdapter tabAdapter;
     private int tabPosition;
     private Pizza currentPizza;
+    private final int MAIN_TAB_INDEX = 1;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -86,13 +87,13 @@ public class TabFragmentCrust extends Fragment {
             imageButtonCurrent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleCrustClicked(view, buttonToCrustMapping, imageButtonCurrent);
+                    handleCrustClicked(buttonToCrustMapping, imageButtonCurrent);
                 }
             });
         }
     }
 
-    private void handleCrustClicked(@NonNull View view, final Map<ImageButton, Crust> buttonToCrustMapping, final ImageButton imageButtonCurrent) {
+    private void handleCrustClicked(final Map<ImageButton, Crust> buttonToCrustMapping, final ImageButton imageButtonCurrent) {
         imageButtonCurrent.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
         for (Map.Entry<ImageButton, Crust> entryOther : buttonToCrustMapping.entrySet()) {
             ImageButton imageButtonOther = entryOther.getKey();
@@ -103,8 +104,8 @@ public class TabFragmentCrust extends Fragment {
         currentPizza.setCrust(buttonToCrustMapping.get(imageButtonCurrent));
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-        viewPager.setCurrentItem(1);
+        TabLayout tabs = getActivity().findViewById(R.id.tabs);
+        tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
     }
 
