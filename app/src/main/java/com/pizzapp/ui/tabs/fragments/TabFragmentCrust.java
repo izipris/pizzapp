@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.pizzapp.MainActivity;
 import com.pizzapp.R;
@@ -64,7 +65,7 @@ public class TabFragmentCrust extends Fragment {
 
         Map<ImageButton, Crust> buttonToTitleMap = generateButtonToCrustMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
                 Arrays.asList(thickCrust, regularCrust, thinCrust));
-        defineDoughButtonsHandlers(buttonToTitleMap);
+        defineDoughButtonsHandlers(view, buttonToTitleMap);
 
         doughThickTextView.setText(getDoughTitle(thickCrust));
         doughRegularTextView.setText(getDoughTitle(regularCrust));
@@ -77,7 +78,7 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(final Map<ImageButton, Crust> buttonToCrustMapping) {
+    private void defineDoughButtonsHandlers(@NonNull View view, final Map<ImageButton, Crust> buttonToCrustMapping) {
         // Define the onClick handlers such that when one option selected. it's highlighted
         // while the others are not.
         for (Map.Entry<ImageButton, Crust> entryCurrent : buttonToCrustMapping.entrySet()) {
@@ -85,13 +86,13 @@ public class TabFragmentCrust extends Fragment {
             imageButtonCurrent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleCrustClicked(buttonToCrustMapping, imageButtonCurrent);
+                    handleCrustClicked(view, buttonToCrustMapping, imageButtonCurrent);
                 }
             });
         }
     }
 
-    private void handleCrustClicked(final Map<ImageButton, Crust> buttonToCrustMapping, final ImageButton imageButtonCurrent) {
+    private void handleCrustClicked(@NonNull View view, final Map<ImageButton, Crust> buttonToCrustMapping, final ImageButton imageButtonCurrent) {
         imageButtonCurrent.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
         for (Map.Entry<ImageButton, Crust> entryOther : buttonToCrustMapping.entrySet()) {
             ImageButton imageButtonOther = entryOther.getKey();
@@ -102,6 +103,8 @@ public class TabFragmentCrust extends Fragment {
         currentPizza.setCrust(buttonToCrustMapping.get(imageButtonCurrent));
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager.setCurrentItem(1);
         tabAdapter.notifyDataSetChanged();
     }
 
