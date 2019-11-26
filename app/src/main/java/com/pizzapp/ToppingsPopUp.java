@@ -52,8 +52,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
     private static final int PIZZA_PASSED = 3;
-    private static final int ENLARGED_WIDTH = 130;
-    private static final int ENLARGED_HEIGHT = 130;
+    private static final int ENLARGED_WIDTH = 120;
+    private static final int ENLARGED_HEIGHT = 120;
 
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
