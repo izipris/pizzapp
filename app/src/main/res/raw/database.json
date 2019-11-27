@@ -30,9 +30,34 @@
 			"image":"@drawable/ic_mushrooms_topping"
 		},
 		{
-			"name": "Tomatos",
+			"name": "Tomatoes",
 			"price":2,
 			"image":"@drawable/ic_tomato_topping"
+		},
+		{
+			"name": "Olives",
+			"price":2,
+			"image":"@drawable/ic_olives_topping"
+		},
+		{
+			"name": "Pineapple",
+			"price":4,
+			"image":"@drawable/ic_pineapple_topping"
+		},
+		{
+			"name": "Sweet Potato",
+			"price":4,
+			"image":"@drawable/ic_sweet_potato_topping"
+		},
+		{
+			"name": "Zucchini",
+			"price":4,
+			"image":"@drawable/ic_zucchini_topping"
+		},
+		{
+			"name": "Eggplant",
+			"price":2,
+			"image":"@drawable/ic_eggplant_topping"
 		}
 	],
 	"crusts":[

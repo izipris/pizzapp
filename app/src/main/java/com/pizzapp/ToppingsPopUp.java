@@ -52,11 +52,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
     private static final int PIZZA_PASSED = 3;
-    private static final int ENLARGED_WIDTH = 130;
-    private static final int ENLARGED_HEIGHT = 130;
+    private static final int ENLARGED_WIDTH = 120;
+    private static final int ENLARGED_HEIGHT = 120;
 
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
+
+    private static final int MIN_ROWS_IN_CHART = 3;
 
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
@@ -121,13 +123,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createToppingChart(){
         GridLayout layout = findViewById(R.id.grid_layout);
-        int numberOfRows = min(4, toppingsList.size());
+        int numberOfRows = min(MIN_ROWS_IN_CHART, toppingsList.size());
         layout.setRowCount(numberOfRows);
         int numberOfColumns = calculateNumberOfColumns();
         layout.setColumnCount(numberOfColumns);
         for (int i = 0; i < numberOfRows; i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i, 1, 1);
             for (int j = 0; j < numberOfColumns; j++) {
+                if (j * MIN_ROWS_IN_CHART + i == toppingsList.size()){
+                    break;
+                }
                 GridLayout.Spec colSpec = GridLayout.spec(j, 1, 1);
                 CheckBox checkBox = createCheckbox(i, j);
                 GridLayout.LayoutParams myGLP = new GridLayout.LayoutParams();
@@ -139,8 +144,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     private int calculateNumberOfColumns() {
-        int numberOfRows = toppingsList.size() / 4;
-        if (toppingsList.size() % 4 != 0) {
+        int numberOfRows = toppingsList.size() / MIN_ROWS_IN_CHART;
+        if (toppingsList.size() % MIN_ROWS_IN_CHART != 0) {
             numberOfRows++;
         }
         return numberOfRows;
@@ -149,11 +154,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private CheckBox createCheckbox(int row, int col){
         final CheckBox checkBox = new CheckBox(this);
-        final Topping topping = toppingsList.get(4 * col + row);
+        final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
         checkBox.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-        checkBox.setId(4 * col + row);
+        checkBox.setId(MIN_ROWS_IN_CHART * col + row);
         checkBox.setText(topping.getName());
-        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())){
             checkBox.setChecked(true);
         }
 
@@ -290,16 +295,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void setGravity(FrameLayout.LayoutParams layoutParams){
         switch (currentSliceIdOutOfFour){
             case (TOP_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                 break;
             case (BOTTOM_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+                layoutParams.gravity = Gravity.TOP | Gravity.START;
                 break;
             case (BOTTOM_LEFT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.TOP | Gravity.END;
                 break;
             case (TOP_LEFT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
                 break;
         }
     }
@@ -330,7 +335,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void editToppingChart() {
         for (Topping topping:toppingsList){
             CheckBox checkBox = findViewById(toppingsList.indexOf(topping));
-            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)){
+            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())){
                 checkBox.setChecked(true);
             } else {
                 checkBox.setChecked(false);
