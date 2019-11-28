@@ -50,10 +50,22 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private Pizza currentPizza;
     private Order finalOrder;
     private List<ImageView> toppingImages = new ArrayList<>();
+    private View currentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        currentView = inflater.inflate(R.layout.tab_fragment_main, container, false);
         return inflater.inflate(R.layout.tab_fragment_main, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Get/Backup current title
+        if (((MainActivity) getActivity()).order != null) {
+            finalOrder = ((MainActivity) getActivity()).order;
+            setPrice(currentView);
+        }
     }
 
     @Override

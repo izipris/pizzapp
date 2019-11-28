@@ -6,29 +6,47 @@
     android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topping_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="backToMain"/>
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="40dp"
-        android:background="#357C39"
+        android:background="?attr/colorPrimary"
         android:gravity="center"
-        android:text="@string/choose_topping" />
+        android:text="@string/choose_topping"
+        android:textColor="#FAF7F7"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
     <TableLayout
         android:id="@+id/pizzaPic"
         android:layout_width="match_parent"
-        android:layout_height="379dp"
+        android:layout_height="350dp"
         android:gravity="center"
         android:paddingBottom="70dp">
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/top_row"
+            android:layout_width="422dp"
+            android:layout_height="121dp"
             android:gravity="center"
             android:layoutDirection="ltr"
-            android:paddingBottom="1dp">
+            android:paddingBottom="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="backToMain">
 
 
             <FrameLayout
@@ -70,7 +88,7 @@
                 <ImageView
                     android:id="@+id/topRight"
                     android:layout_width="76dp"
-                    android:layout_height="76dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
                     android:onClick="onClick"
@@ -90,15 +108,19 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/bottom_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layoutDirection="ltr">
+            android:layoutDirection="ltr"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="backToMain">
 
             <FrameLayout
                 android:id="@+id/bottomLeftFrame"
                 android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_height="120dp"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">
@@ -128,7 +150,7 @@
             <FrameLayout
                 android:id="@+id/bottomRightFrame"
                 android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_height="120dp"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">

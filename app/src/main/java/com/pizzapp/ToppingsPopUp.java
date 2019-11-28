@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import androidx.appcompat.widget.Toolbar;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,12 +55,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int PIZZA_PASSED = 3;
     private static final int ENLARGED_WIDTH = 120;
     private static final int ENLARGED_HEIGHT = 120;
-
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
-
     private static final int MIN_ROWS_IN_CHART = 3;
 
+    private Toolbar toolbar;
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
     Pizza pizza;
@@ -76,11 +76,18 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
+        setToolbar();
         initiateidToStringMap();
         initializepizzaImageToPartMap();
         extractExtras();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
+    }
+
+    private void setToolbar() {
+        toolbar = findViewById(R.id.topping_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void extractExtras() {
