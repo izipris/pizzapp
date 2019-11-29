@@ -189,26 +189,25 @@
         android:layout_height="match_parent"
         android:layout_below="@id/pizzaPic"
         android:background="@drawable/ic_pop_up_toppings_screen"
-        android:fadingEdge="horizontal"
-        android:scrollbars="horizontal"
         android:clickable="true"
-        android:focusable="true">
+        android:fadingEdge="horizontal"
+        android:focusable="true"
+        android:scrollbars="horizontal">
 
         <GridLayout
             android:id="@+id/grid_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:columnCount="3"
-            android:paddingStart="40dp"
-            android:paddingEnd="18dp"
-            android:paddingTop="10dp"
             android:layout_marginTop="10dp"
-            android:rowCount="4"
+            android:layout_marginBottom="10dp"
             android:clickable="true"
+            android:columnCount="3"
             android:focusable="true"
-            android:onClick="backToMain">
-        </GridLayout>
+            android:onClick="backToMain"
+            android:paddingStart="40dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="18dp"
+            android:rowCount="4"></GridLayout>
 
     </HorizontalScrollView>
 
