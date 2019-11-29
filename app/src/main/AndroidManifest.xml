@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ToppingsPopUp"></activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,15 +20,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".OrderSummary"
-            android:label = "Order Summary"
+        <activity
+            android:name=".OrderSummary"
+            android:label="Order Summary"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=
-                    "com.pizzapp.OrderSummary" />
+                android:value="com.pizzapp.OrderSummary" />
         </activity>
-        <activity android:name=".ToppingsPopUp"></activity>
+
 
         <activity
             android:name=".Delivery"
@@ -37,7 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pizzapp.OrderSummary" />
         </activity>
-        <activity android:name=".Pickup"
+        <activity
+            android:name=".Pickup"
             android:label="Pickup"
             android:parentActivityName=".OrderSummary">
             <meta-data
@@ -45,6 +48,7 @@
                 android:value="com.pizzapp.OrderSummary" />
 
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

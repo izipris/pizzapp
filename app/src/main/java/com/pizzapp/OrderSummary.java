@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class OrderSummary extends AppCompatActivity {
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = OrderSummary.class.getSimpleName();
     private LinearLayout mPizzaLayout;
     private Button mDelivery;
     private Button mPickup;
@@ -59,8 +60,9 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
+        Intent intent = NavUtils.getParentActivityIntent(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        NavUtils.navigateUpTo(this, intent);
         return true;
     }
 
@@ -200,6 +202,19 @@ public class OrderSummary extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "onResume");
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -209,9 +224,21 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "onStop");
+    }
+
+    @Override
     public void onRestart() {
         super.onRestart();
         Log.d(LOG_TAG, "onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "onDestroy");
     }
 
 
