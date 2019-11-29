@@ -1,8 +1,5 @@
 package com.pizzapp;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -74,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         Log.d(LOG_TAG, "onStart");
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         Log.d(LOG_TAG, "onResume");
     }
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         Log.d(LOG_TAG, "onStop");
     }
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy");
     }

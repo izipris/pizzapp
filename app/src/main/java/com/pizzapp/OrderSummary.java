@@ -60,11 +60,8 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-//        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivityForResult(myIntent, 0);
-//        return true;
         Intent intent = NavUtils.getParentActivityIntent(this);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         NavUtils.navigateUpTo(this, intent);
         return true;
     }
@@ -205,26 +202,15 @@ public class OrderSummary extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public boolean onOptionsItemSelected(MenuItem item)
-//    {
-//        if (item.getItemId() == android.R.id.home)
-//        {
-//            Intent intent = NavUtils.getParentActivityIntent(this);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//            NavUtils.navigateUpTo(this, intent);
-//            return true;
-//        }
-//        return true;
-//    }
 
     @Override
-    protected void onStart(){
-      super.onStart();
+    protected void onStart() {
+        super.onStart();
         Log.d(LOG_TAG, "onStart");
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         Log.d(LOG_TAG, "onResume");
     }
@@ -238,7 +224,7 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         Log.d(LOG_TAG, "onStop");
     }
@@ -250,7 +236,7 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy");
     }
