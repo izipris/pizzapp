@@ -100,27 +100,8 @@ public class TabFragmentCrust extends Fragment {
             ImageButton imageButtonOther = entryOther.getKey();
             if (imageButtonOther != imageButtonCurrent) {
                 imageButtonOther.setBackgroundResource(0);
-            } else {
-                for (Crust crust: crusts){
-                    if (crust.getName().equals(entryOther.getValue())){
-                        FragmentManager fm = getActivity().getFragmentManager();
-                        Bundle arguments = new Bundle();
-                        arguments.putSerializable("pizza", ((MainActivity) this.getActivity()).pizza.setCrust(crust));
-
-                        TabFragmentMain myFragment = new TabFragmentMain();
-                        myFragment.setArguments(arguments);
-
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.content, myFragment)
-                                .commit();
-
-                    }
-                }
             }
-
         }
-
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToTextMapping.get(imageButtonCurrent));
         tabAdapter.notifyDataSetChanged();

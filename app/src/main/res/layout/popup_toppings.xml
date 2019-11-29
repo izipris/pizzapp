@@ -27,7 +27,8 @@
         android:text="@string/choose_topping"
         android:textColor="#FAF7F7"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
 
     <TableLayout
