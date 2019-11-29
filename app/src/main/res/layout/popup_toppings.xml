@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="backToMain"/>
+        android:minHeight="?attr/actionBarSize"
+        android:onClick="backToMain"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <TextView
         android:id="@+id/title"
@@ -34,6 +34,7 @@
         android:id="@+id/pizzaPic"
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:background="@drawable/ic_pop_up_pizza_back_screen"
         android:gravity="center"
         android:paddingBottom="70dp">
 
@@ -41,12 +42,12 @@
             android:id="@+id/top_row"
             android:layout_width="422dp"
             android:layout_height="121dp"
-            android:gravity="center"
-            android:layoutDirection="ltr"
-            android:paddingBottom="1dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="backToMain">
+            android:gravity="center"
+            android:layoutDirection="ltr"
+            android:onClick="backToMain"
+            android:paddingBottom="1dp">
 
 
             <FrameLayout
@@ -111,10 +112,10 @@
             android:id="@+id/bottom_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layoutDirection="ltr"
             android:clickable="true"
             android:focusable="true"
+            android:gravity="center"
+            android:layoutDirection="ltr"
             android:onClick="backToMain">
 
             <FrameLayout
@@ -181,22 +182,17 @@
         </TableRow>
     </TableLayout>
 
-    <ImageView
-        android:id="@+id/continueButton"
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:layout_gravity="center|bottom"
-        android:onClick="backToMain"
-        app:srcCompat="@drawable/ic_continue" />
-
 
     <HorizontalScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/pizzaPic"
+        android:background="@drawable/ic_pop_up_toppings_screen"
         android:fadingEdge="horizontal"
-        android:scrollbars="horizontal">
+        android:scrollbars="horizontal"
+        android:clickable="true"
+        android:focusable="true">
 
         <GridLayout
             android:id="@+id/grid_layout"
@@ -204,16 +200,13 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:columnCount="3"
-            android:paddingLeft="40dp"
-            android:paddingRight="18dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="18dp"
+            android:layout_marginTop="10dp"
             android:rowCount="4">
-
-
-                    </GridLayout>
+        </GridLayout>
 
     </HorizontalScrollView>
-
-
 
 
 </LinearLayout>
