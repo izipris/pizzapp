@@ -11,23 +11,19 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.pizzapp.MainActivity;
 import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
-import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
-import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.IO;
+import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +41,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int DEFAULT_NUMBER_OF_SLICES = 4;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -60,37 +55,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // a condition to identify if the popup was opened
         initiateCurrentPizzaOrder();
-//        if (((MainActivity) this.getActivity()).pizza == null) {
-//            createDefaultPizza(view);
-//        } else {
-//            currentPizza = ((MainActivity) this.getActivity()).pizza;
-//        }
-//        if (((MainActivity) this.getActivity()).order == null) {
-//            finalOrder = new Order(0);
-//            finalOrder.addPizza(currentPizza);
-//        } else {
-//            finalOrder = ((MainActivity) this.getActivity()).order;
-//            finalOrder.upadateLastPizza(currentPizza);
-//        }
-
-//        Bundle bundle = this.getArguments();
-//
-//        if (bundle != null){
-//            currentPizza = (Pizza) bundle.getSerializable("pizza");
-//            finalOrder.upadateLastPizza(currentPizza);
-//        }
         showPrice(view);
-        ImageView topRightSlice = view.findViewById(R.id.topRight);
-        ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
-        ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
-        ImageView topLeftSlice = view.findViewById(R.id.topLeft);
-        List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
-        addOnClickListener(slices);
-        addClearButtonOnClickListener(view);
-        addAddButtonOnClickListener(view);
-        addContinueOnClickListener(view);
+        addButtonListeners(view);
         createCurrentPizza(view);
     }
 
@@ -110,6 +77,18 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 startActivity(intent);
             }
         });
+    }
+
+    private void addButtonListeners(View view) {
+        ImageView topRightSlice = view.findViewById(R.id.topRight);
+        ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
+        ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
+        ImageView topLeftSlice = view.findViewById(R.id.topLeft);
+        List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
+        addOnClickListener(slices);
+        addClearButtonOnClickListener(view);
+        addAddButtonOnClickListener(view);
+        addContinueOnClickListener(view);
     }
 
     private void addAddButtonOnClickListener(final View view) {
@@ -163,28 +142,32 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
     private void addTopping(View view, final int currentPart, Topping topping) {
-        FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
-        ImageView newTopping = new ImageView(getActivity());
-        newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
-        newTopping.setRotation(getCurrentRotation(currentPart));
-        newTopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPopup(currentPart);
-            }
-        });
-        FrameLayout.LayoutParams layoutParams = new
-                FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
-        setGravity(layoutParams, currentPart);
-        layoutParams.height = StaticFunctions.convertDpToPx(HEIGHT);
-        layoutParams.width = StaticFunctions.convertDpToPx(WIDTH);
+        try {
+            FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
+            ImageView newTopping = new ImageView(getActivity());
+            newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
+            newTopping.setRotation(getCurrentRotation(currentPart));
+            newTopping.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openPopup(currentPart);
+                }
+            });
+            FrameLayout.LayoutParams layoutParams = new
+                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
+            setGravity(layoutParams, currentPart);
+            layoutParams.height = StaticFunctions.convertDpToPx(HEIGHT);
+            layoutParams.width = StaticFunctions.convertDpToPx(WIDTH);
 
-        newTopping.setLayoutParams(layoutParams);
-        toppingImages.add(newTopping);
-        frameLayout.addView(newTopping);
+            newTopping.setLayoutParams(layoutParams);
+            toppingImages.add(newTopping);
+            frameLayout.addView(newTopping);
+        } catch (DoesNotExist doesNotExist) {
+            showErrorMessage(view);
+        }
     }
 
-    private FrameLayout getAppropriateFrameId(int sliceId, View view) {
+    private FrameLayout getAppropriateFrameId(int sliceId, View view) throws DoesNotExist {
         switch (sliceId) {
             case (TOP_RIGHT_SLICE):
                 return view.findViewById(R.id.topRightFrame);
@@ -195,7 +178,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
             case (TOP_LEFT_SLICE):
                 return view.findViewById(R.id.topLeftFrame);
         }
-        return null;
+        throw new DoesNotExist();
 
     }
 
@@ -230,10 +213,34 @@ public class TabFragmentMain extends Fragment implements Serializable {
             slice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPopup(getPartClicked(v.getId()));
+                    try {
+
+                        openPopup(getPartClicked(v.getId()));
+                    } catch (DoesNotExist doesNotExist) {
+                        showErrorMessage(v);
+                    }
                 }
             });
         }
+    }
+
+    private int getPartClicked(int id) throws DoesNotExist {
+        switch (id) {
+            case (R.id.topRight):
+                return TOP_RIGHT_SLICE;
+            case (R.id.bottomRight):
+                return BOTTOM_RIGHT_SLICE;
+            case (R.id.bottomLeft):
+                return BOTTOM_LEFT_SLICE;
+            case (R.id.topLeft):
+                return TOP_LEFT_SLICE;
+        }
+        throw new DoesNotExist();
+    }
+
+    private void showErrorMessage(View view) {
+        Toast toast = Toast.makeText(view.getContext(), R.string.error_message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void openPopup(int id) {
@@ -249,19 +256,5 @@ public class TabFragmentMain extends Fragment implements Serializable {
         }
         intent.putExtra("numberOfExtras", numberOfExtrasPassed);
         startActivity(intent);
-    }
-
-    private int getPartClicked(int id) {
-        switch (id) {
-            case (R.id.topRight):
-                return TOP_RIGHT_SLICE;
-            case (R.id.bottomRight):
-                return BOTTOM_RIGHT_SLICE;
-            case (R.id.bottomLeft):
-                return BOTTOM_LEFT_SLICE;
-            case (R.id.topLeft):
-                return TOP_LEFT_SLICE;
-        }
-        return -1;
     }
 }

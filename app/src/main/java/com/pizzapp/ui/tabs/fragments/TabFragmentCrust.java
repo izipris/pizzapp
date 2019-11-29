@@ -1,9 +1,11 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
@@ -29,6 +32,7 @@ public class TabFragmentCrust extends Fragment {
 
     private TabAdapter tabAdapter;
     private int tabPosition;
+    private List<Crust> crusts;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -58,6 +62,8 @@ public class TabFragmentCrust extends Fragment {
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
         Crust thickCrust = database.getCrusts().get(DB_CRUST_THICK);
+
+        crusts = Arrays.asList(thickCrust, regularCrust, thinCrust);
 
         Map<ImageButton, String> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
                 Arrays.asList(thickCrust.getName(), regularCrust.getName(), thinCrust.getName()));
@@ -94,8 +100,27 @@ public class TabFragmentCrust extends Fragment {
             ImageButton imageButtonOther = entryOther.getKey();
             if (imageButtonOther != imageButtonCurrent) {
                 imageButtonOther.setBackgroundResource(0);
+            } else {
+                for (Crust crust: crusts){
+                    if (crust.getName().equals(entryOther.getValue())){
+                        FragmentManager fm = getActivity().getFragmentManager();
+                        Bundle arguments = new Bundle();
+                        arguments.putSerializable("pizza", ((MainActivity) this.getActivity()).pizza.setCrust(crust));
+
+                        TabFragmentMain myFragment = new TabFragmentMain();
+                        myFragment.setArguments(arguments);
+
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.content, myFragment)
+                                .commit();
+
+                    }
+                }
             }
+
         }
+
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToTextMapping.get(imageButtonCurrent));
         tabAdapter.notifyDataSetChanged();
