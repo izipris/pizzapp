@@ -61,23 +61,27 @@ public class Pizza implements Serializable {
         this.size = size;
     }
 
-    public Crust getCrust() {
-        return crust;
-    }
-
     public String getSizeName() {
         return size.getName();
+    }
+
+    public Crust getCrust() {
+        return crust;
     }
 
     public String getCrustName() {
         return crust.getName();
     }
 
-
-
-
-        public void setCrust(Crust crust) {
+    public Pizza setCrust(Crust crust) {
         this.crust = crust;
+        return this;
+    }
+
+    public void removePizzaToppings(){
+        for (PizzaPart part : parts) {
+            part.removeAllToppings();
+        }
     }
 
     public PizzaPart getPizzaPart(int index) throws IndexOutOfBoundsException{

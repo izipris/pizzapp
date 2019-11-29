@@ -44,6 +44,12 @@ public class PizzaPart implements Serializable {
         }
     }
 
+    public void removeAllToppings(){
+        toppingNames.clear();
+        toppings.clear();
+        hasTopping = false;
+    }
+
     public List<Topping> getToppings() {
         return toppings;
     }

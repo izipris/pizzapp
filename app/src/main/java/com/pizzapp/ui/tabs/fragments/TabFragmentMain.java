@@ -54,37 +54,34 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        currentView = inflater.inflate(R.layout.tab_fragment_main, container, false);
         return inflater.inflate(R.layout.tab_fragment_main, container, false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Get/Backup current title
-        if (((MainActivity) getActivity()).order != null) {
-            finalOrder = ((MainActivity) getActivity()).order;
-            setPrice(currentView);
-        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // a condition to identify if the popup was opened
-        if (((MainActivity) this.getActivity()).pizza == null) {
-            createDefaultPizza(view);
-        } else {
-            currentPizza = ((MainActivity) this.getActivity()).pizza;
-        }
-        if (((MainActivity) this.getActivity()).order == null) {
-            finalOrder = new Order(0);
-            finalOrder.addPizza(currentPizza);
-        } else {
-            finalOrder = ((MainActivity) this.getActivity()).order;
-            finalOrder.upadateLastPizza(currentPizza);
-        }
-        setPrice(view);
+        initiateCurrentPizzaOrder();
+//        if (((MainActivity) this.getActivity()).pizza == null) {
+//            createDefaultPizza(view);
+//        } else {
+//            currentPizza = ((MainActivity) this.getActivity()).pizza;
+//        }
+//        if (((MainActivity) this.getActivity()).order == null) {
+//            finalOrder = new Order(0);
+//            finalOrder.addPizza(currentPizza);
+//        } else {
+//            finalOrder = ((MainActivity) this.getActivity()).order;
+//            finalOrder.upadateLastPizza(currentPizza);
+//        }
+
+//        Bundle bundle = this.getArguments();
+//
+//        if (bundle != null){
+//            currentPizza = (Pizza) bundle.getSerializable("pizza");
+//            finalOrder.upadateLastPizza(currentPizza);
+//        }
+        showPrice(view);
         ImageView topRightSlice = view.findViewById(R.id.topRight);
         ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
         ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
@@ -95,6 +92,12 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addAddButtonOnClickListener(view);
         addContinueOnClickListener(view);
         createCurrentPizza(view);
+    }
+
+    private void initiateCurrentPizzaOrder() {
+        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        finalOrder = ((MainActivity) this.getActivity()).order;
+        finalOrder.upadateLastPizza(currentPizza);
     }
 
     private void addContinueOnClickListener(View view) {
@@ -119,7 +122,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
 //                for (ImageView toppingImage : toppingImages) {
 //                    toppingImage.setVisibility(View.GONE);
 //                }
-                setPrice(view);
+                showPrice(view);
             }
         });
     }
@@ -131,21 +134,16 @@ public class TabFragmentMain extends Fragment implements Serializable {
             public void onClick(View v) {
                 for (ImageView toppingImage : toppingImages) {
                     toppingImage.setVisibility(View.GONE);
-                    deleteToppingsFromPizzaObject();
+                    currentPizza.removePizzaToppings();
                     finalOrder.upadateLastPizza(currentPizza);
-                    setPrice(view);
+                    showPrice(view);
                 }
             }
         });
     }
 
-    private void deleteToppingsFromPizzaObject() {
-        for (PizzaPart part : currentPizza.getParts()) {
-            part.getToppings().clear();
-        }
-    }
 
-    private void setPrice(View view) {
+    private void showPrice(View view) {
         TextView price = view.findViewById(R.id.orderPrice);
         String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
         price.setText(priceDisplay);
@@ -266,14 +264,4 @@ public class TabFragmentMain extends Fragment implements Serializable {
         }
         return -1;
     }
-
-    private void createDefaultPizza(View view) {
-        Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
-        Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
-        currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
-        ((MainActivity) this.getActivity()).pizza = currentPizza;
-
-    }
-
-
 }
