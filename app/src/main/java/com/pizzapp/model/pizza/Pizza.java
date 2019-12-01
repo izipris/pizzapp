@@ -17,37 +17,38 @@ public class Pizza implements Serializable {
     private Crust crust;
     private List<PizzaPart> parts;
 
-    public Pizza(int numberOfSlices, Size size, Crust crust){
+    public Pizza(int numberOfSlices, Size size, Crust crust) {
         this.numberOfSlices = numberOfSlices;
         this.size = size;
         this.crust = crust;
         parts = new Vector<>();
-        for(int i = 0; i < numberOfSlices; ++i) {
+        for (int i = 0; i < numberOfSlices; ++i) {
             parts.add(new PizzaPart(i));
         }
     }
 
     /**
      * copy constructor if the user want to duplicate pizza.
+     *
      * @param pizza another pizza.
      */
-    public Pizza(Pizza pizza){
+    public Pizza(Pizza pizza) {
         this.numberOfSlices = pizza.numberOfSlices;
         this.size = pizza.size;
         this.crust = pizza.crust;
         this.parts = pizza.parts;
     }
 
-    public Pizza(Size size, Crust crust){
+    public Pizza(Size size, Crust crust) {
         this(DEFAULT_NUMBER_OF_SLICES, size, crust);
     }
 
-    public double getPrice(){
+    public double getPrice() {
         double price = size.getPrice() + crust.getPrice();
-        for (PizzaPart part: parts){
-            if (part.isHasTopping()){
-                for (Topping topping:part.getToppings())
-                price += topping.getPrice() / (double) numberOfSlices;
+        for (PizzaPart part : parts) {
+            if (part.isHasTopping()) {
+                for (Topping topping : part.getToppings())
+                    price += topping.getPrice() / (double) numberOfSlices;
             }
         }
         return price;
@@ -61,37 +62,42 @@ public class Pizza implements Serializable {
         this.size = size;
     }
 
-    public Crust getCrust() {
-        return crust;
-    }
-
     public String getSizeName() {
         return size.getName();
+    }
+
+    public Crust getCrust() {
+        return crust;
     }
 
     public String getCrustName() {
         return crust.getName();
     }
 
-
-
-
-        public void setCrust(Crust crust) {
+    public Pizza setCrust(Crust crust) {
         this.crust = crust;
+        return this;
     }
 
-    public PizzaPart getPizzaPart(int index) throws IndexOutOfBoundsException{
-        if (index < 0 || index > numberOfSlices){
+    public void removePizzaToppings() {
+        for (PizzaPart part : parts) {
+            part.removeAllToppings();
+        }
+    }
+
+    public PizzaPart getPizzaPart(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index > numberOfSlices) {
             throw new IndexOutOfBoundsException(OUT_OF_BOUNDS_MSG);
         }
         return parts.get(index);
     }
 
 
-
-    public List<PizzaPart> getParts(){
+    public List<PizzaPart> getParts() {
         return parts;
     }
 
-    public int getNumberOfParts(){return this.parts.size();}
+    public int getNumberOfParts() {
+        return this.parts.size();
+    }
 }

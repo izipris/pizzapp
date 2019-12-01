@@ -10,7 +10,6 @@
     android:background="#F7F7F7"
     tools:context="com.pizzapp.OrderSummary">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/order_toolbar"
         android:layout_width="match_parent"

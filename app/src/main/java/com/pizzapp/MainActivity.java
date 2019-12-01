@@ -9,17 +9,21 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.pizzapp.model.Order;
+import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
+import com.pizzapp.model.pizza.Size;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
+import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     private static final int MAIN_FRAGMENT_INDEX = 1;
+    private static final int DEFAULT_NUMBER_OF_SLICES = 4;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "onCreate");
-        extractExtras();
+        initiatePizza();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,15 +47,28 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         initTabsLayout(viewPager, tabLayout);
     }
 
-    private void extractExtras() {
+    private void initiatePizza() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            pizza = (Pizza) extras.getSerializable("pizza");
-            order = (Order) extras.getSerializable("order");
-            viewPager = findViewById(R.id.viewpager);
-            viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX);
-
+            extractExtras(extras);
+        } else {
+            createPizzaOrder();
         }
+    }
+
+    private void createPizzaOrder() {
+        Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
+        Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
+        pizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
+        order = new Order(0);
+        order.addPizza(pizza);
+    }
+
+    private void extractExtras(Bundle extras) {
+        pizza = (Pizza) extras.getSerializable("pizza");
+        order = (Order) extras.getSerializable("order");
+        viewPager = findViewById(R.id.viewpager);
+        viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX);
     }
 
     private void initTabsLayout(ViewPager viewPager, TabLayout tabLayout) {

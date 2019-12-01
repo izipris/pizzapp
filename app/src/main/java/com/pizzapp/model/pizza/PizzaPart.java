@@ -10,7 +10,7 @@ public class PizzaPart implements Serializable {
     private boolean hasTopping;
     private int id;
 
-    public PizzaPart(int id){
+    public PizzaPart(int id) {
         toppings = new ArrayList<Topping>();
         toppingNames = new ArrayList<String>();
         hasTopping = false;
@@ -21,8 +21,8 @@ public class PizzaPart implements Serializable {
         return hasTopping;
     }
 
-    public boolean hasCertainTopping(String toppingName){
-        if (toppingNames.contains(toppingName)){
+    public boolean hasCertainTopping(String toppingName) {
+        if (toppingNames.contains(toppingName)) {
             return true;
         }
         return false;
@@ -34,7 +34,7 @@ public class PizzaPart implements Serializable {
         hasTopping = true;
     }
 
-    public void removeTopping(Topping topping){
+    public void removeTopping(Topping topping) {
         if (hasTopping) {
             toppings.remove(topping);
             toppingNames.remove(topping.getName());
@@ -42,6 +42,12 @@ public class PizzaPart implements Serializable {
         if (toppings.size() == 0) {
             hasTopping = false;
         }
+    }
+
+    public void removeAllToppings() {
+        toppingNames.clear();
+        toppings.clear();
+        hasTopping = false;
     }
 
     public List<Topping> getToppings() {

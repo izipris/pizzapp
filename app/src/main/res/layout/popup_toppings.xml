@@ -6,35 +6,60 @@
     android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topping_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="?attr/actionBarSize"
+        android:onClick="backToMain"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="40dp"
-        android:background="#357C39"
+        android:background="?attr/colorPrimary"
         android:gravity="center"
-        android:text="@string/choose_topping" />
+        android:text="@string/choose_topping"
+        android:textColor="#FAF7F7"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
     <TableLayout
         android:id="@+id/pizzaPic"
         android:layout_width="match_parent"
-        android:layout_height="379dp"
+        android:layout_height="350dp"
+        android:background="@drawable/ic_pop_up_pizza_back_screen"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
+        android:onClick="backToMain"
         android:paddingBottom="70dp">
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/top_row"
+            android:layout_width="422dp"
+            android:layout_height="121dp"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
             android:layoutDirection="ltr"
+            android:onClick="backToMain"
             android:paddingBottom="1dp">
 
 
             <FrameLayout
                 android:id="@+id/topLeftFrame"
-                android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="backToMain"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">
@@ -61,8 +86,11 @@
 
             <FrameLayout
                 android:id="@+id/topRightFrame"
-                android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="backToMain"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">
@@ -70,7 +98,7 @@
                 <ImageView
                     android:id="@+id/topRight"
                     android:layout_width="76dp"
-                    android:layout_height="76dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
                     android:onClick="onClick"
@@ -90,15 +118,22 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/bottom_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:layoutDirection="ltr">
+            android:layoutDirection="ltr"
+            android:onClick="backToMain">
 
             <FrameLayout
                 android:id="@+id/bottomLeftFrame"
-                android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="backToMain"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">
@@ -127,8 +162,11 @@
 
             <FrameLayout
                 android:id="@+id/bottomRightFrame"
-                android:layout_width="match_parent"
-                android:layout_height="154dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="backToMain"
                 android:paddingLeft="1dp"
                 android:paddingEnd="1dp"
                 android:paddingRight="1dp">
@@ -159,39 +197,35 @@
         </TableRow>
     </TableLayout>
 
-    <ImageView
-        android:id="@+id/continueButton"
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:layout_gravity="center|bottom"
-        android:onClick="backToMain"
-        app:srcCompat="@drawable/ic_continue" />
-
-
     <HorizontalScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/pizzaPic"
+        android:background="@drawable/ic_pop_up_toppings_screen"
+        android:clickable="true"
         android:fadingEdge="horizontal"
+        android:focusable="true"
         android:scrollbars="horizontal">
 
         <GridLayout
             android:id="@+id/grid_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:clickable="true"
             android:columnCount="3"
-            android:paddingLeft="40dp"
-            android:paddingRight="18dp"
+            android:focusable="true"
+            android:onClick="backToMain"
+            android:paddingStart="40dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="18dp"
             android:rowCount="4">
 
-
-                    </GridLayout>
+        </GridLayout>
 
     </HorizontalScrollView>
-
-
 
 
 </LinearLayout>

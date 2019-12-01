@@ -1,9 +1,11 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
@@ -29,6 +32,7 @@ public class TabFragmentCrust extends Fragment {
 
     private TabAdapter tabAdapter;
     private int tabPosition;
+    private List<Crust> crusts;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -58,6 +62,8 @@ public class TabFragmentCrust extends Fragment {
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
         Crust thickCrust = database.getCrusts().get(DB_CRUST_THICK);
+
+        crusts = Arrays.asList(thickCrust, regularCrust, thinCrust);
 
         Map<ImageButton, String> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
                 Arrays.asList(thickCrust.getName(), regularCrust.getName(), thinCrust.getName()));

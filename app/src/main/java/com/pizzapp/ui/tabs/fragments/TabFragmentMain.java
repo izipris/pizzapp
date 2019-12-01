@@ -1,8 +1,10 @@
 package com.pizzapp.ui.tabs.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,12 +23,10 @@ import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
-import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
-import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.IO;
+import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
@@ -45,7 +46,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int DEFAULT_NUMBER_OF_SLICES = 4;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -59,30 +59,17 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // a condition to identify if the popup was opened
-        if (((MainActivity) this.getActivity()).pizza == null) {
-            createDefaultPizza(view);
-        } else {
-            currentPizza = ((MainActivity) this.getActivity()).pizza;
-        }
-        if (((MainActivity) this.getActivity()).order == null) {
-            finalOrder = new Order(0);
-            finalOrder.addPizza(currentPizza);
-        } else {
-            finalOrder = ((MainActivity) this.getActivity()).order;
-            finalOrder.upadateLastPizza(currentPizza);
-        }
-        setPrice(view);
-        ImageView topRightSlice = view.findViewById(R.id.topRight);
-        ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
-        ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
-        ImageView topLeftSlice = view.findViewById(R.id.topLeft);
-        List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
-        addOnClickListener(slices);
-        addClearButtonOnClickListener(view);
-        addAddButtonOnClickListener(view);
-        addContinueOnClickListener(view);
+        initiateCurrentPizzaOrder();
+        showNumberOfPizzas(view);
+        showPrice(view);
+        addButtonListeners(view);
         createCurrentPizza(view);
+    }
+
+    private void initiateCurrentPizzaOrder() {
+        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        finalOrder = ((MainActivity) this.getActivity()).order;
+        finalOrder.upadateLastPizza(currentPizza);
     }
 
     private void addContinueOnClickListener(View view) {
@@ -97,19 +84,59 @@ public class TabFragmentMain extends Fragment implements Serializable {
         });
     }
 
+    private void addButtonListeners(View view) {
+        ImageView topRightSlice = view.findViewById(R.id.topRight);
+        ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
+        ImageView bottomLeftSlice = view.findViewById(R.id.bottomLeft);
+        ImageView topLeftSlice = view.findViewById(R.id.topLeft);
+        List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
+        addOnClickListener(slices);
+        addClearButtonOnClickListener(view);
+        addAddButtonOnClickListener(view);
+        addContinueOnClickListener(view);
+    }
+
     private void addAddButtonOnClickListener(final View view) {
         Button addButton = view.findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                createDefaultPizza(view);
+                copyCurrentPizza();
                 finalOrder.addPizza(currentPizza);
-//                for (ImageView toppingImage : toppingImages) {
-//                    toppingImage.setVisibility(View.GONE);
-//                }
-                setPrice(view);
+                showPrice(view);
+                showNumberOfPizzas(view);
+                final TextView price = view.findViewById(R.id.orderPrice);
+                showTextChange(price);
             }
         });
+    }
+
+    private void copyCurrentPizza() {
+        Pizza tempPizza = currentPizza;
+        currentPizza = new Pizza(currentPizza.getNumberOfParts(),
+                currentPizza.getSize(), currentPizza.getCrust());
+        List<PizzaPart> partList = tempPizza.getParts();
+        for (int i=0; i < partList.size(); i++){
+            List<Topping> partToppings = tempPizza.getParts().get(i).getToppings();
+            if (partToppings.size() > 0){
+                for (int j=0; j<partToppings.size(); j++){
+                    currentPizza.getParts().get(i).addTopping(partToppings.get(j));
+                }
+            }
+        }
+    }
+
+    private void showTextChange(final TextView price) {
+        new CountDownTimer(250, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                price.setTextColor(Color.RED);
+            }
+
+            public void onFinish() {
+                price.setTextColor(Color.BLACK);
+            }
+        }.start();
     }
 
     private void addClearButtonOnClickListener(final View view) {
@@ -119,24 +146,29 @@ public class TabFragmentMain extends Fragment implements Serializable {
             public void onClick(View v) {
                 for (ImageView toppingImage : toppingImages) {
                     toppingImage.setVisibility(View.GONE);
-                    deleteToppingsFromPizzaObject();
-                    finalOrder.upadateLastPizza(currentPizza);
-                    setPrice(view);
                 }
+                currentPizza.removePizzaToppings();
+                finalOrder.upadateLastPizza(currentPizza);
+                showPrice(view);
+                showTextChange((TextView) view.findViewById(R.id.orderPrice));
+
             }
         });
     }
 
-    private void deleteToppingsFromPizzaObject() {
-        for (PizzaPart part : currentPizza.getParts()) {
-            part.getToppings().clear();
-        }
-    }
 
-    private void setPrice(View view) {
+    private void showPrice(View view) {
         TextView price = view.findViewById(R.id.orderPrice);
         String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
         price.setText(priceDisplay);
+        price.setTextColor(Color.BLACK);
+
+    }
+
+    private void showNumberOfPizzas(View view) {
+        TextView numberOfPizzas = view.findViewById(R.id.number_of_pizzas);
+        showTextChange(numberOfPizzas);
+        numberOfPizzas.setText(String.valueOf(finalOrder.getNumberOfPizzas()));
     }
 
 
@@ -153,28 +185,32 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
     private void addTopping(View view, final int currentPart, Topping topping) {
-        FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
-        ImageView newTopping = new ImageView(getActivity());
-        newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
-        newTopping.setRotation(getCurrentRotation(currentPart));
-        newTopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPopup(currentPart);
-            }
-        });
-        FrameLayout.LayoutParams layoutParams = new
-                FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
-        setGravity(layoutParams, currentPart);
-        layoutParams.height = StaticFunctions.convertDpToPx(HEIGHT);
-        layoutParams.width = StaticFunctions.convertDpToPx(WIDTH);
+        try {
+            FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
+            ImageView newTopping = new ImageView(getActivity());
+            newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
+            newTopping.setRotation(getCurrentRotation(currentPart));
+            newTopping.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openPopup(currentPart);
+                }
+            });
+            FrameLayout.LayoutParams layoutParams = new
+                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
+            setGravity(layoutParams, currentPart);
+            layoutParams.height = StaticFunctions.convertDpToPx(HEIGHT);
+            layoutParams.width = StaticFunctions.convertDpToPx(WIDTH);
 
-        newTopping.setLayoutParams(layoutParams);
-        toppingImages.add(newTopping);
-        frameLayout.addView(newTopping);
+            newTopping.setLayoutParams(layoutParams);
+            toppingImages.add(newTopping);
+            frameLayout.addView(newTopping);
+        } catch (DoesNotExist doesNotExist) {
+            showErrorMessage(view);
+        }
     }
 
-    private FrameLayout getAppropriateFrameId(int sliceId, View view) {
+    private FrameLayout getAppropriateFrameId(int sliceId, View view) throws DoesNotExist {
         switch (sliceId) {
             case (TOP_RIGHT_SLICE):
                 return view.findViewById(R.id.topRightFrame);
@@ -185,7 +221,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
             case (TOP_LEFT_SLICE):
                 return view.findViewById(R.id.topLeftFrame);
         }
-        return null;
+        throw new DoesNotExist();
 
     }
 
@@ -220,10 +256,33 @@ public class TabFragmentMain extends Fragment implements Serializable {
             slice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPopup(getPartClicked(v.getId()));
+                    try {
+                        openPopup(getPartClicked(v.getId()));
+                    } catch (DoesNotExist doesNotExist) {
+                        showErrorMessage(v);
+                    }
                 }
             });
         }
+    }
+
+    private int getPartClicked(int id) throws DoesNotExist {
+        switch (id) {
+            case (R.id.topRight):
+                return TOP_RIGHT_SLICE;
+            case (R.id.bottomRight):
+                return BOTTOM_RIGHT_SLICE;
+            case (R.id.bottomLeft):
+                return BOTTOM_LEFT_SLICE;
+            case (R.id.topLeft):
+                return TOP_LEFT_SLICE;
+        }
+        throw new DoesNotExist();
+    }
+
+    private void showErrorMessage(View view) {
+        Toast toast = Toast.makeText(view.getContext(), R.string.error_message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void openPopup(int id) {
@@ -240,28 +299,4 @@ public class TabFragmentMain extends Fragment implements Serializable {
         intent.putExtra("numberOfExtras", numberOfExtrasPassed);
         startActivity(intent);
     }
-
-    private int getPartClicked(int id) {
-        switch (id) {
-            case (R.id.topRight):
-                return TOP_RIGHT_SLICE;
-            case (R.id.bottomRight):
-                return BOTTOM_RIGHT_SLICE;
-            case (R.id.bottomLeft):
-                return BOTTOM_LEFT_SLICE;
-            case (R.id.topLeft):
-                return TOP_LEFT_SLICE;
-        }
-        return -1;
-    }
-
-    private void createDefaultPizza(View view) {
-        Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
-        Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
-        currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
-        ((MainActivity) this.getActivity()).pizza = currentPizza;
-
-    }
-
-
 }
