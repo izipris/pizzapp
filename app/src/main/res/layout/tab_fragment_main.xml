@@ -13,11 +13,6 @@
         android:gravity="center"
         android:paddingBottom="70dp">
 
-        <TextView
-            android:id="@+id/greeting"
-            android:gravity="center"
-            android:text="@string/hello_tomer" />
-
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

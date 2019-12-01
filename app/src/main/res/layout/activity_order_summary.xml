@@ -18,14 +18,6 @@
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <TextView
-        android:id="@+id/greeting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="30dp"
-        android:gravity="center"
-        android:text="@string/hello_tomer"/>
-
 
     <ScrollView
         android:id="@+id/order_details_scroll_text"
