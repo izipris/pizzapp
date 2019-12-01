@@ -20,10 +20,8 @@ import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
-import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
-import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.StaticFunctions;
 
@@ -45,7 +43,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int DEFAULT_NUMBER_OF_SLICES = 4;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -59,19 +56,10 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // a condition to identify if the popup was opened
-        if (((MainActivity) this.getActivity()).pizza == null) {
-            createDefaultPizza(view);
-        } else {
-            currentPizza = ((MainActivity) this.getActivity()).pizza;
-        }
-        if (((MainActivity) this.getActivity()).order == null) {
-            finalOrder = new Order(0);
-            finalOrder.addPizza(currentPizza);
-        } else {
-            finalOrder = ((MainActivity) this.getActivity()).order;
-            finalOrder.upadateLastPizza(currentPizza);
-        }
+
+        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        finalOrder = ((MainActivity) this.getActivity()).order;
+
         setPrice(view);
         ImageView topRightSlice = view.findViewById(R.id.topRight);
         ImageView bottomRightSlice = view.findViewById(R.id.bottomRight);
@@ -102,11 +90,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                createDefaultPizza(view);
                 finalOrder.addPizza(currentPizza);
-//                for (ImageView toppingImage : toppingImages) {
-//                    toppingImage.setVisibility(View.GONE);
-//                }
                 setPrice(view);
             }
         });
@@ -255,20 +239,14 @@ public class TabFragmentMain extends Fragment implements Serializable {
         return -1;
     }
 
-    private void createDefaultPizza(View view) {
-        Size defaultSize =((MainActivity) this.getActivity()).database.getSizes().get(0);
-        Crust defaultCrust = ((MainActivity) this.getActivity()).database.getCrusts().get(0);
-        currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
-        ((MainActivity) this.getActivity()).pizza = currentPizza;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TOPPING_CHOOSING_RESULT){
+        if (requestCode == TOPPING_CHOOSING_RESULT) {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
             ((MainActivity) this.getActivity()).pizza = currentPizza;
             finalOrder = (Order) data.getSerializableExtra("order");
+            finalOrder.upadateLastPizza(currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;
             toppingImages.clear();
             createCurrentPizza(getView());
