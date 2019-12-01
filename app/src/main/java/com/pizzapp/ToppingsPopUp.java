@@ -13,16 +13,15 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 
@@ -56,7 +55,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     int currentSliceId = -1;
     int currentSliceIdOutOfFour;
     Pizza pizza;
-    Order orderToPassBack;
     private List<Topping> toppingsList = new ArrayList<>();
     private boolean initiationOfActivity = true;
 
@@ -71,21 +69,25 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         setContentView(R.layout.popup_toppings);
         initiateidToStringMap();
         initializepizzaImageToPartMap();
-        extractExtras();
+        extractExtras(savedInstanceState);
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
     }
 
-    private void extractExtras() {
+    private void extractExtras(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             currentSliceIdOutOfFour = extras.getInt("callingId");
             assignCurrentSliceId();
 
             if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
-                pizza = (Pizza) extras.getSerializable("pizza");
+                if (savedInstanceState == null) {
+                    pizza = (Pizza) extras.getSerializable("pizza");
+                }
+                else {
+                    pizza = (Pizza) savedInstanceState.getSerializable("pizza");
+                }
                 createInitialPizza(currentSliceId);
-                orderToPassBack = (Order) extras.getSerializable("order");
             } else {
                 createDefaultPizza();
             }
@@ -401,8 +403,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("pizza", pizza);
-        intent.putExtra("order", orderToPassBack);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("pizza", pizza);
     }
 }

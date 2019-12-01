@@ -217,7 +217,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
         if (currentPizza != null) {
             numberOfExtrasPassed = PIZZA_PASSED;
             intent.putExtra("pizza", currentPizza);
-            intent.putExtra("order", finalOrder);
         } else {
             numberOfExtrasPassed = PIZZA_NOT_PASSED;
         }
@@ -245,7 +244,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
         if (requestCode == TOPPING_CHOOSING_RESULT) {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
             ((MainActivity) this.getActivity()).pizza = currentPizza;
-            finalOrder = (Order) data.getSerializableExtra("order");
             finalOrder.upadateLastPizza(currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;
             toppingImages.clear();

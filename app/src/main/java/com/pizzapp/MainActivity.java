@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -47,9 +48,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
-        pizza = createDefaultPizza();
-        order = new Order(0);
-        order.addPizza(pizza);
+        if (savedInstanceState != null){
+            pizza = (Pizza) savedInstanceState.getSerializable("pizza");
+            order = (Order) savedInstanceState.getSerializable("order");
+        }
+        else {
+            pizza = createDefaultPizza();
+            order = new Order(0);
+            order.addPizza(pizza);
+        }
 
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
@@ -108,5 +115,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy");
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("pizza", pizza);
+        outState.putSerializable("order", order);
     }
 }
