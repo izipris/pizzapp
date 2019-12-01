@@ -1,18 +1,10 @@
 package com.pizzapp;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.DisplayMetrics;
-import android.util.Pair;
-import android.util.TypedValue;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +12,9 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Crust;
@@ -33,18 +27,17 @@ import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static android.widget.GridLayout.spec;
 import static java.lang.Math.min;
-import static java.lang.Math.random;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
+
+    private static final String LOG_TAG = ToppingsPopUp.class.getSimpleName();
 
     private static final int TOP_RIGHT_SLICE = 0;
     private static final int BOTTOM_RIGHT_SLICE = 1;
@@ -405,11 +398,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     public void backToMain(View view) {
+        Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("pizza", pizza);
-        bundle.putSerializable("order", orderToPassBack);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        intent.putExtra("pizza", pizza);
+        intent.putExtra("order", orderToPassBack);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
