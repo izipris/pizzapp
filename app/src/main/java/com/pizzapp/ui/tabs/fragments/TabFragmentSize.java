@@ -49,8 +49,7 @@ public class TabFragmentSize extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
-        final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, database);
+        final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
 
         currentPizza = ((MainActivity) this.getActivity()).pizza;
 

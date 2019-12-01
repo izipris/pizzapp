@@ -8,12 +8,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.pizzapp.model.Database;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.ui.tabs.fragments.TabFragmentCrust;
 import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
 import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
+import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private ViewPager viewPager;
     public Pizza pizza;
     public Order order;
+    public Database database;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -33,11 +36,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "onCreate");
+
         extractExtras();
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
         initTabsLayout(viewPager, tabLayout);
@@ -64,10 +70,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         viewPager.setOffscreenPageLimit(viewPagerTabsLimit);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    public Pizza getPizza() {
-        return pizza;
     }
 
     @Override

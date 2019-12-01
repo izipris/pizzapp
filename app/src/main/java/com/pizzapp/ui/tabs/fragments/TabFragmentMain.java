@@ -25,7 +25,6 @@ import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
@@ -256,8 +255,8 @@ public class TabFragmentMain extends Fragment implements Serializable {
     }
 
     private void createDefaultPizza(View view) {
-        Size defaultSize = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getSizes().get(0);
-        Crust defaultCrust = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getCrusts().get(0);
+        Size defaultSize =((MainActivity) this.getActivity()).database.getSizes().get(0);
+        Crust defaultCrust = ((MainActivity) this.getActivity()).database.getCrusts().get(0);
         currentPizza = new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
         ((MainActivity) this.getActivity()).pizza = currentPizza;
 

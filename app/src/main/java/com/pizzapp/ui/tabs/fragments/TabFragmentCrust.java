@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
@@ -53,7 +54,7 @@ public class TabFragmentCrust extends Fragment {
         ImageButton doughThickImageButton = view.findViewById(R.id.doughThickImageButton);
         ImageButton doughRegularImageButton = view.findViewById(R.id.doughRegularImageButton);
         ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
-        Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
+        Database database = ((MainActivity) this.getActivity()).database;
 
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
