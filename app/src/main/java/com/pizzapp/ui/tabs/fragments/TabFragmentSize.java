@@ -30,7 +30,6 @@ public class TabFragmentSize extends Fragment {
     private int tabPosition;
     private Pizza currentPizza;
     private boolean chooseAlready;
-    private int sizeIndex;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
@@ -55,7 +54,6 @@ public class TabFragmentSize extends Fragment {
 
         currentPizza = ((MainActivity) this.getActivity()).pizza;
         chooseAlready = false;
-        sizeIndex = DB_SIZE_M;
 
         for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             buttonSizePair.first.setOnClickListener(new View.OnClickListener() {

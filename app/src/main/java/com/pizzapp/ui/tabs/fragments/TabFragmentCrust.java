@@ -15,6 +15,7 @@ import com.pizzapp.MainActivity;
 import com.pizzapp.R;
 import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
+import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.ui.tabs.TabAdapter;
 import com.pizzapp.utilities.IO;
 
@@ -30,6 +31,8 @@ public class TabFragmentCrust extends Fragment {
 
     private TabAdapter tabAdapter;
     private int tabPosition;
+    private boolean chooseAlready;
+    private Pizza currentPizza;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -56,12 +59,15 @@ public class TabFragmentCrust extends Fragment {
         ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
         Database database = ((MainActivity) this.getActivity()).database;
 
+        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        chooseAlready = savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready");
+
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
         Crust thickCrust = database.getCrusts().get(DB_CRUST_THICK);
 
-        Map<ImageButton, String> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
-                Arrays.asList(thickCrust.getName(), regularCrust.getName(), thinCrust.getName()));
+        Map<ImageButton, Crust> buttonToTitleMap = generateButtonToTitleMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
+                Arrays.asList(thickCrust, regularCrust, thinCrust));
         defineDoughButtonsHandlers(buttonToTitleMap);
 
         doughThickTextView.setText(getDoughTitle(thickCrust));
@@ -75,41 +81,54 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(final Map<ImageButton, String> buttonToTextMapping) {
+    private void defineDoughButtonsHandlers(final Map<ImageButton, Crust> buttonToTextMapping) {
         // Define the onClick handlers such that when one option selected. it's highlighted
         // while the others are not.
-        for (Map.Entry<ImageButton, String> entryCurrent : buttonToTextMapping.entrySet()) {
+        for (Map.Entry<ImageButton, Crust> entryCurrent : buttonToTextMapping.entrySet()) {
             final ImageButton imageButtonCurrent = entryCurrent.getKey();
             imageButtonCurrent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     handleCrustClicked(buttonToTextMapping, imageButtonCurrent);
+                    chooseAlready = true;
                 }
             });
+            /*if user already chose a crust */
+            if (chooseAlready && entryCurrent.getValue() == currentPizza.getCrust()){
+                handleCrustClicked(buttonToTextMapping, imageButtonCurrent);
+            }
         }
     }
 
-    private void handleCrustClicked(final Map<ImageButton, String> buttonToTextMapping, final ImageButton imageButtonCurrent) {
+    private void handleCrustClicked(final Map<ImageButton, Crust> buttonToTextMapping, final ImageButton imageButtonCurrent) {
         imageButtonCurrent.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (Map.Entry<ImageButton, String> entryOther : buttonToTextMapping.entrySet()) {
+        for (Map.Entry<ImageButton, Crust> entryOther : buttonToTextMapping.entrySet()) {
             ImageButton imageButtonOther = entryOther.getKey();
             if (imageButtonOther != imageButtonCurrent) {
                 imageButtonOther.setBackgroundResource(0);
             }
         }
+        Crust chosenCrust = buttonToTextMapping.get(imageButtonCurrent);
+        currentPizza.setCrust(chosenCrust);
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
-                getString(R.string.tab_title_separator) + buttonToTextMapping.get(imageButtonCurrent));
+                getString(R.string.tab_title_separator) + chosenCrust.getName());
         tabAdapter.notifyDataSetChanged();
     }
 
-    private Map<ImageButton, String> generateButtonToTitleMapping(List<ImageButton> imageButtonList, List<String> textList) {
-        if (imageButtonList.size() != textList.size()) {
+    private Map<ImageButton, Crust> generateButtonToTitleMapping(List<ImageButton> imageButtonList, List<Crust> crustList) {
+        if (imageButtonList.size() != crustList.size()) {
             return Collections.emptyMap();
         }
-        Map<ImageButton, String> map = new HashMap<>();
+        Map<ImageButton, Crust> map = new HashMap<>();
         for (int i = 0; i < imageButtonList.size(); i++) {
-            map.put(imageButtonList.get(i), textList.get(i));
+            map.put(imageButtonList.get(i), crustList.get(i));
         }
         return map;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("chooseAlready", chooseAlready);
     }
 }
