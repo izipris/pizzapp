@@ -103,10 +103,10 @@ public class TabFragmentMain extends Fragment implements Serializable {
             public void onClick(View v) {
                 for (ImageView toppingImage : toppingImages) {
                     toppingImage.setVisibility(View.GONE);
-                    deleteToppingsFromPizzaObject();
-                    finalOrder.upadateLastPizza(currentPizza);
-                    setPrice(view);
                 }
+                deleteToppingsFromPizzaObject();
+                finalOrder.upadateLastPizza(currentPizza);
+                setPrice(view);
             }
         });
     }
@@ -246,6 +246,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
             ((MainActivity) this.getActivity()).pizza = currentPizza;
             finalOrder.upadateLastPizza(currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;
+            for (ImageView toppingImage : toppingImages) {
+                toppingImage.setVisibility(View.GONE);
+            }
             toppingImages.clear();
             createCurrentPizza(getView());
         }
