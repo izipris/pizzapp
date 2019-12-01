@@ -195,6 +195,7 @@
                     android:layout_marginStart="160dp"
                     android:layout_marginLeft="160dp"
                     android:text="TextView" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -204,12 +205,30 @@
                 android:layout_below="@id/price"
                 android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
-                    android:layout_marginLeft="150dp"
-                    android:text="View Order" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/number_of_pizzas"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/view_order_button"
+                        android:background="@drawable/circle_textview"
+                        android:text="90"
+                        android:gravity="top|center"
+                        android:layout_alignParentTop="true"/>
+
+                    <Button
+                        android:id="@+id/view_order_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="View Order" />
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -218,8 +237,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDisplay"
-                android:layout_marginStart="160dp"
-                android:layout_marginLeft="160dp"
+                android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
                 android:text="Continue" />
 

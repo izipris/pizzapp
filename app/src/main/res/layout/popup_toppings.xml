@@ -221,7 +221,9 @@
             android:paddingStart="40dp"
             android:paddingTop="10dp"
             android:paddingEnd="18dp"
-            android:rowCount="4"></GridLayout>
+            android:rowCount="4">
+
+        </GridLayout>
 
     </HorizontalScrollView>
 

@@ -415,4 +415,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    @Override
+    public Intent getParentActivityIntent() {
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pizza", pizza);
+        bundle.putSerializable("order", orderToPassBack);
+        intent.putExtras(bundle);
+        return intent;
+    }
 }

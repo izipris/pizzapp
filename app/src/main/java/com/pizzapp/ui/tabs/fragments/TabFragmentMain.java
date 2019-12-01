@@ -1,6 +1,7 @@
 package com.pizzapp.ui.tabs.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -41,11 +42,11 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
+    private static final int TIME_OF_DISPLAY = 10000;
 
     private Pizza currentPizza;
     private Order finalOrder;
     private List<ImageView> toppingImages = new ArrayList<>();
-    private View currentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initiateCurrentPizzaOrder();
+        showNumberOfPizzas(view);
         showPrice(view);
         addButtonListeners(view);
         createCurrentPizza(view);
@@ -96,11 +98,15 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                createDefaultPizza(view);
                 finalOrder.addPizza(currentPizza);
-//                for (ImageView toppingImage : toppingImages) {
-//                    toppingImage.setVisibility(View.GONE);
-//                }
+                showPrice(view);
+                showNumberOfPizzas(view);
+                TextView price = view.findViewById(R.id.orderPrice);
+
+                for (int i=0; i<TIME_OF_DISPLAY;i++){
+                    price.setTextColor(Color.RED);
+                    continue;
+                }
                 showPrice(view);
             }
         });
@@ -126,6 +132,13 @@ public class TabFragmentMain extends Fragment implements Serializable {
         TextView price = view.findViewById(R.id.orderPrice);
         String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
         price.setText(priceDisplay);
+        price.setTextColor(Color.BLACK);
+
+    }
+
+    private void showNumberOfPizzas(View view){
+        TextView numberOfPizzas = view.findViewById(R.id.number_of_pizzas);
+        numberOfPizzas.setText(String.valueOf(finalOrder.getNumberOfPizzas()));
     }
 
 
