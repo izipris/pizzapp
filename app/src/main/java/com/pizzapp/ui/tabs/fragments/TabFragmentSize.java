@@ -30,6 +30,8 @@ public class TabFragmentSize extends Fragment {
     private TabAdapter tabAdapter;
     private int tabPosition;
     private Pizza currentPizza;
+    private boolean chooseAlready;
+    private int sizeIndex;
     static private final int DB_SIZE_M = 0;
     static private final int DB_SIZE_L = 1;
     static private final int DB_SIZE_XL = 2;
@@ -54,14 +56,22 @@ public class TabFragmentSize extends Fragment {
         final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
 
         currentPizza = ((MainActivity) this.getActivity()).pizza;
+        chooseAlready = false;
+        sizeIndex = DB_SIZE_M;
 
         for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     highlightChosenSize(buttonsAndSizes, buttonSizePair);
+                    chooseAlready = true;
                 }
             });
+            /* In case user already chose size */
+            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && buttonSizePair.second == currentPizza.getSize()){
+                chooseAlready = true;
+                highlightChosenSize(buttonsAndSizes, buttonSizePair);
+            }
         }
     }
 
@@ -118,5 +128,11 @@ public class TabFragmentSize extends Fragment {
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("chooseAlready", chooseAlready);
     }
 }
