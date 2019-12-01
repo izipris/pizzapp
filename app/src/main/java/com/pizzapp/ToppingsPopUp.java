@@ -245,8 +245,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 @Override
                 public void onClick(View v) {
                     int newId = getSliceFromTopping(v.getId());
-                    if (newId != currentSliceId && currentSliceId != -1) {
+                    if (newId != currentSliceId) {
                         shrinkSlice();
+                    } else {
+                        backToMain(v);
                     }
                     currentSliceId = newId;
                     assignCurrentSliceOutOfFour();
@@ -325,8 +327,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     public void onClick(View view) {
         int newId = view.getId();
-        if (newId != currentSliceId && currentSliceId != -1) {
+        if (newId != currentSliceId) {
             shrinkSlice();
+        } else {
+            backToMain(view);
         }
         currentSliceId = newId;
         assignCurrentSliceOutOfFour();

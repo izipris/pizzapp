@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.pizzapp.MainActivity;
 import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
@@ -25,6 +28,7 @@ import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +46,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int HEIGHT = 76;
     private static final int WIDTH = 76;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int TIME_OF_DISPLAY = 10000;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -98,18 +101,42 @@ public class TabFragmentMain extends Fragment implements Serializable {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                copyCurrentPizza();
                 finalOrder.addPizza(currentPizza);
                 showPrice(view);
                 showNumberOfPizzas(view);
-                TextView price = view.findViewById(R.id.orderPrice);
-
-                for (int i=0; i<TIME_OF_DISPLAY;i++){
-                    price.setTextColor(Color.RED);
-                    continue;
-                }
-                showPrice(view);
+                final TextView price = view.findViewById(R.id.orderPrice);
+                showTextChange(price);
             }
         });
+    }
+
+    private void copyCurrentPizza() {
+        Pizza tempPizza = currentPizza;
+        currentPizza = new Pizza(currentPizza.getNumberOfParts(),
+                currentPizza.getSize(), currentPizza.getCrust());
+        List<PizzaPart> partList = tempPizza.getParts();
+        for (int i=0; i < partList.size(); i++){
+            List<Topping> partToppings = tempPizza.getParts().get(i).getToppings();
+            if (partToppings.size() > 0){
+                for (int j=0; j<partToppings.size(); j++){
+                    currentPizza.getParts().get(i).addTopping(partToppings.get(j));
+                }
+            }
+        }
+    }
+
+    private void showTextChange(final TextView price) {
+        new CountDownTimer(250, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                price.setTextColor(Color.RED);
+            }
+
+            public void onFinish() {
+                price.setTextColor(Color.BLACK);
+            }
+        }.start();
     }
 
     private void addClearButtonOnClickListener(final View view) {
@@ -119,10 +146,12 @@ public class TabFragmentMain extends Fragment implements Serializable {
             public void onClick(View v) {
                 for (ImageView toppingImage : toppingImages) {
                     toppingImage.setVisibility(View.GONE);
-                    currentPizza.removePizzaToppings();
-                    finalOrder.upadateLastPizza(currentPizza);
-                    showPrice(view);
                 }
+                currentPizza.removePizzaToppings();
+                finalOrder.upadateLastPizza(currentPizza);
+                showPrice(view);
+                showTextChange((TextView) view.findViewById(R.id.orderPrice));
+
             }
         });
     }
@@ -136,8 +165,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     }
 
-    private void showNumberOfPizzas(View view){
+    private void showNumberOfPizzas(View view) {
         TextView numberOfPizzas = view.findViewById(R.id.number_of_pizzas);
+        showTextChange(numberOfPizzas);
         numberOfPizzas.setText(String.valueOf(finalOrder.getNumberOfPizzas()));
     }
 
@@ -227,7 +257,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 @Override
                 public void onClick(View v) {
                     try {
-
                         openPopup(getPartClicked(v.getId()));
                     } catch (DoesNotExist doesNotExist) {
                         showErrorMessage(v);
