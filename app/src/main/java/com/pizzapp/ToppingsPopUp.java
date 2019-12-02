@@ -56,6 +56,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private static final int TOPPING_ORIGINAL_HEIGHT = 72;
     private static final int TOPPING_ORIGINAL_WIDTH = 76;
+    private static final int ENLARGED_WIDTH = 165;
+    private static final int ENLARGED_HEIGHT = 165;
+    private static final int TOPPING_ENLARGED_WIDTH = 155;
+    private static final int TOPPING_ENLARGED_HEIGHT = 155;
+    private static final int ORIGINAL_WIDTH = 145;
+    private static final int ORIGINAL_HEIGHT = 145;
+    private static final int TOPPING_ORIGINAL_HEIGHT = 135;
+    private static final int TOPPING_ORIGINAL_WIDTH = 135;
 
     private static final int MIN_ROWS_IN_CHART = 3;
 

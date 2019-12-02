@@ -44,10 +44,8 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int TOP_LEFT_SLICE = 3;
     private static final int PIZZA_PASSED = 3;
     private static final int PIZZA_NOT_PASSED = 2;
-    private static final int HEIGHT = 76;
-    private static final int WIDTH = 76;
-    private static final int TOPPING_HEIGHT = 72;
-    private static final int TOPPING_WIDTH = 72;
+    private static final int TOPPING_HEIGHT = 135;
+    private static final int TOPPING_WIDTH = 135;
 
     private static final int ANGLE_TO_ROTATE = 90;
 
