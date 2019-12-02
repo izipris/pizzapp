@@ -49,8 +49,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int ENLARGED_WIDTH = 120;
     private static final int ENLARGED_HEIGHT = 120;
 
+    private static final int TOPPING_ENLARGED_WIDTH = 116;
+    private static final int TOPPING_ENLARGED_HEIGHT = 116;
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
+
+    private static final int TOPPING_ORIGINAL_HEIGHT = 72;
+    private static final int TOPPING_ORIGINAL_WIDTH = 76;
 
     private static final int MIN_ROWS_IN_CHART = 3;
 
@@ -198,31 +203,48 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private void shrinkSlice() {
         for (Topping topping : pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()) {
-            shrinkImage(getToppingId(topping));
+            shrinkImage(getToppingId(topping), true);
         }
-        shrinkImage(currentSliceId);
+        shrinkImage(currentSliceId, false);
     }
 
-    private void shrinkImage(int imageId) {
+    private void shrinkImage(int imageId, boolean isTopping) {
         ImageView image = findViewById(imageId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-        layoutParams.height = StaticFunctions.convertDpToPx(ORIGINAL_HEIGHT);
-        layoutParams.width = StaticFunctions.convertDpToPx(ORIGINAL_WIDTH);
+        int width, height;
+        if (isTopping){
+            height = TOPPING_ORIGINAL_HEIGHT;
+            width = TOPPING_ORIGINAL_WIDTH;
+        } else {
+            height = ORIGINAL_HEIGHT;
+            width = ORIGINAL_WIDTH;
+        }
+        layoutParams.height = StaticFunctions.convertDpToPx(height);
+        layoutParams.width = StaticFunctions.convertDpToPx(width);
         image.setLayoutParams(layoutParams);
     }
 
     private void enlargeSlice() {
         for (Topping topping : pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()) {
-            enlargeImage(getToppingId(topping));
+            enlargeImage(getToppingId(topping), true);
         }
-        enlargeImage(currentSliceId);
+        enlargeImage(currentSliceId, false);
     }
 
-    private void enlargeImage(Integer sliceId) {
+    private void enlargeImage(Integer sliceId, boolean isTopping) {
         ImageView image = findViewById(sliceId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-        layoutParams.height = StaticFunctions.convertDpToPx(ENLARGED_HEIGHT);
-        layoutParams.width = StaticFunctions.convertDpToPx(ENLARGED_WIDTH);
+        int height;
+        int width;
+        if (isTopping){
+            height = TOPPING_ENLARGED_HEIGHT;
+            width = TOPPING_ENLARGED_WIDTH;
+        } else {
+            height = ENLARGED_HEIGHT;
+            width = ENLARGED_WIDTH;
+        }
+        layoutParams.height = StaticFunctions.convertDpToPx(height);
+        layoutParams.width = StaticFunctions.convertDpToPx(width);
         image.setLayoutParams(layoutParams);
     }
 
@@ -266,12 +288,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                     FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
             setGravity(layoutParams);
             if (initiationOfActivity) {
-                layoutParams.height = StaticFunctions.convertDpToPx(ORIGINAL_HEIGHT);
-                layoutParams.width = StaticFunctions.convertDpToPx(ORIGINAL_WIDTH);
+                layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);
+                layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_WIDTH);
             } else {
-                layoutParams.height = StaticFunctions.convertDpToPx(ENLARGED_HEIGHT);
-                layoutParams.width = StaticFunctions.convertDpToPx(ENLARGED_WIDTH);
-                // only adding it to the pizza if it isn't already there
+                layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_HEIGHT);
+                layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_WIDTH);
                 pizza.getPizzaPart(currentSliceIdOutOfFour).addTopping(topping);
             }
             newTopping.setLayoutParams(layoutParams);

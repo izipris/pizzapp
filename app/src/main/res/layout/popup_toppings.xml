@@ -221,7 +221,8 @@
             android:paddingStart="40dp"
             android:paddingTop="10dp"
             android:paddingEnd="18dp"
-            android:rowCount="4">
+            android:rowCount="4"
+            android:layoutDirection="ltr">
 
         </GridLayout>
 
