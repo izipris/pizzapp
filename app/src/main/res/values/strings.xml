@@ -32,5 +32,7 @@
     <string name="size_symbol">\"</string>
     <string name="tab_title_separator">/</string>
     <string name="error_message">Error, please try again</string>
+    <string name="price_showing_prefix">Total:&#160;</string>
+    <string name="price_showing_suffix">0$</string>
 
 </resources>
