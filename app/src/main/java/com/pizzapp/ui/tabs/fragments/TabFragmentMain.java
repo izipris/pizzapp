@@ -159,15 +159,15 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     private void showPrice(View view) {
         TextView price = view.findViewById(R.id.orderPrice);
-        String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
-        price.setText(priceDisplay);
         price.setTextColor(Color.BLACK);
+        showUpdatedPrice();
+
     }
 
     public void showUpdatedPrice(){
         View view = getView();
         TextView price = view.findViewById(R.id.orderPrice);
-        String priceDisplay = "Total: " + finalOrder.getTotalPrice() + "0$";
+        String priceDisplay = getResources().getString(R.string.price_showing_prefix) + finalOrder.getTotalPrice() + getResources().getString(R.string.price_showing_suffix);
         price.setText(priceDisplay);
     }
 
