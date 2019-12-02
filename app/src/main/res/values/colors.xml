@@ -6,4 +6,15 @@
     <color name="colorGrayTabBackground">#D6D7D7</color>
     <color name="colorCrustChosenTextView">#FF3333</color>
     <color name="colorChosenSizeBackground">#978A8989</color>
+
+    <color name="pizzapp_logo_dusty_red">#ba4c56</color>
+    <color name="crust_shade_puce">#a67c52</color>
+    <color name="crust_color_sandy_brown">#c69c6d</color>
+    <color name="background_white">#f9f9f9</color>
+    <color name="pressed_tab_white_two">#eaeaea</color>
+    <color name="not_pressed_label_pinkish_grey">#cccccc</color>
+    <color name="title_warm_grey">#808080</color>
+    <color name="sauce_faded_red">#c1272d</color>
+    <color name="cheese_maize">#f4ca45</color>
+    <color name="black">#000000</color>
 </resources>

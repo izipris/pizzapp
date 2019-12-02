@@ -177,7 +177,7 @@ public class OrderSummary extends AppCompatActivity {
     }
 
     private TextView getPizzaPriceView(Pizza pizza, int numOfParts) {
-        double price = getPizzaPrice(pizza, numOfParts);
+        double price = pizza.getPrice();
         TextView priceView = getAnonymousTextView();
         priceView.setText("Total:........." + price + "$");
         priceView.setTextSize(15);
