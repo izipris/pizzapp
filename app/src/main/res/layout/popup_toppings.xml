@@ -39,7 +39,7 @@
         android:focusable="true"
         android:gravity="center"
         android:onClick="backToMain"
-        android:paddingBottom="30dp">
+        android:paddingBottom="10dp">
 
         <TableRow
             android:id="@+id/top_row"
@@ -51,7 +51,7 @@
             android:layoutDirection="ltr"
             android:onClick="backToMain"
             android:paddingBottom="1dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="10dp">
 
 
             <FrameLayout
