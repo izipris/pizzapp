@@ -304,8 +304,10 @@ public class TabFragmentMain extends Fragment implements Serializable {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TOPPING_CHOOSING_RESULT){
-            ((MainActivity) this.getActivity()).pizza = (Pizza) data.getSerializableExtra("pizza");
-            ((MainActivity) this.getActivity()).order = (Order)  data.getSerializableExtra("order");
+            currentPizza = (Pizza) data.getSerializableExtra("pizza");
+            finalOrder.upadateLastPizza(currentPizza);
+            ((MainActivity) this.getActivity()).pizza = currentPizza;
+            ((MainActivity) this.getActivity()).order = finalOrder;
             for (ImageView toppingImage : toppingImages) {
                 toppingImage.setVisibility(View.GONE);
             }
