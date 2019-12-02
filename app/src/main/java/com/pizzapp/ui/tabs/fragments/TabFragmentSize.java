@@ -53,7 +53,7 @@ public class TabFragmentSize extends Fragment {
 
         final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
 
-        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        currentPizza = ((MainActivity) this.getActivity()).getPizza();
         chooseAlready = false;
 
         for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
@@ -122,7 +122,7 @@ public class TabFragmentSize extends Fragment {
                 buttonSizePair.first.setBackgroundResource(0);
             }
         }
-        currentPizza.setSize(chosen.second);
+        ((MainActivity) this.getActivity()).getPizza().setSize(chosen.second);
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                 getString(R.string.tab_title_separator) + chosen.second.getName());
         TabLayout tabs = getActivity().findViewById(R.id.tabs);

@@ -25,13 +25,12 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
-    private static final int MAIN_FRAGMENT_INDEX = 1;
+    public static final int MAIN_FRAGMENT_INDEX = 1;
     private static final int DEFAULT_NUMBER_OF_SLICES = 4;
     private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    public Pizza pizza;
     public Order order;
     public Database database;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -49,11 +48,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
         if (savedInstanceState != null){
-            pizza = (Pizza) savedInstanceState.getSerializable("pizza");
             order = (Order) savedInstanceState.getSerializable("order");
         }
         else {
-            pizza = createDefaultPizza();
+            Pizza pizza = createDefaultPizza();
             order = new Order(0);
             order.addPizza(pizza);
         }
@@ -79,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         Size defaultSize = database.getSizes().get(0);
         Crust defaultCrust = database.getCrusts().get(0);
         return new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
+    }
+
+    public Pizza getPizza(){
+        return order.getLastPizza();
     }
 
     @Override
@@ -120,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("pizza", pizza);
         outState.putSerializable("order", order);
     }
 }

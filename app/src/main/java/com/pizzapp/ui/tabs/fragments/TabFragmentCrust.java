@@ -51,7 +51,7 @@ public class TabFragmentCrust extends Fragment {
         final int DB_CRUST_THICK = 2;
         final int DB_CRUST_REGULAR = 1;
         final int DB_CRUST_THIN = 0;
-        currentPizza = ((MainActivity) this.getActivity()).pizza;
+        currentPizza = ((MainActivity) this.getActivity()).getPizza();
         chooseAlready = false;
         TextView doughThickTextView = view.findViewById(R.id.doughThickTextView);
         TextView doughRegularTextView = view.findViewById(R.id.doughRegularTextView);
@@ -110,7 +110,7 @@ public class TabFragmentCrust extends Fragment {
                 imageButtonOther.setBackgroundResource(0);
             }
         }
-        currentPizza.setCrust(buttonToCrustMapping.get(imageButtonCurrent));
+        ((MainActivity) this.getActivity()).getPizza().setCrust(buttonToCrustMapping.get(imageButtonCurrent));
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
