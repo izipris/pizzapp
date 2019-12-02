@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.pizzapp.model.Order;
+
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
@@ -24,15 +26,19 @@ import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import static java.lang.Math.min;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
+
+    private static final String LOG_TAG = ToppingsPopUp.class.getSimpleName();
 
     private static final int TOP_RIGHT_SLICE = 0;
     private static final int BOTTOM_RIGHT_SLICE = 1;
@@ -42,14 +48,15 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int PIZZA_PASSED = 3;
     private static final int ENLARGED_WIDTH = 120;
     private static final int ENLARGED_HEIGHT = 120;
+
     private static final int ORIGINAL_WIDTH = 76;
     private static final int ORIGINAL_HEIGHT = 76;
+
     private static final int MIN_ROWS_IN_CHART = 3;
 
     private int currentSliceId = -1;
     private int currentSliceIdOutOfFour;
     private Pizza pizza;
-    private Order orderToPassBack;
     private List<Topping> toppingsList = new ArrayList<>();
     private boolean initiationOfActivity = true;
 
@@ -85,7 +92,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
                 pizza = (Pizza) extras.getSerializable("pizza");
                 createInitialPizza(currentSliceId);
-                orderToPassBack = (Order) extras.getSerializable("order");
             } else {
                 createDefaultPizza();
             }
@@ -327,7 +333,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     public void onClick(View view) {
         int newId = view.getId();
-        if (newId != currentSliceId) {
+        if (newId != currentSliceId && currentSliceId != -1){
             shrinkSlice();
         } else {
             backToMain(view);
@@ -412,12 +418,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     public void backToMain(View view) {
+        Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("pizza", pizza);
-        bundle.putSerializable("order", orderToPassBack);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        intent.putExtra("pizza", pizza);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -425,7 +430,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Intent intent = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("pizza", pizza);
-        bundle.putSerializable("order", orderToPassBack);
         intent.putExtras(bundle);
         return intent;
     }

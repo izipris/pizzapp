@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.pizzapp.MainActivity;
+import com.pizzapp.ui.tabs.fragments.TabFragmentMain;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +46,13 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     public void changePageTitle(int position, String title) {
         this.mFragmentTitleList.set(position, title);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+
+        super.notifyDataSetChanged();
+        TabFragmentMain tabFragmentMain = (TabFragmentMain) mFragmentList.get(MainActivity.MAIN_FRAGMENT_INDEX);
+        tabFragmentMain.showUpdatedPrice();
     }
 }
