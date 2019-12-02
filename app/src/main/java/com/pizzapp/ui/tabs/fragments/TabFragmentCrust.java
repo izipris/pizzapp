@@ -18,7 +18,6 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.ui.tabs.TabAdapter;
-import com.pizzapp.utilities.IO;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,6 +31,7 @@ public class TabFragmentCrust extends Fragment {
     private TabAdapter tabAdapter;
     private int tabPosition;
     private Pizza currentPizza;
+    private boolean chooseAlready;
     private final int MAIN_TAB_INDEX = 1;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
@@ -52,13 +52,14 @@ public class TabFragmentCrust extends Fragment {
         final int DB_CRUST_REGULAR = 1;
         final int DB_CRUST_THIN = 0;
         currentPizza = ((MainActivity) this.getActivity()).pizza;
+        chooseAlready = false;
         TextView doughThickTextView = view.findViewById(R.id.doughThickTextView);
         TextView doughRegularTextView = view.findViewById(R.id.doughRegularTextView);
         TextView doughThinTextView = view.findViewById(R.id.doughThinTextView);
         ImageButton doughThickImageButton = view.findViewById(R.id.doughThickImageButton);
         ImageButton doughRegularImageButton = view.findViewById(R.id.doughRegularImageButton);
         ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
-        Database database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
+        Database database = ((MainActivity) this.getActivity()).database;
 
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
@@ -66,7 +67,7 @@ public class TabFragmentCrust extends Fragment {
 
         Map<ImageButton, Crust> buttonToTitleMap = generateButtonToCrustMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
                 Arrays.asList(thickCrust, regularCrust, thinCrust));
-        defineDoughButtonsHandlers(view, buttonToTitleMap);
+        defineDoughButtonsHandlers(view, savedInstanceState, buttonToTitleMap);
 
         doughThickTextView.setText(getDoughTitle(thickCrust));
         doughRegularTextView.setText(getDoughTitle(regularCrust));
@@ -79,7 +80,7 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(@NonNull View view, final Map<ImageButton, Crust> buttonToCrustMapping) {
+    private void defineDoughButtonsHandlers(@NonNull View view, @Nullable Bundle savedInstanceState, final Map<ImageButton, Crust> buttonToCrustMapping) {
         // Define the onClick handlers such that when one option selected. it's highlighted
         // while the others are not.
         for (Map.Entry<ImageButton, Crust> entryCurrent : buttonToCrustMapping.entrySet()) {
@@ -90,6 +91,14 @@ public class TabFragmentCrust extends Fragment {
                     handleCrustClicked(buttonToCrustMapping, imageButtonCurrent);
                 }
             });
+            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && entryCurrent.getValue() == currentPizza.getCrust()) {
+                chooseAlready = true;
+                entryCurrent.getKey().setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+                tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
+                        getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
+                tabAdapter.notifyDataSetChanged();
+            }
+
         }
     }
 
@@ -118,5 +127,11 @@ public class TabFragmentCrust extends Fragment {
             map.put(imageButtonList.get(i), crustList.get(i));
         }
         return map;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("chooseAlready", chooseAlready);
     }
 }

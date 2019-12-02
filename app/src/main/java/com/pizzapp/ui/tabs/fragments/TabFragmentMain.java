@@ -37,6 +37,7 @@ import java.util.List;
 
 public class TabFragmentMain extends Fragment implements Serializable {
 
+    public static final int TOPPING_CHOOSING_RESULT = 1;
     private static final int TOP_RIGHT_SLICE = 0;
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
@@ -69,7 +70,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private void initiateCurrentPizzaOrder() {
         currentPizza = ((MainActivity) this.getActivity()).pizza;
         finalOrder = ((MainActivity) this.getActivity()).order;
-        finalOrder.upadateLastPizza(currentPizza);
     }
 
     private void addContinueOnClickListener(View view) {
@@ -297,6 +297,17 @@ public class TabFragmentMain extends Fragment implements Serializable {
             numberOfExtrasPassed = PIZZA_NOT_PASSED;
         }
         intent.putExtra("numberOfExtras", numberOfExtrasPassed);
-        startActivity(intent);
+        startActivityForResult(intent, TOPPING_CHOOSING_RESULT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TOPPING_CHOOSING_RESULT){
+            ((MainActivity) this.getActivity()).pizza = (Pizza) data.getSerializableExtra("pizza");
+            ((MainActivity) this.getActivity()).order = (Order)  data.getSerializableExtra("order");
+            toppingImages.clear();
+            createCurrentPizza(getView());
+        }
     }
 }

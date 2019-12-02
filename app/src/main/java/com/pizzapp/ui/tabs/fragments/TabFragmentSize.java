@@ -19,7 +19,6 @@ import com.pizzapp.model.Database;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Size;
 import com.pizzapp.ui.tabs.TabAdapter;
-import com.pizzapp.utilities.IO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +65,12 @@ public class TabFragmentSize extends Fragment {
                 }
             });
             /* In case user already chose size */
-            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && buttonSizePair.second == currentPizza.getSize()){
+            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && buttonSizePair.second == currentPizza.getSize()) {
                 chooseAlready = true;
-                highlightChosenSize(buttonsAndSizes, buttonSizePair);
+                buttonSizePair.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+                tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
+                        getString(R.string.tab_title_separator) + currentPizza.getSize().getName());
+                tabAdapter.notifyDataSetChanged();
             }
         }
     }

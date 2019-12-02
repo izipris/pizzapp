@@ -1,11 +1,6 @@
 package com.pizzapp;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.pizzapp.model.Order;
+
 import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.PizzaPart;
@@ -32,14 +28,13 @@ import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import static java.lang.Math.min;
-import static java.lang.Math.random;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
@@ -62,7 +57,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private int currentSliceId = -1;
     private int currentSliceIdOutOfFour;
     private Pizza pizza;
-    private Order orderToPassBack;
     private List<Topping> toppingsList = new ArrayList<>();
     private boolean initiationOfActivity = true;
 
@@ -98,7 +92,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
                 pizza = (Pizza) extras.getSerializable("pizza");
                 createInitialPizza(currentSliceId);
-                orderToPassBack = (Order) extras.getSerializable("order");
             } else {
                 createDefaultPizza();
             }
@@ -428,7 +421,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("pizza", pizza);
-        intent.putExtra("order", orderToPassBack);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -438,7 +430,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Intent intent = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("pizza", pizza);
-        bundle.putSerializable("order", orderToPassBack);
         intent.putExtras(bundle);
         return intent;
     }
