@@ -1,5 +1,6 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class TabFragmentCrust extends Fragment {
     private Pizza currentPizza;
     private boolean chooseAlready;
     private final int MAIN_TAB_INDEX = 1;
+    private final int CRUST_CAPTION_TEXT_VIEW_POSITION = 0;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -104,10 +106,14 @@ public class TabFragmentCrust extends Fragment {
 
     private void handleCrustClicked(final Map<LinearLayout, Crust> layoutToCrustMapping, final LinearLayout linearLayoutCurrent) {
         linearLayoutCurrent.setBackgroundResource(R.drawable.ic_dough_background);
+        TextView textViewCurrent = (TextView) linearLayoutCurrent.getChildAt(CRUST_CAPTION_TEXT_VIEW_POSITION);
+        textViewCurrent.setTextColor(Color.WHITE);
         for (Map.Entry<LinearLayout, Crust> entryOther : layoutToCrustMapping.entrySet()) {
             LinearLayout linearLayoutOther = entryOther.getKey();
             if (linearLayoutOther != linearLayoutCurrent) {
                 linearLayoutOther.setBackgroundResource(0);
+                TextView textViewOther = (TextView) linearLayoutOther.getChildAt(CRUST_CAPTION_TEXT_VIEW_POSITION);
+                textViewOther.setTextColor(Color.BLACK);
             }
         }
         ((MainActivity) this.getActivity()).getPizza().setCrust(layoutToCrustMapping.get(linearLayoutCurrent));
