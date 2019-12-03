@@ -236,7 +236,7 @@
                 <Button
                     android:id="@+id/clear"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/ic_clear_button"
                     android:text="@string/button_clear_text"
                     android:textColor="@color/buttonClearTextColor" />
@@ -274,11 +274,11 @@
 
             <Button
                 android:id="@+id/placeOrder"
-                android:layout_width="@dimen/buttonContinueWidth"
-                android:layout_height="@dimen/buttonContinueHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDisplay"
                 android:layout_centerInParent="true"
-                android:background="@color/buttonContinueColor"
+                android:background="@drawable/ic_vectorcontinue"
                 android:text="@string/button_continue_text"
                 android:textSize="@dimen/buttonContinueTextSize"
                 android:textStyle="bold" />

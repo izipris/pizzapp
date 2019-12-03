@@ -7,6 +7,5 @@
     <color name="colorCrustChosenTextView">#FF3333</color>
     <color name="colorChosenSizeBackground">#978A8989</color>
     <color name="buttonClearTextColor">#FFFFFF</color>
-    <color name="buttonContinueColor">#f4ca45</color>
     <color name="textViewChosenOptionIndicator">#808080</color>
 </resources>
