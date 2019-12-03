@@ -37,7 +37,7 @@ import java.util.List;
 
 public class TabFragmentMain extends Fragment implements Serializable {
 
-    public static final int TOPPING_CHOOSING_RESULT = 1;
+    private static final int TOPPING_CHOOSING_RESULT = 1;
     private static final int TOP_RIGHT_SLICE = 0;
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
@@ -62,11 +62,12 @@ public class TabFragmentMain extends Fragment implements Serializable {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initiateCurrentPizzaOrder();
-        showNumberOfPizzas(view);
         showPrice(view);
         addButtonListeners(view);
         createCurrentPizza(view);
+        MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
     }
+
 
     private void initiateCurrentPizzaOrder() {
         finalOrder = ((MainActivity) this.getActivity()).order;
@@ -93,38 +94,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         List<ImageView> slices = Arrays.asList(topRightSlice, bottomRightSlice, bottomLeftSlice, topLeftSlice);
         addOnClickListener(slices);
         addClearButtonOnClickListener(view);
-        addAddButtonOnClickListener(view);
         addContinueOnClickListener(view);
-    }
-
-    private void addAddButtonOnClickListener(final View view) {
-        Button addButton = view.findViewById(R.id.add);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copyCurrentPizza();
-                finalOrder.addPizza(currentPizza);
-                showPrice(view);
-                showNumberOfPizzas(view);
-                final TextView price = view.findViewById(R.id.orderPrice);
-                showTextChange(price);
-            }
-        });
-    }
-
-    private void copyCurrentPizza() {
-        Pizza tempPizza = currentPizza;
-        currentPizza = new Pizza(currentPizza.getNumberOfParts(),
-                currentPizza.getSize(), currentPizza.getCrust());
-        List<PizzaPart> partList = tempPizza.getParts();
-        for (int i=0; i < partList.size(); i++){
-            List<Topping> partToppings = tempPizza.getParts().get(i).getToppings();
-            if (partToppings.size() > 0){
-                for (int j=0; j<partToppings.size(); j++){
-                    currentPizza.getParts().get(i).addTopping(partToppings.get(j));
-                }
-            }
-        }
     }
 
     private void showTextChange(final TextView price) {
@@ -165,17 +135,11 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     }
 
-    public void showUpdatedPrice(){
+    public void showUpdatedPrice() {
         View view = getView();
         TextView price = view.findViewById(R.id.orderPrice);
         String priceDisplay = getResources().getString(R.string.price_showing_prefix) + finalOrder.getTotalPrice() + getResources().getString(R.string.price_showing_suffix);
         price.setText(priceDisplay);
-    }
-
-    private void showNumberOfPizzas(View view) {
-        TextView numberOfPizzas = view.findViewById(R.id.number_of_pizzas);
-        showTextChange(numberOfPizzas);
-        numberOfPizzas.setText(String.valueOf(finalOrder.getNumberOfPizzas()));
     }
 
 
@@ -310,7 +274,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TOPPING_CHOOSING_RESULT){
+        if (requestCode == TOPPING_CHOOSING_RESULT) {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
             finalOrder.upadateLastPizza(currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;

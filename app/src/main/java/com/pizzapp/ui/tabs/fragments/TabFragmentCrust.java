@@ -113,6 +113,8 @@ public class TabFragmentCrust extends Fragment {
         ((MainActivity) this.getActivity()).getPizza().setCrust(buttonToCrustMapping.get(imageButtonCurrent));
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                 getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
+        currentPizza.setCrust(buttonToCrustMapping.get(imageButtonCurrent));
+        MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();

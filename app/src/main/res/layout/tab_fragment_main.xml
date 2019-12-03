@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGrayTabBackground"
     android:orientation="vertical">
 
 
@@ -17,13 +18,13 @@
             android:id="@+id/top_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:layoutDirection="ltr"
             android:onClick="backToMain"
-            android:paddingBottom="1dp"
-            android:layout_marginTop="30dp">
+            android:paddingBottom="1dp">
 
 
             <FrameLayout
@@ -169,48 +170,94 @@
 
         </TableRow>
 
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mainFragmentMarginTop"
+            android:gravity="bottom|center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewChosenCrust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenCrustIndicatorText"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textViewChosenOptionSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenCrustIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenCrustIndicatorText"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenOptionSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pipe_separator"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionSeparatorSize" />
+
+
+            <TextView
+                android:id="@+id/textViewChosenSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenSizeIndicatorText"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textViewChosenOptionSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenSizeIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenSizeIndicatorText"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+
+        </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pizzaPic">
+            android:layout_marginTop="@dimen/mainFragmentMarginTop">
 
             <LinearLayout
                 android:id="@+id/topOfBottom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="110dp"
-                    android:layout_marginLeft="110dp"
-                    android:text="ADD" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/clear"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="Clear" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_clear_button"
+                    android:text="@string/button_clear_text"
+                    android:textColor="@color/buttonClearTextColor" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/price"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_below="@+id/topOfBottom">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topOfBottom"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/orderPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="160dp"
-                    android:layout_marginLeft="160dp"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="@dimen/textViewPriceSize"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -219,32 +266,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/price"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/number_of_pizzas"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_centerInParent="true"
-                        android:layout_toRightOf="@id/view_order_button"
-                        android:background="@drawable/circle_textview"
-                        android:text="90"
-                        android:gravity="top|center"
-                        android:layout_alignParentTop="true"/>
-
-                    <Button
-                        android:id="@+id/view_order_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="View Order" />
-
-
-                </RelativeLayout>
 
             </LinearLayout>
 
@@ -254,8 +278,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDisplay"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:text="Continue" />
+                android:background="@drawable/ic_vectorcontinue"
+                android:text="@string/button_continue_text"
+                android:textSize="@dimen/buttonContinueTextSize"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

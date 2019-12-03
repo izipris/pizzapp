@@ -116,15 +116,17 @@ public class TabFragmentSize extends Fragment {
     }
 
     private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
+        Pizza currentPizza = ((MainActivity) this.getActivity()).getPizza();
         chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
         for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
             if (buttonSizePair.first != chosen.first) {
                 buttonSizePair.first.setBackgroundResource(0);
             }
         }
-        ((MainActivity) this.getActivity()).getPizza().setSize(chosen.second);
+        currentPizza.setSize(chosen.second);
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                 getString(R.string.tab_title_separator) + chosen.second.getName());
+        MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
