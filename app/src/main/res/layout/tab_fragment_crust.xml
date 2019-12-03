@@ -11,9 +11,9 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
         android:gravity="center"
-        android:paddingBottom="40dp"
-        android:layout_marginTop="@dimen/mainFragmentMarginTop">
+        android:paddingBottom="40dp">
 
         <LinearLayout
             android:id="@+id/layoutCrustThick"
@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/image_description_dough_thick"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
@@ -48,9 +49,9 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
         android:gravity="center"
-        android:paddingBottom="40dp"
-        android:layout_marginTop="@dimen/mainFragmentMarginTop">
+        android:paddingBottom="40dp">
 
         <LinearLayout
             android:id="@+id/layoutCrustRegular"
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/image_description_dough_regular"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
@@ -83,8 +85,8 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/mainFragmentMarginTop">
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
+        android:gravity="center">
 
         <LinearLayout
             android:id="@+id/layoutCrustThin"
@@ -101,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/image_description_dough_thin"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
