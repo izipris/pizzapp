@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ import java.util.List;
 
 public class TabFragmentMain extends Fragment implements Serializable {
 
+    private static final String LOG_TAG = TabFragmentMain.class.getSimpleName();
     private static final int TOPPING_CHOOSING_RESULT = 1;
     private static final int TOP_RIGHT_SLICE = 0;
     private static final int BOTTOM_RIGHT_SLICE = 1;
@@ -274,6 +276,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(LOG_TAG, "return from popup with result: " + requestCode);
         if (requestCode == TOPPING_CHOOSING_RESULT) {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
             finalOrder.upadateLastPizza(currentPizza);
