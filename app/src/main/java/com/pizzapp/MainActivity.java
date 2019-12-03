@@ -3,10 +3,12 @@ package com.pizzapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -47,10 +49,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             order = (Order) savedInstanceState.getSerializable("order");
-        }
-        else {
+        } else {
             Pizza pizza = createDefaultPizza();
             order = new Order(0);
             order.addPizza(pizza);
@@ -73,13 +74,20 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    public static void updatePizzaDimensionsIndicators(FragmentActivity activity, Pizza currentPizza) {
+        TextView crustTextView = activity.findViewById(R.id.textViewChosenCrust);
+        TextView sizeTextView = activity.findViewById(R.id.textViewChosenSize);
+        crustTextView.setText(currentPizza.getCrust().getName());
+        sizeTextView.setText(currentPizza.getSize().getCaption());
+    }
+
     private Pizza createDefaultPizza() {
         Size defaultSize = database.getSizes().get(0);
         Crust defaultCrust = database.getCrusts().get(0);
         return new Pizza(DEFAULT_NUMBER_OF_SLICES, defaultSize, defaultCrust);
     }
 
-    public Pizza getPizza(){
+    public Pizza getPizza() {
         return order.getLastPizza();
     }
 

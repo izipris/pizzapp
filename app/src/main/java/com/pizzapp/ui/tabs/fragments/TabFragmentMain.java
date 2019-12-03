@@ -65,7 +65,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
         showPrice(view);
         addButtonListeners(view);
         createCurrentPizza(view);
+        MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
     }
+
 
     private void initiateCurrentPizzaOrder() {
         finalOrder = ((MainActivity) this.getActivity()).order;
