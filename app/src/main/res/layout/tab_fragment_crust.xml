@@ -32,7 +32,7 @@
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/doughThickImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/doughRegularImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                 android:textSize="@dimen/crustCaptionSize"
                 android:textStyle="bold" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/doughThinImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
