@@ -9,4 +9,5 @@
     <dimen name="textViewChosenOptionIndicatorSize">14sp</dimen>
     <dimen name="textViewChosenOptionSize">18sp</dimen>
     <dimen name="textViewChosenOptionSeparatorSize">24sp</dimen>
+    <dimen name="mainFragmentMarginTop">10dp</dimen>
 </resources>

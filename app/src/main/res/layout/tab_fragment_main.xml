@@ -173,7 +173,8 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
+            android:gravity="bottom|center"
+            android:layout_marginTop="@dimen/mainFragmentMarginTop"
             android:orientation="horizontal">
 
             <TextView
@@ -211,7 +212,7 @@
 
             <TextView
                 android:id="@+id/textViewChosenSizeIndicator"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewChosenSizeIndicatorText"
                 android:textColor="@color/textViewChosenOptionIndicator"
@@ -223,13 +224,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pizzaPic">
+            android:layout_marginTop="@dimen/mainFragmentMarginTop">
 
             <LinearLayout
                 android:id="@+id/topOfBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop">
 
                 <Button
                     android:id="@+id/clear"
@@ -246,7 +248,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/topOfBottom"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop">
 
                 <TextView
                     android:id="@+id/orderPrice"
@@ -263,7 +266,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/price"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/mainFragmentMarginTop">
 
 
             </LinearLayout>
