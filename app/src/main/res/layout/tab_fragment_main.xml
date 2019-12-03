@@ -173,8 +173,8 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom|center"
             android:layout_marginTop="@dimen/mainFragmentMarginTop"
+            android:gravity="bottom|center"
             android:orientation="horizontal">
 
             <TextView
@@ -230,8 +230,8 @@
                 android:id="@+id/topOfBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/mainFragmentMarginTop">
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/clear"
@@ -248,8 +248,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/topOfBottom"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/mainFragmentMarginTop">
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/orderPrice"
@@ -266,8 +266,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/price"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/mainFragmentMarginTop">
+                android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                android:orientation="horizontal">
 
 
             </LinearLayout>
@@ -278,7 +278,7 @@
                 android:layout_height="@dimen/buttonContinueHeight"
                 android:layout_below="@+id/orderDisplay"
                 android:layout_centerInParent="true"
-                android:background="@drawable/ic_continue_button"
+                android:background="@color/buttonContinueColor"
                 android:text="@string/button_continue_text"
                 android:textSize="@dimen/buttonContinueTextSize"
                 android:textStyle="bold" />
