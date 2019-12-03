@@ -170,6 +170,55 @@
 
         </TableRow>
 
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewChosenCrust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenCrustIndicatorText"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textViewChosenOptionSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenCrustIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenCrustIndicatorText"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenOptionSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pipe_separator"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionSeparatorSize" />
+
+
+            <TextView
+                android:id="@+id/textViewChosenSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenSizeIndicatorText"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textViewChosenOptionSize" />
+
+            <TextView
+                android:id="@+id/textViewChosenSizeIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewChosenSizeIndicatorText"
+                android:textColor="@color/textViewChosenOptionIndicator"
+                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+
+        </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
