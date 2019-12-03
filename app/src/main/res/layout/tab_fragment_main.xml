@@ -186,16 +186,16 @@
                     android:id="@+id/clear"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="Clear" />
+                    android:background="@drawable/ic_clear_button"
+                    android:text="@string/button_clear_text"
+                    android:textColor="@color/buttonClearTextColor" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/price"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/topOfBottom"
                 android:gravity="center">
 
@@ -203,7 +203,9 @@
                     android:id="@+id/orderPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="@dimen/textViewPriceSize"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -219,12 +221,14 @@
 
             <Button
                 android:id="@+id/placeOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/buttonContinueWidth"
+                android:layout_height="@dimen/buttonContinueHeight"
                 android:layout_below="@+id/orderDisplay"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:text="Continue" />
+                android:background="@drawable/ic_continue_button"
+                android:text="@string/button_continue_text"
+                android:textSize="@dimen/buttonContinueTextSize"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

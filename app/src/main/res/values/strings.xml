@@ -34,5 +34,7 @@
     <string name="error_message">Error, please try again</string>
     <string name="price_showing_prefix">Total:&#160;</string>
     <string name="price_showing_suffix">0$</string>
+    <string name="button_clear_text">CLEAR PIZZA</string>
+    <string name="button_continue_text">CONTINUE</string>
 
 </resources>
