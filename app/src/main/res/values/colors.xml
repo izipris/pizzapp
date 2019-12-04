@@ -8,4 +8,6 @@
     <color name="colorChosenSizeBackground">#978A8989</color>
     <color name="buttonClearTextColor">#FFFFFF</color>
     <color name="textViewChosenOptionIndicator">#808080</color>
+    <color name="tab_background_selected">#eaeaea</color>
+    <color name="tab_background_unselected">#cccccc</color>
 </resources>

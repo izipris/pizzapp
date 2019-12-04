@@ -19,14 +19,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_color_selector"
             app:tabGravity="fill"
-            app:tabMode="fixed" />
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabTextColor="@android:color/black" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
