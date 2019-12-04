@@ -3,7 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorGrayTabBackground">#D6D7D7</color>
+    <color name="colorGrayTabBackground">#eaeaea</color>
     <color name="colorCrustChosenTextView">#FF3333</color>
     <color name="colorChosenSizeBackground">#978A8989</color>
     <color name="buttonClearTextColor">#FFFFFF</color>
