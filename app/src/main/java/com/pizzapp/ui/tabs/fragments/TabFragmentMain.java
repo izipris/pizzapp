@@ -44,8 +44,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
-    private static final int PIZZA_PASSED = 3;
-    private static final int PIZZA_NOT_PASSED = 2;
     private static final int TOPPING_HEIGHT = 127;
     private static final int TOPPING_WIDTH = 127;
 
@@ -260,16 +258,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     private void openPopup(int id) {
         Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
-        int numberOfExtrasPassed;
         intent.putExtra("callingId", id);
-        if (currentPizza != null) {
-            numberOfExtrasPassed = PIZZA_PASSED;
-            intent.putExtra("pizza", currentPizza);
-            intent.putExtra("order", finalOrder);
-        } else {
-            numberOfExtrasPassed = PIZZA_NOT_PASSED;
-        }
-        intent.putExtra("numberOfExtras", numberOfExtrasPassed);
+        intent.putExtra("pizza", currentPizza);
+        intent.putExtra("order", finalOrder);
         startActivityForResult(intent, TOPPING_CHOOSING_RESULT);
     }
 

@@ -45,7 +45,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int PIZZA_PASSED = 3;
     private static final int ENLARGED_WIDTH = 165;
     private static final int ENLARGED_HEIGHT = 165;
     private static final int TOPPING_ENLARGED_WIDTH = 147;
@@ -62,6 +61,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private Pizza pizza;
     private List<Topping> toppingsList = new ArrayList<>();
     private boolean initiationOfActivity = true;
+    private List<Integer> pizzas_enlarged = new ArrayList<>();
 
     private Map<Integer, String> idToStringMap = new HashMap<>();
     private Map<Integer, Integer> pizzaImageToPartMap = new HashMap<>();
@@ -73,8 +73,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
         setToolbar();
-        initiateidToStringMap();
-        initializepizzaImageToPartMap();
+        initiateIdToStringMap();
+        initializePizzaImageToPartMap();
         extractExtras();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
@@ -90,35 +90,27 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             currentSliceIdOutOfFour = extras.getInt("callingId");
+            pizzas_enlarged.add(currentSliceIdOutOfFour);
             assignCurrentSliceId();
-
-            if (extras.getInt("numberOfExtras") == PIZZA_PASSED) {
-                pizza = (Pizza) extras.getSerializable("pizza");
-                createInitialPizza(currentSliceId);
-            } else {
-                createDefaultPizza();
-            }
+            pizza = (Pizza) extras.getSerializable("pizza");
+            createInitialPizza(currentSliceId);
             initiationOfActivity = false;
-            enlargeSlice();
+            enlargeSlice(currentSliceIdOutOfFour);
         }
     }
 
     private void createInitialPizza(int partId) {
         currentSliceIdOutOfFour = 0;
         assignCurrentSliceId();
-        for (PizzaPart pizzaPart : pizza.getParts()) {
-            for (Topping topping : pizzaPart.getToppings()) {
-                addTopping(topping);
+        for (int i = 0; i < pizza.getNumberOfParts(); i++) {
+            for (Topping topping : pizza.getParts().get(i).getToppings()) {
+                addTopping(topping, i);
             }
             currentSliceIdOutOfFour++;
             assignCurrentSliceId();
         }
         currentSliceId = partId;
         assignCurrentSliceOutOfFour();
-    }
-
-    private void createDefaultPizza() {
-        pizza = new Pizza(4, new Size(), new Crust());
     }
 
 
@@ -168,16 +160,21 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 if (checkBox.isChecked()) {
-                    addTopping(topping);
+                    for (Integer pizzaPart : pizzas_enlarged) {
+                        if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
+                            continue;
+                        }
+                        addTopping(topping, pizzaPart);
+                    }
                 } else {
-                    removeToppingFromPizza(topping);
+                    removeTopping(topping);
                 }
             }
         });
         return checkBox;
     }
 
-    private void initiateidToStringMap() {
+    private void initiateIdToStringMap() {
         addEntryToIdToStringMap(R.id.topRight, "topRight");
         addEntryToIdToStringMap(R.id.bottomRight, "bottomRight");
         addEntryToIdToStringMap(R.id.bottomLeft, "bottomLeft");
@@ -192,25 +189,25 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         idToStringMap.remove(getKeyFromValue(value));
     }
 
-    private void initializepizzaImageToPartMap() {
+    private void initializePizzaImageToPartMap() {
         pizzaImageToPartMap.put(R.id.topRight, 0);
         pizzaImageToPartMap.put(R.id.bottomRight, 1);
         pizzaImageToPartMap.put(R.id.bottomLeft, 2);
         pizzaImageToPartMap.put(R.id.topLeft, 3);
     }
 
-    private void shrinkSlice() {
-        for (Topping topping : pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()) {
-            shrinkImage(getToppingId(topping), true);
+    private void shrinkSlice(int pizzaPart) {
+        for (Topping topping : pizza.getPizzaPart(pizzaPart).getToppings()) {
+            shrinkImage(getToppingId(topping, pizzaPart), true);
         }
-        shrinkImage(currentSliceId, false);
+        shrinkImage(getIdFromPart(pizzaPart), false);
     }
 
     private void shrinkImage(int imageId, boolean isTopping) {
         ImageView image = findViewById(imageId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         int width, height;
-        if (isTopping){
+        if (isTopping) {
             height = TOPPING_ORIGINAL_HEIGHT;
             width = TOPPING_ORIGINAL_WIDTH;
         } else {
@@ -222,11 +219,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         image.setLayoutParams(layoutParams);
     }
 
-    private void enlargeSlice() {
-        for (Topping topping : pizza.getPizzaPart(currentSliceIdOutOfFour).getToppings()) {
-            enlargeImage(getToppingId(topping), true);
+    private void enlargeSlice(int pizzaPart) {
+        for (Topping topping : pizza.getPizzaPart(pizzaPart).getToppings()) {
+            enlargeImage(getToppingId(topping, pizzaPart), true);
         }
-        enlargeImage(currentSliceId, false);
+        enlargeImage(getIdFromPart(pizzaPart), false);
     }
 
     private void enlargeImage(Integer sliceId, boolean isTopping) {
@@ -234,7 +231,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         int height;
         int width;
-        if (isTopping){
+        if (isTopping) {
             height = TOPPING_ENLARGED_HEIGHT;
             width = TOPPING_ENLARGED_WIDTH;
         } else {
@@ -246,13 +243,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         image.setLayoutParams(layoutParams);
     }
 
-    private void addTopping(Topping topping) {
+    private void addTopping(Topping topping, int pizzaPart) {
         int toppingId = createToppingId(topping);
         while (idToStringMap.containsKey(toppingId)) {
             createToppingId(topping);
         }
-        addEntryToIdToStringMap(toppingId, getCurrentSliceString() + topping.getName());
-        addToppingToPizza(topping, toppingId);
+        addEntryToIdToStringMap(toppingId, getCurrentSliceString(pizzaPart) + topping.getName());
+        addToppingToPizza(topping, toppingId, pizzaPart);
     }
 
     private int createToppingId(Topping topping) {
@@ -260,38 +257,30 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return random.nextInt() * (toppingsList.indexOf(topping) + random.nextInt());
     }
 
-    private void addToppingToPizza(Topping topping, int toppingId) {
+    private void addToppingToPizza(Topping topping, int toppingId, int pizzaPart) {
         try {
-            FrameLayout frameLayout = getAppropriateFrameId();
+            FrameLayout frameLayout = getAppropriateFrameId(pizzaPart);
             ImageView newTopping = new ImageView(this);
             newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
-            newTopping.setRotation(getCurrentRotation());
+            newTopping.setRotation(getCurrentRotation(pizzaPart));
             newTopping.setId(toppingId);
             newTopping.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int newId = getSliceFromTopping(v.getId());
-                    if (newId != currentSliceId) {
-                        shrinkSlice();
-                    } else {
-                        backToMain(v);
-                    }
-                    currentSliceId = newId;
-                    assignCurrentSliceOutOfFour();
-                    enlargeSlice();
-                    editToppingChart();
+                    int partClickedId = getSliceFromTopping(v.getId());
+                    partClickedAction(v, partClickedId);
                 }
             });
             FrameLayout.LayoutParams layoutParams = new
                     FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
-            setGravity(layoutParams);
+            setGravity(layoutParams, pizzaPart);
             if (initiationOfActivity) {
                 layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);
                 layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_WIDTH);
             } else {
                 layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_HEIGHT);
                 layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_WIDTH);
-                pizza.getPizzaPart(currentSliceIdOutOfFour).addTopping(topping);
+                pizza.getPizzaPart(pizzaPart).addTopping(topping);
             }
             newTopping.setLayoutParams(layoutParams);
             frameLayout.addView(newTopping);
@@ -321,8 +310,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return -1;
     }
 
-    private void setGravity(FrameLayout.LayoutParams layoutParams) {
-        switch (currentSliceIdOutOfFour) {
+    private void setGravity(FrameLayout.LayoutParams layoutParams, int pizzaPart) {
+        switch (pizzaPart) {
             case (TOP_RIGHT_SLICE):
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                 break;
@@ -343,40 +332,63 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return getResources().getDrawable(id);
     }
 
-    private void removeToppingFromPizza(Topping topping) {
-        pizza.getPizzaPart(currentSliceIdOutOfFour).removeTopping(topping);
-        ImageView toppingToRemove = findViewById(getToppingId(topping));
-        toppingToRemove.setVisibility(View.GONE);
-        RemoveEntryFromIdToStringMap(getCurrentSliceString() + topping.getName());
+    private void removeTopping(Topping topping) {
+        for (Integer pizzaPart : pizzas_enlarged) {
+            pizza.getPizzaPart(pizzaPart).removeTopping(topping);
+            ImageView toppingToRemove = findViewById(getToppingId(topping, pizzaPart));
+            toppingToRemove.setVisibility(View.GONE);
+            RemoveEntryFromIdToStringMap(getCurrentSliceString(pizzaPart) + topping.getName());
+        }
     }
 
     public void onClick(View view) {
-        int newId = view.getId();
-        if (newId != currentSliceId && currentSliceId != -1){
-            shrinkSlice();
+        int clickId = view.getId();
+        partClickedAction(view, clickId);
+    }
+
+    private void partClickedAction(View view, int clickId) {
+        if (pizzas_enlarged.contains(pizzaImageToPartMap.get(clickId))) {
+            shrinkSlice(pizzaImageToPartMap.get(clickId));
+            pizzas_enlarged.remove(pizzaImageToPartMap.get(clickId));
+            if (pizzas_enlarged.size() == 0) {
+                backToMain(view);
+            }
         } else {
-            backToMain(view);
+            pizzas_enlarged.add(pizzaImageToPartMap.get(clickId));
+            currentSliceId = clickId;
+            assignCurrentSliceOutOfFour();
+            enlargeSlice(pizzaImageToPartMap.get(clickId));
         }
-        currentSliceId = newId;
-        assignCurrentSliceOutOfFour();
-        enlargeSlice();
         editToppingChart();
     }
+
 
     private void editToppingChart() {
         for (Topping topping : toppingsList) {
             CheckBox checkBox = findViewById(toppingsList.indexOf(topping));
-            if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
-                checkBox.setChecked(true);
-            } else {
-                checkBox.setChecked(false);
+            for (Integer pizzaPart : pizzas_enlarged) {
+                if (!pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
+                    checkBox.setChecked(false);
+                    break;
+                } else {
+                    checkBox.setChecked(true);
+                }
             }
         }
     }
 
-    private int getToppingId(Topping topping) {
+    private int getIdFromPart(int pizzaPart) {
+        for (Integer id : pizzaImageToPartMap.keySet()) {
+            if (pizzaImageToPartMap.get(id) == pizzaPart) {
+                return id;
+            }
+        }
+        return -1;
+    }
+
+    private int getToppingId(Topping topping, int pizzaPart) {
         for (Map.Entry<Integer, String> entry : idToStringMap.entrySet()) {
-            if ((getCurrentSliceString() + topping.getName()).equals(entry.getValue())) {
+            if ((getCurrentSliceString(pizzaPart) + topping.getName()).equals(entry.getValue())) {
                 return entry.getKey();
             }
         }
@@ -404,8 +416,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
     }
 
-    private String getCurrentSliceString() {
-        switch (currentSliceIdOutOfFour) {
+    private String getCurrentSliceString(int pizzaPart) {
+        switch (pizzaPart) {
             case (TOP_RIGHT_SLICE):
                 return "topRight";
             case (BOTTOM_RIGHT_SLICE):
@@ -418,12 +430,12 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return "";
     }
 
-    private int getCurrentRotation() {
-        return ANGLE_TO_ROTATE * currentSliceIdOutOfFour;
+    private int getCurrentRotation(int pizzaPart) {
+        return ANGLE_TO_ROTATE * pizzaPart;
     }
 
-    private FrameLayout getAppropriateFrameId() throws DoesNotExist {
-        switch (currentSliceIdOutOfFour) {
+    private FrameLayout getAppropriateFrameId(int pizzaPart) throws DoesNotExist {
+        switch (pizzaPart) {
             case (TOP_RIGHT_SLICE):
                 return findViewById(R.id.topRightFrame);
             case (BOTTOM_RIGHT_SLICE):
