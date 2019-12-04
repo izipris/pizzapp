@@ -29,10 +29,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
                 android:text="@string/image_description_dough_thick"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
 
             <ImageView
                 android:id="@+id/doughThickImageButton"
@@ -67,10 +69,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
                 android:text="@string/image_description_dough_regular"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
 
             <ImageView
                 android:id="@+id/doughRegularImageButton"
@@ -102,10 +106,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
                 android:text="@string/image_description_dough_thin"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/crustCaptionSize"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
 
             <ImageView
                 android:id="@+id/doughThinImageButton"
