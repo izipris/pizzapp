@@ -1,11 +1,12 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -118,10 +119,12 @@ public class TabFragmentSize extends Fragment {
 
     private void highlightChosenSize(List<Pair<TableRow, Size>> rowsAndSizes, Pair<TableRow, Size> chosen) {
         Pizza currentPizza = ((MainActivity) this.getActivity()).getPizza();
-        chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+        chosen.first.setBackgroundResource(R.drawable.ic_size_background);
+        highlightChosenTextViews(chosen.first, Color.WHITE);
         for (final Pair<TableRow, Size> rowSizePair : rowsAndSizes) {
             if (rowSizePair.first != chosen.first) {
                 rowSizePair.first.setBackgroundResource(0);
+                highlightChosenTextViews(rowSizePair.first, Color.BLACK);
             }
         }
         currentPizza.setSize(chosen.second);
@@ -131,6 +134,21 @@ public class TabFragmentSize extends Fragment {
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
+    }
+
+    private void highlightChosenTextViews(TableRow tableRow, int color) {
+        final int LINEAR_LAYOUT_POSITION = 0;
+        final int TEXT_VIEW_1_POSITION = 0;
+        final int TEXT_VIEW_2_POSITION = 1;
+        final int TEXT_VIEW_3_POSITION = 2;
+        LinearLayout linearLayout = (LinearLayout) tableRow.getChildAt(LINEAR_LAYOUT_POSITION);
+        TextView textViewCaption = (TextView) linearLayout.getChildAt(TEXT_VIEW_1_POSITION);
+        TextView textViewDimension = (TextView) linearLayout.getChildAt(TEXT_VIEW_2_POSITION);
+        TextView textViewPrice = (TextView) tableRow.getChildAt(TEXT_VIEW_3_POSITION);
+        textViewCaption.setTextColor(color);
+        textViewDimension.setTextColor(color);
+        textViewPrice.setTextColor(color);
+
     }
 
     @Override

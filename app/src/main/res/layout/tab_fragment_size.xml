@@ -30,7 +30,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/m"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
 
             <TextView
@@ -39,6 +41,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/medium_size"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
@@ -56,7 +60,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="@string/initial_medium_pizza_price"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:fontFamily="@font/open_sans" />
 
     </TableRow>
@@ -84,7 +90,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/l"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
 
             <TextView
@@ -93,6 +101,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/large_size"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
@@ -110,7 +120,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="@string/initial_large_pizza_price"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:fontFamily="@font/open_sans" />
 
     </TableRow>
@@ -138,7 +150,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/xl"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
 
             <TextView
@@ -147,6 +161,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/extra_large_size"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
@@ -164,7 +180,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="@string/initial_extra_large_pizza_price"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:fontFamily="@font/open_sans" />
 
     </TableRow>
