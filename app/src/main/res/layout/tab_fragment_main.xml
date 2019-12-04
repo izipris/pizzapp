@@ -10,9 +10,8 @@
     <TableLayout
         android:id="@+id/pizzaPic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingBottom="70dp">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TableRow
             android:id="@+id/top_row"
@@ -236,7 +235,7 @@
                 <Button
                     android:id="@+id/clear"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:background="@drawable/ic_clear_button"
                     android:text="@string/button_clear_text"
                     android:textColor="@color/buttonClearTextColor" />

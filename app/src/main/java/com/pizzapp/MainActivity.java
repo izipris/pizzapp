@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -23,12 +22,13 @@ import com.pizzapp.ui.tabs.fragments.TabFragmentSize;
 import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     public static final int MAIN_FRAGMENT_INDEX = 1;
     private static final int DEFAULT_NUMBER_OF_SLICES = 4;
-    private Toolbar toolbar;
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -41,10 +41,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "onCreate");
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
@@ -71,6 +67,30 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         viewPager.setCurrentItem(MAIN_FRAGMENT_INDEX, false);
         viewPager.setOffscreenPageLimit(viewPagerTabsLimit);
         tabLayout.setupWithViewPager(viewPager);
+        initializeActivitiesCaptions();
+    }
+
+    private void initializeActivitiesCaptions() {
+        final List<String> captions = Arrays.asList(
+                getString(R.string.tab_caption_size),
+                getString(R.string.tab_caption_main),
+                getString(R.string.tab_caption_crust));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                TextView greetingTextView = findViewById(R.id.textViewGreeting);
+                greetingTextView.setText(captions.get(tab.getPosition()));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
     }
 
     public static void updatePizzaDimensionsIndicators(FragmentActivity activity, Pizza currentPizza) {
