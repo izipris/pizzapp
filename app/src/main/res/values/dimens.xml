@@ -15,4 +15,8 @@
     <dimen name="crustCaptionSize">20sp</dimen>
     <dimen name="logoPaddingLeft">15dp</dimen>
     <dimen name="logoPaddingTop">15dp</dimen>
+    <dimen name="buttonClearHeight">32dp</dimen>
+    <dimen name="greetingHeaderSize">18sp</dimen>
+    <dimen name="greetingHeaderMarginBottom">15dp</dimen>
+    <dimen name="tabsHeight">38dp</dimen>
 </resources>
