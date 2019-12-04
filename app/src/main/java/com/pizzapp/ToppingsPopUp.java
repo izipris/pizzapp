@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -45,14 +47,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
-    private static final int ENLARGED_WIDTH = 165;
-    private static final int ENLARGED_HEIGHT = 165;
-    private static final int TOPPING_ENLARGED_WIDTH = 147;
-    private static final int TOPPING_ENLARGED_HEIGHT = 147;
-    private static final int ORIGINAL_WIDTH = 145;
-    private static final int ORIGINAL_HEIGHT = 145;
-    private static final int TOPPING_ORIGINAL_HEIGHT = 127;
-    private static final int TOPPING_ORIGINAL_WIDTH = 127;
+    private final int ENLARGED_WIDTH = 143;
+    private final int ENLARGED_HEIGHT = 143;
+    private final int TOPPING_ENLARGED_WIDTH = 123;
+    private final int TOPPING_ENLARGED_HEIGHT = 123;
+    private final double ORIGINAL_WIDTH = 127.5;
+    private final double ORIGINAL_HEIGHT = 127.5;
+    private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
+    private final double TOPPING_ORIGINAL_WIDTH = 107.5;
 
     private static final int MIN_ROWS_IN_CHART = 3;
 
@@ -128,11 +130,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                     break;
                 }
                 GridLayout.Spec colSpec = GridLayout.spec(j, 1, 1);
-                CheckBox checkBox = createCheckbox(i, j);
+                LinearLayout toppingBox = createToppingBox(i, j);
                 GridLayout.LayoutParams myGLP = new GridLayout.LayoutParams();
                 myGLP.rowSpec = rowSpec;
                 myGLP.columnSpec = colSpec;
-                layout.addView(checkBox, myGLP);
+                layout.addView(toppingBox, myGLP);
             }
         }
     }
@@ -146,33 +148,80 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     }
 
-    private CheckBox createCheckbox(int row, int col) {
-        final CheckBox checkBox = new CheckBox(this);
+    private LinearLayout createToppingBox(int row, int col) {
+        final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
-        checkBox.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-        checkBox.setId(MIN_ROWS_IN_CHART * col + row);
-        checkBox.setText(topping.getName());
-        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
-            checkBox.setChecked(true);
-        }
+        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        toppingBox.setPadding(StaticFunctions.convertDpToPx(5),0,
+                StaticFunctions.convertDpToPx(5),0);
+        toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
+        toppingBox.setOrientation(LinearLayout.HORIZONTAL);
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
+        addToppingToBox(toppingBox, topping);
+        // TODO: 04 דצמבר 2019 add the red outline
+//        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
+//            checkBox.setChecked(true);
+//        }
+
+        toppingBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBox.isChecked()) {
+                // TODO: 04 דצמבר 2019 add the listener if has toppings already
+//                if (checkBox.isChecked()) {
                     for (Integer pizzaPart : pizzas_enlarged) {
                         if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
                             continue;
                         }
                         addTopping(topping, pizzaPart);
                     }
-                } else {
-                    removeTopping(topping);
+//                } else {
+//                    removeTopping(topping);
+//                }
+            }
+        });
+        return toppingBox;
+    }
+
+    private void addToppingToBox(LinearLayout toppingBox, final Topping topping){
+        ImageView iconTopping = new ImageView(this);
+        iconTopping.setImageDrawable(convertStringToDrawable(topping.getIconSource()));
+        iconTopping.setPadding(5, 0, StaticFunctions.convertDpToPx(10), 0);
+        iconTopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Integer pizzaPart : pizzas_enlarged) {
+                    if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
+                        continue;
+                    }
+                    addTopping(topping, pizzaPart);
                 }
             }
         });
-        return checkBox;
+//        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT );
+        TextView iconText = new TextView(this);
+        String textToDisplay = topping.getName() + "......" + topping.getPrice()/4;
+                iconText.setText(textToDisplay);
+        iconText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Integer pizzaPart : pizzas_enlarged) {
+                    if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
+                        continue;
+                    }
+                    addTopping(topping, pizzaPart);
+                }
+            }
+        });
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT );
+        textParams.gravity = Gravity.CENTER;
+        iconText.setLayoutParams(textParams);
+        toppingBox.addView(iconTopping);
+        toppingBox.addView(iconText);
     }
+
 
     private void initiateIdToStringMap() {
         addEntryToIdToStringMap(R.id.topRight, "topRight");
@@ -206,7 +255,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void shrinkImage(int imageId, boolean isTopping) {
         ImageView image = findViewById(imageId);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
-        int width, height;
+        double width, height;
         if (isTopping) {
             height = TOPPING_ORIGINAL_HEIGHT;
             width = TOPPING_ORIGINAL_WIDTH;
@@ -272,7 +321,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 }
             });
             FrameLayout.LayoutParams layoutParams = new
-                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
+                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(ENLARGED_HEIGHT),
+                    StaticFunctions.convertDpToPx(ENLARGED_WIDTH));
             setGravity(layoutParams, pizzaPart);
             if (initiationOfActivity) {
                 layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);
@@ -465,3 +515,25 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         super.onBackPressed();
     }
 }
+
+//
+//
+//<LinearLayout
+//            android:layout_width="wrap_content"
+//                    android:layout_height="wrap_content"
+//                    android:layout_row="0"
+//                    android:layout_column="0"
+//                    android:orientation="horizontal">
+//
+//<ImageView
+//                android:layout_width="wrap_content"
+//                        android:layout_height="wrap_content"
+//                        app:srcCompat="@drawable/olives_small_color"
+//                        android:paddingRight="10dp"/>
+//
+//<TextView
+//                android:layout_width="wrap_content"
+//                        android:layout_height="wrap_content"
+//                        android:text="olives ....  2.00$"/>
+//
+//</LinearLayout>

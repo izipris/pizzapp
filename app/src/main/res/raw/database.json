@@ -23,42 +23,50 @@
     {
       "name": "Onion",
       "price": 2,
-      "image": "@drawable/ic_onion_topping"
+      "image": "@drawable/ic_onion_topping",
+      "icon": "@drawable/small_onion_color"
     },
     {
       "name": "Mushrooms",
       "price": 2,
-      "image": "@drawable/ic_mushrooms_topping"
+      "image": "@drawable/ic_mushrooms_topping",
+      "icon": "@drawable/mushroom_small_color"
     },
     {
       "name": "Tomatoes",
       "price": 2,
-      "image": "@drawable/ic_tomato_topping"
+      "image": "@drawable/ic_tomato_topping",
+      "icon": "@drawable/tomato_small_color"
     },
     {
       "name": "Olives",
       "price": 2,
-      "image": "@drawable/ic_olives_topping"
+      "image": "@drawable/ic_olives_topping",
+      "icon": "@drawable/olives_small_color"
     },
     {
       "name": "Pineapple",
       "price": 4,
-      "image": "@drawable/ic_pineapple_topping"
+      "image": "@drawable/ic_pineapple_topping",
+      "icon": "@drawable/pineapple_small_color"
     },
     {
       "name": "Sweet Potato",
       "price": 4,
-      "image": "@drawable/ic_sweet_potato_topping"
+      "image": "@drawable/ic_sweet_potato_topping",
+      "icon": "@drawable/sweet_potato_small_color"
     },
     {
       "name": "Zucchini",
       "price": 4,
-      "image": "@drawable/ic_zucchini_topping"
+      "image": "@drawable/ic_zucchini_topping",
+      "icon": "@drawable/zucchini_small_color"
     },
     {
       "name": "Eggplant",
       "price": 2,
-      "image": "@drawable/ic_eggplant_topping"
+      "image": "@drawable/ic_eggplant_topping",
+      "icon": "@drawable/eggplant_small_color"
     }
   ],
   "crusts": [

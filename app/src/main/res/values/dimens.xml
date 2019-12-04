@@ -9,7 +9,16 @@
     <dimen name="textViewChosenOptionIndicatorSize">14sp</dimen>
     <dimen name="textViewChosenOptionSize">18sp</dimen>
     <dimen name="textViewChosenOptionSeparatorSize">24sp</dimen>
-    <dimen name="mainFragmentMarginTop">7dp</dimen>
+    <dimen name="mainFragmentMarginTop">10dp</dimen>
+    <dimen name="originalPizzaSize">127.5dp</dimen>
+    <dimen name="originalToppingSize">107.5</dimen>
+    <dimen name="enlargedPizzaSize">143dp</dimen>
+    <dimen name="enlargedToppingSize">123dp</dimen>
+    <dimen name="pizzaTableBottomPadding">30dp</dimen>
+    <dimen name="gridHeight">199.5dp</dimen>
+    <dimen name="iconToTextPadding">10.9</dimen>
+    <dimen name="plusHeight">25.2dp</dimen>
+    <dimen name="plusWidth">22.1dp</dimen>
     <dimen name="crustFragmentCaptionPaddingBottom">15dp</dimen>
     <dimen name="sizeFragmentMarginTop">20dp</dimen>
     <dimen name="crustCaptionSize">20sp</dimen>

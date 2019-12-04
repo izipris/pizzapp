@@ -3,7 +3,7 @@ package com.pizzapp.utilities;
 import android.content.res.Resources;
 
 public class StaticFunctions {
-    public static int convertDpToPx(int dp)
+    public static int convertDpToPx(double dp)
     {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
