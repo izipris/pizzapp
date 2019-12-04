@@ -11,4 +11,5 @@
     <color name="tab_background_selected">#eaeaea</color>
     <color name="tab_background_unselected">#cccccc</color>
     <color name="greeting_color">#808080</color>
+    <color name="logoAreaColor">#F9F9F9</color>
 </resources>
