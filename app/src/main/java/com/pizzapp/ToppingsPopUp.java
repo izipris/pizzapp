@@ -1,6 +1,7 @@
 package com.pizzapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -167,30 +168,44 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         addToppingToBox(toppingBox, topping);
 
         if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
-            toppingBox.getChildAt(0).setVisibility(View.GONE);
-            toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
+            addIndicator(toppingBox);
         }
 
         toppingBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: 04 דצמבר 2019 add the listener if has toppings already
-//                if (checkBox.isChecked()) {
+                if (toppingBox.getBackground() == convertStringToDrawable(TOPPING_PICKED_INDICATOR)) {
+                    removeTopping(topping);
+                    removeIndicator(toppingBox);
+                } else {
                     for (Integer pizzaPart : pizzas_enlarged) {
                         if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
                             continue;
                         }
                         addTopping(topping, pizzaPart);
+                        addIndicator(toppingBox);
                     }
-//                } else {
-//                    removeTopping(topping);
-//                }
+                }
             }
         });
         return toppingBox;
     }
 
-    private void addToppingToBox(LinearLayout toppingBox, final Topping topping){
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void addIndicator(LinearLayout toppingBox) {
+        toppingBox.getChildAt(0).setVisibility(View.GONE);
+        toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void removeIndicator(LinearLayout toppingBox) {
+        toppingBox.getChildAt(0).setVisibility(View.VISIBLE);
+        toppingBox.setBackground(null);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void addToppingToBox(final LinearLayout toppingBox, final Topping topping){
         ImageView iconTopping = new ImageView(this);
         iconTopping.setImageDrawable(convertStringToDrawable(topping.getIconSource()));
         iconTopping.setPadding(5, 0, StaticFunctions.convertDpToPx(10), 0);
@@ -202,6 +217,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                         continue;
                     }
                     addTopping(topping, pizzaPart);
+                    addIndicator(toppingBox);
                 }
             }
         });
@@ -218,6 +234,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                         continue;
                     }
                     addTopping(topping, pizzaPart);
+                    addIndicator(toppingBox);
                 }
             }
         });
@@ -299,6 +316,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         image.setLayoutParams(layoutParams);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addTopping(Topping topping, int pizzaPart) {
         int toppingId = createToppingId(topping);
         while (idToStringMap.containsKey(toppingId)) {
@@ -313,6 +331,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         return random.nextInt() * (toppingsList.indexOf(topping) + random.nextInt());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addToppingToPizza(Topping topping, int toppingId, int pizzaPart) {
         try {
             FrameLayout frameLayout = getAppropriateFrameId(pizzaPart);
@@ -403,6 +422,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         partClickedAction(view, clickId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void partClickedAction(View view, int clickId) {
         if (pizzas_enlarged.contains(pizzaImageToPartMap.get(clickId))) {
             shrinkSlice(pizzaImageToPartMap.get(clickId));
@@ -420,15 +440,16 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void editToppingChart() {
         for (Topping topping : toppingsList) {
-            CheckBox checkBox = findViewById(toppingsList.indexOf(topping));
+            LinearLayout toppingBox = findViewById(toppingsList.indexOf(topping));
             for (Integer pizzaPart : pizzas_enlarged) {
                 if (!pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
-                    checkBox.setChecked(false);
+                    removeIndicator(toppingBox);
                     break;
                 } else {
-                    checkBox.setChecked(true);
+                    addIndicator(toppingBox);
                 }
             }
         }
