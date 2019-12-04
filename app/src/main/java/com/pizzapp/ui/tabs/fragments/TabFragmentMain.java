@@ -15,10 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.pizzapp.MainActivity;
 import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
@@ -44,8 +42,8 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
-    private static final int TOPPING_HEIGHT = 127;
-    private static final int TOPPING_WIDTH = 127;
+    private static final double TOPPING_HEIGHT = 107.5;
+    private static final double TOPPING_WIDTH = 107.5;
 
     private static final int ANGLE_TO_ROTATE = 90;
 

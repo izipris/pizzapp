@@ -172,8 +172,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 //        iconText.setLayoutParams(textParams);
 //        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
-        toppingBox.setPadding(StaticFunctions.convertDpToPx(20),StaticFunctions.convertDpToPx(10),
-                StaticFunctions.convertDpToPx(20),StaticFunctions.convertDpToPx(10));
+        toppingBox.setPadding(StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10),
+                StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10));
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
         toppingBox.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -208,7 +208,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addIndicator(toppingBox);
             }
 
-    }
+        }
 
     }
 
@@ -226,7 +226,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void addToppingToBox(final LinearLayout toppingBox, final Topping topping){
+    private void addToppingToBox(final LinearLayout toppingBox, final Topping topping) {
         ImageView iconTopping = new ImageView(this);
         iconTopping.setImageDrawable(convertStringToDrawable(topping.getIconSource()));
         iconTopping.setPadding(5, 0, StaticFunctions.convertDpToPx(10), 0);
@@ -239,8 +239,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 //        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 //                LinearLayout.LayoutParams.WRAP_CONTENT );
         TextView iconText = new TextView(this);
-        String textToDisplay = topping.getName() + "......" + topping.getPrice()/4;
-                iconText.setText(textToDisplay);
+        String textToDisplay = topping.getName() + "......" + topping.getPrice() / 4;
+        iconText.setText(textToDisplay);
         iconText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

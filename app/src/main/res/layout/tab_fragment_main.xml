@@ -23,7 +23,7 @@
             android:gravity="center"
             android:layoutDirection="ltr"
             android:onClick="backToMain"
-            android:paddingBottom="1dp">
+            android:paddingBottom="0.25dp">
 
 
             <FrameLayout
@@ -33,9 +33,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/topLeft"
@@ -65,9 +65,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/topRight"
@@ -108,9 +108,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
 
                 <ImageView
@@ -142,9 +142,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/bottomRight"
