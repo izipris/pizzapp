@@ -55,6 +55,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private final double ORIGINAL_HEIGHT = 127.5;
     private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
+    private final String TOPPING_PICKED_INDICATOR = "@drawable/clicked_button_1";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -124,7 +125,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         int numberOfColumns = calculateNumberOfColumns();
         layout.setColumnCount(numberOfColumns);
         for (int i = 0; i < numberOfRows; i++) {
-            GridLayout.Spec rowSpec = GridLayout.spec(i, 1, 1);
+            GridLayout.Spec rowSpec = GridLayout.spec(i, 1, 0);
             for (int j = 0; j < numberOfColumns; j++) {
                 if (j * MIN_ROWS_IN_CHART + i == toppingsList.size()) {
                     break;
@@ -148,6 +149,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private LinearLayout createToppingBox(int row, int col) {
         final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
@@ -157,16 +159,17 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 //        iconText.setLayoutParams(textParams);
 //        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
-        toppingBox.setPadding(StaticFunctions.convertDpToPx(5),0,
-                StaticFunctions.convertDpToPx(5),0);
+        toppingBox.setPadding(StaticFunctions.convertDpToPx(20),StaticFunctions.convertDpToPx(10),
+                StaticFunctions.convertDpToPx(20),StaticFunctions.convertDpToPx(10));
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
         toppingBox.setOrientation(LinearLayout.HORIZONTAL);
 
         addToppingToBox(toppingBox, topping);
-        // TODO: 04 דצמבר 2019 add the red outline
-//        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
-//            checkBox.setChecked(true);
-//        }
+
+        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
+            toppingBox.getChildAt(0).setVisibility(View.GONE);
+            toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
+        }
 
         toppingBox.setOnClickListener(new View.OnClickListener() {
             @Override
