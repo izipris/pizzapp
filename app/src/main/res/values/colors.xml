@@ -10,4 +10,5 @@
     <color name="textViewChosenOptionIndicator">#808080</color>
     <color name="tab_background_selected">#eaeaea</color>
     <color name="tab_background_unselected">#cccccc</color>
+    <color name="greeting_color">#808080</color>
 </resources>
