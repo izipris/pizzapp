@@ -10,5 +10,6 @@
     <dimen name="textViewChosenOptionSize">18sp</dimen>
     <dimen name="textViewChosenOptionSeparatorSize">24sp</dimen>
     <dimen name="mainFragmentMarginTop">10dp</dimen>
+    <dimen name="sizeFragmentMarginTop">20dp</dimen>
     <dimen name="crustCaptionSize">20sp</dimen>
 </resources>

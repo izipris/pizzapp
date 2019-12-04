@@ -9,8 +9,11 @@
     android:shrinkColumns="*">
 
     <TableRow
+        android:id="@+id/sizeMRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center">
 
         <LinearLayout
@@ -39,7 +42,7 @@
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/medium_pizza_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,8 +62,12 @@
     </TableRow>
 
     <TableRow
+        android:id="@+id/sizeLRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/sizeFragmentMarginTop"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center">
 
         <LinearLayout
@@ -89,7 +96,7 @@
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/large_pizza_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,8 +116,12 @@
     </TableRow>
 
     <TableRow
+        android:id="@+id/sizeXLRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/sizeFragmentMarginTop"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center">
 
         <LinearLayout
@@ -139,7 +150,7 @@
                 app:fontFamily="@font/open_sans" />
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/extra_large_pizza_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
