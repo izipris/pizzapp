@@ -7,64 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorGrayTabBackground"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/logoAreaColor">
-
-            <ImageView
-                android:id="@+id/imageViewLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:paddingLeft="@dimen/logoPaddingLeft"
-                android:paddingTop="@dimen/logoPaddingTop"
-                app:srcCompat="@drawable/ic_pizzap" />
-
-
-            <TextView
-                android:id="@+id/textViewGreeting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/greetingHeaderMarginBottom"
-                android:text="@string/hello"
-                android:textAlignment="center"
-                android:textColor="@color/greeting_color"
-                android:textSize="@dimen/greetingHeaderSize"
-                app:fontFamily="@font/open_sans" />
-
-
-        </LinearLayout>
-    </TableRow>
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tabsHeight"
-        app:fontFamily="@font/open_sans"
-        app:tabBackground="@drawable/tab_color_selector"
-        app:tabGravity="fill"
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="fixed"
-        app:tabTextColor="@android:color/black" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/layoutLogo"
+            layout="@layout/layout_logo" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tabsHeight"
+            app:fontFamily="@font/open_sans"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabTextColor="@android:color/black" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
