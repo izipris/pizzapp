@@ -56,7 +56,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
 
-    private static final int MIN_ROWS_IN_CHART = 3;
+    private static final int MIN_ROWS_IN_CHART = 4;
 
     private int currentSliceId = -1;
     private int currentSliceIdOutOfFour;
@@ -151,8 +151,12 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private LinearLayout createToppingBox(int row, int col) {
         final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
-        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+//        GridLayout.LayoutParams textParams = LinearLayout.getnew GridLayout.LayoutParams(GridLayout.LayoutParams.WRAP_CONTENT,
+//                GridLayout.LayoutParams.WRAP_CONTENT );
+//        textParams.gravity = Gravity.CENTER;
+//        iconText.setLayoutParams(textParams);
+//        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
         toppingBox.setPadding(StaticFunctions.convertDpToPx(5),0,
                 StaticFunctions.convertDpToPx(5),0);
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
@@ -214,10 +218,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 }
             }
         });
-        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT );
-        textParams.gravity = Gravity.CENTER;
-        iconText.setLayoutParams(textParams);
+//        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT );
+//        textParams.gravity = Gravity.CENTER;
+//        iconText.setLayoutParams(textParams);
         toppingBox.addView(iconTopping);
         toppingBox.addView(iconText);
     }
