@@ -119,7 +119,7 @@ public class TabFragmentSize extends Fragment {
 
     private void highlightChosenSize(List<Pair<TableRow, Size>> rowsAndSizes, Pair<TableRow, Size> chosen) {
         Pizza currentPizza = ((MainActivity) this.getActivity()).getPizza();
-        chosen.first.setBackgroundResource(R.drawable.ic_size_background);
+        setChosenBackground(chosen);
         highlightChosenTextViews(chosen.first, Color.WHITE);
         for (final Pair<TableRow, Size> rowSizePair : rowsAndSizes) {
             if (rowSizePair.first != chosen.first) {
@@ -149,6 +149,20 @@ public class TabFragmentSize extends Fragment {
         textViewDimension.setTextColor(color);
         textViewPrice.setTextColor(color);
 
+    }
+
+    private void setChosenBackground(Pair<TableRow, Size> rowSizeMapping) {
+        switch (rowSizeMapping.second.getName()) {
+            case "M":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_m_background);
+                break;
+            case "L":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_l_background);
+                break;
+            case "XL":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_xl_background);
+                break;
+        }
     }
 
     @Override
