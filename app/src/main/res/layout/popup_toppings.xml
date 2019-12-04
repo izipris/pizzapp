@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topping_toolbar"
@@ -46,11 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="center"
             android:layoutDirection="ltr"
-            android:onClick="backToMain"
             android:paddingBottom="1dp">
 
 
@@ -58,9 +60,6 @@
                 android:id="@+id/topLeftFrame"
                 android:layout_width="@dimen/enlargedPizzaSize"
                 android:layout_height="@dimen/enlargedPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -90,9 +89,6 @@
                 android:id="@+id/topRightFrame"
                 android:layout_width="@dimen/enlargedPizzaSize"
                 android:layout_height="@dimen/enlargedPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -133,9 +129,6 @@
                 android:id="@+id/bottomLeftFrame"
                 android:layout_width="@dimen/enlargedPizzaSize"
                 android:layout_height="@dimen/enlargedPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -167,8 +160,6 @@
                 android:id="@+id/bottomRightFrame"
                 android:layout_width="@dimen/enlargedPizzaSize"
                 android:layout_height="@dimen/enlargedPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
                 android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
@@ -217,17 +208,24 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:clickable="true"
-            android:focusable="true"
             android:layoutDirection="ltr"
-            android:onClick="backToMain"
-            android:paddingLeft="20dp"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="18dp">
 
         </GridLayout>
 
     </HorizontalScrollView>
+    </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:background="@drawable/done_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="420dp"
+        android:onClick="backToMain"
+        />
 
-</LinearLayout>
+</RelativeLayout>

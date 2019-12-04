@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
     private final String TOPPING_PICKED_INDICATOR = "@drawable/clicked_button_1";
+    private final String SPACE_KEEPER = "@drawable/rectangle_spot";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -90,6 +92,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void extractExtras() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -103,6 +106,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void createInitialPizza(int partId) {
         currentSliceIdOutOfFour = 0;
         assignCurrentSliceId();
@@ -121,6 +125,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createToppingChart() {
         GridLayout layout = findViewById(R.id.grid_layout);
+//        HorizontalScrollView.LayoutParams lp = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.WRAP_CONTENT,
+//                HorizontalScrollView.LayoutParams.WRAP_CONTENT);
+//        lp.topMargin = StaticFunctions.convertDpToPx(5);
+//        lp.bottomMargin = StaticFunctions.convertDpToPx(5);
+//        lp.leftMargin = StaticFunctions.convertDpToPx(20);
+//        lp.rightMargin = StaticFunctions.convertDpToPx(20);
+//        layout.setLayoutParams(lp);
+        layout.setUseDefaultMargins(true);
         int numberOfRows = min(MIN_ROWS_IN_CHART, toppingsList.size());
         layout.setRowCount(numberOfRows);
         int numberOfColumns = calculateNumberOfColumns();
@@ -175,26 +187,35 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 // TODO: 04 דצמבר 2019 add the listener if has toppings already
-                if (toppingBox.getBackground() == convertStringToDrawable(TOPPING_PICKED_INDICATOR)) {
-                    removeTopping(topping);
-                    removeIndicator(toppingBox);
-                } else {
-                    for (Integer pizzaPart : pizzas_enlarged) {
-                        if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
-                            continue;
-                        }
-                        addTopping(topping, pizzaPart);
-                        addIndicator(toppingBox);
-                    }
-                }
+
+                addOrRemoveTopping(toppingBox, topping);
             }
         });
         return toppingBox;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void addOrRemoveTopping(LinearLayout toppingBox, Topping topping) {
+        if (toppingBox.getChildAt(0).getVisibility() == View.GONE) {
+            removeTopping(topping);
+            removeIndicator(toppingBox);
+        } else {
+            for (Integer pizzaPart : pizzas_enlarged) {
+                if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
+                    continue;
+                }
+                addTopping(topping, pizzaPart);
+                addIndicator(toppingBox);
+            }
+
+    }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addIndicator(LinearLayout toppingBox) {
         toppingBox.getChildAt(0).setVisibility(View.GONE);
+        toppingBox.getChildAt(0).setBackground(convertStringToDrawable(SPACE_KEEPER));
         toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
     }
 
@@ -212,13 +233,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         iconTopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Integer pizzaPart : pizzas_enlarged) {
-                    if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
-                        continue;
-                    }
-                    addTopping(topping, pizzaPart);
-                    addIndicator(toppingBox);
-                }
+                addOrRemoveTopping(toppingBox, topping);
             }
         });
 //        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -229,13 +244,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         iconText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Integer pizzaPart : pizzas_enlarged) {
-                    if (pizza.getPizzaPart(pizzaPart).hasCertainTopping(topping.getName())) {
-                        continue;
-                    }
-                    addTopping(topping, pizzaPart);
-                    addIndicator(toppingBox);
-                }
+                addOrRemoveTopping(toppingBox, topping);
             }
         });
 //        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -417,6 +426,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onClick(View view) {
         int clickId = view.getId();
         partClickedAction(view, clickId);
