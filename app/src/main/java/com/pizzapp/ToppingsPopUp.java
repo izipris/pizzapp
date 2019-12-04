@@ -445,11 +445,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     }
 
     @Override
-    public Intent getParentActivityIntent() {
+    public void onBackPressed() {
+        Log.d(LOG_TAG, "onBackPressed");
         Intent intent = new Intent(this, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("pizza", pizza);
-        intent.putExtras(bundle);
-        return intent;
+        intent.putExtra("pizza", pizza);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }
