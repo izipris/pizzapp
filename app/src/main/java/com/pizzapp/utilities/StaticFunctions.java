@@ -2,6 +2,8 @@ package com.pizzapp.utilities;
 
 import android.content.res.Resources;
 
+import java.util.Random;
+
 public class StaticFunctions {
     public static int convertDpToPx(double dp)
     {
@@ -21,5 +23,10 @@ public class StaticFunctions {
             }
         }
         return false;
+    }
+
+    public static int generateRandomNumber() {
+        Random random = new Random();
+        return random.nextInt() * random.nextInt();
     }
 }

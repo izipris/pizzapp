@@ -52,7 +52,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
     private final String TOPPING_PICKED_INDICATOR = "@drawable/clicked_button_1";
-    private String OLIVE_WORD = "@drawable/olive_words";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -212,23 +211,21 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addOrRemoveTopping(toppingBox, topping);
             }
         });
-//        TextView iconText = new TextView(this);
-//        String dots = numberOfDotFillersRequired(topping);
-//        String textToDisplay = topping.getName() + "  " + dots  + "  ";
-//        iconText.setText(textToDisplay);
-//        iconText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                addOrRemoveTopping(toppingBox, topping);
-//            }
-//        });
-//        TextView iconPrice = new TextView(this);
-//        iconPrice.setText(String.valueOf(topping.getPrice() / 4));
-        ImageView iconText = new ImageView(this);
-        iconText.setImageDrawable(convertStringToDrawable(OLIVE_WORD));
+        TextView iconText = new TextView(this);
+        String dots = numberOfDotFillersRequired(topping);
+        String textToDisplay = topping.getName() + "  " + dots  + "  ";
+        iconText.setText(textToDisplay);
+        iconText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addOrRemoveTopping(toppingBox, topping);
+            }
+        });
+        TextView iconPrice = new TextView(this);
+        iconPrice.setText(String.valueOf(topping.getPrice() / 4));
         toppingBox.addView(iconTopping);
         toppingBox.addView(iconText);
-//        toppingBox.addView(iconPrice);
+        toppingBox.addView(iconPrice);
     }
 
     private String numberOfDotFillersRequired(Topping topping) {
