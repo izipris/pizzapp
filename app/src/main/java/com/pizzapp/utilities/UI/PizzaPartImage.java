@@ -143,6 +143,15 @@ public class PizzaPartImage extends Image {
         toppingImageList.remove(toppingToRemove);
     }
 
+    public void removeAllTopping(){
+        List<ToppingImage> tempImageList = new ArrayList<>(toppingImageList);
+        for (ToppingImage toppingToRemove: tempImageList){
+            ImageView toppingToRemoveImage = view.findViewById(toppingToRemove.id);
+            toppingToRemoveImage.setVisibility(View.GONE);
+            toppingImageList.remove(toppingToRemove);
+        }
+    }
+
     private ToppingImage getToppingId(Topping topping) {
         for (ToppingImage toppingImage: toppingImageList){
             if (toppingImage.getName().equals(topping.getName())){

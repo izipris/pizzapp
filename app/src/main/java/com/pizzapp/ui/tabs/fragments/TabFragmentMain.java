@@ -45,10 +45,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private static final int BOTTOM_RIGHT_SLICE = 1;
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
-    private static final double TOPPING_HEIGHT = 107.5;
-    private static final double TOPPING_WIDTH = 107.5;
-
-    private static final int ANGLE_TO_ROTATE = 90;
 
     private Pizza currentPizza;
     private Order finalOrder;
@@ -126,8 +122,8 @@ public class TabFragmentMain extends Fragment implements Serializable {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (ImageView toppingImage : toppingImages) {
-                    toppingImage.setVisibility(View.GONE);
+                for (PizzaPartImage pizzaPartImage : partImages) {
+                    pizzaPartImage.removeAllTopping();
                 }
                 currentPizza.removePizzaToppings();
                 finalOrder.upadateLastPizza(currentPizza);
@@ -175,72 +171,72 @@ public class TabFragmentMain extends Fragment implements Serializable {
 //        }
 //    }
 
-    private void addTopping(View view, final int currentPart, Topping topping) {
-        try {
-            FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
-            ImageView newTopping = new ImageView(getActivity());
-            newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
-            newTopping.setRotation(getCurrentRotation(currentPart));
-            newTopping.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openPopup(currentPart);
-                }
-            });
-            FrameLayout.LayoutParams layoutParams = new
-                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
-            setGravity(layoutParams, currentPart);
-            layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_HEIGHT);
-            layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_WIDTH);
+//    private void addTopping(View view, final int currentPart, Topping topping) {
+//        try {
+//            FrameLayout frameLayout = getAppropriateFrameId(currentPart, view);
+//            ImageView newTopping = new ImageView(getActivity());
+//            newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
+//            newTopping.setRotation(getCurrentRotation(currentPart));
+//            newTopping.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    openPopup(currentPart);
+//                }
+//            });
+//            FrameLayout.LayoutParams layoutParams = new
+//                    FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(154), StaticFunctions.convertDpToPx(154));
+//            setGravity(layoutParams, currentPart);
+//            layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_HEIGHT);
+//            layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_WIDTH);
+//
+//            newTopping.setLayoutParams(layoutParams);
+//            toppingImages.add(newTopping);
+//            frameLayout.addView(newTopping);
+//        } catch (DoesNotExist doesNotExist) {
+//            showErrorMessage(view);
+//        }
+//    }
 
-            newTopping.setLayoutParams(layoutParams);
-            toppingImages.add(newTopping);
-            frameLayout.addView(newTopping);
-        } catch (DoesNotExist doesNotExist) {
-            showErrorMessage(view);
-        }
-    }
-
-    private FrameLayout getAppropriateFrameId(int sliceId, View view) throws DoesNotExist {
-        switch (sliceId) {
-            case (TOP_RIGHT_SLICE):
-                return view.findViewById(R.id.topRightFrame);
-            case (BOTTOM_RIGHT_SLICE):
-                return view.findViewById(R.id.bottomRightFrame);
-            case (BOTTOM_LEFT_SLICE):
-                return view.findViewById(R.id.bottomLeftFrame);
-            case (TOP_LEFT_SLICE):
-                return view.findViewById(R.id.topLeftFrame);
-        }
-        throw new DoesNotExist();
-
-    }
-
-    private void setGravity(FrameLayout.LayoutParams layoutParams, int currentPart) {
-        switch (currentPart) {
-            case (TOP_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
-                break;
-            case (BOTTOM_RIGHT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.START;
-                break;
-            case (BOTTOM_LEFT_SLICE):
-                layoutParams.gravity = Gravity.TOP | Gravity.END;
-                break;
-            case (TOP_LEFT_SLICE):
-                layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
-                break;
-        }
-    }
-
-    private int getCurrentRotation(int currentPart) {
-        return ANGLE_TO_ROTATE * currentPart;
-    }
-
-    private Drawable convertStringToDrawable(String name) {
-        int id = getResources().getIdentifier(name, "drawable", getActivity().getPackageName());
-        return getResources().getDrawable(id);
-    }
+//    private FrameLayout getAppropriateFrameId(int sliceId, View view) throws DoesNotExist {
+//        switch (sliceId) {
+//            case (TOP_RIGHT_SLICE):
+//                return view.findViewById(R.id.topRightFrame);
+//            case (BOTTOM_RIGHT_SLICE):
+//                return view.findViewById(R.id.bottomRightFrame);
+//            case (BOTTOM_LEFT_SLICE):
+//                return view.findViewById(R.id.bottomLeftFrame);
+//            case (TOP_LEFT_SLICE):
+//                return view.findViewById(R.id.topLeftFrame);
+//        }
+//        throw new DoesNotExist();
+//
+//    }
+//
+//    private void setGravity(FrameLayout.LayoutParams layoutParams, int currentPart) {
+//        switch (currentPart) {
+//            case (TOP_RIGHT_SLICE):
+//                layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
+//                break;
+//            case (BOTTOM_RIGHT_SLICE):
+//                layoutParams.gravity = Gravity.TOP | Gravity.START;
+//                break;
+//            case (BOTTOM_LEFT_SLICE):
+//                layoutParams.gravity = Gravity.TOP | Gravity.END;
+//                break;
+//            case (TOP_LEFT_SLICE):
+//                layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
+//                break;
+//        }
+//    }
+//
+//    private int getCurrentRotation(int currentPart) {
+//        return ANGLE_TO_ROTATE * currentPart;
+//    }
+//
+//    private Drawable convertStringToDrawable(String name) {
+//        int id = getResources().getIdentifier(name, "drawable", getActivity().getPackageName());
+//        return getResources().getDrawable(id);
+//    }
 
     private void addOnClickListener(List<ImageView> slices) {
         for (ImageView slice : slices) {
