@@ -86,7 +86,7 @@ public class PizzaPartImage extends Image {
     }
 
     private void removePlus() {
-        view.findViewById(plusId).setVisibility(View.INVISIBLE);
+        view.findViewById(plusId).setVisibility(View.GONE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

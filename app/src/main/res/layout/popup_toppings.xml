@@ -199,6 +199,7 @@
         android:background="@drawable/done_button"
         android:layout_alignParentRight="true"
         android:layout_marginTop="410dp"
+        android:layout_marginRight="15dp"
         android:onClick="backToMain"
         />
 
