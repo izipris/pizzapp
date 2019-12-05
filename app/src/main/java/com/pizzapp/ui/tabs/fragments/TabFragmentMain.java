@@ -2,33 +2,30 @@ package com.pizzapp.ui.tabs.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+
 import com.pizzapp.MainActivity;
 import com.pizzapp.OrderSummary;
 import com.pizzapp.R;
 import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
-import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
-import com.pizzapp.utilities.StaticFunctions;
 import com.pizzapp.utilities.UI.PizzaPartImage;
 
 import java.io.Serializable;
