@@ -1,11 +1,13 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,23 +53,23 @@ public class TabFragmentSize extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
+        final ArrayList<Pair<TableRow, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
 
         currentPizza = ((MainActivity) this.getActivity()).getPizza();
         chooseAlready = false;
 
-        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
-            buttonSizePair.first.setOnClickListener(new View.OnClickListener() {
+        for (final Pair<TableRow, Size> rowSizePair : buttonsAndSizes) {
+            rowSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    highlightChosenSize(buttonsAndSizes, buttonSizePair);
+                    highlightChosenSize(buttonsAndSizes, rowSizePair);
                     chooseAlready = true;
                 }
             });
             /* In case user already chose size */
-            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && buttonSizePair.second == currentPizza.getSize()) {
+            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && rowSizePair.second == currentPizza.getSize()) {
                 chooseAlready = true;
-                buttonSizePair.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+                rowSizePair.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                         getString(R.string.tab_title_separator) + currentPizza.getSize().getName());
                 tabAdapter.notifyDataSetChanged();
@@ -75,10 +77,10 @@ public class TabFragmentSize extends Fragment {
         }
     }
 
-    private ArrayList<Pair<ImageButton, Size>> setup(@NonNull View view, Database database) {
-        ArrayList<Pair<ImageButton, Size>> buttonsAndSizes = new ArrayList<>();
+    private ArrayList<Pair<TableRow, Size>> setup(@NonNull View view, Database database) {
+        ArrayList<Pair<TableRow, Size>> buttonsAndSizes = new ArrayList<>();
         Size currentSize;
-        ImageButton currentButton = null;
+        TableRow currentRow = null;
         for (int i = 0; i < database.getSizes().size(); ++i) {
             currentSize = database.getSizes().get(i);
             switch (i) {
@@ -89,7 +91,7 @@ public class TabFragmentSize extends Fragment {
                                     getString(R.string.currency_symbol));
                     ((TextView) view.findViewById(R.id.medium_size)).setText(String.format(Locale.getDefault(), "%.1f",
                             currentSize.getDimension()) + getString(R.string.size_symbol));
-                    currentButton = view.findViewById(R.id.medium_pizza_image);
+                    currentRow = view.findViewById(R.id.sizeMRow);
                     break;
                 case DB_SIZE_L:
                     ((TextView) view.findViewById(R.id.L)).setText(currentSize.getName());
@@ -98,7 +100,7 @@ public class TabFragmentSize extends Fragment {
                                     getString(R.string.currency_symbol));
                     ((TextView) view.findViewById(R.id.large_size)).setText(String.format(Locale.getDefault(), "%.1f",
                             currentSize.getDimension()) + getString(R.string.size_symbol));
-                    currentButton = view.findViewById(R.id.large_pizza_image);
+                    currentRow = view.findViewById(R.id.sizeLRow);
                     break;
                 case DB_SIZE_XL:
                     ((TextView) view.findViewById(R.id.XL)).setText(currentSize.getName());
@@ -107,20 +109,22 @@ public class TabFragmentSize extends Fragment {
                                     getString(R.string.currency_symbol));
                     ((TextView) view.findViewById(R.id.extra_large_size)).setText(String.format(Locale.getDefault(), "%.1f",
                             currentSize.getDimension()) + getString(R.string.size_symbol));
-                    currentButton = view.findViewById(R.id.extra_large_pizza_image);
+                    currentRow = view.findViewById(R.id.sizeXLRow);
                     break;
             }
-            buttonsAndSizes.add(new Pair<>(currentButton, currentSize));
+            buttonsAndSizes.add(new Pair<>(currentRow, currentSize));
         }
         return buttonsAndSizes;
     }
 
-    private void highlightChosenSize(List<Pair<ImageButton, Size>> buttonsAndSizes, Pair<ImageButton, Size> chosen) {
+    private void highlightChosenSize(List<Pair<TableRow, Size>> rowsAndSizes, Pair<TableRow, Size> chosen) {
         Pizza currentPizza = ((MainActivity) this.getActivity()).getPizza();
-        chosen.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (final Pair<ImageButton, Size> buttonSizePair : buttonsAndSizes) {
-            if (buttonSizePair.first != chosen.first) {
-                buttonSizePair.first.setBackgroundResource(0);
+        setChosenBackground(chosen);
+        highlightChosenTextViews(chosen.first, Color.WHITE);
+        for (final Pair<TableRow, Size> rowSizePair : rowsAndSizes) {
+            if (rowSizePair.first != chosen.first) {
+                rowSizePair.first.setBackgroundResource(0);
+                highlightChosenTextViews(rowSizePair.first, Color.BLACK);
             }
         }
         currentPizza.setSize(chosen.second);
@@ -130,6 +134,35 @@ public class TabFragmentSize extends Fragment {
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
+    }
+
+    private void highlightChosenTextViews(TableRow tableRow, int color) {
+        final int LINEAR_LAYOUT_POSITION = 0;
+        final int TEXT_VIEW_1_POSITION = 0;
+        final int TEXT_VIEW_2_POSITION = 1;
+        final int TEXT_VIEW_3_POSITION = 2;
+        LinearLayout linearLayout = (LinearLayout) tableRow.getChildAt(LINEAR_LAYOUT_POSITION);
+        TextView textViewCaption = (TextView) linearLayout.getChildAt(TEXT_VIEW_1_POSITION);
+        TextView textViewDimension = (TextView) linearLayout.getChildAt(TEXT_VIEW_2_POSITION);
+        TextView textViewPrice = (TextView) tableRow.getChildAt(TEXT_VIEW_3_POSITION);
+        textViewCaption.setTextColor(color);
+        textViewDimension.setTextColor(color);
+        textViewPrice.setTextColor(color);
+
+    }
+
+    private void setChosenBackground(Pair<TableRow, Size> rowSizeMapping) {
+        switch (rowSizeMapping.second.getName()) {
+            case "M":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_m_background);
+                break;
+            case "L":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_l_background);
+                break;
+            case "XL":
+                rowSizeMapping.first.setBackgroundResource(R.drawable.ic_size_xl_background);
+                break;
+        }
     }
 
     @Override
