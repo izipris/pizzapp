@@ -16,6 +16,7 @@ import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class PizzaPartImage extends Image {
     private final double ORIGINAL_WIDTH = 127.5;
     private final double ORIGINAL_HEIGHT = 127.5;
 
-    private List<ToppingImage> toppingImageList;
+    private List<ToppingImage> toppingImageList = new ArrayList<>();
     private int frameId;
 
     public PizzaPartImage(int frameId, int pizzaPart, int id, String name, View view){
@@ -46,7 +47,7 @@ public class PizzaPartImage extends Image {
         this.view = view;
     }
 
-    private void shrinkSlice() {
+    public void shrinkSlice() {
         for (ToppingImage toppingImage : toppingImageList) {
             toppingImage.shrinkImage();
         }
@@ -61,7 +62,7 @@ public class PizzaPartImage extends Image {
         image.setLayoutParams(layoutParams);
     }
 
-    private void enlargeSlice() {
+    public void enlargeSlice() {
         for (ToppingImage toppingImage : toppingImageList) {
             toppingImage.enlargeImage();
         }
@@ -77,18 +78,14 @@ public class PizzaPartImage extends Image {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void addTopping(Topping topping, boolean initiation) {
+    public void addTopping(Topping topping, boolean initiation) {
         int toppingId = StaticFunctions.generateRandomNumber();
         while (imageIds.contains(toppingId)) {
             toppingId = StaticFunctions.generateRandomNumber();
         }
-        if (initiation) {
-            toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view, id));
-        }
+        toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view, id));
         addToppingToPizza(topping, toppingId, initiation);
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addToppingToPizza(Topping topping, int toppingId, boolean initiationOfActivity) {
@@ -115,7 +112,6 @@ public class PizzaPartImage extends Image {
         } else {
             layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_HEIGHT);
             layoutParams.width = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_WIDTH);
-            // TODO: 05 דצמבר 2019 add topping to the pizza
         }
         newTopping.setLayoutParams(layoutParams);
         frameLayout.addView(newTopping);
@@ -148,7 +144,7 @@ public class PizzaPartImage extends Image {
         }
     }
 
-    private void removeTopping(Topping topping) {
+    public void removeTopping(Topping topping) {
         ToppingImage toppingToRemove = getToppingId(topping);
         ImageView toppingToRemoveImage = view.findViewById(toppingToRemove.id);
         toppingToRemoveImage.setVisibility(View.GONE);
@@ -162,6 +158,23 @@ public class PizzaPartImage extends Image {
             }
         }
         return null;
+    }
+
+    public boolean hasTopping(Topping topping){
+        for (ToppingImage toppingImage: toppingImageList){
+            if (toppingImage.getName().equals(topping.getName())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int findToppingId(Topping topping){
+        for (ToppingImage toppingImage:toppingImageList){
+            if (toppingImage.getName().equals(topping.getName())){
+                return toppingImage.id;
+            }
+        } return -1;
     }
 }
 

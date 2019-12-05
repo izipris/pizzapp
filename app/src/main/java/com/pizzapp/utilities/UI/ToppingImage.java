@@ -22,7 +22,7 @@ public class ToppingImage extends Image {
         this.pizzaPartId = pizzaPartId;
     }
 
-    public void shrinkImage() {
+    void shrinkImage() {
         ImageView image = view.findViewById(id);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);
@@ -30,7 +30,7 @@ public class ToppingImage extends Image {
         image.setLayoutParams(layoutParams);
     }
 
-    public void enlargeImage() {
+    void enlargeImage() {
         ImageView image = view.findViewById(id);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ENLARGED_HEIGHT);
