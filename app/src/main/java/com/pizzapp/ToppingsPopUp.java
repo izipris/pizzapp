@@ -10,23 +10,27 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 import com.pizzapp.utilities.UI.PizzaPartImage;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import static java.lang.Math.min;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private static final String LOG_TAG = ToppingsPopUp.class.getSimpleName();
 
-    private final String TOPPING_PICKED_INDICATOR = "@drawable/clicked_button_1";
+    private final String TOPPING_PICKED_INDICATOR = "@drawable/topping_on_pizza_indicator";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -42,7 +46,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
-//        setToolbar();
         initializePizzaPartImageList(findViewById(android.R.id.content).getRootView());
         extractExtras();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
@@ -69,7 +72,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             }
         }
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createToppingChart() {
@@ -107,16 +109,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private LinearLayout createToppingBox(int row, int col) {
         final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
-
         toppingBox.setPadding(StaticFunctions.convertDpToPx(15), StaticFunctions.convertDpToPx(8),
                 StaticFunctions.convertDpToPx(15), StaticFunctions.convertDpToPx(8));
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
         toppingBox.setOrientation(LinearLayout.HORIZONTAL);
-
-        addToppingToBox(toppingBox, topping);
-
+        addToppingDataToToppingBox(toppingBox, topping);
         if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)) {
-            addIndicator(toppingBox);
+            addToppingOnPizzaIndicatorToToppingBox(toppingBox);
         }
         toppingBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,51 +130,31 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private void addOrRemoveTopping(LinearLayout toppingBox, Topping topping) {
         if (toppingBox.getChildAt(0).getVisibility() == View.INVISIBLE) {
             removeTopping(topping);
-            removeIndicator(toppingBox);
+            removeToppingOnPizzaIndicatorFromToppingBox(toppingBox);
         } else {
             for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
                 if (!pizzaPartImage.hasTopping(topping)) {
                     addTopping(topping);
-                    addIndicator(toppingBox);
+                    addToppingOnPizzaIndicatorToToppingBox(toppingBox);
                 }
             }
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void addTopping(Topping topping) {
-        for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
-            pizza.getPizzaPart(pizzaPartImage.getPizzaPart()).addTopping(topping);
-            pizzaPartImage.addTopping(topping, false);
-            addOnClickListener(pizzaPartImage, topping);
-        }
-    }
-
-    private void addOnClickListener(final PizzaPartImage pizzaPartImage, Topping topping) {
-        ImageView toppingImage = findViewById(pizzaPartImage.findToppingId(topping));
-        toppingImage.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onClick(View v) {
-                partClickedAction(v, pizzaPartImage.getPizzaPart());
-            }
-        });
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void addIndicator(LinearLayout toppingBox) {
+    private void addToppingOnPizzaIndicatorToToppingBox(LinearLayout toppingBox) {
         toppingBox.getChildAt(0).setVisibility(View.INVISIBLE);
         toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void removeIndicator(LinearLayout toppingBox) {
+    private void removeToppingOnPizzaIndicatorFromToppingBox(LinearLayout toppingBox) {
         toppingBox.getChildAt(0).setVisibility(View.VISIBLE);
         toppingBox.setBackground(null);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void addToppingToBox(final LinearLayout toppingBox, final Topping topping) {
+    private void addToppingDataToToppingBox(final LinearLayout toppingBox, final Topping topping) {
         ImageView iconTopping = new ImageView(this);
         iconTopping.setImageDrawable(convertStringToDrawable(topping.getIconSource()));
         iconTopping.setPadding(5, 0, StaticFunctions.convertDpToPx(10), 0);
@@ -186,7 +165,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             }
         });
         TextView iconText = new TextView(this);
-        String dots = numberOfDotFillersRequired(topping);
+        String dots = calculateNumberOfDotFillersRequired(topping);
         String textToDisplay = topping.getName() + "  " + dots + "  ";
         iconText.setText(textToDisplay);
         iconText.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +181,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         toppingBox.addView(iconPrice);
     }
 
-    private String numberOfDotFillersRequired(Topping topping) {
+    private String calculateNumberOfDotFillersRequired(Topping topping) {
         int lengthOfTopping = topping.getName().length();
         StringBuilder buf = new StringBuilder(28 - 2 * lengthOfTopping);
         for (int i = 0; i < 24 - 2 * lengthOfTopping; i++) {
@@ -222,6 +201,14 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private Drawable convertStringToDrawable(String name) {
         int id = getResources().getIdentifier(name, "drawable", getPackageName());
         return getResources().getDrawable(id);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void addTopping(Topping topping) {
+        for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
+            pizza.getPizzaPart(pizzaPartImage.getPizzaPart()).addTopping(topping);
+            pizzaPartImage.addTopping(topping, false);
+        }
     }
 
     private void removeTopping(Topping topping) {
@@ -269,10 +256,10 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             LinearLayout toppingBox = findViewById(toppingsList.indexOf(topping));
             for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
                 if (!pizzaPartImage.hasTopping(topping)) {
-                    removeIndicator(toppingBox);
+                    removeToppingOnPizzaIndicatorFromToppingBox(toppingBox);
                     break;
                 } else {
-                    addIndicator(toppingBox);
+                    addToppingOnPizzaIndicatorToToppingBox(toppingBox);
                 }
             }
         }
@@ -286,12 +273,4 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        Log.d(LOG_TAG, "onBackPressed");
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("pizza", pizza);
-        setResult(RESULT_OK, intent);
-        super.onBackPressed();
-    }
 }
