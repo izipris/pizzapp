@@ -43,5 +43,6 @@
     <string name="textViewChosenCrustIndicatorText">CRUST</string>
     <string name="textViewChosenSizeIndicatorText">SIZE</string>
     <string name="done">DONE</string>
+    <string name="popup_logo_title">Choose Topping</string>
 
 </resources>

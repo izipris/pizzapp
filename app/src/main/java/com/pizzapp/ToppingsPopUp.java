@@ -47,18 +47,18 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_toppings);
-        setToolbar();
+//        setToolbar();
         initializePizzaPartImageList(findViewById(android.R.id.content).getRootView());
         extractExtras();
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
     }
 
-    private void setToolbar() {
-        Toolbar toolbar = findViewById(R.id.topping_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+//    private void setToolbar() {
+//        Toolbar toolbar = findViewById(R.id.topping_toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void extractExtras() {

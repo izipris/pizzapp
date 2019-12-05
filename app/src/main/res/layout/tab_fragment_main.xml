@@ -37,7 +37,6 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="bottom|end"
                     android:contentDescription="topLeft"
-                    android:onClick="onClick"
                     android:rotation="270"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
@@ -66,7 +65,6 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
-                    android:onClick="onClick"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
@@ -104,7 +102,6 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|end"
                     android:contentDescription="@string/bottomleft"
-                    android:onClick="onClick"
                     android:rotation="180"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
@@ -134,7 +131,7 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|start"
                     android:contentDescription="@string/bottomright"
-                    android:onClick="onClick"
+
                     android:rotation="90"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
