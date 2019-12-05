@@ -52,6 +52,13 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         createToppingChart();
     }
 
+    private void initializePizzaPartImageList(View view) {
+        partImages.add(new PizzaPartImage(R.id.topRightFrame, R.id.pizzaPLusTopRight, 0, R.id.topRight, "topRight", view));
+        partImages.add(new PizzaPartImage(R.id.bottomRightFrame, R.id.pizzaPLusBottomRight, 1, R.id.bottomRight, "bottomRight", view));
+        partImages.add(new PizzaPartImage(R.id.bottomLeftFrame, R.id.pizzaPLusBottomleft,  2, R.id.bottomLeft, "bottomLeft", view));
+        partImages.add(new PizzaPartImage(R.id.topLeftFrame, R.id.pizzaPLusTopleft, 3, R.id.topLeft, "topLeft", view));
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void extractExtras() {
         Bundle extras = getIntent().getExtras();
@@ -189,13 +196,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         }
         return buf.toString();
 
-    }
-
-    private void initializePizzaPartImageList(View view) {
-        partImages.add(new PizzaPartImage(R.id.topRightFrame, 0, R.id.topRight, "topRight", view));
-        partImages.add(new PizzaPartImage(R.id.bottomRightFrame, 1, R.id.bottomRight, "bottomRight", view));
-        partImages.add(new PizzaPartImage(R.id.bottomLeftFrame, 2, R.id.bottomLeft, "bottomLeft", view));
-        partImages.add(new PizzaPartImage(R.id.topLeftFrame, 3, R.id.topLeft, "topLeft", view));
     }
 
     private Drawable convertStringToDrawable(String name) {

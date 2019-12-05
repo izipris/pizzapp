@@ -38,9 +38,11 @@ public class PizzaPartImage extends Image {
 
     private List<ToppingImage> toppingImageList = new ArrayList<>();
     private int frameId;
+    private int plusId;
 
-    public PizzaPartImage(int frameId, int pizzaPart, int id, String name, View view){
+    public PizzaPartImage(int frameId, int plusId, int pizzaPart, int id, String name, View view){
         this.frameId = frameId;
+        this.plusId = plusId;
         this.pizzaPart = pizzaPart;
         this.id = id;
         this.name = name;
@@ -52,6 +54,11 @@ public class PizzaPartImage extends Image {
             toppingImage.shrinkImage();
         }
         shrinkImage();
+        addPlus();
+    }
+
+    private void addPlus() {
+        view.findViewById(plusId).setVisibility(View.VISIBLE);
     }
 
     private void shrinkImage() {
@@ -67,6 +74,7 @@ public class PizzaPartImage extends Image {
             toppingImage.enlargeImage();
         }
         enlargeImage();
+        removePlus();
     }
 
     private void enlargeImage() {
@@ -75,6 +83,10 @@ public class PizzaPartImage extends Image {
         layoutParams.height = StaticFunctions.convertDpToPx(ENLARGED_HEIGHT);
         layoutParams.width = StaticFunctions.convertDpToPx(ENLARGED_WIDTH);
         image.setLayoutParams(layoutParams);
+    }
+
+    private void removePlus() {
+        view.findViewById(plusId).setVisibility(View.INVISIBLE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
