@@ -42,5 +42,6 @@
     <string name="button_continue_text">CONTINUE</string>
     <string name="textViewChosenCrustIndicatorText">CRUST</string>
     <string name="textViewChosenSizeIndicatorText">SIZE</string>
+    <string name="done">DONE</string>
 
 </resources>

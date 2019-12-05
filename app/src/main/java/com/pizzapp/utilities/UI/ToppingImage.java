@@ -12,17 +12,15 @@ public class ToppingImage extends Image {
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
     private final int TOPPING_ENLARGED_WIDTH = 123;
     private final int TOPPING_ENLARGED_HEIGHT = 123;
-    private int pizzaPartId;
 
-    public ToppingImage(int pizzaPart, int id, String name, View view, int pizzaPartId){
+    public ToppingImage(int pizzaPart, int id, String name, View view){
         this.pizzaPart = pizzaPart;
         this.id = id;
         this.name = name;
         this.view = view;
-        this.pizzaPartId = pizzaPartId;
     }
 
-    void shrinkImage() {
+    public void shrinkImage() {
         ImageView image = view.findViewById(id);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);

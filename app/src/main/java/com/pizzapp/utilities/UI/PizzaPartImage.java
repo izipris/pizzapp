@@ -83,7 +83,7 @@ public class PizzaPartImage extends Image {
         while (imageIds.contains(toppingId)) {
             toppingId = StaticFunctions.generateRandomNumber();
         }
-        toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view, id));
+        toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view));
         addToppingToPizza(topping, toppingId, initiation);
     }
 
@@ -94,14 +94,6 @@ public class PizzaPartImage extends Image {
         newTopping.setImageDrawable(convertStringToDrawable(topping.getImageSource()));
         newTopping.setRotation(getCurrentRotation(pizzaPart));
         newTopping.setId(toppingId);
-        // TODO: 05 דצמבר 2019 set on click listener
-//            newTopping.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int partClickedId = getSliceFromTopping(v.getId());
-//                    partClickedAction(v, partClickedId);
-//                }
-//            });
         FrameLayout.LayoutParams layoutParams = new
                 FrameLayout.LayoutParams(StaticFunctions.convertDpToPx(ENLARGED_HEIGHT),
                 StaticFunctions.convertDpToPx(ENLARGED_WIDTH));

@@ -3,6 +3,7 @@ package com.pizzapp.ui.tabs.fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import com.pizzapp.MainActivity;
 import com.pizzapp.OrderSummary;
@@ -27,6 +29,7 @@ import com.pizzapp.model.pizza.PizzaPart;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
+import com.pizzapp.utilities.UI.PizzaPartImage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,6 +52,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     private Pizza currentPizza;
     private Order finalOrder;
+    private List<PizzaPartImage> partImages = new ArrayList<>();
     private List<ImageView> toppingImages = new ArrayList<>();
 
     @Override
@@ -56,13 +60,15 @@ public class TabFragmentMain extends Fragment implements Serializable {
         return inflater.inflate(R.layout.tab_fragment_main, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializePizzaPartImageList(view);
         initiateCurrentPizzaOrder();
         showPrice(view);
         addButtonListeners(view);
-        createCurrentPizza(view);
+        createCurrentPizza();
         MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
     }
 
@@ -70,6 +76,13 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private void initiateCurrentPizzaOrder() {
         finalOrder = ((MainActivity) this.getActivity()).order;
         currentPizza = finalOrder.getLastPizza();
+    }
+
+    private void initializePizzaPartImageList(View view) {
+        partImages.add(new PizzaPartImage(R.id.topRightFrame, 0, R.id.topRight, "topRight", view));
+        partImages.add(new PizzaPartImage(R.id.bottomRightFrame, 1, R.id.bottomRight, "bottomRight", view));
+        partImages.add(new PizzaPartImage(R.id.bottomLeftFrame, 2, R.id.bottomLeft, "bottomLeft", view));
+        partImages.add(new PizzaPartImage(R.id.topLeftFrame, 3, R.id.topLeft, "topLeft", view));
     }
 
     private void addContinueOnClickListener(View view) {
@@ -140,18 +153,27 @@ public class TabFragmentMain extends Fragment implements Serializable {
         price.setText(priceDisplay);
     }
 
-
-    private void createCurrentPizza(View view) {
-        int currentPart = 0;
-        if (currentPizza != null) {
-            for (PizzaPart pizzaPart : currentPizza.getParts()) {
-                for (Topping topping : pizzaPart.getToppings()) {
-                    addTopping(view, currentPart, topping);
-                }
-                currentPart++;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void createCurrentPizza() {
+        for (int i = 0; i < currentPizza.getNumberOfParts(); i++) {
+            for (Topping topping : currentPizza.getParts().get(i).getToppings()) {
+                partImages.get(i).addTopping(topping, true);
             }
         }
     }
+
+
+//    private void createCurrentPizza(View view) {
+//        int currentPart = 0;
+//        if (currentPizza != null) {
+//            for (PizzaPart pizzaPart : currentPizza.getParts()) {
+//                for (Topping topping : pizzaPart.getToppings()) {
+//                    addTopping(view, currentPart, topping);
+//                }
+//                currentPart++;
+//            }
+//        }
+//    }
 
     private void addTopping(View view, final int currentPart, Topping topping) {
         try {
@@ -262,6 +284,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         startActivityForResult(intent, TOPPING_CHOOSING_RESULT);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -274,7 +297,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 toppingImage.setVisibility(View.GONE);
             }
             toppingImages.clear();
-            createCurrentPizza(getView());
+            createCurrentPizza();
             showUpdatedPrice();
         }
     }

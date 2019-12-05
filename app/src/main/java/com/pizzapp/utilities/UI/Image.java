@@ -43,8 +43,4 @@ public class Image {
         imageIds.add(id);
     }
 
-    public void removeId(int id){
-        imageIds.remove(id);
-    }
-
 }

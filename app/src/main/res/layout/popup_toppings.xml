@@ -67,7 +67,7 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="bottom|end"
                     android:contentDescription="topLeft"
-                    android:onClick="onClick"
+                    android:onClick="pizzaPartClicked"
                     android:rotation="270"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
@@ -96,7 +96,7 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
-                    android:onClick="onClick"
+                    android:onClick="pizzaPartClicked"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
@@ -134,7 +134,7 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|end"
                     android:contentDescription="@string/bottomleft"
-                    android:onClick="onClick"
+                    android:onClick="pizzaPartClicked"
                     android:rotation="180"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
@@ -164,7 +164,7 @@
                     android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|start"
                     android:contentDescription="@string/bottomright"
-                    android:onClick="onClick"
+                    android:onClick="pizzaPartClicked"
                     android:rotation="90"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
@@ -214,7 +214,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DONE"
+        android:text="@string/done"
         android:background="@drawable/done_button"
         android:layout_alignParentRight="true"
         android:layout_marginTop="410dp"
