@@ -49,7 +49,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
     private Pizza currentPizza;
     private Order finalOrder;
     private List<PizzaPartImage> partImages = new ArrayList<>();
-    private List<ImageView> toppingImages = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -206,10 +205,9 @@ public class TabFragmentMain extends Fragment implements Serializable {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
             finalOrder.upadateLastPizza(currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;
-            for (ImageView toppingImage : toppingImages) {
-                toppingImage.setVisibility(View.GONE);
+            for (PizzaPartImage pizzaPartImage : partImages) {
+                pizzaPartImage.removeAllTopping();
             }
-            toppingImages.clear();
             createCurrentPizza();
             showUpdatedPrice();
         }

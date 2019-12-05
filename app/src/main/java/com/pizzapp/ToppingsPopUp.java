@@ -10,21 +10,16 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
 import com.pizzapp.utilities.UI.PizzaPartImage;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.lang.Math.min;
 
 public class ToppingsPopUp extends AppCompatActivity implements Serializable {
@@ -53,12 +48,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         toppingsList = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database)).getToppings();
         createToppingChart();
     }
-
-//    private void setToolbar() {
-//        Toolbar toolbar = findViewById(R.id.topping_toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void extractExtras() {
@@ -126,7 +115,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
         addToppingToBox(toppingBox, topping);
 
-        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
+        if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping)) {
             addIndicator(toppingBox);
         }
         toppingBox.setOnClickListener(new View.OnClickListener() {
