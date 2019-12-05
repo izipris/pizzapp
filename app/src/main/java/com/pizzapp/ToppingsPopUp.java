@@ -1,7 +1,6 @@
 package com.pizzapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,28 +8,20 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.pizzapp.model.pizza.Crust;
 import com.pizzapp.model.pizza.Pizza;
-import com.pizzapp.model.pizza.PizzaPart;
-import com.pizzapp.model.pizza.Size;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,13 +116,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createToppingChart() {
         GridLayout layout = findViewById(R.id.grid_layout);
-//        HorizontalScrollView.LayoutParams lp = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.WRAP_CONTENT,
-//                HorizontalScrollView.LayoutParams.WRAP_CONTENT);
-//        lp.topMargin = StaticFunctions.convertDpToPx(5);
-//        lp.bottomMargin = StaticFunctions.convertDpToPx(5);
-//        lp.leftMargin = StaticFunctions.convertDpToPx(20);
-//        lp.rightMargin = StaticFunctions.convertDpToPx(20);
-//        layout.setLayoutParams(lp);
         layout.setUseDefaultMargins(true);
         int numberOfRows = min(MIN_ROWS_IN_CHART, toppingsList.size());
         layout.setRowCount(numberOfRows);
@@ -166,12 +150,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private LinearLayout createToppingBox(int row, int col) {
         final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
-//        GridLayout.LayoutParams textParams = LinearLayout.getnew GridLayout.LayoutParams(GridLayout.LayoutParams.WRAP_CONTENT,
-//                GridLayout.LayoutParams.WRAP_CONTENT );
-//        textParams.gravity = Gravity.CENTER;
-//        iconText.setLayoutParams(textParams);
-//        toppingBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT));
         toppingBox.setPadding(StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10),
                 StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10));
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
@@ -236,8 +214,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addOrRemoveTopping(toppingBox, topping);
             }
         });
-//        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT );
         TextView iconText = new TextView(this);
         String textToDisplay = topping.getName() + "......" + topping.getPrice() / 4;
         iconText.setText(textToDisplay);
@@ -247,10 +223,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addOrRemoveTopping(toppingBox, topping);
             }
         });
-//        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT );
-//        textParams.gravity = Gravity.CENTER;
-//        iconText.setLayoutParams(textParams);
         toppingBox.addView(iconTopping);
         toppingBox.addView(iconText);
     }
