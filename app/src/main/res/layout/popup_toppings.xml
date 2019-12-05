@@ -211,7 +211,7 @@
             android:layoutDirection="ltr"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:paddingRight="18dp">
+            >
 
         </GridLayout>
 
@@ -224,7 +224,7 @@
         android:text="DONE"
         android:background="@drawable/done_button"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="410dp"
         android:onClick="backToMain"
         />
 

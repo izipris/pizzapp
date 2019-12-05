@@ -18,11 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="center"
             android:layoutDirection="ltr"
-            android:onClick="backToMain"
             android:paddingBottom="0.25dp">
 
 
@@ -30,9 +27,6 @@
                 android:id="@+id/topLeftFrame"
                 android:layout_width="@dimen/originalPizzaSize"
                 android:layout_height="@dimen/originalPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -62,9 +56,6 @@
                 android:id="@+id/topRightFrame"
                 android:layout_width="@dimen/originalPizzaSize"
                 android:layout_height="@dimen/originalPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -95,19 +86,13 @@
             android:id="@+id/bottom_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="center"
-            android:layoutDirection="ltr"
-            android:onClick="backToMain">
+            android:layoutDirection="ltr">
 
             <FrameLayout
                 android:id="@+id/bottomLeftFrame"
                 android:layout_width="@dimen/originalPizzaSize"
                 android:layout_height="@dimen/originalPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">
@@ -139,9 +124,6 @@
                 android:id="@+id/bottomRightFrame"
                 android:layout_width="@dimen/originalPizzaSize"
                 android:layout_height="@dimen/originalPizzaSize"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
                 android:paddingLeft="0.25dp"
                 android:paddingEnd="0.25dp"
                 android:paddingRight="0.25dp">

@@ -14,14 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.IO;
 import com.pizzapp.utilities.StaticFunctions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +52,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
     private final double TOPPING_ORIGINAL_WIDTH = 107.5;
     private final String TOPPING_PICKED_INDICATOR = "@drawable/clicked_button_1";
-    private final String SPACE_KEEPER = "@drawable/rectangle_spot";
+    private String OLIVE_WORD = "@drawable/olive_words";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -150,8 +153,9 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private LinearLayout createToppingBox(int row, int col) {
         final LinearLayout toppingBox = new LinearLayout(this);
         final Topping topping = toppingsList.get(MIN_ROWS_IN_CHART * col + row);
-        toppingBox.setPadding(StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10),
-                StaticFunctions.convertDpToPx(20), StaticFunctions.convertDpToPx(10));
+
+        toppingBox.setPadding(StaticFunctions.convertDpToPx(15), StaticFunctions.convertDpToPx(8),
+                StaticFunctions.convertDpToPx(15), StaticFunctions.convertDpToPx(8));
         toppingBox.setId(MIN_ROWS_IN_CHART * col + row);
         toppingBox.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -160,12 +164,9 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
         if (pizza.getPizzaPart(currentSliceIdOutOfFour).hasCertainTopping(topping.getName())) {
             addIndicator(toppingBox);
         }
-
         toppingBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 04 דצמבר 2019 add the listener if has toppings already
-
                 addOrRemoveTopping(toppingBox, topping);
             }
         });
@@ -174,7 +175,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addOrRemoveTopping(LinearLayout toppingBox, Topping topping) {
-        if (toppingBox.getChildAt(0).getVisibility() == View.GONE) {
+        if (toppingBox.getChildAt(0).getVisibility() == View.INVISIBLE) {
             removeTopping(topping);
             removeIndicator(toppingBox);
         } else {
@@ -185,15 +186,12 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addTopping(topping, pizzaPart);
                 addIndicator(toppingBox);
             }
-
         }
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addIndicator(LinearLayout toppingBox) {
-        toppingBox.getChildAt(0).setVisibility(View.GONE);
-        toppingBox.getChildAt(0).setBackground(convertStringToDrawable(SPACE_KEEPER));
+        toppingBox.getChildAt(0).setVisibility(View.INVISIBLE);
         toppingBox.setBackground(convertStringToDrawable(TOPPING_PICKED_INDICATOR));
     }
 
@@ -214,17 +212,33 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
                 addOrRemoveTopping(toppingBox, topping);
             }
         });
-        TextView iconText = new TextView(this);
-        String textToDisplay = topping.getName() + "......" + topping.getPrice() / 4;
-        iconText.setText(textToDisplay);
-        iconText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addOrRemoveTopping(toppingBox, topping);
-            }
-        });
+//        TextView iconText = new TextView(this);
+//        String dots = numberOfDotFillersRequired(topping);
+//        String textToDisplay = topping.getName() + "  " + dots  + "  ";
+//        iconText.setText(textToDisplay);
+//        iconText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                addOrRemoveTopping(toppingBox, topping);
+//            }
+//        });
+//        TextView iconPrice = new TextView(this);
+//        iconPrice.setText(String.valueOf(topping.getPrice() / 4));
+        ImageView iconText = new ImageView(this);
+        iconText.setImageDrawable(convertStringToDrawable(OLIVE_WORD));
         toppingBox.addView(iconTopping);
         toppingBox.addView(iconText);
+//        toppingBox.addView(iconPrice);
+    }
+
+    private String numberOfDotFillersRequired(Topping topping) {
+        int lengthOfTopping = topping.getName().length();
+        StringBuilder buf = new StringBuilder(28 - 2 * lengthOfTopping);
+        for (int i = 0; i < 24 - 2 * lengthOfTopping; i++) {
+            buf.append('.');
+        }
+        return buf.toString();
+
     }
 
 
