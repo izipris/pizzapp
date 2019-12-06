@@ -36,8 +36,16 @@ public class PizzaPart implements Serializable {
 
     public void removeTopping(Topping topping) {
         if (hasTopping) {
-            toppings.remove(topping);
             toppingNames.remove(topping.getName());
+            Topping toppingToRemove = null;
+            for (Topping toppingObject: toppings){
+                if (toppingObject.getName().equals(topping.getName())){
+                    toppingToRemove = toppingObject;
+                }
+            }
+            if (toppingToRemove != null) {
+                toppings.remove(toppingToRemove);
+            }
         }
         if (toppings.size() == 0) {
             hasTopping = false;

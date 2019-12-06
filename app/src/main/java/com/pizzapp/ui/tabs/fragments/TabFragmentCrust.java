@@ -1,10 +1,11 @@
 package com.pizzapp.ui.tabs.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class TabFragmentCrust extends Fragment {
     private Pizza currentPizza;
     private boolean chooseAlready;
     private final int MAIN_TAB_INDEX = 1;
+    private final int CRUST_CAPTION_TEXT_VIEW_POSITION = 0;
 
     public TabFragmentCrust(TabAdapter tabAdapter, int tabPosition) {
         super();
@@ -56,16 +58,16 @@ public class TabFragmentCrust extends Fragment {
         TextView doughThickTextView = view.findViewById(R.id.doughThickTextView);
         TextView doughRegularTextView = view.findViewById(R.id.doughRegularTextView);
         TextView doughThinTextView = view.findViewById(R.id.doughThinTextView);
-        ImageButton doughThickImageButton = view.findViewById(R.id.doughThickImageButton);
-        ImageButton doughRegularImageButton = view.findViewById(R.id.doughRegularImageButton);
-        ImageButton doughThinImageButton = view.findViewById(R.id.doughThinImageButton);
+        LinearLayout doughThickLinearLayout = view.findViewById(R.id.layoutCrustThick);
+        LinearLayout doughRegularLinearLayout = view.findViewById(R.id.layoutCrustRegular);
+        LinearLayout doughThinLinearLayout = view.findViewById(R.id.layoutCrustThin);
         Database database = ((MainActivity) this.getActivity()).database;
 
         Crust thinCrust = database.getCrusts().get(DB_CRUST_THIN);
         Crust regularCrust = database.getCrusts().get(DB_CRUST_REGULAR);
         Crust thickCrust = database.getCrusts().get(DB_CRUST_THICK);
 
-        Map<ImageButton, Crust> buttonToTitleMap = generateButtonToCrustMapping(Arrays.asList(doughThickImageButton, doughRegularImageButton, doughThinImageButton),
+        Map<LinearLayout, Crust> buttonToTitleMap = generateButtonToCrustMapping(Arrays.asList(doughThickLinearLayout, doughRegularLinearLayout, doughThinLinearLayout),
                 Arrays.asList(thickCrust, regularCrust, thinCrust));
         defineDoughButtonsHandlers(view, savedInstanceState, buttonToTitleMap);
 
@@ -80,51 +82,57 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(@NonNull View view, @Nullable Bundle savedInstanceState, final Map<ImageButton, Crust> buttonToCrustMapping) {
+    private void defineDoughButtonsHandlers(@NonNull View view, @Nullable Bundle savedInstanceState, final Map<LinearLayout, Crust> layoutToCrustMapping) {
         // Define the onClick handlers such that when one option selected. it's highlighted
         // while the others are not.
-        for (Map.Entry<ImageButton, Crust> entryCurrent : buttonToCrustMapping.entrySet()) {
-            final ImageButton imageButtonCurrent = entryCurrent.getKey();
-            imageButtonCurrent.setOnClickListener(new View.OnClickListener() {
+        for (Map.Entry<LinearLayout, Crust> entryCurrent : layoutToCrustMapping.entrySet()) {
+            final LinearLayout linearLayoutCurrent = entryCurrent.getKey();
+            linearLayoutCurrent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleCrustClicked(buttonToCrustMapping, imageButtonCurrent);
+                    handleCrustClicked(layoutToCrustMapping, linearLayoutCurrent);
                 }
             });
             if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && entryCurrent.getValue() == currentPizza.getCrust()) {
                 chooseAlready = true;
                 entryCurrent.getKey().setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
-                        getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
+                        getString(R.string.tab_title_separator) + layoutToCrustMapping.get(linearLayoutCurrent).getName());
                 tabAdapter.notifyDataSetChanged();
             }
 
         }
     }
 
-    private void handleCrustClicked(final Map<ImageButton, Crust> buttonToCrustMapping, final ImageButton imageButtonCurrent) {
-        imageButtonCurrent.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
-        for (Map.Entry<ImageButton, Crust> entryOther : buttonToCrustMapping.entrySet()) {
-            ImageButton imageButtonOther = entryOther.getKey();
-            if (imageButtonOther != imageButtonCurrent) {
-                imageButtonOther.setBackgroundResource(0);
+    private void handleCrustClicked(final Map<LinearLayout, Crust> layoutToCrustMapping, final LinearLayout linearLayoutCurrent) {
+        linearLayoutCurrent.setBackgroundResource(R.drawable.ic_dough_background);
+        TextView textViewCurrent = (TextView) linearLayoutCurrent.getChildAt(CRUST_CAPTION_TEXT_VIEW_POSITION);
+        textViewCurrent.setTextColor(Color.WHITE);
+        for (Map.Entry<LinearLayout, Crust> entryOther : layoutToCrustMapping.entrySet()) {
+            LinearLayout linearLayoutOther = entryOther.getKey();
+            if (linearLayoutOther != linearLayoutCurrent) {
+                linearLayoutOther.setBackgroundResource(0);
+                TextView textViewOther = (TextView) linearLayoutOther.getChildAt(CRUST_CAPTION_TEXT_VIEW_POSITION);
+                textViewOther.setTextColor(Color.BLACK);
             }
         }
-        ((MainActivity) this.getActivity()).getPizza().setCrust(buttonToCrustMapping.get(imageButtonCurrent));
+        ((MainActivity) this.getActivity()).getPizza().setCrust(layoutToCrustMapping.get(linearLayoutCurrent));
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
-                getString(R.string.tab_title_separator) + buttonToCrustMapping.get(imageButtonCurrent).getName());
+                getString(R.string.tab_title_separator) + layoutToCrustMapping.get(linearLayoutCurrent).getName());
+        currentPizza.setCrust(layoutToCrustMapping.get(linearLayoutCurrent));
+        MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
         TabLayout tabs = getActivity().findViewById(R.id.tabs);
         tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
     }
 
-    private Map<ImageButton, Crust> generateButtonToCrustMapping(List<ImageButton> imageButtonList, List<Crust> crustList) {
-        if (imageButtonList.size() != crustList.size()) {
+    private Map<LinearLayout, Crust> generateButtonToCrustMapping(List<LinearLayout> linearLayoutList, List<Crust> crustList) {
+        if (linearLayoutList.size() != crustList.size()) {
             return Collections.emptyMap();
         }
-        Map<ImageButton, Crust> map = new HashMap<>();
-        for (int i = 0; i < imageButtonList.size(); i++) {
-            map.put(imageButtonList.get(i), crustList.get(i));
+        Map<LinearLayout, Crust> map = new HashMap<>();
+        for (int i = 0; i < linearLayoutList.size(); i++) {
+            map.put(linearLayoutList.get(i), crustList.get(i));
         }
         return map;
     }

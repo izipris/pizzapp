@@ -3,6 +3,9 @@
     <string name="tab_title_main">My Pizza</string>
     <string name="tab_title_crust">Crust</string>
     <string name="tab_title_size">Size</string>
+    <string name="tab_caption_main">Hello!</string>
+    <string name="tab_caption_crust">Choose Crust</string>
+    <string name="tab_caption_size">Choose Size</string>
     <string name="image_description_dough_thick">Thick</string>
     <string name="image_description_dough_regular">Regular</string>
     <string name="image_description_dough_thin">Thin</string>
@@ -27,12 +30,17 @@
     <string name="bottomright">bottomRight</string>
     <string name="bottomleft">bottomLeft</string>
     <string name="topleft">topLeft</string>
-    <string name="hello_tomer">Hello Tomer</string>
+    <string name="hello">Hello!</string>
     <string name="choose_topping">Choose Topping</string>
     <string name="size_symbol">\"</string>
     <string name="tab_title_separator">/</string>
+    <string name="pipe_separator">|</string>
     <string name="error_message">Error, please try again</string>
     <string name="price_showing_prefix">Total:&#160;</string>
     <string name="price_showing_suffix">0$</string>
+    <string name="button_clear_text">CLEAR PIZZA</string>
+    <string name="button_continue_text">CONTINUE</string>
+    <string name="textViewChosenCrustIndicatorText">CRUST</string>
+    <string name="textViewChosenSizeIndicatorText">SIZE</string>
 
 </resources>
