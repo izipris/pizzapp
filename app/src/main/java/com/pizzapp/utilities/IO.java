@@ -63,7 +63,8 @@ public class IO {
             String name = sizesJsonArr.getJSONObject(i).getString("name");
             double price = sizesJsonArr.getJSONObject(i).getDouble("price");
             double dimension = sizesJsonArr.getJSONObject(i).getDouble("dimension");
-            Size size = new Size(name, price, dimension);
+            String caption = sizesJsonArr.getJSONObject(i).getString("caption");
+            Size size = new Size(name, price, dimension, caption);
             sizes.add(size);
         }
         for (int i = 0; i < crustsJsonArr.length(); i++) {
@@ -76,7 +77,8 @@ public class IO {
             String name = toppingsJsonArr.getJSONObject(i).getString("name");
             double price = toppingsJsonArr.getJSONObject(i).getDouble("price");
             String imageSource = toppingsJsonArr.getJSONObject(i).getString("image");
-            Topping topping = new Topping(name, price, imageSource);
+            String iconSource = toppingsJsonArr.getJSONObject(i).getString("icon");
+            Topping topping = new Topping(name, price, imageSource, iconSource);
             toppings.add(topping);
         }
         return new Database(sizes, toppings, crusts);

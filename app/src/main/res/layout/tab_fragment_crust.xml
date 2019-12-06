@@ -7,88 +7,121 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/doughThickTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/image_description_dough_thick"
-            android:textStyle="bold" />
-    </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
         android:gravity="center"
         android:paddingBottom="40dp">
 
-        <ImageButton
-            android:id="@+id/doughThickImageButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layoutCrustThick"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/image_description_dough_thick"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            app:srcCompat="@drawable/ic_thick_dough" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/doughThickTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
+                android:text="@string/image_description_dough_thick"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/crustCaptionSize"
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
+
+            <ImageView
+                android:id="@+id/doughThickImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/image_description_dough_thick"
+                android:gravity="center"
+                app:srcCompat="@drawable/ic_thick_dough" />
+
+        </LinearLayout>
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/doughRegularTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/image_description_dough_regular"
-            android:textStyle="bold" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
         android:gravity="center"
         android:paddingBottom="40dp">
 
-        <ImageButton
-            android:id="@+id/doughRegularImageButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layoutCrustRegular"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/image_description_dough_regular"
-            app:srcCompat="@drawable/ic_regular_dough" />
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/doughRegularTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
+                android:text="@string/image_description_dough_regular"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/crustCaptionSize"
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
+
+            <ImageView
+                android:id="@+id/doughRegularImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/image_description_dough_regular"
+                app:srcCompat="@drawable/ic_regular_dough" />
+        </LinearLayout>
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mainFragmentMarginTop"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/doughThinTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layoutCrustThin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="@string/image_description_dough_thin"
-            android:textStyle="bold" />
-    </TableRow>
+            android:orientation="vertical">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingBottom="40dp">
+            <TextView
+                android:id="@+id/doughThinTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/crustFragmentCaptionPaddingBottom"
+                android:text="@string/image_description_dough_thin"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/crustCaptionSize"
+                android:textStyle="bold"
+                app:fontFamily="@font/open_sans" />
 
-        <ImageButton
-            android:id="@+id/doughThinImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/image_description_dough_thin"
-            app:srcCompat="@drawable/ic_thin_dough" />
+            <ImageView
+                android:id="@+id/doughThinImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/image_description_dough_thin"
+                app:srcCompat="@drawable/ic_thin_dough" />
+
+
+        </LinearLayout>
     </TableRow>
 </TableLayout>
