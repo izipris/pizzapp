@@ -77,8 +77,7 @@ public class IO {
             String name = toppingsJsonArr.getJSONObject(i).getString("name");
             double price = toppingsJsonArr.getJSONObject(i).getDouble("price");
             String imageSource = toppingsJsonArr.getJSONObject(i).getString("image");
-            String iconSource = toppingsJsonArr.getJSONObject(i).getString("icon");
-            Topping topping = new Topping(name, price, imageSource, iconSource);
+            Topping topping = new Topping(name, price, imageSource);
             toppings.add(topping);
         }
         return new Database(sizes, toppings, crusts);
