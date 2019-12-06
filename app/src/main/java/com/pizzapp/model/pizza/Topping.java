@@ -6,6 +6,7 @@ public class Topping implements Serializable {
     private String name;
     private double price;
     private String imageSource;
+    private String iconSource;
 
     public Topping() {
         this.name = "";
@@ -13,10 +14,11 @@ public class Topping implements Serializable {
         this.imageSource = "";
     }
 
-    public Topping(String name, double price, String imageSource) {
+    public Topping(String name, double price, String imageSource, String iconSource) {
         this.name = name;
         this.price = price;
         this.imageSource = imageSource;
+        this.iconSource = iconSource;
     }
 
     public String getName() {
@@ -37,6 +39,10 @@ public class Topping implements Serializable {
 
     public String getImageSource() {
         return imageSource;
+    }
+
+    public String getIconSource(){
+        return iconSource;
     }
 
     public void setImageSource(String imageSource) {
