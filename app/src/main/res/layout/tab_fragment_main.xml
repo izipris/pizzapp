@@ -18,73 +18,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="center"
             android:layoutDirection="ltr"
-            android:onClick="backToMain"
-            android:paddingBottom="1dp">
+            android:paddingBottom="0.25dp">
 
 
             <FrameLayout
                 android:id="@+id/topLeftFrame"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:layout_width="@dimen/originalPizzaSize"
+                android:layout_height="@dimen/originalPizzaSize"
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/topLeft"
-                    android:layout_width="145dp"
-                    android:layout_height="145dp"
+                    android:layout_width="@dimen/originalPizzaSize"
+                    android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="bottom|end"
                     android:contentDescription="topLeft"
-                    android:onClick="onClick"
                     android:rotation="270"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
                     android:id="@+id/pizzaPLusTopleft"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/plusWidth"
+                    android:layout_height="@dimen/plusHeight"
                     android:layout_gravity="end|center|bottom"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="36.5dp"
+                    android:layout_marginRight="36.5dp"
+                    android:layout_marginBottom="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/topRightFrame"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:layout_width="@dimen/originalPizzaSize"
+                android:layout_height="@dimen/originalPizzaSize"
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/topRight"
-                    android:layout_width="145dp"
-                    android:layout_height="145dp"
+                    android:layout_width="@dimen/originalPizzaSize"
+                    android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
-                    android:onClick="onClick"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
                     android:id="@+id/pizzaPLusTopRight"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/plusWidth"
+                    android:layout_height="@dimen/plusHeight"
                     android:layout_gravity="start|center|bottom"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="36.5dp"
+                    android:layout_marginLeft="36.5dp"
+                    android:layout_marginBottom="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
             </FrameLayout>
 
@@ -94,74 +84,65 @@
             android:id="@+id/bottom_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"
             android:gravity="center"
-            android:layoutDirection="ltr"
-            android:onClick="backToMain">
+            android:layoutDirection="ltr">
 
             <FrameLayout
                 android:id="@+id/bottomLeftFrame"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:layout_width="@dimen/originalPizzaSize"
+                android:layout_height="@dimen/originalPizzaSize"
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
 
                 <ImageView
                     android:id="@+id/bottomLeft"
-                    android:layout_width="145dp"
-                    android:layout_height="145dp"
+                    android:layout_width="@dimen/originalPizzaSize"
+                    android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|end"
                     android:contentDescription="@string/bottomleft"
-                    android:onClick="onClick"
                     android:rotation="180"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
                     android:id="@+id/pizzaPLusBottomleft"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/plusWidth"
+                    android:layout_height="@dimen/plusHeight"
                     android:layout_gravity="end|center|top"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="36.5dp"
+                    android:layout_marginRight="36.5dp"
+                    android:layout_marginTop="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
             </FrameLayout>
 
 
             <FrameLayout
                 android:id="@+id/bottomRightFrame"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="backToMain"
-                android:paddingLeft="1dp"
-                android:paddingEnd="1dp"
-                android:paddingRight="1dp">
+                android:layout_width="@dimen/originalPizzaSize"
+                android:layout_height="@dimen/originalPizzaSize"
+                android:paddingLeft="0.25dp"
+                android:paddingEnd="0.25dp"
+                android:paddingRight="0.25dp">
 
                 <ImageView
                     android:id="@+id/bottomRight"
-                    android:layout_width="145dp"
-                    android:layout_height="145dp"
+                    android:layout_width="@dimen/originalPizzaSize"
+                    android:layout_height="@dimen/originalPizzaSize"
                     android:layout_gravity="top|start"
                     android:contentDescription="@string/bottomright"
-                    android:onClick="onClick"
+
                     android:rotation="90"
                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
                 <ImageView
                     android:id="@+id/pizzaPLusBottomRight"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/plusWidth"
+                    android:layout_height="@dimen/plusHeight"
                     android:layout_gravity="start|center|top"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="36.5dp"
+                    android:layout_marginLeft="36.5dp"
+                    android:layout_marginTop="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
 
             </FrameLayout>

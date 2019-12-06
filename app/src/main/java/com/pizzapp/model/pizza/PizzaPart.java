@@ -6,13 +6,11 @@ import java.util.List;
 
 public class PizzaPart implements Serializable {
     private List<Topping> toppings;
-    private List<String> toppingNames;
     private boolean hasTopping;
     private int id;
 
     public PizzaPart(int id) {
         toppings = new ArrayList<Topping>();
-        toppingNames = new ArrayList<String>();
         hasTopping = false;
         this.id = id;
     }
@@ -21,22 +19,22 @@ public class PizzaPart implements Serializable {
         return hasTopping;
     }
 
-    public boolean hasCertainTopping(String toppingName) {
-        if (toppingNames.contains(toppingName)) {
-            return true;
+    public boolean hasCertainTopping(Topping topping) {
+        for (Topping partTopping: toppings) {
+            if (partTopping.getName().equals(topping.getName())) {
+                return true;
+            }
         }
         return false;
     }
 
     public void addTopping(Topping topping) {
         this.toppings.add(topping);
-        this.toppingNames.add(topping.getName());
         hasTopping = true;
     }
 
     public void removeTopping(Topping topping) {
         if (hasTopping) {
-            toppingNames.remove(topping.getName());
             Topping toppingToRemove = null;
             for (Topping toppingObject: toppings){
                 if (toppingObject.getName().equals(topping.getName())){
@@ -53,7 +51,6 @@ public class PizzaPart implements Serializable {
     }
 
     public void removeAllToppings() {
-        toppingNames.clear();
         toppings.clear();
         hasTopping = false;
     }
