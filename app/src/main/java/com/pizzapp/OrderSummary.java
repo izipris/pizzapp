@@ -166,15 +166,6 @@ public class OrderSummary extends AppCompatActivity {
         return views;
     }
 
-    private double getPizzaPrice(Pizza pizza, int numOfParts) {
-        double priceSum = pizza.getSize().getPrice();
-        for (int i = 0; i < numOfParts; i++) {
-            List<Topping> toppings = pizza.getPizzaPart(i).getToppings();
-            for (Topping topping : toppings)
-                priceSum = priceSum + topping.getPrice();
-        }
-        return priceSum;
-    }
 
     private TextView getPizzaPriceView(Pizza pizza, int numOfParts) {
         double price = pizza.getPrice();
