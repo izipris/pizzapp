@@ -3,7 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorGrayTabBackground">#D6D7D7</color>
     <color name="colorCrustChosenTextView">#FF3333</color>
     <color name="colorChosenSizeBackground">#978A8989</color>
 
@@ -17,4 +16,12 @@
     <color name="sauce_faded_red">#c1272d</color>
     <color name="cheese_maize">#f4ca45</color>
     <color name="black">#000000</color>
+    
+    <color name="buttonClearTextColor">#FFFFFF</color>
+    <color name="textViewChosenOptionIndicator">#808080</color>
+    <color name="tab_background_selected">#eaeaea</color>
+    <color name="tab_background_unselected">#cccccc</color>
+    <color name="greeting_color">#808080</color>
+    <color name="logoAreaColor">#F9F9F9</color>
+    <color name="colorGrayTabBackground">#eaeaea</color>
 </resources>
