@@ -1,5 +1,6 @@
 package com.pizzapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -47,9 +48,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if (savedInstanceState != null) {
             order = (Order) savedInstanceState.getSerializable("order");
         } else {
-            Pizza pizza = createDefaultPizza();
-            order = new Order(0);
-            order.addPizza(pizza);
+            Intent intent = getIntent();
+            if(intent.getBooleanExtra("newOrder", true)) {
+                Pizza pizza = createDefaultPizza();
+                order = new Order(0);
+                order.addPizza(pizza);
+            }
+            else {
+                order = (Order) intent.getSerializableExtra("order");
+            }
         }
 
         viewPager = findViewById(R.id.viewpager);
