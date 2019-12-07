@@ -74,8 +74,8 @@
 
                 <ImageView
                     android:id="@+id/topRight"
-                    android:layout_width="@dimen/originalPizzaSize"
-                    android:layout_height="@dimen/originalPizzaSize"
+                    android:layout_width="@dimen/enlargedPizzaSize"
+                    android:layout_height="@dimen/enlargedPizzaSize"
                     android:layout_gravity="start|bottom"
                     android:contentDescription="@string/topright"
                     android:onClick="pizzaPartClicked"
@@ -90,7 +90,6 @@
                     android:layout_marginLeft="36.5dp"
                     android:layout_marginBottom="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
-
             </FrameLayout>
 
         </TableRow>

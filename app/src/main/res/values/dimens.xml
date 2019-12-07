@@ -13,7 +13,7 @@
     <dimen name="originalPizzaSize">127.5dp</dimen>
     <dimen name="originalToppingSize">107.5</dimen>
     <dimen name="enlargedPizzaSize">143dp</dimen>
-    <dimen name="enlargedToppingSize">123dp</dimen>
+    <dimen name="enlargedToppingSize">124dp</dimen>
     <dimen name="pizzaTableBottomPadding">30dp</dimen>
     <dimen name="gridHeight">199.5dp</dimen>
     <dimen name="iconToTextPadding">10.9</dimen>
