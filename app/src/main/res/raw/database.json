@@ -26,6 +26,11 @@
       "image": "@drawable/ic_onion_topping"
     },
     {
+      "name": "Olives",
+      "price": 2,
+      "image": "@drawable/ic_olives_topping"
+    },
+    {
       "name": "Mushrooms",
       "price": 2,
       "image": "@drawable/ic_mushrooms_topping"
@@ -34,11 +39,6 @@
       "name": "Tomatoes",
       "price": 2,
       "image": "@drawable/ic_tomato_topping"
-    },
-    {
-      "name": "Olives",
-      "price": 2,
-      "image": "@drawable/ic_olives_topping"
     },
     {
       "name": "Pineapple",

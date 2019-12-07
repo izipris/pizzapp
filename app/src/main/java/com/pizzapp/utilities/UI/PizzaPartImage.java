@@ -92,9 +92,6 @@ public class PizzaPartImage extends Image {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void addTopping(Topping topping, boolean initiation) {
         int toppingId = StaticFunctions.generateRandomNumber();
-        while (imageIds.contains(toppingId)) {
-            toppingId = StaticFunctions.generateRandomNumber();
-        }
         toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view));
         addToppingToPizza(topping, toppingId, initiation);
     }
@@ -181,14 +178,6 @@ public class PizzaPartImage extends Image {
             }
         }
         return false;
-    }
-
-    public int findToppingId(Topping topping){
-        for (ToppingImage toppingImage:toppingImageList){
-            if (toppingImage.getName().equals(topping.getName())){
-                return toppingImage.id;
-            }
-        } return -1;
     }
 }
 

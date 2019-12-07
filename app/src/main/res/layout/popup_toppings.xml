@@ -61,6 +61,7 @@
                     android:layout_marginRight="36.5dp"
                     android:layout_marginBottom="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
+
             </FrameLayout>
 
             <FrameLayout
@@ -89,6 +90,7 @@
                     android:layout_marginLeft="36.5dp"
                     android:layout_marginBottom="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
+
             </FrameLayout>
 
         </TableRow>
