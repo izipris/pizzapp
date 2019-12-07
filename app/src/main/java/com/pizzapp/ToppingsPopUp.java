@@ -31,6 +31,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     private static final String LOG_TAG = ToppingsPopUp.class.getSimpleName();
 
     private final String TOPPING_PICKED_INDICATOR = "@drawable/topping_on_pizza_indicator";
+    private final String BUTTON_SQUARE = "@drawable/plain_sqaure_to_indicate_button";
 
     private static final int MIN_ROWS_IN_CHART = 4;
 
@@ -163,7 +164,7 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addToppingDataToToppingBox(final LinearLayout toppingBox, final Topping topping) {
         ImageView iconTopping = new ImageView(this);
-        iconTopping.setImageDrawable(convertStringToDrawable(topping.getIconSource()));
+        iconTopping.setImageDrawable(convertStringToDrawable(BUTTON_SQUARE));
         iconTopping.setPadding(5, 0, StaticFunctions.convertDpToPx(10), 0);
         iconTopping.setOnClickListener(new View.OnClickListener() {
             @Override
