@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private int pizzaIndex;
     public Order order;
     public Database database;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -53,9 +54,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 Pizza pizza = createDefaultPizza();
                 order = new Order(0);
                 order.addPizza(pizza);
+                pizzaIndex = 0;
             }
             else {
                 order = (Order) intent.getSerializableExtra("order");
+                pizzaIndex = intent.getIntExtra("pizzaIndex",0);
             }
         }
 
@@ -114,7 +117,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     public Pizza getPizza() {
-        return order.getLastPizza();
+        return order.getPizza(pizzaIndex);
+    }
+
+    public int getPizzaIndex() {
+        return pizzaIndex;
     }
 
     @Override
