@@ -119,6 +119,7 @@ public class PizzaPartImage extends Image {
         }
         newTopping.setLayoutParams(layoutParams);
         frameLayout.addView(newTopping);
+        view.findViewById(plusId).bringToFront();
     }
 
     private Drawable convertStringToDrawable(String name) {
