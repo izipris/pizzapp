@@ -25,7 +25,6 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
 
     private static final String LOG_TAG = ToppingsPopUp.class.getSimpleName();
 
-    private int currentSliceIdOutOfFour;
     private Pizza pizza;
     private List<PizzaPartImage> partImages = new ArrayList<>();
     private List<PizzaPartImage> partImagesEnlarged = new ArrayList<>();
@@ -55,11 +54,11 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void extractExtras() {
         Bundle extras = getIntent().getExtras();
-        currentSliceIdOutOfFour = extras.getInt("callingId");
+        int currentSlice = extras.getInt("callingId");
         pizza = (Pizza) extras.getSerializable("pizza");
         createInitialPizza();
-        partImagesEnlarged.add(partImages.get(currentSliceIdOutOfFour));
-        partImages.get(currentSliceIdOutOfFour).enlargeSlice();
+        partImagesEnlarged.add(partImages.get(currentSlice));
+        partImages.get(currentSlice).enlargeSlice();
         toppingGrid.editToppingGrid(partImagesEnlarged);
     }
 

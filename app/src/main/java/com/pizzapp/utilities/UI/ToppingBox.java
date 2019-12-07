@@ -17,9 +17,9 @@ public class ToppingBox {
     private final String TOPPING_PICKED_INDICATOR = "@drawable/topping_on_pizza_indicator";
     private final String BUTTON_SQUARE = "@drawable/plain_square_to_indicate_button";
     LinearLayout toppingBox;
-    int boxId;
-    Topping topping;
-    View view;
+    private int boxId;
+    private Topping topping;
+    private View view;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     ToppingBox(Topping topping, View view, int row, int col, int numberOfRows){
