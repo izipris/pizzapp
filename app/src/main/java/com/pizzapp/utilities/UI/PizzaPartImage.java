@@ -58,7 +58,9 @@ public class PizzaPartImage extends Image {
     }
 
     private void addPlus() {
-        view.findViewById(plusId).setVisibility(View.VISIBLE);
+        ImageView plus = view.findViewById(plusId);
+        plus.setVisibility(View.VISIBLE);
+        plus.bringToFront();
     }
 
     private void shrinkImage() {
