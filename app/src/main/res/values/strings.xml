@@ -68,4 +68,5 @@ enables effective performance tuning: once a system is complete and profiling ha
 determined which components are causing performance problems (Item 67), those
 components can be optimized without affecting the correctness of others. Information hiding increases software reuse because components that aren’t tightly coupled often prove useful in other contexts besides the ones for which they wer</string>
     <string name="add_more_button">Add More</string>
+    <string name="order_on_its_way_text">Your order is\n on it\'s way!</string>
 </resources>

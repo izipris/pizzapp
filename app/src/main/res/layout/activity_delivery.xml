@@ -1,26 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical"
-    android:background="#367da8"
-    android:orientation="vertical"
+    android:background="@color/cheese_maize"
     tools:context=".Delivery">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/delivery_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/delivery" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/logoPaddingLeft"
+        android:layout_marginTop="@dimen/logoPaddingTop"
+        android:contentDescription="@string/app_name"
+        android:layoutDirection="ltr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_pizzap" />
+
+    <TextView
+        android:id="@+id/textViewGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61.5dp"
+        android:text="@string/hello"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/greetingHeaderSize"
+        app:fontFamily="@font/open_sans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewOrderOnItsWay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:layout_marginTop="120.3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGreeting"
+        tools:text="@string/order_on_its_way_text" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
