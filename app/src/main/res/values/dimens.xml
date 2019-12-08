@@ -28,4 +28,7 @@
     <dimen name="greetingHeaderSize">18sp</dimen>
     <dimen name="greetingHeaderMarginBottom">15dp</dimen>
     <dimen name="tabsHeight">38dp</dimen>
+    <dimen name="recieptPizzaSize">60dp</dimen>
+    <dimen name="recieptPizzaHeaderTextSize">14sp</dimen>
+
 </resources>

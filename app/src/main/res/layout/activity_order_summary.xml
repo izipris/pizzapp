@@ -23,14 +23,13 @@
 
         <TableLayout
             android:id="@+id/table_of_pizzas"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorGrayTabBackground"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@color/colorGrayTabBackground">
-
+            android:orientation="vertical">
             <TableRow
+                android:id="@+id/pizza_row"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -38,50 +37,171 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/medium_pizza_image"
-                        android:layout_width="wrap_content"
+                    <TableLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:contentDescription="@string/image_description_medium_pizza"
-                        app:srcCompat="@drawable/ic_m_pizza" />
+                        android:gravity="center"
+                        android:padding="15dp">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layoutDirection="ltr"
+                            android:paddingBottom="0.25dp">
+
+
+                            <FrameLayout
+                                android:layout_width="@dimen/recieptPizzaSize"
+                                android:layout_height="@dimen/recieptPizzaSize"
+                                android:paddingLeft="0.25dp"
+                                android:paddingEnd="0.25dp"
+                                android:paddingRight="0.25dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/recieptPizzaSize"
+                                    android:layout_height="@dimen/recieptPizzaSize"
+                                    android:layout_gravity="bottom|end"
+                                    android:contentDescription="topLeft"
+                                    android:rotation="270"
+                                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="@dimen/recieptPizzaSize"
+                                android:layout_height="@dimen/recieptPizzaSize"
+                                android:paddingLeft="0.25dp"
+                                android:paddingEnd="0.25dp"
+                                android:paddingRight="0.25dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/recieptPizzaSize"
+                                    android:layout_height="@dimen/recieptPizzaSize"
+                                    android:layout_gravity="start|bottom"
+                                    android:contentDescription="@string/topright"
+                                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                            </FrameLayout>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layoutDirection="ltr">
+
+                            <FrameLayout
+                                android:layout_width="@dimen/recieptPizzaSize"
+                                android:layout_height="@dimen/recieptPizzaSize"
+                                android:paddingLeft="0.25dp"
+                                android:paddingEnd="0.25dp"
+                                android:paddingRight="0.25dp">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/recieptPizzaSize"
+                                    android:layout_height="@dimen/recieptPizzaSize"
+                                    android:layout_gravity="top|end"
+                                    android:contentDescription="@string/bottomleft"
+                                    android:rotation="180"
+                                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                            </FrameLayout>
+
+
+                            <FrameLayout
+                                android:layout_width="@dimen/recieptPizzaSize"
+                                android:layout_height="@dimen/recieptPizzaSize"
+                                android:paddingLeft="0.25dp"
+                                android:paddingEnd="0.25dp"
+                                android:paddingRight="0.25dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/recieptPizzaSize"
+                                    android:layout_height="@dimen/recieptPizzaSize"
+                                    android:layout_gravity="top|start"
+                                    android:contentDescription="@string/bottomright"
+                                    android:rotation="90"
+                                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                            </FrameLayout>
+                        </TableRow>
+                    </TableLayout>
 
                     <Button
                         android:layout_width="48dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/ic_clear_button" />
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/ic_clear_button"
+                        android:onClick="backToMain"
+                        android:text="@string/change_button"
+                        android:textSize="5dp" />
                 </RelativeLayout>
 
 
                 <LinearLayout
-                    android:id="@+id/pizza_text_layout"
+                    android:id="@+id/pizza_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="1dp">
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/pizza_summary"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:layout_marginStart="20dp"-->
-<!--                        android:layout_marginLeft="20dp"-->
-<!--                        android:text="@string/test_body_of_text"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:textSize="10sp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        app:fontFamily="@font/open_sans" />-->
+                    <LinearLayout
+                        android:id="@+id/pizza_headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mainFragmentMarginTop"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/size_of_pizza"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="Large"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="@string/pizza"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pipe_separator"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+
+
+                        <TextView
+                            android:id="@+id/crust_of_pizza"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="Thick"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="@string/tab_title_crust"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+
+                    </LinearLayout>
                 </LinearLayout>
-
-
             </TableRow>
 
         </TableLayout>
@@ -100,9 +220,10 @@
             android:layout_height="@dimen/buttonClearHeight"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/ic_clear_button"
+            android:onClick="backToMain"
             android:text="@string/add_more_button"
-            android:textColor="@color/buttonClearTextColor"
-            android:onClick="backToMain"/>
+            android:textColor="@color/buttonClearTextColor" />
+
         <TextView
             android:id="@+id/order_total_price"
             android:layout_width="match_parent"
@@ -132,17 +253,17 @@
             android:id="@+id/delivery_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/ic_vectorcontinue"
+            android:onClick="launchDeliveryActivity"
             android:text="@string/delivery_button"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:onClick="launchDeliveryActivity"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="1dp"
@@ -153,17 +274,17 @@
             android:id="@+id/pickup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/ic_vectorcontinue"
+            android:onClick="launchPickupActivity"
             android:text="@string/pickup_button"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:onClick="launchPickupActivity"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>
