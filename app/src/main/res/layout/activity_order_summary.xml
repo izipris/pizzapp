@@ -28,10 +28,11 @@
             android:background="@color/colorGrayTabBackground"
             android:gravity="center"
             android:orientation="vertical">
+
             <TableRow
                 android:id="@+id/pizza_row"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -40,10 +41,11 @@
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:padding="15dp">
 
                         <TableRow
+                            android:id="@+id/top_pizza_parts"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -52,6 +54,7 @@
 
 
                             <FrameLayout
+                                android:id="@+id/top_left_part"
                                 android:layout_width="@dimen/recieptPizzaSize"
                                 android:layout_height="@dimen/recieptPizzaSize"
                                 android:paddingLeft="0.25dp"
@@ -62,13 +65,14 @@
                                     android:layout_width="@dimen/recieptPizzaSize"
                                     android:layout_height="@dimen/recieptPizzaSize"
                                     android:layout_gravity="bottom|end"
-                                    android:contentDescription="topLeft"
                                     android:rotation="270"
                                     app:srcCompat="@drawable/ic_pizza_slice_color" />
+
 
                             </FrameLayout>
 
                             <FrameLayout
+                                android:id="@+id/top_right_part"
                                 android:layout_width="@dimen/recieptPizzaSize"
                                 android:layout_height="@dimen/recieptPizzaSize"
                                 android:paddingLeft="0.25dp"
@@ -82,17 +86,20 @@
                                     android:contentDescription="@string/topright"
                                     app:srcCompat="@drawable/ic_pizza_slice_color" />
 
+
                             </FrameLayout>
 
                         </TableRow>
 
                         <TableRow
+                            android:id="@+id/bottom_pizza_parts"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:layoutDirection="ltr">
 
                             <FrameLayout
+                                android:id="@+id/bottom_left_part"
                                 android:layout_width="@dimen/recieptPizzaSize"
                                 android:layout_height="@dimen/recieptPizzaSize"
                                 android:paddingLeft="0.25dp"
@@ -112,6 +119,7 @@
 
 
                             <FrameLayout
+                                android:id="@+id/bottom_right_part"
                                 android:layout_width="@dimen/recieptPizzaSize"
                                 android:layout_height="@dimen/recieptPizzaSize"
                                 android:paddingLeft="0.25dp"
@@ -131,16 +139,18 @@
                     </TableLayout>
 
                     <Button
-                        android:layout_width="48dp"
+                        android:layout_width="60dp"
                         android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/ic_clear_button"
                         android:onClick="backToMain"
                         android:text="@string/change_button"
-                        android:textSize="5dp" />
+                        android:textSize="10sp" />
                 </RelativeLayout>
 
 
@@ -163,7 +173,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="3dp"
-                            android:text="Large"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/recieptPizzaHeaderTextSize" />
 
@@ -188,7 +197,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="3dp"
-                            android:text="Thick"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/recieptPizzaHeaderTextSize" />
 
@@ -201,7 +209,15 @@
                             android:textSize="@dimen/recieptPizzaHeaderTextSize" />
 
                     </LinearLayout>
+
                 </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
             </TableRow>
 
         </TableLayout>
