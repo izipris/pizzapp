@@ -91,20 +91,21 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             removeTopping(topping);
             toppingBox.removeToppingOnPizzaIndicatorFromToppingBox();
         } else {
-            for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
-                if (!pizzaPartImage.hasTopping(topping)) {
+
                     addTopping(topping);
                     toppingBox.addToppingOnPizzaIndicatorToToppingBox();
-                }
-            }
+
+
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void addTopping(Topping topping) {
         for (PizzaPartImage pizzaPartImage : partImagesEnlarged) {
-            pizza.getPizzaPart(pizzaPartImage.getPizzaPart()).addTopping(topping);
-            pizzaPartImage.addTopping(topping, false);
+            if (!pizzaPartImage.hasTopping(topping)) {
+                pizza.getPizzaPart(pizzaPartImage.getPizzaPart()).addTopping(topping);
+                pizzaPartImage.addTopping(topping, false);
+            }
         }
     }
 
