@@ -29,40 +29,40 @@
         android:id="@+id/textViewTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="25dp"
         android:text="@string/price_showing_prefix"
         android:textColor="@color/unlighted_text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creditCardInfo" />
 
     <FrameLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotal"
-        android:layout_marginTop="8dp">
+        android:layout_marginBottom="18dp">
 
         <ImageButton
             android:id="@+id/payButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/pay_button_image_description"
             android:background="@color/background_white"
-            app:srcCompat="@drawable/ic_pay_button"
+            android:contentDescription="@string/pay_button_image_description"
             android:onClick="onClickPay"
-            />
+            app:srcCompat="@drawable/ic_pay_button" />
 
         <TextView
             android:id="@+id/letsStartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="onClickPay"
             android:text="@string/pay_button_text"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:onClick="onClickPay"/>
+            android:textSize="25sp" />
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

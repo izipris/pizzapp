@@ -246,6 +246,7 @@ public class OrderSummary extends AppCompatActivity {
         Log.d(LOG_TAG, "Delivery button clicked!");
         mDelivery.setTextColor(Color.RED);
         Intent intent = new Intent(this, Delivery.class);
+        intent.putExtra("Total", finalOrder.getTotalPrice());
         startActivity(intent);
     }
 
@@ -254,6 +255,7 @@ public class OrderSummary extends AppCompatActivity {
         Log.d(LOG_TAG, "Pickup button clicked!");
         mPickup.setTextColor(Color.RED);
         Intent intent = new Intent(this, Pickup.class);
+        intent.putExtra("Total", finalOrder.getTotalPrice());
         startActivity(intent);
     }
 
@@ -264,7 +266,6 @@ public class OrderSummary extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
-
 
     @Override
     protected void onStart() {

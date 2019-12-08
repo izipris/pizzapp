@@ -26,4 +26,5 @@
     <color name="colorGrayTabBackground">#eaeaea</color>
     
     <color name="unlighted_text">#c4c4c4</color>
+    <color name="pickup_and_delivery_background">#eaeaea</color>
 </resources>
