@@ -193,6 +193,13 @@ public class OrderSummary extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void launchPaymentActivity(View view){
+        Log.d(LOG_TAG, "Payment button clicked!");
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra("Total", finalOrder.getTotalPrice());
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onStart() {
