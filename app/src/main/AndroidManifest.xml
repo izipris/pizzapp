@@ -12,6 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".PaymentActivity"
+            android:label="Payment"
+            android:parentActivityName=".OrderSummary">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pizzapp.OrderSummary" />
+        </activity>
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
