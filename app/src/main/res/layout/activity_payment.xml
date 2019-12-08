@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/credit_card_info"
+        android:id="@+id/creditCardInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/credit_card_image_description"
@@ -34,7 +34,7 @@
         android:textColor="@color/unlighted_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/credit_card_info" />
+        app:layout_constraintTop_toBottomOf="@+id/creditCardInfo" />
 
     <FrameLayout
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_marginTop="8dp">
 
         <ImageButton
-            android:id="@+id/pay_button"
+            android:id="@+id/payButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/pay_button_image_description"
@@ -55,13 +55,13 @@
             />
 
         <TextView
-            android:id="@+id/lets_start_text"
+            android:id="@+id/letsStartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/pay_button_text"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="25sp"
             android:onClick="onClickPay"/>
 
     </FrameLayout>
