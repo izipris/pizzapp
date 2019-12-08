@@ -2,6 +2,7 @@ package com.pizzapp.ui.tabs.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,17 @@ public class TabFragmentCrust extends Fragment {
             linearLayoutCurrent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleCrustClicked(layoutToCrustMapping, linearLayoutCurrent);
+                    new CountDownTimer(500, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            handleCrustClicked(layoutToCrustMapping, linearLayoutCurrent);
+                            chooseAlready = true;
+                        }
+
+                        public void onFinish() {
+                            TabLayout tabs = getActivity().findViewById(R.id.tabs);
+                            tabs.getTabAt(MAIN_TAB_INDEX).select();
+                        }
+                    }.start();
                 }
             });
             if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && entryCurrent.getValue() == currentPizza.getCrust()) {
@@ -121,8 +132,6 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.tab_title_separator) + layoutToCrustMapping.get(linearLayoutCurrent).getName());
         currentPizza.setCrust(layoutToCrustMapping.get(linearLayoutCurrent));
         MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
-        TabLayout tabs = getActivity().findViewById(R.id.tabs);
-        tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
     }
 
