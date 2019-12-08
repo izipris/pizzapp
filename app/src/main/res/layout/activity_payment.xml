@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
     tools:context=".PaymentActivity">
 
     <include
@@ -29,21 +30,22 @@
         android:id="@+id/textViewTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/price_showing_prefix"
         android:textColor="@color/unlighted_text"
-        android:textSize="24sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/payButtonLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditCardInfo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
+        android:id="@+id/payButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="18dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/payButton"
