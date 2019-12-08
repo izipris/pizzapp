@@ -16,191 +16,191 @@
             android:id="@+id/layoutLogo"
             layout="@layout/popup_logo" />
 
-    <TableLayout
-        android:id="@+id/pizzaPic"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:background="#eaeaea"
-        android:gravity="center"
-        android:paddingBottom="10dp">
-
-        <TableRow
-            android:id="@+id/top_row"
+        <TableLayout
+            android:id="@+id/pizzaPic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_height="350dp"
+            android:background="#eaeaea"
             android:gravity="center"
-            android:layoutDirection="ltr"
-            android:paddingBottom="1dp">
+            android:paddingBottom="10dp">
+
+            <TableRow
+                android:id="@+id/top_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layoutDirection="ltr"
+                android:paddingBottom="1dp">
 
 
-            <FrameLayout
-                android:id="@+id/topLeftFrame"
-                android:layout_width="@dimen/enlargedPizzaSize"
-                android:layout_height="@dimen/enlargedPizzaSize"
-                android:paddingLeft="0.25dp"
-                android:paddingEnd="0.25dp"
-                android:paddingRight="0.25dp">
+                <FrameLayout
+                    android:id="@+id/topLeftFrame"
+                    android:layout_width="@dimen/enlargedPizzaSize"
+                    android:layout_height="@dimen/enlargedPizzaSize"
+                    android:paddingLeft="0.25dp"
+                    android:paddingEnd="0.25dp"
+                    android:paddingRight="0.25dp">
 
-                <ImageView
-                    android:id="@+id/topLeft"
-                    android:layout_width="@dimen/originalPizzaSize"
-                    android:layout_height="@dimen/originalPizzaSize"
-                    android:layout_gravity="bottom|end"
-                    android:contentDescription="topLeft"
-                    android:onClick="pizzaPartClicked"
-                    android:rotation="270"
-                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+                    <ImageView
+                        android:id="@+id/topLeft"
+                        android:layout_width="@dimen/originalPizzaSize"
+                        android:layout_height="@dimen/originalPizzaSize"
+                        android:layout_gravity="bottom|end"
+                        android:contentDescription="topLeft"
+                        android:onClick="pizzaPartClicked"
+                        android:rotation="270"
+                        app:srcCompat="@drawable/ic_pizza_slice_color" />
 
-                <ImageView
-                    android:id="@+id/pizzaPLusTopleft"
-                    android:layout_width="@dimen/plusWidth"
-                    android:layout_height="@dimen/plusHeight"
-                    android:layout_gravity="center|bottom|right"
-                    android:layout_marginEnd="36.5dp"
-                    android:layout_marginRight="36.5dp"
-                    android:layout_marginBottom="40.1dp"
-                    app:srcCompat="@drawable/ic_plus_color" />
-            </FrameLayout>
+                    <ImageView
+                        android:id="@+id/pizzaPLusTopleft"
+                        android:layout_width="@dimen/plusWidth"
+                        android:layout_height="@dimen/plusHeight"
+                        android:layout_gravity="center|bottom|right"
+                        android:layout_marginEnd="36.5dp"
+                        android:layout_marginRight="36.5dp"
+                        android:layout_marginBottom="40.1dp"
+                        app:srcCompat="@drawable/ic_plus_color" />
 
-            <FrameLayout
-                android:id="@+id/topRightFrame"
-                android:layout_width="@dimen/enlargedPizzaSize"
-                android:layout_height="@dimen/enlargedPizzaSize"
-                android:paddingLeft="0.25dp"
-                android:paddingEnd="0.25dp"
-                android:paddingRight="0.25dp">
+                </FrameLayout>
 
-                <ImageView
-                    android:id="@+id/topRight"
-                    android:layout_width="@dimen/originalPizzaSize"
-                    android:layout_height="@dimen/originalPizzaSize"
-                    android:layout_gravity="start|bottom"
-                    android:contentDescription="@string/topright"
-                    android:onClick="pizzaPartClicked"
-                    app:srcCompat="@drawable/ic_pizza_slice_color" />
+                <FrameLayout
+                    android:id="@+id/topRightFrame"
+                    android:layout_width="@dimen/enlargedPizzaSize"
+                    android:layout_height="@dimen/enlargedPizzaSize"
+                    android:paddingLeft="0.25dp"
+                    android:paddingEnd="0.25dp"
+                    android:paddingRight="0.25dp">
 
-                <ImageView
-                    android:id="@+id/pizzaPLusTopRight"
-                    android:layout_width="@dimen/plusWidth"
-                    android:layout_height="@dimen/plusHeight"
-                    android:layout_gravity="start|center|bottom"
-                    android:layout_marginStart="36.5dp"
-                    android:layout_marginLeft="36.5dp"
-                    android:layout_marginBottom="40.1dp"
-                    app:srcCompat="@drawable/ic_plus_color" />
-            </FrameLayout>
+                    <ImageView
+                        android:id="@+id/topRight"
+                        android:layout_width="@dimen/originalPizzaSize"
+                        android:layout_height="@dimen/originalPizzaSize"
+                        android:layout_gravity="start|bottom"
+                        android:contentDescription="@string/topright"
+                        android:onClick="pizzaPartClicked"
+                        app:srcCompat="@drawable/ic_pizza_slice_color" />
 
-        </TableRow>
+                    <ImageView
+                        android:id="@+id/pizzaPLusTopRight"
+                        android:layout_width="@dimen/plusWidth"
+                        android:layout_height="@dimen/plusHeight"
+                        android:layout_gravity="start|center|bottom"
+                        android:layout_marginStart="36.5dp"
+                        android:layout_marginLeft="36.5dp"
+                        android:layout_marginBottom="40.1dp"
+                        app:srcCompat="@drawable/ic_plus_color" />
 
-        <TableRow
-            android:id="@+id/bottom_row"
+                </FrameLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/bottom_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layoutDirection="ltr">
+
+                <FrameLayout
+                    android:id="@+id/bottomLeftFrame"
+                    android:layout_width="@dimen/enlargedPizzaSize"
+                    android:layout_height="@dimen/enlargedPizzaSize"
+                    android:paddingLeft="0.25dp"
+                    android:paddingEnd="0.25dp"
+                    android:paddingRight="0.25dp">
+
+
+                    <ImageView
+                        android:id="@+id/bottomLeft"
+                        android:layout_width="@dimen/originalPizzaSize"
+                        android:layout_height="@dimen/originalPizzaSize"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="@string/bottomleft"
+                        android:onClick="pizzaPartClicked"
+                        android:rotation="180"
+                        app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                    <ImageView
+                        android:id="@+id/pizzaPLusBottomleft"
+                        android:layout_width="@dimen/plusWidth"
+                        android:layout_height="@dimen/plusHeight"
+                        android:layout_gravity="end|center|top"
+                        android:layout_marginTop="40.1dp"
+                        android:layout_marginEnd="36.5dp"
+                        android:layout_marginRight="36.5dp"
+                        app:srcCompat="@drawable/ic_plus_color" />
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/bottomRightFrame"
+                    android:layout_width="@dimen/enlargedPizzaSize"
+                    android:layout_height="@dimen/enlargedPizzaSize"
+                    android:paddingLeft="0.25dp"
+                    android:paddingEnd="0.25dp"
+                    android:paddingRight="0.25dp">
+
+                    <ImageView
+                        android:id="@+id/bottomRight"
+                        android:layout_width="@dimen/originalPizzaSize"
+                        android:layout_height="@dimen/originalPizzaSize"
+                        android:layout_gravity="top|start"
+                        android:contentDescription="@string/bottomright"
+                        android:onClick="pizzaPartClicked"
+                        android:rotation="90"
+                        app:srcCompat="@drawable/ic_pizza_slice_color" />
+
+                    <ImageView
+                        android:id="@+id/pizzaPLusBottomRight"
+                        android:layout_width="@dimen/plusWidth"
+                        android:layout_height="@dimen/plusHeight"
+                        android:layout_gravity="start|center|top"
+                        android:layout_marginStart="36.5dp"
+                        android:layout_marginLeft="36.5dp"
+                        android:layout_marginTop="40.1dp"
+                        app:srcCompat="@drawable/ic_plus_color" />
+
+
+                </FrameLayout>
+
+
+            </TableRow>
+        </TableLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layoutDirection="ltr">
+            android:background="#ffffff"
+            android:clickable="true"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
+            android:scrollbars="horizontal">
 
-            <FrameLayout
-                android:id="@+id/bottomLeftFrame"
-                android:layout_width="@dimen/enlargedPizzaSize"
-                android:layout_height="@dimen/enlargedPizzaSize"
-                android:paddingLeft="0.25dp"
-                android:paddingEnd="0.25dp"
-                android:paddingRight="0.25dp">
+            <GridLayout
+                android:id="@+id/grid_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layoutDirection="ltr"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
 
+            </GridLayout>
 
-                <ImageView
-                    android:id="@+id/bottomLeft"
-                    android:layout_width="@dimen/originalPizzaSize"
-                    android:layout_height="@dimen/originalPizzaSize"
-                    android:layout_gravity="top|end"
-                    android:contentDescription="@string/bottomleft"
-                    android:onClick="pizzaPartClicked"
-                    android:rotation="180"
-                    app:srcCompat="@drawable/ic_pizza_slice_color" />
-
-                <ImageView
-                    android:id="@+id/pizzaPLusBottomleft"
-                    android:layout_width="@dimen/plusWidth"
-                    android:layout_height="@dimen/plusHeight"
-                    android:layout_gravity="end|center|top"
-                    android:layout_marginEnd="36.5dp"
-                    android:layout_marginRight="36.5dp"
-                    android:layout_marginTop="40.1dp"
-                    app:srcCompat="@drawable/ic_plus_color" />
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:id="@+id/bottomRightFrame"
-                android:layout_width="@dimen/enlargedPizzaSize"
-                android:layout_height="@dimen/enlargedPizzaSize"
-                android:paddingLeft="0.25dp"
-                android:paddingEnd="0.25dp"
-                android:paddingRight="0.25dp">
-
-                <ImageView
-                    android:id="@+id/bottomRight"
-                    android:layout_width="@dimen/originalPizzaSize"
-                    android:layout_height="@dimen/originalPizzaSize"
-                    android:layout_gravity="top|start"
-                    android:contentDescription="@string/bottomright"
-                    android:onClick="pizzaPartClicked"
-                    android:rotation="90"
-                    app:srcCompat="@drawable/ic_pizza_slice_color" />
-
-                <ImageView
-                    android:id="@+id/pizzaPLusBottomRight"
-                    android:layout_width="@dimen/plusWidth"
-                    android:layout_height="@dimen/plusHeight"
-                    android:layout_gravity="start|center|top"
-                    android:layout_marginStart="36.5dp"
-                    android:layout_marginLeft="36.5dp"
-                    android:layout_marginTop="40.1dp"
-                    app:srcCompat="@drawable/ic_plus_color" />
-
-            </FrameLayout>
-
-
-        </TableRow>
-    </TableLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/pizzaPic"
-        android:background="#ffffff"
-        android:clickable="true"
-        android:fadingEdge="horizontal"
-        android:focusable="true"
-        android:scrollbars="horizontal">
-
-        <GridLayout
-            android:id="@+id/grid_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layoutDirection="ltr"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            >
-
-        </GridLayout>
-
-    </HorizontalScrollView>
+        </HorizontalScrollView>
     </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/done"
-        android:background="@drawable/done_button"
         android:layout_alignParentRight="true"
         android:layout_marginTop="410dp"
         android:layout_marginRight="15dp"
+        android:background="@drawable/done_button"
         android:onClick="backToMain"
-        />
+        android:text="@string/done" />
 
 </RelativeLayout>

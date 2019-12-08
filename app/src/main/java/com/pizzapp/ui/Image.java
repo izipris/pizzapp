@@ -1,4 +1,4 @@
-package com.pizzapp.utilities.UI;
+package com.pizzapp.ui;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ public class Image {
     protected int pizzaPart;
     protected String name;
     protected View view;
-    protected static List<Integer> imageIds = new ArrayList<>();
 
     public Image(){
         id = -1;
@@ -33,14 +32,6 @@ public class Image {
 
     public String getName(){
         return name;
-    }
-
-    public List<Integer> getImageIds(){
-        return imageIds;
-    }
-
-    public void addId(int id){
-        imageIds.add(id);
     }
 
 }

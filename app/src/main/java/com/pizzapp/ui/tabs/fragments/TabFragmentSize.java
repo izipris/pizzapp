@@ -2,6 +2,7 @@ package com.pizzapp.ui.tabs.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +63,16 @@ public class TabFragmentSize extends Fragment {
             rowSizePair.first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    highlightChosenSize(buttonsAndSizes, rowSizePair);
-                    chooseAlready = true;
+                    new CountDownTimer(500, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            highlightChosenSize(buttonsAndSizes, rowSizePair);
+                            chooseAlready = true;
+                        }
+                        public void onFinish() {
+                            TabLayout tabs = getActivity().findViewById(R.id.tabs);
+                            tabs.getTabAt(MAIN_TAB_INDEX).select();
+                        }
+                    }.start();
                 }
             });
             /* In case user already chose size */
@@ -131,8 +140,6 @@ public class TabFragmentSize extends Fragment {
         tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                 getString(R.string.tab_title_separator) + chosen.second.getName());
         MainActivity.updatePizzaDimensionsIndicators(getActivity(), currentPizza);
-        TabLayout tabs = getActivity().findViewById(R.id.tabs);
-        tabs.getTabAt(MAIN_TAB_INDEX).select();
         tabAdapter.notifyDataSetChanged();
     }
 

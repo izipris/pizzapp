@@ -1,4 +1,4 @@
-package com.pizzapp.utilities.UI;
+package com.pizzapp.ui;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -7,18 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import com.pizzapp.R;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.utilities.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PizzaPartImage extends Image {
 
@@ -92,9 +88,6 @@ public class PizzaPartImage extends Image {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void addTopping(Topping topping, boolean initiation) {
         int toppingId = StaticFunctions.generateRandomNumber();
-        while (imageIds.contains(toppingId)) {
-            toppingId = StaticFunctions.generateRandomNumber();
-        }
         toppingImageList.add(new ToppingImage(pizzaPart, toppingId, topping.getName(), view));
         addToppingToPizza(topping, toppingId, initiation);
     }
@@ -181,14 +174,6 @@ public class PizzaPartImage extends Image {
             }
         }
         return false;
-    }
-
-    public int findToppingId(Topping topping){
-        for (ToppingImage toppingImage:toppingImageList){
-            if (toppingImage.getName().equals(topping.getName())){
-                return toppingImage.id;
-            }
-        } return -1;
     }
 }
 
