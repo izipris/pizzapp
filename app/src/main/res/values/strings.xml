@@ -57,6 +57,6 @@
     <string name="credit_card_image_description">Image of credit card info</string>
     <string name="pay_button_image_description">pay button image</string>
     <string name="pay_button_text">Pay</string>
-    <string name="paymen_made_ok">Payment successfully\\nmade!</string>
+    <string name="paymen_made_ok">Payment successfully\nmade!</string>
 
 </resources>
