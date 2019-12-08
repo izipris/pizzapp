@@ -1,13 +1,11 @@
 package com.pizzapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Delivery extends AppCompatActivity {
 
@@ -21,11 +19,11 @@ public class Delivery extends AppCompatActivity {
         TextView textView = findViewById(R.id.textViewGreeting);
         textView.setText(R.string.delivery);
 
-        total = getIntent().getDoubleExtra("Total",0);
+        total = getIntent().getDoubleExtra("Total", 0);
 
     }
 
-    public void toPayment(View view){
+    public void toPayment(View view) {
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra("Total", total);
         startActivity(intent);

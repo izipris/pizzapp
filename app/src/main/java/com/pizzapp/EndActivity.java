@@ -1,8 +1,8 @@
 package com.pizzapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EndActivity extends AppCompatActivity {
 

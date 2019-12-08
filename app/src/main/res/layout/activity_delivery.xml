@@ -18,10 +18,10 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="18dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/toPaymentButton"
@@ -43,7 +43,6 @@
             android:textSize="25sp" />
 
     </FrameLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
