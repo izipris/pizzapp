@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical"
-    android:background="#367da8"
-    android:orientation="vertical"
     tools:context=".Delivery">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/delivery_toolbar"
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/delivery" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="18dp">
+
+        <ImageButton
+            android:id="@+id/toPaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white"
+            android:contentDescription="@string/pay_button_image_description"
+            android:onClick="toPayment"
+            app:srcCompat="@drawable/ic_pay_button" />
+
+        <TextView
+            android:id="@+id/ToPaymentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="toPayment"
+            android:text="@string/to_payment_text"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+    </FrameLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
