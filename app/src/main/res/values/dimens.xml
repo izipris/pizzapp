@@ -30,5 +30,10 @@
     <dimen name="tabsHeight">38dp</dimen>
     <dimen name="recieptPizzaSize">60dp</dimen>
     <dimen name="recieptPizzaHeaderTextSize">14sp</dimen>
+    <dimen name="buttonAddMoreHeight">43dp</dimen>
+    <dimen name="buttonAddMoreWidth">110dp</dimen>
+    <dimen name="buttonOrderApproveHeight">33dp</dimen>
+    <dimen name="buttonOrderApproveWidth">105dp</dimen>
+    <dimen name="buttonOrderApproveTextSize">16sp</dimen>
 
 </resources>

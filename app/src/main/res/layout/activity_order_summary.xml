@@ -5,8 +5,9 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
+    android:background="@color/background_white"
     android:fillViewport="true"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
     tools:context="com.pizzapp.OrderSummary">
 
@@ -232,10 +233,10 @@
 
         <Button
             android:id="@+id/add_more"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/buttonClearHeight"
+            android:layout_width="@dimen/buttonAddMoreWidth"
+            android:layout_height="@dimen/buttonAddMoreHeight"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_clear_button"
+            android:background="@drawable/ic_button_add_more"
             android:onClick="backToMain"
             android:text="@string/add_more_button"
             android:textColor="@color/buttonClearTextColor" />
@@ -249,6 +250,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:fontFamily="@font/open_sans" />
 
     </LinearLayout>
@@ -260,15 +262,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:background="#FFFFFF"
+        android:background="@color/background_white"
         android:gravity="bottom"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/delivery_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/buttonOrderApproveWidth"
+            android:layout_height="@dimen/buttonOrderApproveHeight"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -278,7 +279,7 @@
             android:background="@drawable/ic_vectorcontinue"
             android:onClick="launchDeliveryActivity"
             android:text="@string/delivery_button"
-            android:textSize="20sp"
+            android:textSize="@dimen/buttonOrderApproveTextSize"
             android:textStyle="bold" />
 
         <View
@@ -288,8 +289,8 @@
 
         <Button
             android:id="@+id/pickup_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/buttonOrderApproveWidth"
+            android:layout_height="@dimen/buttonOrderApproveHeight"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -299,7 +300,7 @@
             android:background="@drawable/ic_vectorcontinue"
             android:onClick="launchPickupActivity"
             android:text="@string/pickup_button"
-            android:textSize="20sp"
+            android:textSize="@dimen/buttonOrderApproveTextSize"
             android:textStyle="bold" />
 
     </LinearLayout>

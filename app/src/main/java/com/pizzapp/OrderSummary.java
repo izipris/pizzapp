@@ -75,7 +75,8 @@ public class OrderSummary extends AppCompatActivity {
 
     private void setPriceTextView(double testOrderTotalPrice) {
         TextView orderPrice = findViewById(R.id.order_total_price);
-        orderPrice.setText("Order Total: " + testOrderTotalPrice + "$");
+        orderPrice.setText(getString(R.string.price_showing_prefix)
+                + testOrderTotalPrice + getString(R.string.price_showing_suffix));
     }
 
     private void viewOrder() {
