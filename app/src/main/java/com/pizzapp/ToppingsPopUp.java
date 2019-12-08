@@ -91,11 +91,8 @@ public class ToppingsPopUp extends AppCompatActivity implements Serializable {
             removeTopping(topping);
             toppingBox.removeToppingOnPizzaIndicatorFromToppingBox();
         } else {
-
-                    addTopping(topping);
-                    toppingBox.addToppingOnPizzaIndicatorToToppingBox();
-
-
+            addTopping(topping);
+            toppingBox.addToppingOnPizzaIndicatorToToppingBox();
         }
     }
 
