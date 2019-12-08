@@ -3,9 +3,11 @@ package com.pizzapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -27,6 +29,13 @@ public class PaymentActivity extends AppCompatActivity {
     public void onClickPay(View view){
         final Dialog successfulPayment = new Dialog(this);
         successfulPayment.setContentView(R.layout.successful_payment);
+        Button okButton = findViewById(R.id.doneButton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                successfulPayment.dismiss();
+            }
+        });
         successfulPayment.show();
 
     }
