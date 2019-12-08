@@ -70,8 +70,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_time_counter"
+            android:contentDescription="@string/time_counter_description" />
 
-        />
+        <TextView
+            android:id="@+id/textViewEstimatedTimeCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/EstimatedTimeCounterImage"
+            android:layout_alignRight="@id/EstimatedTimeCounterImage"
+            android:layout_alignBottom="@id/EstimatedTimeCounterImage"
+            android:layout_alignTop="@id/EstimatedTimeCounterImage"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:textColor="#606060"
+            android:text="@string/estimated_time"/>
     </RelativeLayout>
 
 

@@ -12,7 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EndActivity"></activity>
+        <activity
+            android:name=".EndActivity"
+            android:label="End"
+            android:parentActivityName=".PaymentActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PaymentActivity" />
+        </activity>
         <activity
             android:name=".PaymentActivity"
             android:label="Payment"
@@ -28,25 +35,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ToppingsPopUp" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".ToppingsPopUp"
+            android:label="Topping Pop Up"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pizzapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Main"
+            android:parentActivityName=".IntroActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".IntroActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".OrderSummary"
             android:label="Order Summary"
             android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pizzapp.MainActivity" />

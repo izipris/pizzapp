@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 public class PaymentActivity extends AppCompatActivity {
 
+    private Dialog successfulPayment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +29,14 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     public void onClickPay(View view){
-        final Dialog successfulPayment = new Dialog(this);
+        successfulPayment = new Dialog(this);
         successfulPayment.setContentView(R.layout.successful_payment);
-        Button okButton = findViewById(R.id.doneButton);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                successfulPayment.dismiss();
-            }
-        });
         successfulPayment.show();
+    }
 
+    public void done(View view){
+        successfulPayment.dismiss();
+        Intent intent = new Intent(this, EndActivity.class);
+        startActivity(intent);
     }
 }
