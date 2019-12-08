@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             else {
                 order = (Order) intent.getSerializableExtra("order");
                 pizzaIndex = intent.getIntExtra("pizzaIndex",0);
+                if (order.getNumberOfPizzas() == pizzaIndex){
+                    order.addPizza(createDefaultPizza());
+                }
             }
         }
 
