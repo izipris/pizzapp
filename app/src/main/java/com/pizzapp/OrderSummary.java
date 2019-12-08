@@ -31,15 +31,12 @@ public class OrderSummary extends AppCompatActivity {
     private LinearLayout mPizzaLayout;
     private Button mDelivery;
     private Button mPickup;
-    private Toolbar toolbar;
     private Order finalOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_summary);
-
-        setToolbar();
 
         initializeDataMembers();
         Intent intent = getIntent();
@@ -53,11 +50,6 @@ public class OrderSummary extends AppCompatActivity {
         }
     }
 
-    public void setToolbar() {
-        toolbar = findViewById(R.id.order_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = NavUtils.getParentActivityIntent(this);
