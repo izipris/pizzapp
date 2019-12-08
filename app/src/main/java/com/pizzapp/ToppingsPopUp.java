@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
 import com.pizzapp.utilities.IO;
-import com.pizzapp.utilities.UI.Grid;
-import com.pizzapp.utilities.UI.PizzaPartImage;
-import com.pizzapp.utilities.UI.ToppingBox;
+import com.pizzapp.ui.Grid;
+import com.pizzapp.ui.PizzaPartImage;
+import com.pizzapp.ui.ToppingBox;
 
 import java.io.Serializable;
 import java.util.ArrayList;

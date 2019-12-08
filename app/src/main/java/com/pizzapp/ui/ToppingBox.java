@@ -1,4 +1,4 @@
-package com.pizzapp.utilities.UI;
+package com.pizzapp.ui;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;

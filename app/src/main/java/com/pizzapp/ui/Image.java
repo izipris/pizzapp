@@ -1,4 +1,4 @@
-package com.pizzapp.utilities.UI;
+package com.pizzapp.ui;
 
 import android.view.View;
 import android.view.ViewGroup;
