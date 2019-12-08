@@ -1,12 +1,12 @@
 package com.pizzapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class PaymentActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textViewGreeting);
         textView.setText(R.string.payment_header_text);
 
-        double total = getIntent().getDoubleExtra("Total",0);
+        double total = getIntent().getDoubleExtra("Total", 0);
         String totalText = getResources().getString(R.string.price_showing_prefix) + total + getResources().getString(R.string.price_showing_suffix);
         textView = findViewById(R.id.textViewTotal);
         textView.setText(totalText);
