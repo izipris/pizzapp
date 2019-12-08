@@ -49,9 +49,13 @@
     <string name="pizza">Pizza</string>
     <string name="Welcome_to">Welcome to</string>
     <string name="start_button_description">start button image</string>
-    <string name="lets_start_text">Let\'s start</string>
     <string name="order_summary_title">Order Summary</string>
     <string name="orderSummaryToppingPrefix">-&#160;</string>
     <string name="orderSummaryToppingHeader"><b>Toppings:</b></string>
+    <string name="lets_start_text">Lets start</string>
+    <string name="payment_header_text">Payment details</string>
+    <string name="credit_card_image_description">Image of credit card info</string>
+    <string name="pay_button_image_description">pay button image</string>
+    <string name="pay_button_text">Pay</string>
 
 </resources>
