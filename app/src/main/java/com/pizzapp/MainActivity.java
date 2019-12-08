@@ -1,5 +1,6 @@
 package com.pizzapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private TabAdapter tabAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private int pizzaIndex;
     public Order order;
     public Database database;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -47,9 +49,20 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if (savedInstanceState != null) {
             order = (Order) savedInstanceState.getSerializable("order");
         } else {
-            Pizza pizza = createDefaultPizza();
-            order = new Order(0);
-            order.addPizza(pizza);
+            Intent intent = getIntent();
+            if(intent.getBooleanExtra("newOrder", true)) {
+                Pizza pizza = createDefaultPizza();
+                order = new Order(0);
+                order.addPizza(pizza);
+                pizzaIndex = 0;
+            }
+            else {
+                order = (Order) intent.getSerializableExtra("order");
+                pizzaIndex = intent.getIntExtra("pizzaIndex",0);
+                if (order.getNumberOfPizzas() >= pizzaIndex){
+                    order.addPizza(createDefaultPizza());
+                }
+            }
         }
 
         viewPager = findViewById(R.id.viewpager);
@@ -107,7 +120,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     public Pizza getPizza() {
-        return order.getLastPizza();
+        return order.getPizza(pizzaIndex);
+    }
+
+    public int getPizzaIndex() {
+        return pizzaIndex;
     }
 
     @Override

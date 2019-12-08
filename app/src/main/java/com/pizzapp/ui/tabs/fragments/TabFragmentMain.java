@@ -45,6 +45,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     private Pizza currentPizza;
     private Order finalOrder;
+    private int pizzaIndex;
     private List<PizzaPartImage> partImages = new ArrayList<>();
 
     @Override
@@ -67,7 +68,8 @@ public class TabFragmentMain extends Fragment implements Serializable {
 
     private void initiateCurrentPizzaOrder() {
         finalOrder = ((MainActivity) this.getActivity()).order;
-        currentPizza = finalOrder.getLastPizza();
+        pizzaIndex = ((MainActivity) this.getActivity()).getPizzaIndex();
+        currentPizza = ((MainActivity) this.getActivity()).getPizza();
     }
 
     private void initializePizzaPartImageList(View view) {
@@ -189,7 +191,6 @@ public class TabFragmentMain extends Fragment implements Serializable {
         Intent intent = new Intent(getActivity(), ToppingsPopUp.class);
         intent.putExtra("callingId", id);
         intent.putExtra("pizza", currentPizza);
-        intent.putExtra("order", finalOrder);
         startActivityForResult(intent, TOPPING_CHOOSING_RESULT);
     }
 
@@ -200,7 +201,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         Log.d(LOG_TAG, "return from popup with result: " + requestCode);
         if (requestCode == TOPPING_CHOOSING_RESULT) {
             currentPizza = (Pizza) data.getSerializableExtra("pizza");
-            finalOrder.upadateLastPizza(currentPizza);
+            finalOrder.updatePizza(pizzaIndex, currentPizza);
             ((MainActivity) this.getActivity()).order = finalOrder;
             for (PizzaPartImage pizzaPartImage : partImages) {
                 pizzaPartImage.removeAllTopping();
