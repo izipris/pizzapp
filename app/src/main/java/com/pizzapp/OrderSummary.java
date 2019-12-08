@@ -83,9 +83,9 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView getSizeView(Pizza pizza) {
         TextView pizzaSizeView = getAnonymousTextView();
-        pizzaSizeView.setText(pizza.getSize().getName() + " "
-                + pizza.getCrust().getName() + " Pizza"); //don't care about translations
-        pizzaSizeView.setTextSize(20);
+        pizzaSizeView.setText(pizza.getSize().getCaption() + "Pizza | "
+                + pizza.getCrust().getName() + " Crust");
+        pizzaSizeView.setTextSize(17);
         pizzaSizeView.setPadding(5, 5, 5, 5);
         pizzaSizeView.setVisibility(View.VISIBLE);
         return pizzaSizeView;
@@ -183,6 +183,14 @@ public class OrderSummary extends AppCompatActivity {
         mPickup.setTextColor(Color.RED);
         Intent intent = new Intent(this, Pickup.class);
         startActivity(intent);
+    }
+
+    public void backToMain(View view) {
+        Log.d(LOG_TAG, "backToMain");
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("pizza", finalOrder.getLastPizza());
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 

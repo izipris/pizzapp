@@ -22,6 +22,8 @@
         android:layout_weight="1">
 
         <TableLayout
+            android:id="@+id/table_of_pizzas"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -99,7 +101,8 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/ic_clear_button"
             android:text="@string/add_more_button"
-            android:textColor="@color/buttonClearTextColor" />
+            android:textColor="@color/buttonClearTextColor"
+            android:onClick="backToMain"/>
         <TextView
             android:id="@+id/order_total_price"
             android:layout_width="match_parent"
@@ -138,7 +141,8 @@
             android:background="@drawable/ic_vectorcontinue"
             android:text="@string/delivery_button"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="launchDeliveryActivity"/>
 
         <View
             android:layout_width="1dp"
@@ -158,7 +162,8 @@
             android:background="@drawable/ic_vectorcontinue"
             android:text="@string/pickup_button"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="launchPickupActivity"/>
 
     </LinearLayout>
 </LinearLayout>
