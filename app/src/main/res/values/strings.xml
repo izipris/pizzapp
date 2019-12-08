@@ -58,5 +58,7 @@
     <string name="pay_button_image_description">pay button image</string>
     <string name="pay_button_text">Pay</string>
     <string name="paymen_made_ok">Payment successfully\nmade!</string>
+    <string name="order_on_its_way_text">Your order is\non it's way!</string>
+    <string name="estimated_time_text">Estimated time to delivery</string>
 
 </resources>
