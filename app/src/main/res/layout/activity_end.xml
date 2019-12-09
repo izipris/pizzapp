@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGreeting"
-        tools:text="@string/order_on_its_way_text" />
+        android:text="@string/order_on_its_way_text" />
 
     <TextView
         android:id="@+id/textViewEstimatedTimeHeader"
