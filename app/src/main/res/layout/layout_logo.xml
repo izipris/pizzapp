@@ -25,7 +25,7 @@
                 android:contentDescription="@string/app_name"
                 android:paddingLeft="@dimen/logoPaddingLeft"
                 android:paddingTop="@dimen/logoPaddingTop"
-                app:srcCompat="@drawable/ic_pizzap" />
+                app:srcCompat="@drawable/ic_pizzapp" />
 
 
             <TextView

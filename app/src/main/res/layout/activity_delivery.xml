@@ -17,7 +17,7 @@
         android:layoutDirection="ltr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pizzap" />
+        app:srcCompat="@drawable/ic_pizzapp" />
 
     <TextView
         android:id="@+id/textViewGreeting"
