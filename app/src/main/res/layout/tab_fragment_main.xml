@@ -110,9 +110,9 @@
                     android:layout_width="@dimen/plusWidth"
                     android:layout_height="@dimen/plusHeight"
                     android:layout_gravity="end|center|top"
+                    android:layout_marginTop="40.1dp"
                     android:layout_marginEnd="36.5dp"
                     android:layout_marginRight="36.5dp"
-                    android:layout_marginTop="40.1dp"
                     app:srcCompat="@drawable/ic_plus_color" />
             </FrameLayout>
 
@@ -150,54 +150,83 @@
 
         </TableRow>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/mainFragmentMarginTop"
-            android:gravity="bottom|center"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
-            <TextView
-                android:id="@+id/textViewChosenCrust"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="235dp"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewChosenCrustIndicatorText"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/textViewChosenOptionSize" />
+                android:orientation="horizontal"
+                android:stretchColumns="0,1">
 
-            <TextView
-                android:id="@+id/textViewChosenCrustIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewChosenCrustIndicatorText"
-                android:textColor="@color/textViewChosenOptionIndicator"
-                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textViewChosenOptionSeparator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pipe_separator"
-                android:textColor="@color/textViewChosenOptionIndicator"
-                android:textSize="@dimen/textViewChosenOptionSeparatorSize" />
+                    <TableRow
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left">
 
+                        <TextView
+                            android:id="@+id/textViewChosenCrust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textViewChosenCrustIndicatorText"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textViewChosenOptionSize" />
 
-            <TextView
-                android:id="@+id/textViewChosenSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewChosenSizeIndicatorText"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/textViewChosenOptionSize" />
+                        <TextView
+                            android:id="@+id/textViewChosenCrustIndicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textViewChosenCrustIndicatorText"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+                    </TableRow>
 
-            <TextView
-                android:id="@+id/textViewChosenSizeIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewChosenSizeIndicatorText"
-                android:textColor="@color/textViewChosenOptionIndicator"
-                android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
+                        <TextView
+                            android:id="@+id/textViewChosenOptionSeparator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pipe_separator"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/textViewChosenOptionSeparatorSize" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/textViewChosenSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textViewChosenSizeIndicatorText"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textViewChosenOptionSize" />
+
+                        <TextView
+                            android:id="@+id/textViewChosenSizeIndicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textViewChosenSizeIndicatorText"
+                            android:textColor="@color/textViewChosenOptionIndicator"
+                            android:textSize="@dimen/textViewChosenOptionIndicatorSize" />
+                    </TableRow>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
 
 

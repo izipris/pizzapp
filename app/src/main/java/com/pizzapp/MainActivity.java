@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int pizzaIndex;
+    private boolean newOrder;
     public Order order;
     public Database database;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -46,11 +47,13 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         database = IO.getDatabaseFromInputStream(getResources().openRawResource(R.raw.database));
 
+
         if (savedInstanceState != null) {
             order = (Order) savedInstanceState.getSerializable("order");
         } else {
             Intent intent = getIntent();
-            if(intent.getBooleanExtra("newOrder", true)) {
+            newOrder = intent.getBooleanExtra("newOrder", true);
+            if(newOrder) {
                 Pizza pizza = createDefaultPizza();
                 order = new Order(0);
                 order.addPizza(pizza);
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             else {
                 order = (Order) intent.getSerializableExtra("order");
                 pizzaIndex = intent.getIntExtra("pizzaIndex",0);
-                if (order.getNumberOfPizzas() >= pizzaIndex){
+                if (order.getNumberOfPizzas() <= pizzaIndex){
                     order.addPizza(createDefaultPizza());
                 }
             }
@@ -125,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     public int getPizzaIndex() {
         return pizzaIndex;
+    }
+
+    public boolean isNewOrder() {
+        return newOrder;
     }
 
     @Override

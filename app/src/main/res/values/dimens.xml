@@ -43,4 +43,6 @@
     <dimen name="buttonOrderChangeHeight">28dp</dimen>
     <dimen name="orderSummaryBottomBlockMarginTop">15dp</dimen>
     <dimen name="orderSummaryToppingsHeaderTextSize">12sp</dimen>
+    <dimen name="ButtonDoneWidth">94dp</dimen>
+    <dimen name="ButtonDoneHeight">35dp</dimen>
 </resources>
