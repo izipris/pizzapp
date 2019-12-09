@@ -24,4 +24,5 @@
     <color name="greeting_color">#808080</color>
     <color name="logoAreaColor">#F9F9F9</color>
     <color name="colorGrayTabBackground">#eaeaea</color>
+    <color name="rusty_orange">#d34d11</color>
 </resources>

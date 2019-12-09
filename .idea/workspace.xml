@@ -16,9 +16,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,36 +46,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+            <state relative-caret-position="3298">
+              <caret line="223" column="41" selection-start-line="223" selection-start-column="41" selection-end-line="223" selection-end-column="41" />
+              <folding>
+                <element signature="e#9095#9140#0" expanded="true" />
+                <element signature="e#9192#9227#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
-          <provider editor-type-id="android-designer2" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2737">
-              <caret line="161" column="38" selection-start-line="161" selection-start-column="38" selection-end-line="161" selection-end-column="38" />
+            <state relative-caret-position="347">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Pickup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="2465">
+              <caret line="145" column="47" lean-forward="true" selection-start-line="145" selection-start-column="47" selection-end-line="145" selection-end-column="47" />
+              <folding>
+                <element signature="e#11182#11217#0" expanded="true" />
+                <element signature="e#11324#11367#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,6 +102,8 @@
       <find>onOptionsItemSelected</find>
       <find>onO</find>
       <find>price</find>
+      <find>13.5</find>
+      <find>10</find>
     </findStrings>
   </component>
   <component name="Git.Rebase.Settings">
@@ -108,7 +113,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="redesign_order_summary" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -132,12 +137,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Order.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Pickup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java" />
       </list>
     </option>
   </component>
@@ -203,9 +208,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DEBUGGABLE_DEVICE" value="Pixel_2_API_27 [emulator-5554]" />
+    <property name="DEBUGGABLE_PROCESS" value="com.pizzapp" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_27" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-12-06T14:24:15.838Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -540,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575641000697</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="First commit, nothing done">
+      <created>1575878049784</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1575878049784</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView">
@@ -568,10 +583,10 @@
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49959514" weight="0.31150442" />
       <window_info anchor="bottom" id="Debug" order="1" weight="0.37522125" />
       <window_info anchor="bottom" id="Version Control" order="2" sideWeight="0.49716598" weight="0.28318584" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="3" sideWeight="0.49716598" visible="true" weight="0.5115044" />
+      <window_info anchor="bottom" id="Logcat" order="3" sideWeight="0.49716598" visible="true" weight="0.12566371" />
       <window_info anchor="bottom" id="TODO" order="4" sideWeight="0.49959514" weight="0.32920355" />
       <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49959514" weight="0.32920355" />
-      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.502834" side_tool="true" visible="true" weight="0.5115044" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.502834" side_tool="true" visible="true" weight="0.12566371" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49716598" weight="0.26725665" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32920355" />
@@ -579,7 +594,7 @@
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
-      <window_info anchor="right" id="Preview" order="3" weight="0.23076923" />
+      <window_info active="true" anchor="right" id="Preview" order="3" visible="true" weight="0.23076923" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32955465" />
       <window_info anchor="right" id="Device File Explorer" order="6" side_tool="true" weight="0.32955465" />
@@ -654,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="was able to change the textView" />
     <MESSAGE value="app.iml was not added" />
     <MESSAGE value="gradling and creating strings" />
     <MESSAGE value="deleting misplaced pojos, to accept the master's pojos locations" />
@@ -679,19 +693,10 @@
     <MESSAGE value="1. corrected pizza price in receipt&#10;2. minor mistake in manifest, and the annoying googleIndexing warning&#10;3. added the app colors with descriptive and functional names" />
     <MESSAGE value="commiting before pull" />
     <MESSAGE value="Merge branch 'master' of https://github.com/izipris/pizzapp&#10;&#10;# Conflicts:&#10;#&#9;.idea/vcs.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/izipris/pizzapp&#10;&#10;# Conflicts:&#10;#&#9;.idea/vcs.xml" />
+    <MESSAGE value="First commit, nothing done" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit, nothing done" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build/generated/ap_generated_sources/debug/out/com/pizzapp/databinding/ActivityOrderSummaryBindingImpl.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Part.java" />
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-246" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -932,13 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/model/pizza/Pizza.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -968,21 +966,6 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2737">
-          <caret line="161" column="38" selection-start-line="161" selection-start-column="38" selection-end-line="161" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Pickup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -994,6 +977,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/view/ViewGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8271" column="20" selection-start-line="8271" selection-start-column="20" selection-end-line="8271" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captures/com.pizzapp_2019.12.09_10.43.li">
+      <provider selected="true" editor-type-id="capture-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captures/com.pizzapp_2019.12.09_11.17.li">
+      <provider selected="true" editor-type-id="capture-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_logo.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_clear_button.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_pizzap.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/OrderSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="223" column="41" selection-start-line="223" selection-start-column="41" selection-end-line="223" selection-end-column="41" />
+          <folding>
+            <element signature="e#9095#9140#0" expanded="true" />
+            <element signature="e#9192#9227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2465">
+          <caret line="145" column="47" lean-forward="true" selection-start-line="145" selection-start-column="47" selection-end-line="145" selection-end-column="47" />
+          <folding>
+            <element signature="e#11182#11217#0" expanded="true" />
+            <element signature="e#11324#11367#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
