@@ -262,9 +262,10 @@ public class OrderSummary extends AppCompatActivity {
     public void backToMain(View view) {
         Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("pizza", finalOrder.getLastPizza());
-        setResult(RESULT_OK, intent);
-        finish();
+        intent.putExtra("newOrder", false);
+        intent.putExtra("order", finalOrder);
+        intent.putExtra("pizzaIndex",0);
+        startActivity(intent);
     }
 
     @Override

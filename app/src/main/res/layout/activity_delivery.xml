@@ -4,49 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cheese_maize"
     tools:context=".Delivery">
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_logo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/logoPaddingLeft"
-        android:layout_marginTop="@dimen/logoPaddingTop"
-        android:contentDescription="@string/app_name"
-        android:layoutDirection="ltr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pizzap" />
-
-    <TextView
-        android:id="@+id/textViewGreeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61.5dp"
-        android:text="@string/hello"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/greetingHeaderSize"
-        app:fontFamily="@font/open_sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewOrderOnItsWay"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:layout_marginTop="120.3dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGreeting"
-        tools:text="@string/order_on_its_way_text" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <ImageButton
+            android:id="@+id/toPaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white"
+            android:contentDescription="@string/pay_button_image_description"
+            android:onClick="toPayment"
+            app:srcCompat="@drawable/ic_pay_button" />
 
+        <TextView
+            android:id="@+id/ToPaymentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="toPayment"
+            android:text="@string/to_payment_text"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
