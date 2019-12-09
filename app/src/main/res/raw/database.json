@@ -4,19 +4,19 @@
       "name": "M",
       "price": 15,
       "dimension": 9.5,
-      "caption": "MEDIUM"
+      "caption": "Medium"
     },
     {
       "name": "L",
       "price": 17.5,
       "dimension": 11.5,
-      "caption": "LARGE"
+      "caption": "Large"
     },
     {
       "name": "XL",
       "price": 20,
       "dimension": 13.5,
-      "caption": "X-LARGE"
+      "caption": "X-Large"
     }
   ],
   "toppings": [
@@ -63,15 +63,15 @@
   ],
   "crusts": [
     {
-      "name": "THIN",
+      "name": "Thin",
       "price": 0
     },
     {
-      "name": "REGULAR",
+      "name": "Regular",
       "price": 0
     },
     {
-      "name": "THICK",
+      "name": "Thick",
       "price": 2.00
     }
   ]

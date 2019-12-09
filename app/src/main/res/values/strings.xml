@@ -44,8 +44,14 @@
     <string name="textViewChosenSizeIndicatorText">SIZE</string>
     <string name="done">DONE</string>
     <string name="popup_logo_title">Choose Topping</string>
+    <string name="add_more_button">Add More</string>
+    <string name="change_button">Change</string>
+    <string name="pizza">Pizza</string>
     <string name="Welcome_to">Welcome to</string>
     <string name="start_button_description">start button image</string>
-    <string name="lets_start_text">Lets start</string>
+    <string name="lets_start_text">Let\'s start</string>
+    <string name="order_summary_title">Order Summary</string>
+    <string name="orderSummaryToppingPrefix">-&#160;</string>
+    <string name="orderSummaryToppingHeader"><b>Toppings:</b></string>
 
 </resources>
