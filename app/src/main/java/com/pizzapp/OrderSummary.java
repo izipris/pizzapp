@@ -234,7 +234,8 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView getToppingView(Topping topping) {
         TextView toppingsView = getAnonymousTextView();
-        toppingsView.setTextSize(8);
+        toppingsView.setTextSize(12);
+        toppingsView.setTextColor(Color.parseColor("#808080"));
         toppingsView.setText(getString(R.string.orderSummaryToppingPrefix) + topping.getName() + "..." + topping.getPrice() + getString(R.string.currency_symbol));
         toppingsView.setVisibility(View.VISIBLE);
         return toppingsView;
