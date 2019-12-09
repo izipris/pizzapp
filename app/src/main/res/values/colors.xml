@@ -16,7 +16,7 @@
     <color name="sauce_faded_red">#c1272d</color>
     <color name="cheese_maize">#F4CA45</color>
     <color name="black">#000000</color>
-    
+
     <color name="buttonClearTextColor">#FFFFFF</color>
     <color name="textViewChosenOptionIndicator">#808080</color>
     <color name="tab_background_selected">#eaeaea</color>
@@ -24,7 +24,7 @@
     <color name="greeting_color">#808080</color>
     <color name="logoAreaColor">#F9F9F9</color>
     <color name="colorGrayTabBackground">#eaeaea</color>
-    
+    <color name="rusty_orange">#d34d11</color>
     <color name="unlighted_text">#c4c4c4</color>
     <color name="pickup_and_delivery_background">#eaeaea</color>
 </resources>
