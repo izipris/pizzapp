@@ -2,7 +2,6 @@ package com.pizzapp;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +39,9 @@ public class OrderSummary extends AppCompatActivity {
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
     private static final int SIZE_OF_TOPPING = 50;
+    private static final double TEXT_LEFT_MARGIN = 13.5;
+    private static final int TEXT_SIZE_PIZZA_DETAILS = 10;
+    private static final int PRICE_RIGHT_ALINGMENT = 10;
     private Button mDelivery;
     private Button mPickup;
     private Order finalOrder;
@@ -200,18 +202,27 @@ public class OrderSummary extends AppCompatActivity {
 
     private TextView getPizzaPriceView(Pizza pizza) {
         double price = pizza.getPrice();
-        TextView priceView = getAnonymousTextView();
+        TextView priceView = getPizzaPriceTextView();
         priceView.setText(getString(R.string.price_showing_prefix) + price + getString(R.string.price_showing_suffix) + "   ");
-        priceView.setTextSize(15);
+        priceView.setTextSize(TEXT_SIZE_PIZZA_DETAILS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             priceView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         }
-        priceView.setTextColor(getResources().getColor(R.color.cheese_maize));
-        priceView.setTypeface(null, Typeface.BOLD);
+        priceView.setTextColor(getResources().getColor(R.color.rusty_orange));
         priceView.setVisibility(View.VISIBLE);
         return priceView;
     }
 
+
+    public TextView getPizzaPriceTextView() {
+        TextView textView = new TextView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, StaticFunctions.convertDpToPx(PRICE_RIGHT_ALINGMENT),
+                0);
+        textView.setLayoutParams(params);
+        return textView;
+    }
 
     private void setHeadline(Pizza pizza) {
         TextView size = findViewById(R.id.size_of_pizza);
@@ -220,20 +231,8 @@ public class OrderSummary extends AppCompatActivity {
         crust.setText(pizza.getCrust().getName());
     }
 
-
-    public TextView getAnonymousTextView() {
-        TextView textView = new TextView(this);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(20, 0, 0, 0);
-        textView.setLayoutParams(params);
-        textView.setTextColor(Color.BLACK);
-        return textView;
-    }
-
-
     private TextView getToppingView(Topping topping) {
-        TextView toppingsView = getAnonymousTextView();
+        TextView toppingsView = getToppingTextView();
         toppingsView.setTextSize(12);
         toppingsView.setTextColor(Color.parseColor("#808080"));
         toppingsView.setText(getString(R.string.orderSummaryToppingPrefix) + topping.getName() + "..." + topping.getPrice() + getString(R.string.currency_symbol));
@@ -241,11 +240,21 @@ public class OrderSummary extends AppCompatActivity {
         return toppingsView;
     }
 
+    public TextView getToppingTextView() {
+        TextView textView = new TextView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(StaticFunctions.convertDpToPx(TEXT_LEFT_MARGIN), 0, 0, 0);
+        textView.setLayoutParams(params);
+        textView.setTextColor(Color.BLACK);
+        return textView;
+    }
 
     public void launchDeliveryActivity(View view) {
         Log.d(LOG_TAG, "Delivery button clicked!");
         mDelivery.setTextColor(Color.RED);
         Intent intent = new Intent(this, Delivery.class);
+        intent.putExtra("Total", finalOrder.getTotalPrice());
         startActivity(intent);
     }
 
@@ -254,17 +263,18 @@ public class OrderSummary extends AppCompatActivity {
         Log.d(LOG_TAG, "Pickup button clicked!");
         mPickup.setTextColor(Color.RED);
         Intent intent = new Intent(this, Pickup.class);
+        intent.putExtra("Total", finalOrder.getTotalPrice());
         startActivity(intent);
     }
 
     public void backToMain(View view) {
         Log.d(LOG_TAG, "backToMain");
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("pizza", finalOrder.getLastPizza());
-        setResult(RESULT_OK, intent);
-        finish();
+        intent.putExtra("newOrder", false);
+        intent.putExtra("order", finalOrder);
+        intent.putExtra("pizzaIndex", 0);
+        startActivity(intent);
     }
-
 
     @Override
     protected void onStart() {

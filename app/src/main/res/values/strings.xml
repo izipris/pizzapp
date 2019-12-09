@@ -49,9 +49,27 @@
     <string name="pizza">Pizza</string>
     <string name="Welcome_to">Welcome to</string>
     <string name="start_button_description">start button image</string>
-    <string name="lets_start_text">Let\'s start</string>
     <string name="order_summary_title">Order Summary</string>
     <string name="orderSummaryToppingPrefix">-&#160;</string>
     <string name="orderSummaryToppingHeader"><b>Toppings:</b></string>
+    <string name="lets_start_text">Lets start</string>
+    <string name="payment_header_text">Payment details</string>
+    <string name="credit_card_image_description">Image of credit card info</string>
+    <string name="pay_button_image_description">pay button image</string>
+    <string name="pay_button_text">Pay</string>
+    <string name="paymen_made_ok">Payment successfully\nmade!</string>
+    <string name="order_on_its_way_text">Your order is\non it\'s way!</string>
+    <string name="estimated_time_text">Estimated time to delivery</string>
+    <string name="time_counter_description">Image of time counter to delivery</string>
+    <string name="estimated_time">30 Minutes</string>
+    <string name="bottom_text_1">pizzapp@ac.il</string>
+    <string name="bottom_text_2">+572 455 664 2254</string>
+    <string name="bottom_text_3">For any problem contact</string>
+    <string name="delivery_header_text">Delivery</string>
+    <string name="to_payment_text">To Payment</string>
+    <string name="delivery">Delivery</string>
+    <string name="pickup_image_description">pickup image</string>
+    <string name="delivery_image_description">delivery image</string>
+    <string name="pickup">Pickup</string>
 
 </resources>

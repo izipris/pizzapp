@@ -76,7 +76,7 @@ public class TabFragmentSize extends Fragment {
                 }
             });
             /* In case user already chose size */
-            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && rowSizePair.second == currentPizza.getSize()) {
+            if (((savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || !((MainActivity) this.getActivity()).isNewOrder()) && rowSizePair.second == currentPizza.getSize()){
                 chooseAlready = true;
                 rowSizePair.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
