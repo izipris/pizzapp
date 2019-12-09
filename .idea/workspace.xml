@@ -19,12 +19,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pizzapp/Pickup.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="2737">
               <caret line="161" column="38" selection-start-line="161" selection-start-column="38" selection-end-line="161" selection-end-column="38" />
             </state>
           </provider>
@@ -68,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -156,28 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Pizzapp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="Pizzapp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="Pizzapp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="pizzapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,8 +196,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -595,11 +568,11 @@
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49959514" weight="0.31150442" />
       <window_info anchor="bottom" id="Debug" order="1" weight="0.37522125" />
       <window_info anchor="bottom" id="Version Control" order="2" sideWeight="0.49716598" weight="0.28318584" />
-      <window_info anchor="bottom" id="Logcat" order="3" sideWeight="0.4979757" weight="0.5115044" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="3" sideWeight="0.49716598" visible="true" weight="0.5115044" />
       <window_info anchor="bottom" id="TODO" order="4" sideWeight="0.49959514" weight="0.32920355" />
       <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49959514" weight="0.32920355" />
-      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.502834" side_tool="true" visible="true" weight="0.28318584" />
-      <window_info active="true" anchor="bottom" id="Build" order="7" sideWeight="0.49716598" visible="true" weight="0.26725665" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.502834" side_tool="true" visible="true" weight="0.5115044" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49716598" weight="0.26725665" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32920355" />
       <window_info anchor="bottom" id="Messages" order="10" />
@@ -1005,7 +978,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_summary.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="2737">
           <caret line="161" column="38" selection-start-line="161" selection-start-column="38" selection-end-line="161" selection-end-column="38" />
         </state>
       </provider>
@@ -1020,7 +993,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pizzapp/Delivery.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
