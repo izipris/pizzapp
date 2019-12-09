@@ -102,6 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bottom_text_2"
+        android:layoutDirection="ltr"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@id/bottomText1"
         app:layout_constraintEnd_toEndOf="parent"
