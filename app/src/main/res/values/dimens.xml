@@ -32,8 +32,15 @@
     <dimen name="recieptPizzaHeaderTextSize">14sp</dimen>
     <dimen name="buttonAddMoreHeight">43dp</dimen>
     <dimen name="buttonAddMoreWidth">110dp</dimen>
+    <dimen name="buttonAddMoreTextSize">14sp</dimen>
+    <dimen name="buttonOrderChangeTextSize">12sp</dimen>
     <dimen name="buttonOrderApproveHeight">33dp</dimen>
     <dimen name="buttonOrderApproveWidth">105dp</dimen>
     <dimen name="buttonOrderApproveTextSize">16sp</dimen>
-
+    <dimen name="blockLeftOrderSummaryWidth">170dp</dimen>
+    <dimen name="blockOrderSummaryHeight">328dp</dimen>
+    <dimen name="buttonOrderChangeWidth">71dp</dimen>
+    <dimen name="buttonOrderChangeHeight">28dp</dimen>
+    <dimen name="orderSummaryBottomBlockMarginTop">15dp</dimen>
+    <dimen name="orderSummaryToppingsHeaderTextSize">12sp</dimen>
 </resources>

@@ -169,6 +169,9 @@ public class OrderSummary extends AppCompatActivity {
     private void setToppings(Pizza pizza, LinearLayout pizzaText) {
         List<Topping> toppings = getAllToppings(pizza);  // including repetitions
         Set<String> alreadyInsertedToppings = new HashSet<>();
+        if (toppings.size() == 0) {
+            findViewById(R.id.textViewOrderSummaryToppingsHeader).setVisibility(View.INVISIBLE);
+        }
         for (Topping topping : toppings) {
             String toppingName = topping.getName();
             if (!alreadyInsertedToppings.contains(toppingName)) {
@@ -198,7 +201,7 @@ public class OrderSummary extends AppCompatActivity {
     private TextView getPizzaPriceView(Pizza pizza) {
         double price = pizza.getPrice();
         TextView priceView = getAnonymousTextView();
-        priceView.setText("Total:........." + price + "$");
+        priceView.setText(getString(R.string.price_showing_prefix) + price + getString(R.string.price_showing_suffix) + "   ");
         priceView.setTextSize(15);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             priceView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
@@ -232,7 +235,7 @@ public class OrderSummary extends AppCompatActivity {
     private TextView getToppingView(Topping topping) {
         TextView toppingsView = getAnonymousTextView();
         toppingsView.setTextSize(8);
-        toppingsView.setText(topping.getName() + "..." + topping.getPrice());
+        toppingsView.setText(getString(R.string.orderSummaryToppingPrefix) + topping.getName() + "..." + topping.getPrice() + getString(R.string.currency_symbol));
         toppingsView.setVisibility(View.VISIBLE);
         return toppingsView;
     }

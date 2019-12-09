@@ -51,5 +51,7 @@
     <string name="start_button_description">start button image</string>
     <string name="lets_start_text">Let\'s start</string>
     <string name="order_summary_title">Order Summary</string>
+    <string name="orderSummaryToppingPrefix">-&#160;</string>
+    <string name="orderSummaryToppingHeader"><b>Toppings:</b></string>
 
 </resources>

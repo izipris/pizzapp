@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/background_white"
     android:fillViewport="true"
+    android:gravity="center"
     android:layoutDirection="ltr"
     android:orientation="vertical"
     tools:context="com.pizzapp.OrderSummary">
@@ -19,21 +20,18 @@
     <ScrollView
         android:id="@+id/order_details_scroll_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1">
 
-        <TableLayout
-            android:id="@+id/table_of_pizzas"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorGrayTabBackground"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TableRow
-                android:id="@+id/pizza_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="@dimen/blockLeftOrderSummaryWidth"
+                android:layout_height="@dimen/blockOrderSummaryHeight">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -42,14 +40,13 @@
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:padding="15dp">
+                        android:gravity="start">
 
                         <TableRow
                             android:id="@+id/top_pizza_parts"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layoutDirection="ltr"
                             android:paddingBottom="0.25dp">
 
@@ -96,7 +93,7 @@
                             android:id="@+id/bottom_pizza_parts"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layoutDirection="ltr">
 
                             <FrameLayout
@@ -137,23 +134,33 @@
 
                             </FrameLayout>
                         </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right">
+
+                            <Button
+                                android:layout_width="@dimen/buttonOrderChangeWidth"
+                                android:layout_height="@dimen/buttonOrderChangeHeight"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/ic_clear_button"
+                                android:onClick="backToMain"
+                                android:text="@string/change_button"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/buttonOrderChangeTextSize" />
+
+                        </TableRow>
                     </TableLayout>
 
-                    <Button
-                        android:layout_width="60dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/ic_clear_button"
-                        android:onClick="backToMain"
-                        android:text="@string/change_button"
-                        android:textSize="10sp" />
-                </RelativeLayout>
 
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="328dp"
+                android:background="@color/colorGrayTabBackground">
 
                 <LinearLayout
                     android:id="@+id/pizza_text"
@@ -175,7 +182,9 @@
                             android:layout_height="wrap_content"
                             android:padding="3dp"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/open_sans" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -183,14 +192,16 @@
                             android:padding="3dp"
                             android:text="@string/pizza"
                             android:textColor="@color/textViewChosenOptionIndicator"
-                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize"
+                            app:fontFamily="@font/open_sans" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pipe_separator"
                             android:textColor="@color/textViewChosenOptionIndicator"
-                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize"
+                            app:fontFamily="@font/open_sans" />
 
 
                         <TextView
@@ -199,7 +210,9 @@
                             android:layout_height="wrap_content"
                             android:padding="3dp"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/open_sans" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -207,28 +220,32 @@
                             android:padding="3dp"
                             android:text="@string/tab_title_crust"
                             android:textColor="@color/textViewChosenOptionIndicator"
-                            android:textSize="@dimen/recieptPizzaHeaderTextSize" />
+                            android:textSize="@dimen/recieptPizzaHeaderTextSize"
+                            app:fontFamily="@font/open_sans" />
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/textViewOrderSummaryToppingsHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:text="@string/orderSummaryToppingHeader"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/orderSummaryToppingsHeaderTextSize"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/open_sans" />
+
                 </LinearLayout>
             </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </TableRow>
-
-        </TableLayout>
-
+        </LinearLayout>
 
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/orderSummaryBottomBlockMarginTop"
         android:orientation="vertical">
 
         <Button
@@ -239,14 +256,15 @@
             android:background="@drawable/ic_button_add_more"
             android:onClick="backToMain"
             android:text="@string/add_more_button"
-            android:textColor="@color/buttonClearTextColor" />
+            android:textColor="@color/buttonClearTextColor"
+            android:textSize="@dimen/buttonAddMoreTextSize" />
 
         <TextView
             android:id="@+id/order_total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="25sp"
@@ -258,12 +276,9 @@
 
     <LinearLayout
         android:id="@+id/action_buttons_layout"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
         android:background="@color/background_white"
-        android:gravity="bottom"
         android:orientation="horizontal">
 
         <Button
@@ -279,8 +294,7 @@
             android:background="@drawable/ic_vectorcontinue"
             android:onClick="launchDeliveryActivity"
             android:text="@string/delivery_button"
-            android:textSize="@dimen/buttonOrderApproveTextSize"
-            android:textStyle="bold" />
+            android:textSize="@dimen/buttonOrderApproveTextSize" />
 
         <View
             android:layout_width="1dp"
@@ -300,8 +314,7 @@
             android:background="@drawable/ic_vectorcontinue"
             android:onClick="launchPickupActivity"
             android:text="@string/pickup_button"
-            android:textSize="@dimen/buttonOrderApproveTextSize"
-            android:textStyle="bold" />
+            android:textSize="@dimen/buttonOrderApproveTextSize" />
 
     </LinearLayout>
 </LinearLayout>
