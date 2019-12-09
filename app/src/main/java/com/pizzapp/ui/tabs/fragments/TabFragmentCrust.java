@@ -104,7 +104,7 @@ public class TabFragmentCrust extends Fragment {
                     }.start();
                 }
             });
-            if (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready") && entryCurrent.getValue() == currentPizza.getCrust()) {
+            if (((savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || ((MainActivity) this.getActivity()).isNewOrder()) && entryCurrent.getValue() == currentPizza.getCrust()) {
                 chooseAlready = true;
                 entryCurrent.getKey().setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
