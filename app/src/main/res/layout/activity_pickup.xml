@@ -16,7 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/imageViewPickup"
+        android:layout_width="321dp"
+        android:layout_height="406dp"
+        android:contentDescription="@string/pickup_image_description"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:srcCompat="@drawable/pickup" />
+
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
@@ -44,6 +57,7 @@
             android:textSize="25sp" />
 
     </FrameLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

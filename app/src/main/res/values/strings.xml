@@ -68,5 +68,8 @@
     <string name="delivery_header_text">Delivery</string>
     <string name="to_payment_text">To Payment</string>
     <string name="delivery">Delivery</string>
+    <string name="pickup_image_description">pickup image</string>
+    <string name="delivery_image_description">delivery image</string>
+    <string name="pickup">Pickup</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.pizzapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ public class Pickup extends AppCompatActivity {
         setContentView(R.layout.activity_pickup);
 
         TextView textView = findViewById(R.id.textViewGreeting);
-        textView.setText(R.string.delivery_header_text);
+        textView.setText(R.string.pickup);
 
         total = getIntent().getDoubleExtra("Total", 0);
     }
