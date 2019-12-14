@@ -14,8 +14,8 @@ import com.pizzapp.utilities.StaticFunctions;
 
 public class ToppingBox {
 
-    private final String TOPPING_PICKED_INDICATOR = "@drawable/topping_on_pizza_indicator";
-    private final String BUTTON_SQUARE = "@drawable/plain_square_to_indicate_button";
+    private static final String TOPPING_PICKED_INDICATOR = "@drawable/topping_on_pizza_indicator";
+    private static final String BUTTON_SQUARE = "@drawable/plain_square_to_indicate_button";
     LinearLayout toppingBox;
     private int boxId;
     private Topping topping;

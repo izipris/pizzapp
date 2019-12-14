@@ -6,21 +6,21 @@ import android.widget.ImageView;
 
 import com.pizzapp.utilities.StaticFunctions;
 
-public class ToppingImage extends Image {
+class ToppingImage extends Image {
 
-    private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
-    private final double TOPPING_ORIGINAL_WIDTH = 107.5;
-    private final int TOPPING_ENLARGED_WIDTH = 123;
-    private final int TOPPING_ENLARGED_HEIGHT = 123;
+    private static final double TOPPING_ORIGINAL_HEIGHT = 107.5;
+    private static final double TOPPING_ORIGINAL_WIDTH = 107.5;
+    private static final int TOPPING_ENLARGED_WIDTH = 123;
+    private static final int TOPPING_ENLARGED_HEIGHT = 123;
 
-    public ToppingImage(int pizzaPart, int id, String name, View view){
+    ToppingImage(int pizzaPart, int id, String name, View view) {
         this.pizzaPart = pizzaPart;
         this.id = id;
         this.name = name;
         this.view = view;
     }
 
-    public void shrinkImage() {
+    void shrinkImage() {
         ImageView image = view.findViewById(id);
         ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         layoutParams.height = StaticFunctions.convertDpToPx(TOPPING_ORIGINAL_HEIGHT);

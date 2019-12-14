@@ -23,14 +23,14 @@ public class PizzaPartImage extends Image {
     private static final int BOTTOM_LEFT_SLICE = 2;
     private static final int TOP_LEFT_SLICE = 3;
     private static final int ANGLE_TO_ROTATE = 90;
-    private final double TOPPING_ORIGINAL_HEIGHT = 107.5;
-    private final double TOPPING_ORIGINAL_WIDTH = 107.5;
-    private final int TOPPING_ENLARGED_WIDTH = 123;
-    private final int TOPPING_ENLARGED_HEIGHT = 123;
+    private static final double TOPPING_ORIGINAL_HEIGHT = 107.5;
+    private static final double TOPPING_ORIGINAL_WIDTH = 107.5;
+    private static final int TOPPING_ENLARGED_WIDTH = 123;
+    private static final int TOPPING_ENLARGED_HEIGHT = 123;
     private final int ENLARGED_WIDTH = 143;
     private final int ENLARGED_HEIGHT = 143;
-    private final double ORIGINAL_WIDTH = 127.5;
-    private final double ORIGINAL_HEIGHT = 127.5;
+    private static final double ORIGINAL_WIDTH = 127.5;
+    private static final double ORIGINAL_HEIGHT = 127.5;
 
     private List<ToppingImage> toppingImageList = new ArrayList<>();
     private int frameId;

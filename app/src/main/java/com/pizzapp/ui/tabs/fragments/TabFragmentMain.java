@@ -25,8 +25,8 @@ import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.ui.PizzaPartImage;
+import com.pizzapp.utilities.DoesNotExist;
 
 import java.io.Serializable;
 import java.util.ArrayList;
