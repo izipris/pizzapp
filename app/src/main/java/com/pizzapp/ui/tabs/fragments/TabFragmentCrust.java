@@ -55,7 +55,7 @@ public class TabFragmentCrust extends Fragment {
         final int DB_CRUST_REGULAR = 1;
         final int DB_CRUST_THIN = 0;
         currentPizza = ((MainActivity) this.getActivity()).getPizza();
-        chooseAlready = false;
+        chooseAlready = (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || !((MainActivity) this.getActivity()).isNewOrder();
         TextView doughThickTextView = view.findViewById(R.id.doughThickTextView);
         TextView doughRegularTextView = view.findViewById(R.id.doughRegularTextView);
         TextView doughThinTextView = view.findViewById(R.id.doughThinTextView);
@@ -70,7 +70,7 @@ public class TabFragmentCrust extends Fragment {
 
         Map<LinearLayout, Crust> buttonToTitleMap = generateButtonToCrustMapping(Arrays.asList(doughThickLinearLayout, doughRegularLinearLayout, doughThinLinearLayout),
                 Arrays.asList(thickCrust, regularCrust, thinCrust));
-        defineDoughButtonsHandlers(view, savedInstanceState, buttonToTitleMap);
+        defineDoughButtonsHandlers(view, buttonToTitleMap);
 
         doughThickTextView.setText(getDoughTitle(thickCrust));
         doughRegularTextView.setText(getDoughTitle(regularCrust));
@@ -83,7 +83,7 @@ public class TabFragmentCrust extends Fragment {
                 getString(R.string.currency_symbol) : crust.getName();
     }
 
-    private void defineDoughButtonsHandlers(@NonNull View view, @Nullable Bundle savedInstanceState, final Map<LinearLayout, Crust> layoutToCrustMapping) {
+    private void defineDoughButtonsHandlers(@NonNull View view, final Map<LinearLayout, Crust> layoutToCrustMapping) {
         // Define the onClick handlers such that when one option selected. it's highlighted
         // while the others are not.
         for (Map.Entry<LinearLayout, Crust> entryCurrent : layoutToCrustMapping.entrySet()) {
@@ -104,9 +104,8 @@ public class TabFragmentCrust extends Fragment {
                     }.start();
                 }
             });
-            if (((savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || !((MainActivity) this.getActivity()).isNewOrder()) && entryCurrent.getValue() == currentPizza.getCrust()) {
-                chooseAlready = true;
-                entryCurrent.getKey().setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+            if (chooseAlready && entryCurrent.getValue().getName().equals(currentPizza.getCrust().getName())) {
+                entryCurrent.getKey().setBackgroundResource(R.drawable.ic_dough_background);
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_crust) +
                         getString(R.string.tab_title_separator) + layoutToCrustMapping.get(linearLayoutCurrent).getName());
                 tabAdapter.notifyDataSetChanged();

@@ -57,7 +57,7 @@ public class TabFragmentSize extends Fragment {
         final ArrayList<Pair<TableRow, Size>> buttonsAndSizes = setup(view, ((MainActivity) this.getActivity()).database);
 
         currentPizza = ((MainActivity) this.getActivity()).getPizza();
-        chooseAlready = false;
+        chooseAlready = (savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || !((MainActivity) this.getActivity()).isNewOrder();
 
         for (final Pair<TableRow, Size> rowSizePair : buttonsAndSizes) {
             rowSizePair.first.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +76,8 @@ public class TabFragmentSize extends Fragment {
                 }
             });
             /* In case user already chose size */
-            if (((savedInstanceState != null && savedInstanceState.getBoolean("chooseAlready")) || !((MainActivity) this.getActivity()).isNewOrder()) && rowSizePair.second == currentPizza.getSize()){
-                chooseAlready = true;
-                rowSizePair.first.setBackgroundColor(getResources().getColor(R.color.colorChosenSizeBackground));
+            if (chooseAlready && rowSizePair.second.getName().equals(currentPizza.getSize().getName())){
+                setChosenBackground(rowSizePair);
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                         getString(R.string.tab_title_separator) + currentPizza.getSize().getName());
                 tabAdapter.notifyDataSetChanged();
