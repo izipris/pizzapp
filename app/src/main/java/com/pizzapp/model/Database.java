@@ -6,6 +6,9 @@ import com.pizzapp.model.pizza.Topping;
 
 import java.util.List;
 
+/**
+ * This class represents the structure of our database
+ */
 public class Database {
     private List<Size> sizes;
     private List<Topping> toppings;
