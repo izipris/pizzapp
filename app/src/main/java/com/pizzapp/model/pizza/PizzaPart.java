@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is a POJO which represents a slice of a pizza
+ */
 public class PizzaPart implements Serializable {
     private List<Topping> toppings;
     private boolean hasTopping;
     private int id;
 
     public PizzaPart(int id) {
-        toppings = new ArrayList<Topping>();
+        toppings = new ArrayList<>();
         hasTopping = false;
         this.id = id;
     }
@@ -20,7 +23,7 @@ public class PizzaPart implements Serializable {
     }
 
     public boolean hasCertainTopping(Topping topping) {
-        for (Topping partTopping: toppings) {
+        for (Topping partTopping : toppings) {
             if (partTopping.getName().equals(topping.getName())) {
                 return true;
             }
@@ -36,8 +39,8 @@ public class PizzaPart implements Serializable {
     public void removeTopping(Topping topping) {
         if (hasTopping) {
             Topping toppingToRemove = null;
-            for (Topping toppingObject: toppings){
-                if (toppingObject.getName().equals(topping.getName())){
+            for (Topping toppingObject : toppings) {
+                if (toppingObject.getName().equals(topping.getName())) {
                     toppingToRemove = toppingObject;
                 }
             }

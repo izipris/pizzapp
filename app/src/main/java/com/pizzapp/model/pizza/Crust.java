@@ -2,14 +2,12 @@ package com.pizzapp.model.pizza;
 
 import java.io.Serializable;
 
+/**
+ * This class is a POJO which represents the crust
+ */
 public class Crust implements Serializable {
     private String name;
     private double price;
-
-    public Crust() {
-        this.name = "";
-        this.price = 0;
-    }
 
     public Crust(String name, double price) {
         this.name = name;

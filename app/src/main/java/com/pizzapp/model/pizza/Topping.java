@@ -2,6 +2,9 @@ package com.pizzapp.model.pizza;
 
 import java.io.Serializable;
 
+/**
+ * This class is a POJO which represents a topping of a slice
+ */
 public class Topping implements Serializable {
     private String name;
     private double price;

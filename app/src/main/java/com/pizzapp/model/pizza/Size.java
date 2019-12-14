@@ -2,16 +2,15 @@ package com.pizzapp.model.pizza;
 
 import java.io.Serializable;
 
+/**
+ * This class is a POJO which represents the size of the pizza
+ */
 public class Size implements Serializable {
     private String name;
     private double price;
     private double dimension;
     private String caption;
 
-    public Size() {
-        this.name = "";
-        this.price = 0;
-    }
 
     public Size(String name, double price, double dimension, String caption) {
         this.name = name;
