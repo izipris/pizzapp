@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.IO;
 import com.pizzapp.ui.Grid;
 import com.pizzapp.ui.PizzaPartImage;
 import com.pizzapp.ui.ToppingBox;
+import com.pizzapp.utilities.IO;
 
 import java.io.Serializable;
 import java.util.ArrayList;

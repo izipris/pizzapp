@@ -25,8 +25,8 @@ import com.pizzapp.ToppingsPopUp;
 import com.pizzapp.model.Order;
 import com.pizzapp.model.pizza.Pizza;
 import com.pizzapp.model.pizza.Topping;
-import com.pizzapp.utilities.DoesNotExist;
 import com.pizzapp.ui.PizzaPartImage;
+import com.pizzapp.utilities.DoesNotExistsException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -160,7 +160,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
                 public void onClick(View v) {
                     try {
                         openPopup(getPartClicked(v.getId()));
-                    } catch (DoesNotExist doesNotExist) {
+                    } catch (DoesNotExistsException doesNotExistsException) {
                         showErrorMessage(v);
                     }
                 }
@@ -168,7 +168,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
         }
     }
 
-    private int getPartClicked(int id) throws DoesNotExist {
+    private int getPartClicked(int id) throws DoesNotExistsException {
         switch (id) {
             case (R.id.topRight):
                 return TOP_RIGHT_SLICE;
@@ -179,7 +179,7 @@ public class TabFragmentMain extends Fragment implements Serializable {
             case (R.id.topLeft):
                 return TOP_LEFT_SLICE;
         }
-        throw new DoesNotExist();
+        throw new DoesNotExistsException();
     }
 
     private void showErrorMessage(View view) {

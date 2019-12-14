@@ -68,6 +68,7 @@ public class TabFragmentSize extends Fragment {
                             highlightChosenSize(buttonsAndSizes, rowSizePair);
                             chooseAlready = true;
                         }
+
                         public void onFinish() {
                             TabLayout tabs = getActivity().findViewById(R.id.tabs);
                             tabs.getTabAt(MAIN_TAB_INDEX).select();
@@ -76,7 +77,7 @@ public class TabFragmentSize extends Fragment {
                 }
             });
             /* In case user already chose size */
-            if (chooseAlready && rowSizePair.second.getName().equals(currentPizza.getSize().getName())){
+            if (chooseAlready && rowSizePair.second.getName().equals(currentPizza.getSize().getName())) {
                 setChosenBackground(rowSizePair);
                 tabAdapter.changePageTitle(tabPosition, getString(R.string.tab_title_size) +
                         getString(R.string.tab_title_separator) + currentPizza.getSize().getName());

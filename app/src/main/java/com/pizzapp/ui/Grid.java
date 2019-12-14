@@ -17,10 +17,10 @@ import static java.lang.Math.min;
 public class Grid {
 
     private static final int NUM_OF_ROWS = 4;
-    int id;
-    List<Topping> toppingList;
-    List<ToppingBox> toppingBoxList = new ArrayList<>();
-    View view;
+    private int id;
+    private List<Topping> toppingList;
+    private List<ToppingBox> toppingBoxList = new ArrayList<>();
+    private View view;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Grid(int id, List<Topping> toppingList, View view) {

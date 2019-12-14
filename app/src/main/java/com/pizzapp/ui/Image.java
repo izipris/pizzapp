@@ -1,13 +1,6 @@
 package com.pizzapp.ui;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.pizzapp.utilities.StaticFunctions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Image {
     protected int id;
@@ -15,22 +8,22 @@ public class Image {
     protected String name;
     protected View view;
 
-    public Image(){
+    public Image() {
         id = -1;
         pizzaPart = -1;
         name = "";
         this.view = null;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public int getPizzaPart(){
+    public int getPizzaPart() {
         return pizzaPart;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
