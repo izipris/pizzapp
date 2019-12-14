@@ -26,13 +26,13 @@ public class PaymentActivity extends AppCompatActivity {
         textView.setText(totalText);
     }
 
-    public void onClickPay(View view){
+    public void onClickPay(View view) {
         successfulPayment = new Dialog(this);
         successfulPayment.setContentView(R.layout.successful_payment);
         successfulPayment.show();
     }
 
-    public void done(View view){
+    public void done(View view) {
         successfulPayment.dismiss();
         Intent intent = new Intent(this, EndActivity.class);
         startActivity(intent);
